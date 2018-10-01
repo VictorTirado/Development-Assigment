@@ -30,7 +30,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("hello2.tmx");
+	App->map->Load("map2.tmx");
 	return true;
 }
 
@@ -48,7 +48,16 @@ bool j1Scene::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 		App->SaveGame();
-
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	{
+		App->map->CleanUp();
+		App->map->Load("map1.tmx");
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		App->map->CleanUp();
+		App->map->Load("map2.tmx");
+	}
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y -= 1;
 

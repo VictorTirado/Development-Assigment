@@ -46,9 +46,26 @@ void j1Map::Draw()
 						SDL_Rect tile = tileset_list->data->GetTileRect(layers_list->data->Get(i, j));
 						iPoint coords = MapToWorld(i, j);
 						uint gid = Get_gid(coords.x, coords.y);
-						if (layers_list->data->name == "Capa de Patrones 1")
+						if (layers_list->data->name == "Walkable")
 						{
 							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
+						}
+						if (layers_list->data->name == "Decoration")
+						{
+							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
+						}
+						if (layers_list->data->name == "Decoration2")
+						{
+							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
+						}
+						
+						if (layers_list->data->name == "Background")
+						{
+							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
+						}
+						if (layers_list->data->name == "Parallax2")
+						{
+							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile, 1.0f);
 						}
 					}
 					
@@ -196,9 +213,10 @@ bool j1Map::Load(const char* file_name)
 		p2List_item<MapLayer*>* item_layer = data.map_layers.start;
 		while(item_layer != NULL)
 		{
+			MapLayer* l = item_layer->data;
 			LOG("Layer ----");
-			LOG("name: %s", info_layer.name.GetString());
-			LOG("tile width: %d tile height: %d",info_layer.width,info_layer.height);
+			LOG("name: %s", l->name.GetString());
+			LOG("tile width: %d tile height: %d",l->width,l->height);
 			item_layer = item_layer->next;
 		}
 	}

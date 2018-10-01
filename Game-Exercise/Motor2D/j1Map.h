@@ -101,7 +101,6 @@ private:
 public:
 
 	MapData data;
-	MapLayer info_layer;
 	uint Get_gid(int x, int y);
 
 private:

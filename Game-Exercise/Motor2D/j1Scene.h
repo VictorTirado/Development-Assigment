@@ -33,6 +33,7 @@ public:
 	bool CleanUp();
 
 private:
+	bool is_faded = false;
 };
 
 #endif // __j1SCENE_H__

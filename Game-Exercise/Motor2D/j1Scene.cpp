@@ -31,7 +31,11 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
+	if(!is_faded)
 	App->map->Load("Map1.tmx");
+
+
+
 	return true;
 }
 
@@ -51,11 +55,8 @@ bool j1Scene::Update(float dt)
 		App->SaveGame();
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
-		if (App->fade_to_black->IsFading() == false)
-		{
-			App->fade_to_black->FadeToBlack(this, this, 2.0f);
-		}
-		
+		App->fade_to_black->FadeToBlack(this, this, 2.0f);
+		is_faded = true;
 		App->map->CleanUp();
 		App->map->Load("ForestMap.tmx");
 	}

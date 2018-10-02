@@ -51,8 +51,12 @@ bool j1Scene::Update(float dt)
 		App->SaveGame();
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
+		if (App->fade_to_black->IsFading() == false)
+		{
+			App->fade_to_black->FadeToBlack(this, this, 2.0f);
+		}
+		
 		App->map->CleanUp();
-		App->fade_to_black->FadeToBlack(this, this, 2000);
 		App->map->Load("ForestMap.tmx");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)

@@ -46,14 +46,34 @@ void j1Map::Draw()
 						SDL_Rect tile = tileset_list->data->GetTileRect(layers_list->data->Get(i, j));
 						iPoint coords = MapToWorld(i, j);
 						uint gid = Get_gid(coords.x, coords.y);
+					
+						SDL_Rect tile2 = tileset_list->next->data->GetTileRect(layers_list->data->Get(i, j));
+						if (layers_list->data->name == "Parallax1" )
+						{
+							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.5f);
+						}
+						if (layers_list->data->name == "Parallax2")
+						{
+							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.70f);
+						}
+						if (layers_list->data->name == "Parallax3")
+						{
+							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.80f);
+						}
+						if (layers_list->data->name == "Parallax4")
+						{
+							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.90f);
+						}
 						if (layers_list->data->name == "Walkable")
 						{
 							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
 						}
+
 						if (layers_list->data->name == "Decoration")
 						{
 							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
 						}
+
 						if (layers_list->data->name == "Decoration2")
 						{
 							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
@@ -62,16 +82,11 @@ void j1Map::Draw()
 						if (layers_list->data->name == "Background")
 						{
 							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
-						}
-						if (layers_list->data->name == "Parallax2")
-						{
-							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile, 1.0f);
-						}
+						}	
 					}
 					
 				}
 			}
-			
 			layers_list = layers_list->next;
 		}
 		tileset_list = tileset_list->next;

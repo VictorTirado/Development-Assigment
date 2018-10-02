@@ -31,7 +31,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("map2.tmx");
+	App->map->Load("Map1.tmx");
 	return true;
 }
 
@@ -53,24 +53,24 @@ bool j1Scene::Update(float dt)
 	{
 		App->map->CleanUp();
 		App->fade_to_black->FadeToBlack(this, this, 2000);
-		App->map->Load("map1.tmx");
+		App->map->Load("ForestMap.tmx");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
 		App->map->CleanUp();
-		App->map->Load("map2.tmx");
+		App->map->Load("Map1.tmx");
 	}
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		App->render->camera.y -= 1;
+		App->render->camera.y -= 10;
 
 	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		App->render->camera.y += 1;
+		App->render->camera.y += 10;
 
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		App->render->camera.x -= 1;
+		App->render->camera.x -= 10;
 
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		App->render->camera.x += 1;
+		App->render->camera.x += 10;
 
 	//App->render->Blit(img, 0, 0);
 	App->map->Draw();

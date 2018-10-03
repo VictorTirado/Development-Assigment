@@ -13,6 +13,7 @@ class j1Textures;
 class j1Audio;
 class j1Scene;
 class j1Map;
+class j1Player;
 class j1FadeToBlack;
 
 class j1App
@@ -50,10 +51,15 @@ public:
 	void SaveGame() const;
 	void GetSaveGames(p2List<p2SString>& list_to_fill) const;
 
+	pugi::xml_node LoadPlayer(pugi::xml_document&) const;
+
 private:
 
 	// Load config file
 	pugi::xml_node LoadConfig(pugi::xml_document&) const;
+
+	//Load player animations 
+	
 
 	// Call modules before each loop iteration
 	void PrepareUpdate();
@@ -84,6 +90,7 @@ public:
 	j1Audio*			audio;
 	j1Scene*			scene;
 	j1Map*				map;
+	j1Player*			player;
 	j1FadeToBlack* fade_to_black;
 
 private:
@@ -101,6 +108,8 @@ private:
 	bool				want_to_load;
 	p2SString			load_game;
 	mutable p2SString	save_game;
+
+	
 };
 
 extern j1App* App; // No student is asking me about that ... odd :-S

@@ -1,0 +1,16 @@
+
+
+<player>
+   <animation name ="idle" speed="1.0">
+    <frame x="0" y="0" w="0" h="1"/>
+    <frame x="1" y="0" w="0" h="2"/>
+    <frame x="1" y="0" w="0" h="3"/>
+    <frame x="1" y="2" w="3" h="4"/>
+   </animation>
+   <animation name ="run">
+    <frame x="0" y="0" w="0" h="1"/>
+    <frame x="1" y="0" w="0" h="2"/>
+    <frame x="1" y="0" w="0" h="3"/>
+    <frame x="1" y="2" w="3" h="4"/> 
+   </animation>
+</player>

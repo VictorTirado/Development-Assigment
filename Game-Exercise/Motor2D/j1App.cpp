@@ -12,6 +12,7 @@
 #include "j1Map.h"
 #include "j1FadeToBlack.h"
 #include "j1App.h"
+#include "j1Player.h"
 
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
@@ -27,6 +28,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new j1Scene();
 	map = new j1Map();
 	fade_to_black = new j1FadeToBlack();
+	player = new j1Player();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -35,8 +37,10 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(map);
+	AddModule(player);
 	AddModule(scene);
 	AddModule(fade_to_black);
+	
 
 	// render last to swap buffer
 	AddModule(render);
@@ -70,9 +74,13 @@ bool j1App::Awake()
 	pugi::xml_node		config;
 	pugi::xml_node		app_config;
 
+	
+	
+
 	bool ret = false;
 		
 	config = LoadConfig(config_file);
+	
 
 	if(config.empty() == false)
 	{
@@ -147,6 +155,19 @@ pugi::xml_node j1App::LoadConfig(pugi::xml_document& config_file) const
 		LOG("Could not load map xml file config.xml. pugi error: %s", result.description());
 	else
 		ret = config_file.child("config");
+
+	return ret;
+}
+
+pugi::xml_node j1App::LoadPlayer(pugi::xml_document& player_file) const
+{
+	pugi::xml_node ret;
+
+	pugi::xml_parse_result result = player_file.load_file("player.xml");
+	if (result == NULL)
+		LOG("Could not load map xml file config.xml. pugi error: %s", result.description());
+	else
+		ret = player_file.child("player");
 
 	return ret;
 }

@@ -28,6 +28,10 @@ j1Player::j1Player() : j1Module()
 		LoadAnimation(animations, &idle);
 		if (name == "run")
 			LoadAnimation(animations, &run);
+		if (name == "teleport")
+			LoadAnimation(animations, &teleport);
+		if (name == "jutsu")
+			LoadAnimation(animations, &jutsu);
 	}
 
 }
@@ -52,6 +56,10 @@ bool j1Player::PreUpdate()
 bool j1Player::Update(float dt)
 {
 	bool ret = true;
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		player_position.x += 3;
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+		player_position.x -= 3;
 	
 	return ret;
 }

@@ -27,7 +27,10 @@ public:
 public:
 	Animation idle;
 	Animation run;
-
+	Animation teleport;
+	Animation jutsu;
+	Animation* current_animation = nullptr;
+	iPoint player_position;
 	SDL_Texture* graphics = nullptr;
 
 	

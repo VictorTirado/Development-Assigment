@@ -7,6 +7,20 @@
 #include "Animation.h"
 //#include "ModuleCollision.h"
 
+enum ENTITY_TYPES
+{
+	NO_TYPE,
+	PLAYER,
+};
+
+struct PlayerInfo
+{
+	ENTITY_TYPES type = ENTITY_TYPES::NO_TYPE;
+	int x = 0;
+	int y = 0;
+	uint player_hp = 0;
+};
+
 class j1Player : public j1Module
 {
 public:
@@ -19,10 +33,11 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 
-
+	bool AddPlayer(ENTITY_TYPES, int, int);
 	bool Save(pugi::xml_node&) const;
 	bool Load(pugi::xml_node&);
 	
+	void SpawnPlayer(const PlayerInfo&);
 	void LoadAnimation(pugi::xml_node&, Animation* player);
 public:
 	Animation idle;
@@ -31,9 +46,11 @@ public:
 	Animation jutsu;
 	Animation* current_animation = nullptr;
 	iPoint player_position;
-	SDL_Texture* graphics = nullptr;
 
-	
+	PlayerInfo player_data;
+	j1Player* player_spawn;
+
+	SDL_Texture* graphics;
 
 };
 #endif

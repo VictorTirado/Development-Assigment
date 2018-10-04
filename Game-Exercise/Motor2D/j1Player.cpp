@@ -24,8 +24,8 @@ j1Player::j1Player() : j1Module()
 	for (pugi::xml_node animations = player.child("animation"); animations; animations = animations.next_sibling("animation"))
 	{
 		p2SString name = animations.attribute("name").as_string();
-		if(name == "idle")
-		LoadAnimation(animations, &idle);
+		if (name == "idle")
+			LoadAnimation(animations, &idle);
 		if (name == "run")
 			LoadAnimation(animations, &run);
 		if (name == "teleport")
@@ -33,7 +33,10 @@ j1Player::j1Player() : j1Module()
 		if (name == "jutsu")
 			LoadAnimation(animations, &jutsu);
 	}
+	current_animation = &idle;
 
+	idle.PushBack({ 4, 15, 37, 51 });
+	
 }
 
 j1Player::~j1Player()
@@ -44,23 +47,29 @@ bool j1Player::Start()
 {
 	bool ret = true;
 	
+	graphics = App->tex->Load("textures/Sasuke_sprites.png");
+
 	return ret;
 }
 
 bool j1Player::PreUpdate()
 {
 	bool ret = true;
+
+	if (player_data.type != ENTITY_TYPES::NO_TYPE)
+	{
+		LOG("Loading player");
+		SpawnPlayer(player_data);
+	}
+
 	return ret;
 }
 
 bool j1Player::Update(float dt)
 {
 	bool ret = true;
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-		player_position.x += 3;
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-		player_position.x -= 3;
 	
+
 	return ret;
 }
 
@@ -101,5 +110,22 @@ void j1Player::LoadAnimation(pugi::xml_node& animation, Animation* player)
 		player->speed = animation.child("animation").attribute("speed").as_float();
 	}
 	
+}
+
+bool j1Player::AddPlayer(ENTITY_TYPES type, int x, int y)
+{
+	bool ret = true;
+
+	player_data.type = type;
+	player_data.x = x;
+	player_data.y = y;
+
+	return ret;
+}
+
+void j1Player::SpawnPlayer(const PlayerInfo& info)
+{
+	if (info.type == ENTITY_TYPES::PLAYER)
+		player_spawn = new j1Player();
 }
 

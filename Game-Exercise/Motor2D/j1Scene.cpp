@@ -34,8 +34,10 @@ bool j1Scene::Start()
 {
 	if(!is_faded)
 	App->map->Load("Map1.tmx");
+	//App->audio->PlayMusic("audio/music/Mega_Rust.ogg");
+	App->audio->StartVolume(0);
 
-	App->player->AddPlayer(ENTITY_TYPES::PLAYER, 0, 0);
+	//App->player->AddPlayer(ENTITY_TYPES::PLAYER, 0, 0);
 
 	return true;
 }
@@ -52,6 +54,7 @@ bool j1Scene::Update(float dt)
 	if(change_map == true && App->fade_to_black->IsFading() == true)
 	{ 
 		App->map->CleanUp();
+		App->audio->CleanUp();
 		App->map->Load("ForestMap.tmx");
 		change_map = false;
 		

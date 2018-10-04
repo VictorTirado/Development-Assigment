@@ -23,7 +23,6 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	LOG("Loading Audio Mixer");
 	bool ret = true;
 	SDL_Init(0);
-
 	if(SDL_InitSubSystem(SDL_INIT_AUDIO) < 0)
 	{
 		LOG("SDL_INIT_AUDIO could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -170,4 +169,25 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 	}
 
 	return ret;
+}
+
+bool j1Audio::Load(pugi::xml_node& data)
+{
+	volume = Mix_VolumeMusic(data.child("music").attribute("value").as_int());
+	LOG("%d", volume);
+
+	return true;
+}
+
+bool j1Audio::Save(pugi::xml_node& data)const
+{
+	pugi::xml_node cam = data.append_child("music");
+	cam.append_attribute("value") = volume;
+
+	return true;
+}
+
+void j1Audio::StartVolume(int music_begging)
+{
+	Mix_VolumeMusic(music_begging);
 }

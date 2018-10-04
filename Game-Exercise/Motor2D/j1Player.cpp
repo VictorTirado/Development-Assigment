@@ -21,6 +21,7 @@ j1Player::j1Player() : j1Module()
 	pugi::xml_node player;
 	player = App->LoadPlayer(player_file);
 
+	path = player.child("folder").attribute("path").as_string();
 	for (pugi::xml_node animations = player.child("animation"); animations; animations = animations.next_sibling("animation"))
 	{
 		p2SString name = animations.attribute("name").as_string();
@@ -56,11 +57,11 @@ bool j1Player::PreUpdate()
 {
 	bool ret = true;
 
-	if (player_data.type != ENTITY_TYPES::NO_TYPE)
+	/*if (player_data.type != ENTITY_TYPES::NO_TYPE)
 	{
 		LOG("Loading player");
 		SpawnPlayer(player_data);
-	}
+	}*/
 
 	return ret;
 }
@@ -86,21 +87,6 @@ bool j1Player::CleanUp()
 	return true;
 }
 
-
-
-bool j1Player::Save(pugi::xml_node& save) const
-{
-	bool ret = false;
-	
-	return ret;
-}
-
-bool j1Player::Load(pugi::xml_node& save)
-{
-	bool ret = false;
-
-	return ret;
-}
 
 void j1Player::LoadAnimation(pugi::xml_node& animation, Animation* player)
 {

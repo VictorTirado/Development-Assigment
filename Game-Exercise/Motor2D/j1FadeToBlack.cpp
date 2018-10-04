@@ -8,7 +8,9 @@
 #include "SDL/include/SDL_timer.h"
 
 j1FadeToBlack::j1FadeToBlack()
-{}
+{
+	name.create("fadeToBlack");
+}
 
 j1FadeToBlack::~j1FadeToBlack()
 {}

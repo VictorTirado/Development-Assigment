@@ -34,8 +34,8 @@ public:
 	bool PostUpdate();
 
 	bool AddPlayer(ENTITY_TYPES, int, int);
-	bool Save(pugi::xml_node&) const;
-	bool Load(pugi::xml_node&);
+	
+	
 	
 	void SpawnPlayer(const PlayerInfo&);
 	void LoadAnimation(pugi::xml_node&, Animation* player);
@@ -51,6 +51,7 @@ public:
 	j1Player* player_spawn;
 
 	SDL_Texture* graphics;
+	p2SString path;
 
 };
 #endif

@@ -1,6 +1,8 @@
 
 
 <player>
+  <folder path="textures/Sasuke_sprites.png" ></folder>
+  
    <animation name ="idle" speed="1.0">
     <frame x="4" y="15" w="37" h="51"/>
     <frame x="79" y="16" w="38" h="50"/>

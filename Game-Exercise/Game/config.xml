@@ -17,7 +17,9 @@
     <resizable value="false"/>
     <fullscreen_window value="false"/>
   </window>
-
+  <audio>
+    <path value ="audio/music/Mega_Rust.ogg" />
+  </audio>
   <file_system>
     <path>data.zip</path>
   </file_system>

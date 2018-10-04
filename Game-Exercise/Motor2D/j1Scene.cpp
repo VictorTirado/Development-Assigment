@@ -7,6 +7,7 @@
 #include "j1Render.h"
 #include "j1Window.h"
 #include "j1Map.h"
+#include "j1Player.h"
 #include "j1FadeToBlack.h"
 #include "j1Scene.h"
 
@@ -34,7 +35,7 @@ bool j1Scene::Start()
 	if(!is_faded)
 	App->map->Load("Map1.tmx");
 
-
+	App->player->AddPlayer(ENTITY_TYPES::PLAYER, 0, 0);
 
 	return true;
 }

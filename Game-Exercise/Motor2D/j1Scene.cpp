@@ -48,6 +48,13 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
+	if(change_map == true && App->fade_to_black->IsFading() == true)
+	{ 
+		App->map->CleanUp();
+		App->map->Load("ForestMap.tmx");
+		change_map = false;
+		
+	}
 	if(App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		App->LoadGame();
 
@@ -55,10 +62,10 @@ bool j1Scene::Update(float dt)
 		App->SaveGame();
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
-		App->fade_to_black->FadeToBlack(this, this, 2.0f);
+		App->fade_to_black->FadeToBlack(this, this, 3.0f);
+		change_map = true;
 		is_faded = true;
-		App->map->CleanUp();
-		App->map->Load("ForestMap.tmx");
+	
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
@@ -76,6 +83,7 @@ bool j1Scene::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x += 10;
+	
 
 	//App->render->Blit(img, 0, 0);
 	App->map->Draw();

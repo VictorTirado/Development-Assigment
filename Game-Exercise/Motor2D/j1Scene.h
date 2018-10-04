@@ -34,6 +34,7 @@ public:
 
 private:
 	bool is_faded = false;
+	bool change_map = false;
 };
 
 #endif // __j1SCENE_H__

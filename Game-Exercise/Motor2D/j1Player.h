@@ -34,11 +34,11 @@ public:
 	bool PostUpdate();
 
 	bool AddPlayer(ENTITY_TYPES, int, int);
-	
-	
-	
 	void SpawnPlayer(const PlayerInfo&);
 	void LoadAnimation(pugi::xml_node&, Animation* player);
+
+	bool Load(pugi::xml_node&);
+	bool Save(pugi::xml_node&) const;
 public:
 	Animation idle;
 	Animation run;

@@ -115,3 +115,36 @@ void j1Player::SpawnPlayer(const PlayerInfo& info)
 		player_spawn = new j1Player();
 }
 
+
+bool j1Player::Load(pugi::xml_node& data)
+{
+	if (data.child("map") != nullptr)
+	{
+		App->scene->map_number = data.child("map").attribute("level").as_int();
+	}
+
+	if (App->scene->map_number == 2)
+	{
+		App->scene->ChangeMap(App->scene->map_number);
+	}
+	else if (App->scene->map_number == 1)
+	{
+		App->scene->ChangeMap(App->scene->map_number);
+	}
+
+	return true;
+}
+
+bool j1Player::Save(pugi::xml_node& data)const
+{
+	if (data.child("map") == NULL)
+	{
+		data.append_child("map").append_attribute("level") = App->scene->map_number;
+	}
+	else
+	{
+		data.child("map").attribute("level") = App->scene->map_number;
+	}
+
+	return true;
+}

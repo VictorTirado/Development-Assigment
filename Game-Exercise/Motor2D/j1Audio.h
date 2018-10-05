@@ -39,6 +39,8 @@ public:
 
 	void StartVolume(int);
 
+	void ChangeMusic(bool);
+
 private:
 
 	_Mix_Music*			music;
@@ -46,7 +48,7 @@ private:
 
 public:
 	int volume = 0;
-	
+	p2SString  path;
 };
 
 #endif // __j1AUDIO_H__

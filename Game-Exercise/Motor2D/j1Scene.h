@@ -32,9 +32,17 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	
+
+	bool ChangeMap(int map_number);
+
 private:
 	bool is_faded = false;
 	bool change_map = false;
+	bool change_music = false;
+
+public:
+	int map_number = 0;
 };
 
 #endif // __j1SCENE_H__

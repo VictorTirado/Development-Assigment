@@ -39,8 +39,8 @@ j1Player::j1Player() : j1Module()
 	}
 	current_animation = &idle;
 
-	idle.PushBack({ 4, 15, 37, 51 });
-	idle.speed = 2.0f;
+	//idle.PushBack({ 4, 15, 37, 51 });
+	//idle.speed = 2.0f;
 }
 
 j1Player::~j1Player()
@@ -51,7 +51,7 @@ bool j1Player::Start()
 {
 	bool ret = true;
 	
-	graphics = App->tex->Load("textures/Sasuke_sprites.png");
+	graphics = App->tex->Load(path.GetString());
 
 	return ret;
 }
@@ -72,9 +72,19 @@ bool j1Player::PreUpdate()
 bool j1Player::Update(float dt)
 {
 	bool ret = true;
+	current_animation = &idle;
+	
+	if (firstUpdate == true) {
+		App->render->camera.x = -player_position.x +(App->win->width/2);
+		App->render->camera.y = player_position.y + (App->win->height/2);
+		firstUpdate = false;
+	}
+		
 	
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
+		App->render->camera.x = -player_position.x;
+		App->render->camera.y = player_position.y;
 		player_position.y += 7;
 	}
 
@@ -85,12 +95,24 @@ bool j1Player::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
-		player_position.x -= 7;
+		App->render->camera.x = -player_position.x * 3 + (App->win->width / 2);
+		App->render->camera.y = player_position.y + (App->win->height / 2);
+		
+		current_animation = &run;
+		player_position.x -= MOVEMENT_SPEED;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
-		player_position.x += 7;
+		App->render->camera.x = -player_position.x*3 + (App->win->width / 2);
+		App->render->camera.y = player_position.y + (App->win->height / 2);
+		current_animation = &run;
+		player_position.x += MOVEMENT_SPEED;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
+	{
+		current_animation = &jutsu;
+		
 	}
 
 	App->render->Blit(graphics, player_position.x, player_position.y, &current_animation->GetCurrentFrame());
@@ -117,9 +139,10 @@ void j1Player::LoadAnimation(pugi::xml_node& animation, Animation* player)
 	for (pugi::xml_node frame = animation.child("frame"); frame; frame = frame.next_sibling("frame"))
 	{
 		player->PushBack({frame.attribute("x").as_int(),frame.attribute("y").as_int(),frame.attribute("w").as_int(),frame.attribute("h").as_int()});
-		player->speed = animation.child("animation").attribute("speed").as_float();
+		
 	}
-	
+	player->speed = animation.attribute("speed").as_float();
+	player->loop = animation.attribute("loop").as_bool();
 }
 
 bool j1Player::AddPlayer(ENTITY_TYPES type, int x, int y)
@@ -142,6 +165,7 @@ void j1Player::SpawnPlayer(const PlayerInfo& info)
 
 bool j1Player::Load(pugi::xml_node& data)
 {
+
 	if (data.child("map") != nullptr)
 	{
 		App->scene->map_number = data.child("map").attribute("level").as_int();

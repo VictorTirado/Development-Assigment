@@ -3,13 +3,13 @@
 <player>
   <folder path="textures/Sasuke_sprites.png" ></folder>
   
-   <animation name ="idle" speed="1.0">
+   <animation name ="idle" speed="0.05f" loop="true">
     <frame x="4" y="15" w="37" h="51"/>
     <frame x="79" y="16" w="38" h="50"/>
     <frame x="158" y="18" w="38" h="48"/>
     <frame x="224" y="15" w="36" h="51"/>
    </animation>
-   <animation name ="run" speed="1.0">
+   <animation name ="run" speed="0.1f" loop="true">
     <frame x="7" y="149" w="42" h="43"/>
     <frame x="62" y="151" w="48" h="41"/>
     <frame x="130" y="149" w="36" h="42"/>
@@ -17,11 +17,11 @@
     <frame x="246" y="151" w="42" h="41"/>
     <frame x="310" y="151" w="34" h="41"/>
    </animation>
-  <animation name ="teleport" speed="1.0">
+  <animation name ="teleport" speed="0.05f" loop ="false">
     <frame x="6" y="804" w="32" h="54"/>
     <frame x="92" y="802" w="37" h="55"/>
   </animation>
-  <animation name ="jutsu" speed="1.0">
+  <animation name ="jutsu" speed="0.05f" loop="false">
     <frame x="4" y="462" w="36" h="50"/>
     <frame x="66" y="462" w="39" h="50"/>
     <frame x="128" y="462" w="41" h="50"/>

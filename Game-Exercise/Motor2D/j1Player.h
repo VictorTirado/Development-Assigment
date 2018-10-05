@@ -6,6 +6,7 @@
 #include "j1Module.h"
 #include "Animation.h"
 //#include "ModuleCollision.h"
+#define MOVEMENT_SPEED 1
 
 enum ENTITY_TYPES
 {
@@ -52,6 +53,8 @@ public:
 
 	SDL_Texture* graphics;
 	p2SString path;
+	bool firstUpdate = true;
 
+	
 };
 #endif

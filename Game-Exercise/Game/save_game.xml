@@ -7,12 +7,12 @@
 		<music value="0" />
 	</audio>
 	<map />
+	<scene />
 	<player>
 		<map level="1" />
 	</player>
-	<scene />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-770" y="100" />
+		<camera x="0" y="-640" />
 	</renderer>
 </game_state>

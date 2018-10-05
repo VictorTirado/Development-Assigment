@@ -21,6 +21,9 @@ j1Player::j1Player() : j1Module()
 	pugi::xml_node player;
 	player = App->LoadPlayer(player_file);
 
+	player_position.x = 0;
+	player_position.y = 0;
+
 	path = player.child("folder").attribute("path").as_string();
 	for (pugi::xml_node animations = player.child("animation"); animations; animations = animations.next_sibling("animation"))
 	{
@@ -37,7 +40,7 @@ j1Player::j1Player() : j1Module()
 	current_animation = &idle;
 
 	idle.PushBack({ 4, 15, 37, 51 });
-	
+	idle.speed = 2.0f;
 }
 
 j1Player::~j1Player()
@@ -70,6 +73,27 @@ bool j1Player::Update(float dt)
 {
 	bool ret = true;
 	
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	{
+		player_position.y += 7;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	{
+		player_position.y -= 7;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	{
+		player_position.x -= 7;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	{
+		player_position.x += 7;
+	}
+
+	App->render->Blit(graphics, player_position.x, player_position.y, &current_animation->GetCurrentFrame());
 
 	return ret;
 }

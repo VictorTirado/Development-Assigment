@@ -30,8 +30,12 @@ j1Player::j1Player() : j1Module()
 		p2SString name = animations.attribute("name").as_string();
 		if (name == "idle")
 			LoadAnimation(animations, &idle);
+		if (name == "idleBackwards")
+			LoadAnimation(animations, &idleBackwards);
 		if (name == "run")
 			LoadAnimation(animations, &run);
+		if (name == "runBackwards")
+			LoadAnimation(animations, &runBackwards);
 		if (name == "teleport")
 			LoadAnimation(animations, &teleport);
 		if (name == "jutsu")
@@ -72,9 +76,18 @@ bool j1Player::PreUpdate()
 bool j1Player::Update(float dt)
 {
 	bool ret = true;
-	current_animation = &idle;
+
+	if (!is_backwards)
+	{
+		current_animation = &idle;
+	}
 	
-	if (firstUpdate == true) {
+
+	if (is_backwards)
+		current_animation = &idleBackwards;
+	
+	if (firstUpdate == true) 
+	{
 		App->render->camera.x = -player_position.x +(App->win->width/2);
 		App->render->camera.y = player_position.y + (App->win->height/2);
 		firstUpdate = false;
@@ -98,7 +111,8 @@ bool j1Player::Update(float dt)
 		App->render->camera.x = -player_position.x * 3 + (App->win->width / 2);
 		App->render->camera.y = player_position.y + (App->win->height / 2);
 		
-		current_animation = &run;
+		current_animation = &runBackwards;
+		is_backwards = true;
 		player_position.x -= MOVEMENT_SPEED;
 	}
 
@@ -107,6 +121,7 @@ bool j1Player::Update(float dt)
 		App->render->camera.x = -player_position.x*3 + (App->win->width / 2);
 		App->render->camera.y = player_position.y + (App->win->height / 2);
 		current_animation = &run;
+		is_backwards = false;
 		player_position.x += MOVEMENT_SPEED;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)

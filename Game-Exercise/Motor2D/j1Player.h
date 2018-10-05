@@ -42,6 +42,8 @@ public:
 	bool Save(pugi::xml_node&) const;
 public:
 	Animation idle;
+	Animation idleBackwards;
+	Animation runBackwards;
 	Animation run;
 	Animation teleport;
 	Animation jutsu;
@@ -54,6 +56,7 @@ public:
 	SDL_Texture* graphics;
 	p2SString path;
 	bool firstUpdate = true;
+	bool is_backwards = false;
 
 	
 };

@@ -4,16 +4,16 @@
   <folder path="textures/Sasuke_sprites.png" ></folder>
   
    <animation name ="idle" speed="0.05f" loop="true">
-    <frame x="4" y="18" w="37" h="51"/>
-    <frame x="79" y="18" w="38" h="50"/>
-    <frame x="158" y="18" w="38" h="48"/>
-    <frame x="224" y="18" w="36" h="51"/>
+    <frame x="4" y="15" w="37" h="51"/>
+    <frame x="79" y="15" w="38" h="51"/>
+    <frame x="158" y="15" w="38" h="51"/>
+    <frame x="224" y="15" w="36" h="51"/>
    </animation>
   <animation name ="idleBackwards" speed="0.05f" loop ="true">
-    <frame x="536" y="1257" w="37" h="51"/>
-    <frame x="460" y="1257" w="38" h="50"/>
-    <frame x="381" y="1257" w="38" h="48"/>
-    <frame x="317" y="1257" w="36" h="51"/>
+    <frame x="536" y="1254" w="37" h="51"/>
+    <frame x="460" y="1254" w="38" h="51"/>
+    <frame x="381" y="1254" w="38" h="51"/>
+    <frame x="317" y="1254" w="36" h="51"/>
   </animation>
    <animation name ="run" speed="0.1f" loop="true">
     <frame x="7" y="149" w="42" h="43"/>

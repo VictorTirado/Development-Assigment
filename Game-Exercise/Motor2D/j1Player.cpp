@@ -130,6 +130,13 @@ bool j1Player::Update(float dt)
 		
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
+	{
+		
+	}
+
+	
+
 	App->render->Blit(graphics, player_position.x, player_position.y, &current_animation->GetCurrentFrame());
 
 	return ret;

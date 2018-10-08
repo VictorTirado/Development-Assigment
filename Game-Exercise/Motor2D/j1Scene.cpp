@@ -87,18 +87,30 @@ bool j1Scene::Update(float dt)
 		change_map = true;
 		App->map->Load("Map1.tmx");*/
 	}
-	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	{
+		LOG("%d camera x", App->render->camera.x);
+		LOG("%d camera y", App->render->camera.y);
 		App->render->camera.y -= 10;
-
+	}
 	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	{
+		LOG("%d camera x", App->render->camera.x);
+		LOG("%d camera y", App->render->camera.y);
 		App->render->camera.y += 10;
-
-	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		}
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	{
+		LOG("%d camera x", App->render->camera.x);
+		LOG("%d camera y", App->render->camera.y);
 		App->render->camera.x -= 10;
-
-	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		App->render->camera.x += 10;
-
+	}
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		{
+			LOG("%d camera x", App->render->camera.x);
+			LOG("%d camera y", App->render->camera.y);
+			App->render->camera.x += 10;
+		}
 	if (App->input->GetKey(SDL_SCANCODE_KP_PLUS) == KEY_DOWN)
 	{
 		LOG("%d", App->audio->volume);

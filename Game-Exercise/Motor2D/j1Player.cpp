@@ -21,8 +21,8 @@ j1Player::j1Player() : j1Module()
 	pugi::xml_node player;
 	player = App->LoadPlayer(player_file);
 
-	player_position.x = 0;
-	player_position.y = 0;
+	player_position.x = 50;
+	player_position.y = 400;
 
 	path = player.child("folder").attribute("path").as_string();
 	for (pugi::xml_node animations = player.child("animation"); animations; animations = animations.next_sibling("animation"))
@@ -43,8 +43,6 @@ j1Player::j1Player() : j1Module()
 	}
 	current_animation = &idle;
 
-	//idle.PushBack({ 4, 15, 37, 51 });
-	//idle.speed = 2.0f;
 }
 
 j1Player::~j1Player()
@@ -89,40 +87,50 @@ bool j1Player::Update(float dt)
 	if (firstUpdate == true) 
 	{
 		App->render->camera.x = -player_position.x +(App->win->width/2);
-		App->render->camera.y = player_position.y + (App->win->height/2);
+		App->render->camera.y = -player_position.y -(App->win->height/2);
 		firstUpdate = false;
 	}
 		
 	
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
-		App->render->camera.x = -player_position.x;
-		App->render->camera.y = player_position.y;
-		player_position.y += 7;
+		App->render->camera.x = -player_position.x ;
+		App->render->camera.y = -player_position.y - 350;
+		player_position.y += MOVEMENT_SPEED;
+		LOG("%d camera x", App->render->camera.x);
+		LOG("%d camera y", App->render->camera.y);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
-		player_position.y -= 7;
+		App->render->camera.x = -player_position.x ;
+		App->render->camera.y = -player_position.y - 350;
+		player_position.y -= MOVEMENT_SPEED;
+		LOG("%d camera x", App->render->camera.x);
+		LOG("%d camera y", App->render->camera.y);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		App->render->camera.x = -player_position.x * 3 + (App->win->width / 2);
-		App->render->camera.y = player_position.y + (App->win->height / 2);
-		
+		App->render->camera.y = -player_position.y - 350;
+
 		current_animation = &runBackwards;
 		is_backwards = true;
 		player_position.x -= MOVEMENT_SPEED;
+		LOG("%d camera x", App->render->camera.x);
+		LOG("%d camera y", App->render->camera.y);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		App->render->camera.x = -player_position.x*3 + (App->win->width / 2);
-		App->render->camera.y = player_position.y + (App->win->height / 2);
+		App->render->camera.y = -player_position.y - 350;
 		current_animation = &run;
 		is_backwards = false;
 		player_position.x += MOVEMENT_SPEED;
+		LOG("%d camera x", App->render->camera.x);
+		LOG("%d camera y", App->render->camera.y);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
 	{

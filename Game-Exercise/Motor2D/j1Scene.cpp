@@ -43,7 +43,7 @@ bool j1Scene::Start()
 	App->audio->PlayMusic(App->audio->path.GetString());
 	App->audio->StartVolume(App->audio->volume);
 
-	//App->player->AddPlayer(ENTITY_TYPES::PLAYER, 0, 0);
+	
 
 	return true;
 }

@@ -4,6 +4,8 @@
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Map.h"
+#include "j1Player.h"
+#include "j1Scene.h"
 #include <math.h>
 
 j1Map::j1Map() : j1Module(), map_loaded(false)
@@ -82,7 +84,21 @@ void j1Map::Draw()
 						if (layers_list->data->name == "Background")
 						{
 							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
-						}	
+						}
+						if (layers_list->data->name == "Logic")
+						{
+							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
+						}
+						if (App->map->data.map_layers.end->data->data[gid] == 52) {
+						//	App->player->player_position.x = coords.x;
+							//App->player->player_position.y = coords.y;
+							//LOG("Spawn.x = %d Spawn.y = %d", spawn.x, spawn.y);
+						}
+						if (App->map->data.map_layers.end->data->data[gid] == 53) {
+							//App->scene->ChangeMap(App->scene->map_number);
+							
+							
+						}
 					}
 					
 				}

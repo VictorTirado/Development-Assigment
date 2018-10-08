@@ -48,7 +48,7 @@ public:
 	bool CleanUp() override;
 
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr);
-	//void DebugDraw();
+	void DebugDraw();
 
 private:
 

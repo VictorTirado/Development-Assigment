@@ -74,7 +74,7 @@ bool j1Collision::Update(float dt)
 {
 
 	bool ret = true;
-	//DebugDraw();
+	
 
 	//god mode
 	/*if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
@@ -90,11 +90,11 @@ bool j1Collision::Update(float dt)
 		matrix[COLLIDER_PLAYER][COLLIDER_WALL] = false;
 		matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
 	}*/
-
+	DebugDraw();
 	return ret;
 }
 
-/*void j1Collision::DebugDraw()
+void j1Collision::DebugDraw()
 {
 	if (App->input->GetKey(SDL_SCANCODE_F9))
 		debug = !debug;
@@ -121,7 +121,7 @@ bool j1Collision::Update(float dt)
 			break;
 		}
 	}
-}*/
+}
 
 // Called before quitting
 bool j1Collision::CleanUp()

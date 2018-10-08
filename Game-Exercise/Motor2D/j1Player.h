@@ -8,19 +8,9 @@
 //#include "ModuleCollision.h"
 #define MOVEMENT_SPEED 1
 
-enum ENTITY_TYPES
-{
-	NO_TYPE,
-	PLAYER,
-};
 
-struct PlayerInfo
-{
-	ENTITY_TYPES type = ENTITY_TYPES::NO_TYPE;
-	int x = 0;
-	int y = 0;
-	uint player_hp = 0;
-};
+
+
 
 class j1Player : public j1Module
 {
@@ -34,8 +24,6 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 
-	bool AddPlayer(ENTITY_TYPES, int, int);
-	void SpawnPlayer(const PlayerInfo&);
 	void LoadAnimation(pugi::xml_node&, Animation* player);
 
 	bool Load(pugi::xml_node&);
@@ -50,19 +38,21 @@ public:
 	Animation* current_animation = nullptr;
 	iPoint player_position;
 
-	PlayerInfo player_data;
-	j1Player* player_spawn;
+	
+
 
 	SDL_Texture* graphics;
 	p2SString path;
 	bool firstUpdate = true;
 	bool is_backwards = false;
 
-	bool is_jumping = true;
+	bool is_jumping = false;
 	uint player_position_y0;
 	uint initial_velocity = 25;
 	uint gravity = 5;
 	float jumping_time = 0.0f;
+
+	Collider* collider;
 
 	
 };

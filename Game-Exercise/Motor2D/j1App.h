@@ -15,6 +15,7 @@ class j1Scene;
 class j1Map;
 class j1Player;
 class j1FadeToBlack;
+class j1Collision;
 
 class j1App
 {
@@ -92,6 +93,7 @@ public:
 	j1Map*				map;
 	j1Player*			player;
 	j1FadeToBlack* fade_to_black;
+	j1Collision*		collision;
 
 private:
 

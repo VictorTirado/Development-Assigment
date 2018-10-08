@@ -9,6 +9,7 @@
 #include "j1Window.h"
 #include "j1Render.h"
 #include "j1Scene.h"
+#include "j1Collision.h"
 //#include "j1Particles.h"
 #include "j1FadeToBlack.h"
 //#include "ModuleCollision.h"
@@ -54,6 +55,8 @@ bool j1Player::Start()
 	bool ret = true;
 	
 	graphics = App->tex->Load(path.GetString());
+	
+	collider = App->collision->AddCollider({ player_position.x, player_position.y,37,51 }, COLLIDER_PLAYER, this);
 
 	return ret;
 }
@@ -62,11 +65,7 @@ bool j1Player::PreUpdate()
 {
 	bool ret = true;
 
-	/*if (player_data.type != ENTITY_TYPES::NO_TYPE)
-	{
-		LOG("Loading player");
-		SpawnPlayer(player_data);
-	}*/
+	
 
 	return ret;
 }
@@ -86,6 +85,7 @@ bool j1Player::Update(float dt)
 	{
 		App->render->camera.x = -player_position.x +(App->win->width/2);
 		App->render->camera.y = -player_position.y -(App->win->height/2);
+		
 		firstUpdate = false;
 	}
 		
@@ -150,7 +150,7 @@ bool j1Player::Update(float dt)
 			is_jumping = false;
 		}
 	}
-
+	collider->SetPos(player_position.x, player_position.y);
 	App->render->Blit(graphics, player_position.x, player_position.y, &current_animation->GetCurrentFrame());
 
 	return ret;
@@ -181,22 +181,9 @@ void j1Player::LoadAnimation(pugi::xml_node& animation, Animation* player)
 	player->loop = animation.attribute("loop").as_bool();
 }
 
-bool j1Player::AddPlayer(ENTITY_TYPES type, int x, int y)
-{
-	bool ret = true;
 
-	player_data.type = type;
-	player_data.x = x;
-	player_data.y = y;
 
-	return ret;
-}
 
-void j1Player::SpawnPlayer(const PlayerInfo& info)
-{
-	if (info.type == ENTITY_TYPES::PLAYER)
-		player_spawn = new j1Player();
-}
 
 
 bool j1Player::Load(pugi::xml_node& data)

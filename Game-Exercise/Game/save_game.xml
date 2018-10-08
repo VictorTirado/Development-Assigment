@@ -13,6 +13,6 @@
 	</player>
 	<fadeToBlack />
 	<renderer>
-		<camera x="-3070" y="-599" />
+		<camera x="-709" y="-710" />
 	</renderer>
 </game_state>

@@ -11,6 +11,8 @@
 
 class j1App;
 
+struct Collider;
+
 class j1Module
 {
 private:
@@ -70,6 +72,8 @@ public:
 	{
 		return true;
 	}
+
+	virtual void OnCollision(Collider*, Collider*) {}
 
 	bool IsEnabled() const { return enabled; }
 

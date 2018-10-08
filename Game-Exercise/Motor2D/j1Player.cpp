@@ -76,9 +76,7 @@ bool j1Player::Update(float dt)
 	bool ret = true;
 
 	if (!is_backwards)
-	{
 		current_animation = &idle;
-	}
 	
 
 	if (is_backwards)
@@ -132,18 +130,26 @@ bool j1Player::Update(float dt)
 		LOG("%d camera x", App->render->camera.x);
 		LOG("%d camera y", App->render->camera.y);
 	}
+
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
-	{
 		current_animation = &jutsu;
-		
-	}
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
-	{
-		
-	}
+		is_jumping = true;
 
-	
+	if (jumping_time == 0.0f)
+		player_position_y0 = player_position.y;
+
+	if (is_jumping)
+	{
+		jumping_time += 0.1f;
+		player_position.y = player_position_y0 - initial_velocity * jumping_time + (jumping_time*jumping_time) * gravity / 2; //Formula to calculate player position in Y axis
+		if (player_position.y > player_position_y0)
+		{
+			jumping_time = 0.0f;
+			is_jumping = false;
+		}
+	}
 
 	App->render->Blit(graphics, player_position.x, player_position.y, &current_animation->GetCurrentFrame());
 

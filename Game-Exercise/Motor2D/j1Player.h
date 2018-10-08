@@ -58,6 +58,11 @@ public:
 	bool firstUpdate = true;
 	bool is_backwards = false;
 
+	bool is_jumping = true;
+	uint player_position_y0;
+	uint initial_velocity = 25;
+	uint gravity = 5;
+	float jumping_time = 0.0f;
 
 	
 };

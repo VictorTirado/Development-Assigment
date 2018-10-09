@@ -23,7 +23,7 @@ j1Player::j1Player() : j1Module()
 	player = App->LoadPlayer(player_file);
 
 	player_position.x = 50;
-	player_position.y = 400;
+	player_position.y = 250;
 
 	path = player.child("folder").attribute("path").as_string();
 	for (pugi::xml_node animations = player.child("animation"); animations; animations = animations.next_sibling("animation"))
@@ -76,8 +76,14 @@ bool j1Player::Update(float dt)
 
 	if (!is_backwards)
 		current_animation = &idle;
+	/*while (App->map->data.map_layers.end->data->data[gid] != 51)
+	{
+		player_position.y += 1;
+	}*/
 	
-
+	gid = App->map->Get_gid(player_position.x, player_position.y+51);
+	App->render->DrawQuad({player_position.x+ 10,player_position.y+45,16,16},0,0,255,255);
+	//LOG("GIIIIID %d", gid);
 	if (is_backwards)
 		current_animation = &idleBackwards;
 	
@@ -88,8 +94,21 @@ bool j1Player::Update(float dt)
 		
 		firstUpdate = false;
 	}
+	if (OnCollision(collider,App->map->walkable) == false)
+	{
+		player_position.y = player_position.y;
+	}
+	else
+	{
 		
-	
+	}
+	if (App->map->data.map_layers.end->data->data[gid +1] != 51) {
+		player_position.y += 1;
+	}
+	else
+	{
+		player_position.y = player_position.y;
+	}
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
 		App->render->camera.x = -player_position.x ;
@@ -217,5 +236,10 @@ bool j1Player::Save(pugi::xml_node& data)const
 		data.child("map").attribute("level") = App->scene->map_number;
 	}
 
+	return true;
+}
+bool j1Player::OnCollision(Collider* n1, Collider* n2)
+{
+	
 	return true;
 }

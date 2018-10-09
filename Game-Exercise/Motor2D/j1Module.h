@@ -73,7 +73,7 @@ public:
 		return true;
 	}
 
-	virtual void OnCollision(Collider*, Collider*) {}
+	virtual bool OnCollision(Collider*, Collider*) { return false; }
 
 	bool IsEnabled() const { return enabled; }
 

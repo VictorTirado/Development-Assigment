@@ -25,7 +25,7 @@ public:
 	bool PostUpdate();
 
 	void LoadAnimation(pugi::xml_node&, Animation* player);
-
+	bool OnCollision(Collider*, Collider*);
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 public:
@@ -53,7 +53,8 @@ public:
 	float jumping_time = 0.0f;
 
 	Collider* collider;
+	uint gid;
 
-	
+	bool check = false;
 };
 #endif

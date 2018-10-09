@@ -43,6 +43,7 @@ private:
 
 public:
 	int map_number = 0;
+	bool collision_debug = false;
 };
 
 #endif // __j1SCENE_H__

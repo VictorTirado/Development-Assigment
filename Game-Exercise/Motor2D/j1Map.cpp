@@ -7,6 +7,7 @@
 #include "j1Player.h"
 #include "j1Scene.h"
 #include "j1Collision.h"
+#include "j1Input.h"
 #include <math.h>
 
 j1Map::j1Map() : j1Module(), map_loaded(false)
@@ -88,13 +89,17 @@ void j1Map::Draw()
 						}
 						if (layers_list->data->name == "Logic")
 						{
+							if (App->scene->collision_debug)
+							{
+								App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
+							}
+							
 							if (App->map->data.map_layers.end->data->data[gid] == 51)
 							{
 								//App->player->player_position.y += 1;
 								//walkable = App->collision->AddCollider({coords.x,coords.y,16,16},COLLIDER_WALL,this);
 							}
-							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
-							
+
 						}
 						if (App->map->data.map_layers.end->data->data[gid] == 52) {
 							/*App->player->player_position.x = coords.x;

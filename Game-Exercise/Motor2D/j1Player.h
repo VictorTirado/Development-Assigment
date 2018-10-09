@@ -35,6 +35,10 @@ public:
 	Animation run;
 	Animation teleport;
 	Animation jutsu;
+	Animation jump;
+	Animation fall;
+	Animation jumpBackwards;
+	Animation fallBackwards;
 	Animation* current_animation = nullptr;
 	iPoint player_position;
 
@@ -46,14 +50,18 @@ public:
 	bool firstUpdate = true;
 	bool is_backwards = false;
 
+	bool is_falling = true;
 	bool is_jumping = false;
-	uint player_position_y0;
+	int player_position_y0 = 0;
 	uint initial_velocity = 25;
 	uint gravity = 5;
 	float jumping_time = 0.0f;
 
 	Collider* collider;
 	uint gid;
+	iPoint speed;
+
+	int jumpH = 200;
 
 	bool check = false;
 };

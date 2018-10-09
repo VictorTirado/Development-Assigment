@@ -41,6 +41,10 @@ j1Player::j1Player() : j1Module()
 			LoadAnimation(animations, &teleport);
 		if (name == "jutsu")
 			LoadAnimation(animations, &jutsu);
+		if (name == "jump")
+			LoadAnimation(animations, &jump);
+		if (name == "fall")
+			LoadAnimation(animations, &fall);
 	}
 	current_animation = &idle;
 
@@ -102,13 +106,15 @@ bool j1Player::Update(float dt)
 	{
 		
 	}
-	if (App->map->data.map_layers.end->data->data[gid +1] != 51) {
+	if (App->map->data.map_layers.end->data->data[gid +1] != 51)
 		player_position.y += 1;
-	}
+
 	else
 	{
 		player_position.y = player_position.y;
+		is_falling = false;
 	}
+
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
 		App->render->camera.x = -player_position.x ;
@@ -153,22 +159,46 @@ bool j1Player::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
 		current_animation = &jutsu;
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		is_jumping = true;
 
 	if (jumping_time == 0.0f)
-		player_position_y0 = player_position.y;
+	   player_position_y0 = - 1 * player_position.y;
+
 
 	if (is_jumping)
 	{
+		current_animation = &jump;
 		jumping_time += 0.1f;
-		player_position.y = player_position_y0 - initial_velocity * jumping_time + (jumping_time*jumping_time) * gravity / 2; //Formula to calculate player position in Y axis
-		if (player_position.y > player_position_y0)
+		//player_position.y = player_position_y0 - initial_velocity * jumping_time + (jumping_time*jumping_time) * gravity / 2; //Formula to calculate player position in Y axis
+		//if (player_position.y > player_position_y0)
+		//{
+		//	jumping_time = 0.0f;
+		//	is_jumping = false;
+		//}
+		//speed.y = gravity;
+		player_position.y -= gravity;
+
+		if (player_position.y > player_position_y0 && jumping_time >= 1.5f)
 		{
+			player_position.y += 5;
 			jumping_time = 0.0f;
 			is_jumping = false;
+			is_falling = true;
 		}
 	}
+	
+	if (is_falling)
+		current_animation = &fall;
+
+	
+	if (App->map->data.map_layers.end->data->data[gid] == 71)
+	{
+		player_position.x = 50;
+		player_position.y = 250;
+	}
+	
+
 	collider->SetPos(player_position.x, player_position.y);
 	App->render->Blit(graphics, player_position.x, player_position.y, &current_animation->GetCurrentFrame());
 

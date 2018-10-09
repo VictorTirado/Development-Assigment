@@ -129,6 +129,11 @@ bool j1Scene::Update(float dt)
 		ChangeMap(map_number);
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		collision_debug = !collision_debug;
+	}
+
 	//App->render->Blit(img, 0, 0);
 	App->map->Draw();
 

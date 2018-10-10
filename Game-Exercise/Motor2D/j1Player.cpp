@@ -22,7 +22,7 @@ j1Player::j1Player() : j1Module()
 	pugi::xml_node player;
 	player = App->LoadPlayer(player_file);
 
-	player_position.x = 50;
+	player_position.x = 170;
 	player_position.y = 315;
 
 	path = player.child("folder").attribute("path").as_string();
@@ -159,7 +159,7 @@ bool j1Player::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-		if (App->map->data.map_layers.end->data->data[gid] == 51)
+		//if (App->map->data.map_layers.end->data->data[gid] == 51)
 			is_jumping = true;
 	}
 	
@@ -232,7 +232,6 @@ void j1Player::LoadAnimation(pugi::xml_node& animation, Animation* player)
 
 bool j1Player::Load(pugi::xml_node& data)
 {
-	App->player->CleanUp();
 	if (data.child("map") != nullptr)
 	{
 		App->scene->map_number = data.child("map").attribute("level").as_int();

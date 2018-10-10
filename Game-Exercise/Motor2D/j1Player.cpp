@@ -71,8 +71,6 @@ bool j1Player::PreUpdate()
 {
 	bool ret = true;
 
-	
-
 	return ret;
 }
 
@@ -110,7 +108,7 @@ bool j1Player::Update(float dt)
 	{
 		player_position.y += 1;
 		is_falling = true;
-		App->render->camera.y = player_position.y*-3;
+		App->render->camera.y = player_position.y* -3 + (App->win->height / 2);
 	}
 	else
 	{
@@ -214,6 +212,9 @@ bool j1Player::CleanUp()
 {
 	LOG("Unloading player");
 	
+	App->tex->UnLoad(graphics);
+	graphics = nullptr;
+
 	return true;
 }
 
@@ -229,14 +230,9 @@ void j1Player::LoadAnimation(pugi::xml_node& animation, Animation* player)
 	player->loop = animation.attribute("loop").as_bool();
 }
 
-
-
-
-
-
 bool j1Player::Load(pugi::xml_node& data)
 {
-
+	App->player->CleanUp();
 	if (data.child("map") != nullptr)
 	{
 		App->scene->map_number = data.child("map").attribute("level").as_int();
@@ -251,6 +247,12 @@ bool j1Player::Load(pugi::xml_node& data)
 		App->scene->ChangeMap(App->scene->map_number);
 	}
 
+	if (data.child("position") != nullptr)
+	{
+		player_position.x = data.child("position").attribute("x").as_int();
+		player_position.y = data.child("position").attribute("y").as_int();
+	}
+
 	return true;
 }
 
@@ -259,10 +261,24 @@ bool j1Player::Save(pugi::xml_node& data)const
 	if (data.child("map") == NULL)
 	{
 		data.append_child("map").append_attribute("level") = App->scene->map_number;
+		
 	}
 	else
 	{
 		data.child("map").attribute("level") = App->scene->map_number;
+		
+	}
+
+	if (data.child("position") == NULL)
+	{
+		data.append_child("position").append_attribute("x") = player_position.x;
+		data.append_child("position").append_attribute("y") = player_position.y;
+	}
+
+	else
+	{
+		data.child("position").attribute("x") = player_position.x;
+		data.child("position").attribute("y") = player_position.y;
 	}
 
 	return true;

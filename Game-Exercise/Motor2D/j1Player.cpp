@@ -60,8 +60,6 @@ bool j1Player::Start()
 	
 	graphics = App->tex->Load(path.GetString());
 	
-	collider = App->collision->AddCollider({ player_position.x, player_position.y,37,51 }, COLLIDER_PLAYER, this);
-
 	return ret;
 }
 
@@ -80,14 +78,11 @@ bool j1Player::Update(float dt)
 
 	if (!is_backwards)
 		current_animation = &idle;
-	/*while (App->map->data.map_layers.end->data->data[gid] != 51)
-	{
-		player_position.y += 1;
-	}*/
+	
 	
 	gid = App->map->Get_gid(player_position.x, player_position.y+51);
-	App->render->DrawQuad({player_position.x+ 10,player_position.y+45,16,16},0,0,255,255);
-	//LOG("GIIIIID %d", gid);
+	//App->render->DrawQuad({player_position.x+ 10,player_position.y+45,16,16},0,0,255,255);
+	
 	if (is_backwards)
 		current_animation = &idleBackwards;
 	
@@ -97,14 +92,6 @@ bool j1Player::Update(float dt)
 		App->render->camera.y = -player_position.y -(App->win->height/2);
 		
 		firstUpdate = false;
-	}
-	if (OnCollision(collider,App->map->walkable) == false)
-	{
-		player_position.y = player_position.y;
-	}
-	else
-	{
-		
 	}
 	if (App->map->data.map_layers.end->data->data[gid +1] != 51)
 		player_position.y += 1;
@@ -120,8 +107,6 @@ bool j1Player::Update(float dt)
 		App->render->camera.x = -player_position.x ;
 		App->render->camera.y = -player_position.y - 350;
 		player_position.y += MOVEMENT_SPEED;
-		LOG("%d camera x", App->render->camera.x);
-		LOG("%d camera y", App->render->camera.y);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
@@ -129,20 +114,16 @@ bool j1Player::Update(float dt)
 		App->render->camera.x = -player_position.x ;
 		App->render->camera.y = -player_position.y - 350;
 		player_position.y -= MOVEMENT_SPEED;
-		LOG("%d camera x", App->render->camera.x);
-		LOG("%d camera y", App->render->camera.y);
+		
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		App->render->camera.x = -player_position.x * 3 + (App->win->width / 2);
 		App->render->camera.y = -player_position.y - 350;
-
 		current_animation = &runBackwards;
 		is_backwards = true;
 		player_position.x -= MOVEMENT_SPEED;
-		LOG("%d camera x", App->render->camera.x);
-		LOG("%d camera y", App->render->camera.y);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
@@ -152,8 +133,6 @@ bool j1Player::Update(float dt)
 		current_animation = &run;
 		is_backwards = false;
 		player_position.x += MOVEMENT_SPEED;
-		LOG("%d camera x", App->render->camera.x);
-		LOG("%d camera y", App->render->camera.y);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
@@ -191,13 +170,6 @@ bool j1Player::Update(float dt)
 	if (is_falling)
 		current_animation = &fall;
 
-	
-	if (App->map->data.map_layers.end->data->data[gid] == 71)
-	{
-		player_position.x = 50;
-		player_position.y = 250;
-	}
-	
 
 	collider->SetPos(player_position.x, player_position.y);
 	App->render->Blit(graphics, player_position.x, player_position.y, &current_animation->GetCurrentFrame());
@@ -266,10 +238,5 @@ bool j1Player::Save(pugi::xml_node& data)const
 		data.child("map").attribute("level") = App->scene->map_number;
 	}
 
-	return true;
-}
-bool j1Player::OnCollision(Collider* n1, Collider* n2)
-{
-	
 	return true;
 }

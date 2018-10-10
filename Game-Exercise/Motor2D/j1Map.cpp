@@ -94,23 +94,14 @@ void j1Map::Draw()
 								App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
 							}
 							
-							if (App->map->data.map_layers.end->data->data[gid] == 51)
-							{
-								//App->player->player_position.y += 1;
-								//walkable = App->collision->AddCollider({coords.x,coords.y,16,16},COLLIDER_WALL,this);
-							}
-
+					
 						}
 						if (App->map->data.map_layers.end->data->data[gid] == 52) {
 							/*App->player->player_position.x = coords.x;
 							App->player->player_position.y = coords.y;*/
 							//LOG("Spawn.x = %d Spawn.y = %d", spawn.x, spawn.y);
 						}
-						if (App->map->data.map_layers.end->data->data[gid] == 53) {
-							//App->scene->ChangeMap(App->scene->map_number);
-							
-							
-						}
+						
 					}
 					
 				}

@@ -5,7 +5,6 @@
 #include "p2Point.h"
 #include "j1Module.h"
 #include "Animation.h"
-//#include "ModuleCollision.h"
 #define MOVEMENT_SPEED 1
 
 
@@ -25,7 +24,6 @@ public:
 	bool PostUpdate();
 
 	void LoadAnimation(pugi::xml_node&, Animation* player);
-	bool OnCollision(Collider*, Collider*);
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 public:

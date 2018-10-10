@@ -40,8 +40,8 @@ bool j1Scene::Start()
 	
 
 
-	App->audio->PlayMusic(App->audio->path.GetString());
-	App->audio->StartVolume(App->audio->volume);
+	//App->audio->PlayMusic(App->audio->path.GetString());
+	//App->audio->StartVolume(App->audio->volume);
 
 	
 
@@ -89,26 +89,22 @@ bool j1Scene::Update(float dt)
 	}
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 	{
-		LOG("%d camera x", App->render->camera.x);
-		LOG("%d camera y", App->render->camera.y);
+		
 		App->render->camera.y -= 10;
 	}
 	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
-		LOG("%d camera x", App->render->camera.x);
-		LOG("%d camera y", App->render->camera.y);
+	
 		App->render->camera.y += 10;
 		}
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
-		LOG("%d camera x", App->render->camera.x);
-		LOG("%d camera y", App->render->camera.y);
+		
 		App->render->camera.x -= 10;
 	}
 		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		{
-			LOG("%d camera x", App->render->camera.x);
-			LOG("%d camera y", App->render->camera.y);
+			
 			App->render->camera.x += 10;
 		}
 	if (App->input->GetKey(SDL_SCANCODE_KP_PLUS) == KEY_DOWN)
@@ -134,10 +130,9 @@ bool j1Scene::Update(float dt)
 		collision_debug = !collision_debug;
 	}
 
-	//App->render->Blit(img, 0, 0);
+	
 	App->map->Draw();
 
-	
 	// "Map:%dx%d Tiles:%dx%d Tilesets:%d"
 	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
 					App->map->data.width, App->map->data.height,

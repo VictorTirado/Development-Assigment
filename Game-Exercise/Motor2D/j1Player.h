@@ -51,15 +51,12 @@ public:
 	bool is_falling = true;
 	bool is_jumping = false;
 	int player_position_y0 = 0;
-	uint initial_velocity = 25;
 	uint gravity = 5;
 	float jumping_time = 0.0f;
+	SDL_RendererFlip sprite_flip = SDL_FLIP_NONE;
 
 	Collider* collider;
 	uint gid;
-	iPoint speed;
-
-	int jumpH = 200;
 
 	bool check = false;
 };

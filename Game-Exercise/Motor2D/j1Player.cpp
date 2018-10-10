@@ -105,6 +105,7 @@ bool j1Player::Update(float dt)
 	if (App->map->data.map_layers.end->data->data[gid] != 51 /*|| App->map->data.map_layers.end->data->data[gid] != 51*/)
 	{
 		player_position.y += 1;
+		is_falling = true;
 		App->render->camera.y = player_position.y*-3;
 	}
 	else
@@ -114,7 +115,6 @@ bool j1Player::Update(float dt)
 	}
 	if (App->map->data.map_layers.end->data->data[gid -1] == 53 || App->map->data.map_layers.end->data->data[gid + 1] == 53)
 	{
-	
 		LOG("HOLAAAAAAAAAAAAAAAAAAAA");
 		player_position.x = player_position.x;
 	}
@@ -156,8 +156,16 @@ bool j1Player::Update(float dt)
 
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-		//if(App->map->data.map_layers.end->data->data[gid + 1] == 51)
-		is_jumping = true;
+	{
+		if (App->map->data.map_layers.end->data->data[gid] == 51)
+			is_jumping = true;
+	}
+	
+	/*if (is_jumping && is_backwards)
+		sprite_flip = SDL_FLIP_HORIZONTAL;*/
+
+	//SDL_RenderCopyEx(App->render->renderer,graphics, NULL, NULL, 0, 0, SDL_FLIP_HORIZONTAL);
+
 
 	if (jumping_time == 0.0f)
 	   player_position_y0 = - 1 * player_position.y;

@@ -4,32 +4,32 @@
   <folder path="textures/Sasuke_sprites.png" ></folder>
   
    <animation name ="idle" speed="0.05f" loop="true">
-    <frame x="4" y="15" w="37" h="51"/>
-    <frame x="79" y="15" w="38" h="51"/>
-    <frame x="158" y="15" w="38" h="51"/>
-    <frame x="224" y="15" w="36" h="51"/>
+    <frame x="4" y="12" w="37" h="54"/>
+    <frame x="79" y="12" w="38" h="54"/>
+    <frame x="158" y="12" w="38" h="54"/>
+    <frame x="224" y="12" w="36" h="54"/>
    </animation>
   <animation name ="idleBackwards" speed="0.05f" loop ="true">
-    <frame x="536" y="1254" w="37" h="51"/>
-    <frame x="460" y="1254" w="38" h="51"/>
-    <frame x="381" y="1254" w="38" h="51"/>
-    <frame x="317" y="1254" w="36" h="51"/>
+    <frame x="536" y="1251" w="37" h="54"/>
+    <frame x="460" y="1251" w="38" h="54"/>
+    <frame x="381" y="1251" w="38" h="54"/>
+    <frame x="317" y="1251" w="36" h="54"/>
   </animation>
    <animation name ="run" speed="0.1f" loop="true">
-    <frame x="7" y="149" w="42" h="43"/>
-    <frame x="62" y="151" w="48" h="41"/>
-    <frame x="130" y="149" w="36" h="42"/>
-    <frame x="188" y="147" w="39" h="44"/>
-    <frame x="246" y="151" w="42" h="41"/>
-    <frame x="310" y="151" w="34" h="41"/>
+     <frame x="7" y="138" w="42" h="54"/>
+     <frame x="62" y="140" w="48" h="52"/>
+     <frame x="130" y="138" w="36" h="53"/>
+     <frame x="188" y="136" w="39" h="55"/>
+     <frame x="246" y="140" w="42" h="52"/>
+     <frame x="310" y="140" w="34" h="52"/>
    </animation>
   <animation name ="runBackwards" speed="0.1f" loop ="true">
-    <frame x="528" y="1388" w="42" h="43"/>
-    <frame x="467" y="1390" w="48" h="41"/>
-    <frame x="411" y="1388" w="36" h="42"/>
-    <frame x="350" y="1386" w="39" h="44"/>
-    <frame x="289" y="1390" w="42" h="41"/>
-    <frame x="233" y="1390" w="34" h="41"/>
+    <frame x="528" y="1377" w="42" h="54"/>
+    <frame x="467" y="1379" w="48" h="52"/>
+    <frame x="411" y="1377" w="36" h="53"/>
+    <frame x="350" y="1375" w="39" h="55"/>
+    <frame x="289" y="1379" w="42" h="52"/>
+    <frame x="233" y="1379" w="34" h="52"/>
     </animation>
   <animation name ="teleport" speed="0.05f" loop ="false">
     <frame x="6" y="804" w="32" h="54"/>

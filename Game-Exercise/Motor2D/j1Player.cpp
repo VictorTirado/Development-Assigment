@@ -45,9 +45,13 @@ j1Player::j1Player() : j1Module()
 			LoadAnimation(animations, &jump);
 		if (name == "fall")
 			LoadAnimation(animations, &fall);
+		if (name == "jumpBackwards")
+			LoadAnimation(animations, &jumpBackwards);
+		if (name == "fallBackwards")
+			LoadAnimation(animations, &fallBackwards);
 	}
-	current_animation = &idle;
 
+	current_animation = &idle;
 }
 
 j1Player::~j1Player()
@@ -101,7 +105,7 @@ bool j1Player::Update(float dt)
 	//	LOG("%d camera y", App->render->camera.y);
 	//}
 	
-	//LOGIG
+	//LOGIC
 	if (App->map->data.map_layers.end->data->data[gid] != 51 /*|| App->map->data.map_layers.end->data->data[gid] != 51*/)
 	{
 		player_position.y += 1;
@@ -161,27 +165,16 @@ bool j1Player::Update(float dt)
 			is_jumping = true;
 	}
 	
-	/*if (is_jumping && is_backwards)
-		sprite_flip = SDL_FLIP_HORIZONTAL;*/
 
-	//SDL_RenderCopyEx(App->render->renderer,graphics, NULL, NULL, 0, 0, SDL_FLIP_HORIZONTAL);
-
-
+	//JUMP
 	if (jumping_time == 0.0f)
 	   player_position_y0 = - 1 * player_position.y;
 
 
 	if (is_jumping)
 	{
-		current_animation = &jump;
 		jumping_time += 0.1f;
-		//player_position.y = player_position_y0 - initial_velocity * jumping_time + (jumping_time*jumping_time) * gravity / 2; //Formula to calculate player position in Y axis
-		//if (player_position.y > player_position_y0)
-		//{
-		//	jumping_time = 0.0f;
-		//	is_jumping = false;
-		//}
-		//speed.y = gravity;
+		
 		player_position.y -= gravity;
 
 		if (player_position.y > player_position_y0 && jumping_time >= 1.5f)
@@ -193,9 +186,17 @@ bool j1Player::Update(float dt)
 		}
 	}
 	
-	if (is_falling)
+	if (is_falling && !is_backwards)
 		current_animation = &fall;
 
+	if (is_falling && is_backwards)
+		current_animation = &fallBackwards;
+
+	if (is_jumping && is_backwards)
+		current_animation = &jumpBackwards;
+
+	if(is_jumping && !is_backwards)
+		current_animation = &jump;
 
 
 	App->render->Blit(graphics, player_position.x, player_position.y, &current_animation->GetCurrentFrame());

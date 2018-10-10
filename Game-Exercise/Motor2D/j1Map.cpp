@@ -6,7 +6,7 @@
 #include "j1Map.h"
 #include "j1Player.h"
 #include "j1Scene.h"
-#include "j1Collision.h"
+
 #include "j1Input.h"
 #include <math.h>
 
@@ -52,22 +52,7 @@ void j1Map::Draw()
 						uint gid = Get_gid(coords.x, coords.y);
 					
 						SDL_Rect tile2 = tileset_list->next->data->GetTileRect(layers_list->data->Get(i, j));
-						if (layers_list->data->name == "Parallax1" )
-						{
-							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.5f);
-						}
-						if (layers_list->data->name == "Parallax2")
-						{
-							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.70f);
-						}
-						if (layers_list->data->name == "Parallax3")
-						{
-							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.80f);
-						}
-						if (layers_list->data->name == "Parallax4")
-						{
-							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.90f);
-						}
+						
 						if (layers_list->data->name == "Walkable")
 						{
 							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
@@ -87,12 +72,28 @@ void j1Map::Draw()
 						{
 							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
 						}
-						if (layers_list->data->name == "Logic")
+						if (layers_list->data->name == "Parallax")
 						{
-							if (App->scene->collision_debug)
-							{
+							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.5f);
+						}
+						/*if (layers_list->data->name == "Parallax2")
+						{
+							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.70f);
+						}
+						if (layers_list->data->name == "Parallax3")
+						{
+							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.80f);
+						}
+						if (layers_list->data->name == "Parallax4")
+						{
+							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.90f);
+						}*/
+						if (layers_list->data->name == "Logic" &&App->scene->collision_debug)
+						{
+							
 								App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
-							}
+							
+
 							
 					
 						}

@@ -35,7 +35,7 @@
     <frame x="6" y="804" w="32" h="54"/>
     <frame x="92" y="802" w="37" h="55"/>
   </animation>
-  <animation name ="jutsu" speed="0.05f" loop="false">
+  <animation name ="jutsu" speed="0.01f" loop="false">
     <frame x="4" y="462" w="36" h="50"/>
     <frame x="66" y="462" w="39" h="50"/>
     <frame x="128" y="462" w="41" h="50"/>

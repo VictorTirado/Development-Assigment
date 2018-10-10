@@ -12,8 +12,7 @@
 		<map level="1" />
 	</player>
 	<fadeToBlack />
-	<:anonymous />
 	<renderer>
-		<camera x="462" y="-264" />
+		<camera x="-778" y="-545" />
 	</renderer>
 </game_state>

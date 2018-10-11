@@ -44,6 +44,7 @@ private:
 public:
 	int map_number = 0;
 	bool collision_debug = false;
+	bool is_god = false;
 };
 
 #endif // __j1SCENE_H__

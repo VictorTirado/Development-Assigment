@@ -81,12 +81,12 @@ bool j1Scene::Update(float dt)
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		App->SaveGame();
-	else if(App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	else if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		App->LoadGame();
 	else if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
-			collision_debug = !collision_debug;
-	else if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
-	{}
+		collision_debug = !collision_debug;
+	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+		is_god = !is_god;
 
 	else if (App->input->GetKey(SDL_SCANCODE_KP_PLUS) == KEY_DOWN)
 	{

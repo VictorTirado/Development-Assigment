@@ -26,6 +26,7 @@ public:
 	void LoadAnimation(pugi::xml_node&, Animation* player);
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
+	bool GodMode();
 public:
 	Animation idle;
 	Animation idleBackwards;
@@ -53,8 +54,6 @@ public:
 	int player_position_y0 = 0;
 	uint gravity = 5;
 	float jumping_time = 0.0f;
-	
-
 	
 	uint gid;
 

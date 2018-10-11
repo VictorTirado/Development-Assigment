@@ -92,7 +92,7 @@ bool j1Player::Update(float dt)
 	//LOGIC
 	gid = App->map->Get_gid(player_position.x + 10, player_position.y + 51);
 	App->render->DrawQuad({ player_position.x + 10,player_position.y + 51,16,16 }, 0, 0, 255, 255);
-	if (App->map->data.map_layers.end->data->data[gid +1] != 51 && App->map->data.map_layers.end->data->data[gid] != 51 )
+	if (App->map->data.map_layers.end->data->data[gid +1] != 51 && App->map->data.map_layers.end->data->data[gid] != 51 && !App->scene->is_god)
 	{
 		player_position.y += 1;
 		is_falling = true;
@@ -175,6 +175,26 @@ bool j1Player::Update(float dt)
 	if(is_jumping && !is_backwards)
 		current_animation = &jump;
 
+	//GOD MODE
+
+	if (App->scene->is_god)
+	{
+		if (App->input->GetKey(SDL_SCANCODE_W))
+		{
+			player_position.y -= 1;
+			App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
+			App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
+		}
+			
+
+		if (App->input->GetKey(SDL_SCANCODE_S))
+		{
+			App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
+			App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
+			player_position.y += 1;
+		}
+			
+	}
 
 	App->render->Blit(graphics, player_position.x, player_position.y, &current_animation->GetCurrentFrame());
 
@@ -261,3 +281,4 @@ bool j1Player::Save(pugi::xml_node& data)const
 
 	return true;
 }
+

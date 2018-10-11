@@ -95,7 +95,7 @@ public:
 
 public:
 
-	p2SString	name;
+	p2SString	name = nullptr;
 	bool		active;
 
 };

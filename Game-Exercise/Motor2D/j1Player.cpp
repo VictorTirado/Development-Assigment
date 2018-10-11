@@ -36,6 +36,8 @@ j1Player::j1Player() : j1Module()
 			LoadAnimation(animations, &runBackwards);
 		if (name == "teleport")
 			LoadAnimation(animations, &teleport);
+		if (name == "teleportBackwards")
+			LoadAnimation(animations, &teleportBackwards);
 		if (name == "jutsu")
 			LoadAnimation(animations, &jutsu);
 		if (name == "jump")
@@ -175,23 +177,29 @@ bool j1Player::Update(float dt)
 	if(is_jumping && !is_backwards)
 		current_animation = &jump;
 
-	//GOD MODE
+	//TELEPORT
+
+	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+		current_animation = &teleport;
+
+
+	//GOD MODE  The player can fly and move everywhere and is not affected by gravity
 
 	if (App->scene->is_god)
 	{
-		if (App->input->GetKey(SDL_SCANCODE_W))
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 		{
-			player_position.y -= 1;
 			App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
 			App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
+			player_position.y -= 4;
 		}
 			
 
-		if (App->input->GetKey(SDL_SCANCODE_S))
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		{
 			App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
 			App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
-			player_position.y += 1;
+			player_position.y += 4;
 		}
 			
 	}

@@ -364,7 +364,7 @@ bool j1App::SavegameNow() const
 
 	LOG("Saving Game State to %s...", "save_game.xml");
 
-	// xml object were we will store all data
+	// xml object where we will store all data
 	pugi::xml_document data;
 	pugi::xml_node root;
 	

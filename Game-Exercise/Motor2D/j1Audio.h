@@ -43,12 +43,12 @@ public:
 
 private:
 
-	_Mix_Music*			music;
+	_Mix_Music*			music = nullptr;
 	p2List<Mix_Chunk*>	fx;
 
 public:
 	int volume = 0;
-	p2SString  path;
+	p2SString  path = nullptr;
 };
 
 #endif // __j1AUDIO_H__

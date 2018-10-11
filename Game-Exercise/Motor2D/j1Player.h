@@ -33,29 +33,31 @@ public:
 	Animation runBackwards;
 	Animation run;
 	Animation teleport;
+	Animation teleportBackwards;
 	Animation jutsu;
 	Animation jump;
 	Animation fall;
 	Animation jumpBackwards;
 	Animation fallBackwards;
 	Animation* current_animation = nullptr;
-	iPoint player_position ;
+	iPoint player_position;
 
 	
 
 
-	SDL_Texture* graphics;
-	p2SString path;
+	SDL_Texture* graphics = nullptr;
+	p2SString path = nullptr;
 	bool firstUpdate = true;
 	bool is_backwards = false;
 
 	bool is_falling = true;
 	bool is_jumping = false;
+	bool is_teleporting = false;
 	int player_position_y0 = 0;
 	uint gravity = 5;
 	float jumping_time = 0.0f;
 	
-	uint gid;
+	uint gid = 0;
 
 	bool check = false;
 };

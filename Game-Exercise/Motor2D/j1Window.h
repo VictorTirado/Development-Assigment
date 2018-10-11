@@ -39,11 +39,11 @@ public:
 	SDL_Surface* screen_surface;
 
 public:
-	p2SString	title;
-	uint		width;
-	uint		height;
-	uint		scale;
-	int		render_scale;
+	p2SString	title = nullptr;
+	uint		width = 0;
+	uint		height = 0;
+	uint		scale = 0;
+	int		render_scale = 0;
 };
 
 #endif // __j1WINDOW_H__

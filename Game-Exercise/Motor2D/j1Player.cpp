@@ -179,7 +179,7 @@ bool j1Player::Update(float dt)
 
 	//TELEPORT
 
-	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 		current_animation = &teleport;
 
 

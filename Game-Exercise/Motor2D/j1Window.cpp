@@ -37,6 +37,7 @@ bool j1Window::Awake(pugi::xml_node& config)
 		bool borderless = config.child("borderless").attribute("value").as_bool(false);
 		bool resizable = config.child("resizable").attribute("value").as_bool(false);
 		bool fullscreen_window = config.child("fullscreen_window").attribute("value").as_bool(false);
+		render_scale = config.child("render_scale").attribute("value").as_int();
 
 		width = config.child("resolution").attribute("width").as_int();
 		height = config.child("resolution").attribute("height").as_int();

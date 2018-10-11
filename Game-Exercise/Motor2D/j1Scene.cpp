@@ -61,84 +61,50 @@ bool j1Scene::Update(float dt)
 	{ 
 		App->map->CleanUp();
 		App->map->Load("ForestMap.tmx");
-		change_map = false;
-		
-		
+		change_map = false;	
 	}*/
-	if(App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-		App->LoadGame();
 
-	if(App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-		App->SaveGame();
+	//DEBUG KEYS
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
-		
-		//App->fade_to_black->FadeToBlack(this, this, 2.0f);
-		map_number = 2;
+		map_number = 1;
 		ChangeMap(map_number);
-		//change_map = true;
 		is_faded = true;
 	}
-	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	else if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
-		map_number = 1;
+		map_number = 2;
 		ChangeMap(map_number);
 		/*App->fade_to_black->FadeToBlack(this, this, 2.0f);
 		change_map = true;
 		App->map->Load("Map1.tmx");*/
 	}
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	else if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+		App->SaveGame();
+	else if(App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+		App->LoadGame();
+	else if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+			collision_debug = !collision_debug;
+	else if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{}
+
+	else if (App->input->GetKey(SDL_SCANCODE_KP_PLUS) == KEY_DOWN)
 	{
-		
-		App->render->camera.y -= 10;
-	}
-	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-	{
-	
-		App->render->camera.y += 10;
-		}
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-	{
-		
-		App->render->camera.x -= 10;
-	}
-		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		{
-			
-			App->render->camera.x += 10;
-		}
-	if (App->input->GetKey(SDL_SCANCODE_KP_PLUS) == KEY_DOWN)
-	{
-		LOG("%d", App->audio->volume);
 		change_music = true;
 		App->audio->ChangeMusic(change_music);
 	}
-	if (App->input->GetKey(SDL_SCANCODE_KP_MINUS) == KEY_DOWN)
-	{
-		LOG("%d", App->audio->volume);
+	else if (App->input->GetKey(SDL_SCANCODE_KP_MINUS) == KEY_DOWN)
+	{	
 		change_music = false;
 		App->audio->ChangeMusic(change_music);
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
-	{
-		ChangeMap(map_number);
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
-	{
-		collision_debug = !collision_debug;
-	}
-
-	
 	App->map->Draw();
 
-	// "Map:%dx%d Tiles:%dx%d Tilesets:%d"
 	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
 					App->map->data.width, App->map->data.height,
 					App->map->data.tile_width, App->map->data.tile_height,
 					App->map->data.tilesets.count());
-
 	App->win->SetTitle(title.GetString());
 	return true;
 }
@@ -172,6 +138,10 @@ bool j1Scene::ChangeMap(int map_number)
 		App->fade_to_black->FadeToBlack(this, this, 3.0f);
 		App->map->CleanUp();
 		App->map->Load("Map1.tmx");
+		App->player->player_position.x = App->map->spawn.x;
+		App->player->player_position.y = App->map->spawn.y;
+		App->render->camera.x = (-App->player->player_position.x * App->win->render_scale) + (App->win->width / 2);
+		App->render->camera.y = (-App->player->player_position.y * App->win->render_scale) + (App->win->height / 2);
 	}
 	else if (map_number == 2)
 	{

@@ -38,7 +38,7 @@ public:
 	Animation jumpBackwards;
 	Animation fallBackwards;
 	Animation* current_animation = nullptr;
-	iPoint player_position;
+	iPoint player_position ;
 
 	
 
@@ -53,9 +53,9 @@ public:
 	int player_position_y0 = 0;
 	uint gravity = 5;
 	float jumping_time = 0.0f;
-	SDL_RendererFlip sprite_flip = SDL_FLIP_NONE;
+	
 
-	Collider* collider;
+	
 	uint gid;
 
 	bool check = false;

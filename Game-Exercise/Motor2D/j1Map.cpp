@@ -72,10 +72,9 @@ void j1Map::Draw()
 						{
 							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
 						}
-						if (layers_list->data->name == "Parallax")
-						{
+						//BLIT PARALLAX
 							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.5f);
-						}
+						
 						/*if (layers_list->data->name == "Parallax2")
 						{
 							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.70f);
@@ -88,19 +87,14 @@ void j1Map::Draw()
 						{
 							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.90f);
 						}*/
-						if (layers_list->data->name == "Logic" &&App->scene->collision_debug)
-						{
-							
+						if (App->scene->collision_debug)
+						{	
 								App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
-							
-
-							
-					
 						}
 						if (App->map->data.map_layers.end->data->data[gid] == 52) {
-							/*App->player->player_position.x = coords.x;
-							App->player->player_position.y = coords.y;*/
-							//LOG("Spawn.x = %d Spawn.y = %d", spawn.x, spawn.y);
+							spawn.x = coords.x;
+							spawn.y = coords.y;
+	
 						}
 						
 					}

@@ -16,6 +16,7 @@
     <borderless value="false"/>
     <resizable value="false"/>
     <fullscreen_window value="false"/>
+    <render_scale value="3"/>
   </window>
   <audio>
     <path value ="audio/music/Mega_Rust.ogg" />

@@ -101,7 +101,7 @@ public:
 
 	MapData data;
 	uint Get_gid(int x, int y);
-	Collider* walkable;
+	iPoint spawn;
 private:
 
 	pugi::xml_document	map_file;

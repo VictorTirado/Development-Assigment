@@ -43,6 +43,7 @@ public:
 	uint		width;
 	uint		height;
 	uint		scale;
+	int		render_scale;
 };
 
 #endif // __j1WINDOW_H__

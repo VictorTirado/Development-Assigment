@@ -52,7 +52,7 @@
     <frame x="7" y="82" w="34" h="47"/>
     <frame x="71" y="82" w="34" h="47"/>
   </animation>
-  <animation name="fall" speed="0.2f" loop="true">
+  <animation name="fall" speed="0.05f" loop="true">
     <frame x="3" y="330" w="32" h="50"/>
     <frame x="69" y="330" w="31" h="50"/>
   </animation>
@@ -60,7 +60,7 @@
     <frame x="536" y="1321" w="34" h="47"/>
     <frame x="472" y="1321" w="34" h="47"/>
   </animation>
-  <animation name="fallBackwards" speed="0.2f" loop="true">
+  <animation name="fallBackwards" speed="0.05f" loop="true">
     <frame x="541" y="1483" w="32" h="50"/>
     <frame x="476" y="1483" w="31" h="50"/>
   </animation>

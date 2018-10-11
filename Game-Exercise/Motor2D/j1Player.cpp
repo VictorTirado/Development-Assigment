@@ -80,8 +80,8 @@ bool j1Player::Update(float dt)
 
 	if (firstUpdate == true)
 	{
-		App->render->camera.x = -player_position.x  + (App->win->width / 2);
-		App->render->camera.y = -player_position.y - (App->win->height / 2);
+		App->render->camera.x = -player_position.x*3  + (App->win->width / 2);
+		App->render->camera.y = -player_position.y*3 - (App->win->height / 2);
 
 		firstUpdate = false;
 	}
@@ -104,7 +104,7 @@ bool j1Player::Update(float dt)
 	//}
 	
 	//LOGIC
-	if (App->map->data.map_layers.end->data->data[gid] != 51 /*|| App->map->data.map_layers.end->data->data[gid] != 51*/)
+	if (App->map->data.map_layers.end->data->data[gid +1] != 51 && App->map->data.map_layers.end->data->data[gid] != 51 )
 	{
 		player_position.y += 1;
 		is_falling = true;
@@ -115,11 +115,11 @@ bool j1Player::Update(float dt)
 		player_position.y = player_position.y;
 		is_falling = false;
 	}
-	if (App->map->data.map_layers.end->data->data[gid -1] == 53 || App->map->data.map_layers.end->data->data[gid + 1] == 53)
-	{
-		LOG("HOLAAAAAAAAAAAAAAAAAAAA");
-		player_position.x = player_position.x;
-	}
+	//if (App->map->data.map_layers.end->data->data[gid -1] == 53 || App->map->data.map_layers.end->data->data[gid + 1] == 53)
+	//{
+	//	LOG("HOLAAAAAAAAAAAAAAAAAAAA");
+	//	player_position.x = player_position.x;
+	//}
 
 	/*if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
@@ -129,7 +129,7 @@ bool j1Player::Update(float dt)
 	}*/
 
 	
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid-1] != 53)
 	{
 		App->render->camera.x = -player_position.x*3 + (App->win->width/2);
 		App->render->camera.y = -player_position.y * 3 + (App->win->height / 2);
@@ -138,7 +138,7 @@ bool j1Player::Update(float dt)
 		player_position.x -= MOVEMENT_SPEED;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] != 53)
 	{
 		App->render->camera.x = -player_position.x*3 + (App->win->width / 2);
 		App->render->camera.y = -player_position.y * 3 + (App->win->height / 2);

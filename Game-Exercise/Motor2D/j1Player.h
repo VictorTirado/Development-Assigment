@@ -27,6 +27,7 @@ public:
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 	bool GodMode();
+	
 public:
 	Animation idle;
 	Animation idleBackwards;
@@ -40,7 +41,8 @@ public:
 	Animation jumpBackwards;
 	Animation fallBackwards;
 	Animation* current_animation = nullptr;
-	iPoint player_position;
+	iPoint player_position = { 0,0 };
+
 
 	
 

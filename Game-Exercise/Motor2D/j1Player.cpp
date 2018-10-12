@@ -83,6 +83,8 @@ bool j1Player::Update(float dt)
 		player_position.y = App->map->spawn.y;
 		App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
 		App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
+		LOG("%d player.x", player_position.x);
+		LOG("%d player.y", player_position.y);
 		
 		firstUpdate = false;
 	}
@@ -111,6 +113,8 @@ bool j1Player::Update(float dt)
 		current_animation = &runBackwards;
 		is_backwards = true;
 		player_position.x -= MOVEMENT_SPEED;
+		LOG("%d player.x", player_position.x);
+		LOG("%d player.y", player_position.y);
 	}
 
 	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] != 53)
@@ -120,6 +124,8 @@ bool j1Player::Update(float dt)
 		current_animation = &run;
 		is_backwards = false;
 		player_position.x += MOVEMENT_SPEED;
+		LOG("%d player.x", player_position.x);
+		LOG("%d player.y", player_position.y);
 	}
 
 	else if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
@@ -239,54 +245,37 @@ void j1Player::LoadAnimation(pugi::xml_node& animation, Animation* player)
 
 bool j1Player::Load(pugi::xml_node& data)
 {
-	if (data.child("map") != nullptr)
-	{
+	if(data.child("map") != NULL)
 		App->scene->map_number = data.child("map").attribute("level").as_int();
-	}
 
-	if (App->scene->map_number == 2)
+	if (App->scene->map_number == 2 && data.child("map") != NULL)
 	{
-		App->scene->ChangeMap(App->scene->map_number);
-	}
-	else if (App->scene->map_number == 1)
-	{
-		App->scene->ChangeMap(App->scene->map_number);
-	}
-
-	if (data.child("position") != nullptr)
-	{
+		App->fade_to_black->FadeToBlack(this, this, 3.0f);
+		App->map->CleanUp();
+		App->map->Load("ForestMap.tmx");
 		player_position.x = data.child("position").attribute("x").as_int();
 		player_position.y = data.child("position").attribute("y").as_int();
 	}
+	else if (App->scene->map_number == 1 && data.child("map") != NULL)
+	{
+		App->fade_to_black->FadeToBlack(this, this, 3.0f);
+		App->map->CleanUp();
+		App->map->Load("Map1.tmx");
+		player_position.x = data.child("position").attribute("x").as_int();
+		player_position.y = data.child("position").attribute("y").as_int();
+	}
+
 
 	return true;
 }
 
 bool j1Player::Save(pugi::xml_node& data)const
 {
-	if (data.child("map") == NULL)
-	{
-		data.append_child("map").append_attribute("level") = App->scene->map_number;
-		
-	}
-	else
-	{
-		data.child("map").attribute("level") = App->scene->map_number;
-		
-	}
-
-	if (data.child("position") == NULL)
-	{
-		data.append_child("position").append_attribute("x") = player_position.x;
-		data.append_child("position").append_attribute("y") = player_position.y;
-	}
-
-	else
-	{
-		data.child("position").attribute("x") = player_position.x;
-		data.child("position").attribute("y") = player_position.y;
-	}
-
+	data.append_child("map").append_attribute("level") = App->scene->map_number;
+	data.append_child("position").append_attribute("x") = player_position.x;
+	data.child("position").append_attribute("y") = player_position.y;
 	return true;
 }
+
+
 

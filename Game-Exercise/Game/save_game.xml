@@ -10,11 +10,10 @@
 	<scene />
 	<player>
 		<map level="1" />
-		<position x="457" />
-		<position y="493" />
+		<position x="265" y="349" />
 	</player>
 	<fadeToBlack />
 	<renderer>
-		<camera x="-856" y="-1095" />
+		<camera x="-280" y="-663" />
 	</renderer>
 </game_state>

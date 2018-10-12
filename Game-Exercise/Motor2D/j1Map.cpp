@@ -73,20 +73,9 @@ void j1Map::Draw()
 							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
 						}
 						//BLIT PARALLAX
+
 							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.5f);
 						
-						/*if (layers_list->data->name == "Parallax2")
-						{
-							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.70f);
-						}
-						if (layers_list->data->name == "Parallax3")
-						{
-							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.80f);
-						}
-						if (layers_list->data->name == "Parallax4")
-						{
-							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.90f);
-						}*/
 						if (App->scene->collision_debug)
 						{	
 								App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
@@ -105,8 +94,6 @@ void j1Map::Draw()
 		}
 		tileset_list = tileset_list->next;
 	}
-	// TODO 5: Prepare the loop to draw all tilesets + Blit
-		// TODO 9: Complete the draw function
 }
 
 
@@ -147,7 +134,6 @@ bool j1Map::CleanUp()
 	}
 	data.tilesets.clear();
 
-	// TODO 2: clean up all layer data
 	// Remove all layers
 	p2List_item<MapLayer*>* item2;
 	item2 = data.map_layers.start;

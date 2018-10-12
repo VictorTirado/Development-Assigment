@@ -35,7 +35,7 @@ bool j1Scene::Start()
 	if (!is_faded)
 	{
 		map_number = 1;
-		App->map->Load("Map1.tmx");
+		App->map->Load("Map2.tmx");
 	}
 	
 

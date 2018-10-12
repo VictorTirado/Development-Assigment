@@ -83,8 +83,6 @@ bool j1Player::Update(float dt)
 		player_position.y = App->map->spawn.y;
 		App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
 		App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
-		LOG("%d player.x", player_position.x);
-		LOG("%d player.y", player_position.y);
 		
 		firstUpdate = false;
 	}
@@ -113,8 +111,6 @@ bool j1Player::Update(float dt)
 		current_animation = &runBackwards;
 		is_backwards = true;
 		player_position.x -= MOVEMENT_SPEED;
-		LOG("%d player.x", player_position.x);
-		LOG("%d player.y", player_position.y);
 	}
 
 	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] != 53)
@@ -124,8 +120,6 @@ bool j1Player::Update(float dt)
 		current_animation = &run;
 		is_backwards = false;
 		player_position.x += MOVEMENT_SPEED;
-		LOG("%d player.x", player_position.x);
-		LOG("%d player.y", player_position.y);
 	}
 
 	else if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
@@ -137,7 +131,7 @@ bool j1Player::Update(float dt)
 		App->map->CleanUp();
 		if (App->scene->map_number == 1)
 		{
-			App->map->Load("Map1.tmx");
+			App->map->Load("Map2.tmx");
 		}
 		player_position.x = App->map->spawn.x;
 		player_position.y = App->map->spawn.y;

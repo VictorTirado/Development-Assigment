@@ -7,6 +7,7 @@
 #include "j1Book.h"
 #include "j1Input.h"
 #include "j1Window.h"
+#include "j1Collision.h"
 #include "j1Render.h"
 #include "j1Scene.h"
 
@@ -17,6 +18,8 @@
 
 j1Book::j1Book() : j1Module()
 {
+	book_position.x = 210;
+	book_position.y = 710;
 	//name.create("book");
 	//pugi::xml_document player_file;
 	//pugi::xml_node player;
@@ -49,7 +52,7 @@ bool j1Book::Start()
 
 	//graphics = App->tex->Load(path.GetString());
 	graphics = App->tex->Load("textures/Objects.png");
-
+	book_collider = App->collision->AddCollider({ book_position.x, book_position.y, 28, 25 }, COLLIDER_TYPE::COLLIDER_POWER_UP, this);
 
 	return ret;
 }
@@ -65,7 +68,7 @@ bool j1Book::Update(float dt)
 {
 	bool ret = true;
 
-	App->render->Blit(graphics, 210, 710, (&current_animation->GetCurrentFrame()),1);
+	App->render->Blit(graphics, book_position.x, book_position.y, (&current_animation->GetCurrentFrame()),1);
 
 	return ret;
 }
@@ -96,6 +99,11 @@ void j1Book::LoadAnimation(pugi::xml_node& animation, Animation* player)
 	}
 	player->speed = animation.attribute("speed").as_float();
 	player->loop = animation.attribute("loop").as_bool();
+}
+
+void j1Book::OnCollision(Collider* collider)
+{
+	is_caught = true;
 }
 
 

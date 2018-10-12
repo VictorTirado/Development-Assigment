@@ -6,6 +6,7 @@
 #include "j1Module.h"
 #include "Animation.h"
 
+
 class j1Book: public j1Module
 {
 public:
@@ -19,12 +20,14 @@ public:
 	bool PostUpdate();
 
 	void LoadAnimation(pugi::xml_node&, Animation* player);
-	
+	void OnCollision(Collider* collider);
 
 public:
+	iPoint book_position;
 	Animation idle;
 	SDL_Texture* graphics = nullptr;
 	Animation* current_animation = nullptr;
-	
+	Collider* book_collider = nullptr;
+	bool is_caught = false;
 };
 #endif

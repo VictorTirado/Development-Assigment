@@ -5,10 +5,9 @@
 #include "p2Point.h"
 #include "j1Module.h"
 #include "Animation.h"
+
+
 #define MOVEMENT_SPEED 1
-
-
-
 
 
 class j1Player : public j1Module
@@ -26,7 +25,6 @@ public:
 	void LoadAnimation(pugi::xml_node&, Animation* player);
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
-	bool GodMode();
 	
 public:
 	Animation idle;
@@ -43,10 +41,7 @@ public:
 	Animation* current_animation = nullptr;
 	iPoint player_position = { 0,0 };
 
-
-	
-
-
+	Collider* player_collider = nullptr;
 	SDL_Texture* graphics = nullptr;
 	p2SString path = nullptr;
 	bool firstUpdate = true;

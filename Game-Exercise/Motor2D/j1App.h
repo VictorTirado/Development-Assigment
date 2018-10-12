@@ -13,9 +13,11 @@ class j1Textures;
 class j1Audio;
 class j1Scene;
 class j1Map;
+class j1Collision;
 class j1Player;
 class j1Book;
 class j1FadeToBlack;
+
 
 
 class j1App
@@ -92,6 +94,7 @@ public:
 	j1Audio*			audio = nullptr;
 	j1Scene*			scene = nullptr;
 	j1Map*				map = nullptr;
+	j1Collision* collision = nullptr;
 	j1Player*			player = nullptr;
 	j1Book*				book = nullptr;
 	j1FadeToBlack* fade_to_black = nullptr;

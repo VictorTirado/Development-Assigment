@@ -79,8 +79,18 @@ bool j1Player::Update(float dt)
 
 	if (firstUpdate == true)
 	{
-		player_position.x = App->map->spawn.x;
-		player_position.y = App->map->spawn.y;
+		if (App->scene->map_number == 1)
+		{
+			player_position.x = App->map->spawn.x;
+			player_position.y = App->map->spawn.y;
+			LOG("%d", player_position.x);
+				LOG("%d", player_position.y);
+		}
+		else if (App->scene->map_number == 2)
+		{
+			player_position.x = App->map->spawn.x;
+			player_position.y = App->map->spawn.y;
+		}
 		App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
 		App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
 		
@@ -94,15 +104,45 @@ bool j1Player::Update(float dt)
 	//LOGIC
 	gid = App->map->Get_gid(player_position.x + 10, player_position.y + 51);
 	App->render->DrawQuad({ player_position.x + 10,player_position.y + 51,16,16 }, 0, 0, 255, 255);
-	if (App->map->data.map_layers.end->data->data[gid +1] != 51 && App->map->data.map_layers.end->data->data[gid] != 51 && !App->scene->is_god)
+	if (App->map->data.map_layers.end->data->data != 0)
 	{
-		player_position.y += 1;
-		is_falling = true;
-		App->render->camera.y = (player_position.y) *(-App->win->render_scale) + (App->win->height / 2);
+		if (App->map->data.map_layers.end->data->data[gid + 1] != 51 && App->map->data.map_layers.end->data->data[gid] != 51 && !App->scene->is_god)
+		{
+			player_position.y += 1;
+			is_falling = true;
+			App->render->camera.y = (player_position.y) *(-App->win->render_scale) + (App->win->height / 2);
+		}
+		else
+			is_falling = false;
 	}
-	else
-	is_falling = false;
-
+	if (App->map->data.map_layers.end->data->data[gid] == 71)
+	{
+		App->fade_to_black->FadeToBlack(this, this, 3.0f);
+		App->map->CleanUp();
+		if (App->scene->map_number == 1)
+		{
+			App->map->Load("Map2.tmx");
+		}
+		player_position.x = App->map->spawn.x;
+		player_position.y = App->map->spawn.y;
+		App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
+		App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
+	}
+	if (App->map->data.map_layers.end->data->data[gid] == 72)
+	{
+		App->fade_to_black->FadeToBlack(this, this, 3.0f);
+		App->map->CleanUp();
+		if (App->scene->map_number == 1)
+		{
+			App->map->Load("ForestMap.tmx");
+			App->scene->map_number = 2;
+		}
+		
+		player_position.x = App->map->spawn.x;
+		player_position.y = App->map->spawn.y;
+		App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
+		App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
+	}
 	//MOVEMENT PLAYER
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid-1] != 53)
 	{
@@ -125,19 +165,7 @@ bool j1Player::Update(float dt)
 	else if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 		current_animation = &jutsu;
 
-	if (App->map->data.map_layers.end->data->data[gid] == 71)
-	{
-		App->fade_to_black->FadeToBlack(this, this, 3.0f);
-		App->map->CleanUp();
-		if (App->scene->map_number == 1)
-		{
-			App->map->Load("Map2.tmx");
-		}
-		player_position.x = App->map->spawn.x;
-		player_position.y = App->map->spawn.y;
-		App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
-		App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
-	}
+	
 
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
@@ -178,9 +206,11 @@ bool j1Player::Update(float dt)
 		current_animation = &jump;
 
 	//TELEPORT
-
-	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] == 51)
+	{
 		current_animation = &teleport;
+		player_position.y -= 100;
+	}
 
 
 	//GOD MODE  The player can fly and move everywhere and is not affected by gravity
@@ -270,6 +300,5 @@ bool j1Player::Save(pugi::xml_node& data)const
 	data.child("position").append_attribute("y") = player_position.y;
 	return true;
 }
-
 
 

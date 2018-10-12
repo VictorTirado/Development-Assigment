@@ -25,7 +25,8 @@ public:
 	void LoadAnimation(pugi::xml_node&, Animation* player);
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
-	
+	void OnCollision(Collider*, Collider*);
+
 public:
 	Animation idle;
 	Animation idleBackwards;

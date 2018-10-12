@@ -306,4 +306,15 @@ bool j1Player::Save(pugi::xml_node& data)const
 	return true;
 }
 
+void j1Player::OnCollision(Collider* c1, Collider* c2)
+{
+	if (c2->type == COLLIDER_POWER_UP)
+	{
+		App->book->graphics = nullptr;
+		can_tp = true;
+	}
+
+
+}
+
 

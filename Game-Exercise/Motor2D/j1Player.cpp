@@ -24,8 +24,6 @@ j1Player::j1Player() : j1Module()
 	pugi::xml_node player;
 	player = App->LoadPlayer(player_file);
 
-	//player_collider = App->collision->AddCollider({ 0, 0, 38, 54 }, COLLIDER_TYPE::COLLIDER_PLAYER, this);
-
 	path = player.child("folder").attribute("path").as_string();
 	for (pugi::xml_node animations = player.child("animation"); animations; animations = animations.next_sibling("animation"))
 	{
@@ -66,7 +64,9 @@ bool j1Player::Start()
 	bool ret = true;
 
 	graphics = App->tex->Load(path.GetString());
-	
+
+	player_collider = App->collision->AddCollider({ 0, 0, 38, 54 }, COLLIDER_PLAYER, this);
+
 	return ret;
 }
 
@@ -210,7 +210,7 @@ bool j1Player::Update(float dt)
 		current_animation = &jump;
 
 	//TELEPORT
-	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] == 51 && App->book->is_caught == true)
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] == 51 && can_tp)
 	{
 		current_animation = &teleport;
 		player_position.y -= 100;
@@ -238,7 +238,7 @@ bool j1Player::Update(float dt)
 			
 	}
 
-	//player_collider->SetPos(player_position.x, player_position.y);
+	player_collider->SetPos(player_position.x, player_position.y);
 	App->render->Blit(graphics, player_position.x, player_position.y, &current_animation->GetCurrentFrame());
 
 	return ret;

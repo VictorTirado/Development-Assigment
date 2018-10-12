@@ -40,8 +40,7 @@ public:
 	Animation fallBackwards;
 	Animation* current_animation = nullptr;
 	iPoint player_position = { 0,0 };
-
-	Collider* player_collider = nullptr;
+	
 	SDL_Texture* graphics = nullptr;
 	p2SString path = nullptr;
 	bool firstUpdate = true;
@@ -57,5 +56,8 @@ public:
 	uint gid = 0;
 
 	bool check = false;
+
+	bool can_tp = false;
+	Collider* player_collider = nullptr;
 };
 #endif

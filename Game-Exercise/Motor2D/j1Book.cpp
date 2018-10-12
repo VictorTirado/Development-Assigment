@@ -9,6 +9,7 @@
 #include "j1Window.h"
 #include "j1Collision.h"
 #include "j1Render.h"
+#include "j1Player.h"
 #include "j1Scene.h"
 
 //#include "j1Particles.h"
@@ -18,7 +19,7 @@
 
 j1Book::j1Book() : j1Module()
 {
-	book_position.x = 210;
+	book_position.x = 260;
 	book_position.y = 710;
 	//name.create("book");
 	//pugi::xml_document player_file;
@@ -103,7 +104,9 @@ void j1Book::LoadAnimation(pugi::xml_node& animation, Animation* player)
 
 void j1Book::OnCollision(Collider* collider)
 {
-	is_caught = true;
+	LOG("COLLISION");
+	App->player->can_tp = true;
+	CleanUp();
 }
 
 

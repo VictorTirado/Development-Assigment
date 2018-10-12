@@ -20,7 +20,6 @@ struct Collider
 	bool to_delete = false;
 	COLLIDER_TYPE type;
 	j1Module* callback = nullptr;
-	float damage = 1.0;
 
 	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, j1Module* callback = nullptr) :
 		rect(rectangle),
@@ -56,7 +55,7 @@ private:
 	Collider* colliders[MAX_COLLIDERS];
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
 	bool debug = false;
-	bool god_mode = false;
+
 
 };
 

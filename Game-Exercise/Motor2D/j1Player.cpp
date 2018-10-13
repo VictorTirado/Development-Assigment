@@ -108,7 +108,7 @@ bool j1Player::Update(float dt)
 	//LOGIC
 	gid = App->map->Get_gid(player_position.x + 10, player_position.y + 51);
 	App->render->DrawQuad({ player_position.x + 10,player_position.y + 51,16,16 }, 0, 0, 255, 255);
-	if (App->map->data.map_layers.end->data->data != 0)
+	if (App->map->data.map_layers.end->data->data[gid + 1] != 72 || App->map->data.map_layers.end->data->data[gid] == 71)
 	{
 		if (App->map->data.map_layers.end->data->data[gid + 1] != 51 && App->map->data.map_layers.end->data->data[gid] != 51 && !App->scene->is_god)
 		{
@@ -127,6 +127,10 @@ bool j1Player::Update(float dt)
 		{
 			App->map->Load("Map2.tmx");
 		}
+		else if (App->scene->map_number == 2)
+		{
+			App->map->Load("ForestMap.tmx");
+		}
 		player_position.x = App->map->spawn.x;
 		player_position.y = App->map->spawn.y;
 		App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
@@ -140,6 +144,13 @@ bool j1Player::Update(float dt)
 		{
 			App->map->Load("ForestMap.tmx");
 			App->scene->map_number = 2;
+			firstUpdate = true;
+		}
+		else if (App->scene->map_number == 2)
+		{
+			App->map->Load("Map2.tmx");
+			App->scene->map_number = 1;
+			firstUpdate = true;
 		}
 		
 		player_position.x = App->map->spawn.x;
@@ -310,7 +321,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == COLLIDER_POWER_UP)
 	{
-		App->book->graphics = nullptr;
+		App->book->CleanUp();
 		can_tp = true;
 	}
 

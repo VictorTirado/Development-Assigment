@@ -35,70 +35,56 @@ void j1Map::Draw()
 	if(map_loaded == false)
 		return;
 
-	p2List_item<TileSet*>* tileset_list = data.tilesets.start;
-	p2List_item<MapLayer*>* layers_list = data.map_layers.start;
-	while (tileset_list != NULL)
-	{
+
+	p2List_item<MapLayer*>* layers_list = this->data.map_layers.start;
+	
 		while (layers_list != NULL)
 		{
 			for (int i = 0; i < layers_list->data->width; i++)
 			{
 				for (int j = 0; j < layers_list->data->height; j++)
 				{
-					if (layers_list->data->Get(i, j) != 0)
+					int tile_id = layers_list->data->Get(i, j);
+					if (tile_id > 0)
 					{
-						SDL_Rect tile = tileset_list->data->GetTileRect(layers_list->data->Get(i, j));
-						iPoint coords = MapToWorld(i, j);
-						uint gid = Get_gid(coords.x, coords.y);
-					
-						SDL_Rect tile2 = tileset_list->next->data->GetTileRect(layers_list->data->Get(i, j));
-						
-						if (layers_list->data->name == "Walkable")
+
+						TileSet* tileset = GetTilesetFromTileId(tile_id);
+						if (tileset != nullptr)
 						{
-							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
-						}
 
-						//if (layers_list->data->name == "Decoration")
-						//{
-						//	App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
-						//}
+							if (layers_list->data->Get(i, j) != 0)
+							{
+								SDL_Rect tile = tileset->GetTileRect(tile_id);
+								iPoint coords = MapToWorld(i, j);
+								uint gid = Get_gid(coords.x, coords.y);
 
-						//if (layers_list->data->name == "Decoration2")
-						//{
-						//	App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
-						//}
-						//
-						//if (layers_list->data->name == "Background")
-						//{
-						//	App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
-						//}
-						//BLIT PARALLAX
+								
+								if(layers_list->data->name !="Logic")
+								App->render->Blit(tileset->texture, coords.x, coords.y, &tile, 1.0f);
+								
+								else if (App->scene->collision_debug)
+								{
+									App->render->Blit(tileset->texture, coords.x, coords.y, &tile, 1.0f);
+								}
+								if (App->map->data.map_layers.end->data->data[gid] == 52) {
+									spawn.x = coords.x;
+									spawn.y = coords.y;
 
-							//App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.5f);
-						
-						if (App->scene->collision_debug)
-						{	
-								App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
-						}
-						if (App->map->data.map_layers.end->data->data[gid] == 52) {
-							spawn.x = coords.x;
-							spawn.y = coords.y;
-	
-						}
-						if (App->map->data.map_layers.end->data->data[gid] == 73) {
-							spawn_book.x = coords.x;
-							spawn_book.y = coords.y;
+								}
+								if (App->map->data.map_layers.end->data->data[gid] == 73) {
+									spawn_book.x = coords.x;
+									spawn_book.y = coords.y;
+
+								}
+
+							}
 
 						}
-						
 					}
-					
 				}
 			}
 			layers_list = layers_list->next;
 		}
-		tileset_list = tileset_list->next;
-	}
 }
 
 
@@ -110,6 +96,19 @@ iPoint j1Map::MapToWorld(int x, int y) const
 	ret.y = y * data.tile_height;
 
 	return ret;
+}
+
+TileSet* j1Map::GetTilesetFromTileId(int id) const
+{
+	p2List_item<TileSet*>* item = data.tilesets.start;
+
+	for (item; item != NULL; item = item->next)
+	{
+		if (item->next == nullptr || item->next->data->firstgid > id)
+			return item->data;
+	}
+
+	return data.tilesets.start->data;
 }
 
 SDL_Rect TileSet::GetTileRect(int id) const

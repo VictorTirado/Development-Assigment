@@ -93,6 +93,11 @@ bool j1Book::CleanUp()
 	LOG("Unloading player");
 
 	App->tex->UnLoad(graphics);
+	if (book_collider != nullptr)
+	{
+		book_collider->to_delete = true;
+		book_collider = nullptr;
+	}
 	graphics = nullptr;
 
 	return true;

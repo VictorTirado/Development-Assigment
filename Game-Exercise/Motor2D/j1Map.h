@@ -97,6 +97,8 @@ private:
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 
+	TileSet* GetTilesetFromTileId(int id) const;
+
 public:
 
 	MapData data;

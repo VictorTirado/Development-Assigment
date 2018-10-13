@@ -8,12 +8,14 @@
 	</audio>
 	<map />
 	<scene />
+	<:anonymous />
 	<player>
-		<map level="1" />
-		<position x="265" y="349" />
+		<map level="2" />
+		<position x="869" y="189" />
 	</player>
+	<:anonymous />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-280" y="-663" />
+		<camera x="-2092" y="-183" />
 	</renderer>
 </game_state>

@@ -140,8 +140,7 @@ bool j1Scene::ChangeMap(int map_number)
 		App->map->CleanUp();
 		App->map->Load("Map2.tmx");
 		App->book->graphics = App->tex->Load("textures/Objects.png");
-		App->player->player_position.x = App->map->spawn.x;
-		App->player->player_position.y = App->map->spawn.y;
+		App->player->firstUpdate = true;
 		App->book->book_position.x = App->map->spawn_book.x;
 		App->book->book_position.y = App->map->spawn_book.y;
 		App->render->camera.x = (-App->player->player_position.x * App->win->render_scale) + (App->win->width / 2);

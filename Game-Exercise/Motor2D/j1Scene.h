@@ -31,9 +31,6 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
-
-	
-
 	bool ChangeMap(int map_number);
 
 private:

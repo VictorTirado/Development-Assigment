@@ -87,23 +87,11 @@ bool j1Player::Update(float dt)
 
 	if (firstUpdate == true)
 	{
-		if (App->scene->map_number == 1)
-		{
 			player_position.x = App->map->spawn.x;
 			player_position.y = App->map->spawn.y;
-			LOG("%d", player_position.x);
-				LOG("%d", player_position.y);
-		}
-		else if (App->scene->map_number == 2)
-		{
-			player_position.x = App->map->spawn.x;
-			player_position.y = App->map->spawn.y;
-		}
-		App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
-		App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
-		
 		firstUpdate = false;
 	}
+
 	else if (!is_backwards)
 		current_animation = &idle;
 	else if (is_backwards)
@@ -118,7 +106,6 @@ bool j1Player::Update(float dt)
 		{
 			player_position.y += 1;
 			is_falling = true;
-			App->render->camera.y = (player_position.y) *(-App->win->render_scale) + (App->win->height / 2);
 		}
 		else
 			is_falling = false;
@@ -138,8 +125,6 @@ bool j1Player::Update(float dt)
 		can_tp = false;
 		player_position.x = App->map->spawn.x;
 		player_position.y = App->map->spawn.y;
-		App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
-		App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
 		App->book->Start(); //Spawns the book after player's death
 		App->audio->PlayFx(1); //player's death fx
 	}
@@ -163,35 +148,23 @@ bool j1Player::Update(float dt)
 		
 		player_position.x = App->map->spawn.x;
 		player_position.y = App->map->spawn.y;
-		App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
-		App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
+		
 	}
 	//MOVEMENT PLAYER
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid-1] != 53)
-	{
-		App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width/2);
-		App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid-1] != 53 && App->fade_to_black->IsFading() == false)
+	{	
 		current_animation = &runBackwards;
 		is_backwards = true;
 		player_position.x -= MOVEMENT_SPEED;
 	}
 
-	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] != 53)
+	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] != 53 && App->fade_to_black->IsFading() == false)
 	{
-		App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
-		App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
 		current_animation = &run;
 		is_backwards = false;
 		player_position.x += MOVEMENT_SPEED;
 	}
-
-	else if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
-		current_animation = &jutsu;
-
-	
-
-
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->fade_to_black->IsFading() == false)
 	{
 		//if (App->map->data.map_layers.end->data->data[gid] == 51)
 			is_jumping = true;
@@ -242,21 +215,21 @@ bool j1Player::Update(float dt)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 		{
-			App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
-			App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
+			
 			player_position.y -= 4;
 		}
 			
 
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		{
-			App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
-			App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
+			
 			player_position.y += 4;
 		}
 			
 	}
 
+	App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
+	App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
 	player_collider->SetPos(player_position.x, player_position.y);
 	App->render->Blit(graphics, player_position.x, player_position.y, &current_animation->GetCurrentFrame());
 
@@ -308,7 +281,7 @@ bool j1Player::Load(pugi::xml_node& data)
 	{
 		App->fade_to_black->FadeToBlack(this, this, 3.0f);
 		App->map->CleanUp();
-		App->map->Load("Map1.tmx");
+		App->map->Load("Map2.tmx");
 		player_position.x = data.child("position").attribute("x").as_int();
 		player_position.y = data.child("position").attribute("y").as_int();
 	}
@@ -330,6 +303,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == COLLIDER_POWER_UP)
 	{
 		App->book->CleanUp();
+
 		can_tp = true;
 	}
 

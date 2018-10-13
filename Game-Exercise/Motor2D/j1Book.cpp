@@ -19,6 +19,7 @@
 
 j1Book::j1Book() : j1Module()
 {
+	name.create("book");
 	book_position.x = 240;
 	book_position.y = 576;
 	//name.create("book");
@@ -51,7 +52,6 @@ bool j1Book::Start()
 {
 	bool ret = true;
 
-	//graphics = App->tex->Load(path.GetString());
 	graphics = App->tex->Load("textures/Objects.png");
 	book_collider = App->collision->AddCollider({ book_position.x, book_position.y, 28, 25 }, COLLIDER_TYPE::COLLIDER_POWER_UP, this);
 	
@@ -90,7 +90,7 @@ bool j1Book::PostUpdate()
 
 bool j1Book::CleanUp()
 {
-	LOG("Unloading player");
+	LOG("Unloading book");
 
 	App->tex->UnLoad(graphics);
 	if (book_collider != nullptr)

@@ -38,11 +38,8 @@ bool j1Scene::Start()
 		map_number = 1;
 		App->map->Load("Map2.tmx");
 	}
-	
-
-
-	//App->audio->PlayMusic(App->audio->path.GetString());
-	//App->audio->StartVolume(App->audio->volume);
+	App->audio->PlayMusic(App->audio->path.GetString());
+	App->audio->StartVolume(App->audio->volume);
 
 	
 
@@ -58,22 +55,12 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	/*if(change_map == true && App->fade_to_black->IsFading() == true)
-	{ 
-		App->map->CleanUp();
-		App->map->Load("ForestMap.tmx");
-		change_map = false;	
-	}*/
-
 	//DEBUG KEYS
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		map_number = 1;
 		ChangeMap(map_number);
-		
-		
 		App->book->Start();
-		
 		is_faded = true;
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)

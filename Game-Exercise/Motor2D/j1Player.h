@@ -26,6 +26,7 @@ public:
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 	void OnCollision(Collider*, Collider*);
+	void Teleport();
 
 public:
 	Animation idle;
@@ -60,6 +61,9 @@ public:
 	bool check = false;
 
 	bool can_tp = false;
+	bool is_tp = false;
+	float tp_time = 0.0f;
+
 	Collider* player_collider = nullptr;
 };
 #endif

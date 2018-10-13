@@ -31,7 +31,7 @@
     <frame x="289" y="1379" w="42" h="52"/>
     <frame x="233" y="1379" w="34" h="52"/>
     </animation>
-  <animation name ="teleport" speed="0.05f" loop ="false">
+  <animation name ="teleport" speed="0.001f" loop ="false">
     <frame x="92" y="802" w="37" h="55"/>
     <frame x="6" y="804" w="32" h="54"/>
   </animation>

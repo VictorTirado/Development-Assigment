@@ -204,9 +204,23 @@ bool j1Player::Update(float dt)
 	//TELEPORT
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] == 51 && can_tp)
 	{
-		current_animation = &teleport;
-		player_position.y -= 100;
+		is_tp = true;
 	}
+
+	if (is_tp)
+	{
+		current_animation = &teleport;
+		tp_time += 0.1f;
+
+		if (tp_time == 0.6f)
+		{
+			player_position.y -= 100;
+			is_tp = false;
+			tp_time = 0.0f;
+		}
+	}
+
+		
 
 
 	//GOD MODE  The player can fly and move everywhere and is not affected by gravity
@@ -214,18 +228,10 @@ bool j1Player::Update(float dt)
 	if (App->scene->is_god)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-		{
-			
 			player_position.y -= 4;
-		}
-			
 
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-		{
-			
-			player_position.y += 4;
-		}
-			
+			player_position.y += 4;		
 	}
 
 	App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
@@ -303,11 +309,18 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == COLLIDER_POWER_UP)
 	{
 		App->book->CleanUp();
-
 		can_tp = true;
 	}
-
-
 }
 
+void j1Player::Teleport()
+{
+	player_position.y -= 100;
+	
+	float tp_time = 0.0f;
+	tp_time += 0.5f;
+
+	if (tp_time == 0.5f)
+	current_animation = &teleport;
+}
 

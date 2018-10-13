@@ -75,4 +75,7 @@
     <frame x="64" y="711" w="48" h="20"/>
     <frame x="3" y="721" w="51" h="17"/>
   </animation>
+
+  <audio path ="audio/fx/player_death.wav"></audio>
+  
 </player>

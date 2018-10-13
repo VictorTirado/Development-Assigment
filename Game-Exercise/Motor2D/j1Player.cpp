@@ -10,6 +10,7 @@
 #include "j1Render.h"
 #include "j1Collision.h"
 #include "j1Book.h"
+#include "j1Audio.h"
 #include "j1Scene.h"
 
 //#include "j1Particles.h"
@@ -52,6 +53,8 @@ j1Player::j1Player() : j1Module()
 			LoadAnimation(animations, &fallBackwards);
 	}
 
+	fx_path = player.child("audio").attribute("path").as_string();
+
 	current_animation = &idle;
 }
 
@@ -67,6 +70,7 @@ bool j1Player::Start()
 
 	player_collider = App->collision->AddCollider({ 0, 0, 38, 54 }, COLLIDER_PLAYER, this);
 
+	App->audio->LoadFx(fx_path.GetString());
 	return ret;
 }
 
@@ -137,6 +141,7 @@ bool j1Player::Update(float dt)
 		App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
 		App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
 		App->book->Start(); //Spawns the book after player's death
+		App->audio->PlayFx(1); //player's death fx
 	}
 
 	if (App->map->data.map_layers.end->data->data[gid] == 72)

@@ -29,5 +29,6 @@ public:
 	Animation* current_animation = nullptr;
 	Collider* book_collider = nullptr;
 	bool is_caught = false;
+	bool firstUpdate = true;
 };
 #endif

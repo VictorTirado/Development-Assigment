@@ -58,23 +58,23 @@ void j1Map::Draw()
 							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
 						}
 
-						if (layers_list->data->name == "Decoration")
-						{
-							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
-						}
+						//if (layers_list->data->name == "Decoration")
+						//{
+						//	App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
+						//}
 
-						if (layers_list->data->name == "Decoration2")
-						{
-							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
-						}
-						
-						if (layers_list->data->name == "Background")
-						{
-							App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
-						}
+						//if (layers_list->data->name == "Decoration2")
+						//{
+						//	App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
+						//}
+						//
+						//if (layers_list->data->name == "Background")
+						//{
+						//	App->render->Blit(tileset_list->data->texture, coords.x, coords.y, &tile, 1.0f);
+						//}
 						//BLIT PARALLAX
 
-							App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.5f);
+							//App->render->Blit(tileset_list->next->data->texture, coords.x, coords.y, &tile2, 0.5f);
 						
 						if (App->scene->collision_debug)
 						{	
@@ -84,6 +84,11 @@ void j1Map::Draw()
 							spawn.x = coords.x;
 							spawn.y = coords.y;
 	
+						}
+						if (App->map->data.map_layers.end->data->data[gid] == 73) {
+							spawn_book.x = coords.x;
+							spawn_book.y = coords.y;
+
 						}
 						
 					}

@@ -8,6 +8,7 @@
 #include "j1Window.h"
 #include "j1Map.h"
 #include "j1Player.h"
+#include "j1Book.h"
 #include "j1FadeToBlack.h"
 #include "j1Scene.h"
 
@@ -137,9 +138,12 @@ bool j1Scene::ChangeMap(int map_number)
 	{
 		App->fade_to_black->FadeToBlack(this, this, 3.0f);
 		App->map->CleanUp();
-		App->map->Load("Map1.tmx");
+		App->map->Load("Map2.tmx");
+		App->book->graphics = App->tex->Load("textures/Objects.png");
 		App->player->player_position.x = App->map->spawn.x;
 		App->player->player_position.y = App->map->spawn.y;
+		App->book->book_position.x = App->map->spawn_book.x;
+		App->book->book_position.y = App->map->spawn_book.y;
 		App->render->camera.x = (-App->player->player_position.x * App->win->render_scale) + (App->win->width / 2);
 		App->render->camera.y = (-App->player->player_position.y * App->win->render_scale) + (App->win->height / 2);
 	}

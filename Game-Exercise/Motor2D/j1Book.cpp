@@ -19,8 +19,8 @@
 
 j1Book::j1Book() : j1Module()
 {
-	book_position.x = 260;
-	book_position.y = 710;
+	book_position.x = 240;
+	book_position.y = 576;
 	//name.create("book");
 	//pugi::xml_document player_file;
 	//pugi::xml_node player;
@@ -54,7 +54,7 @@ bool j1Book::Start()
 	//graphics = App->tex->Load(path.GetString());
 	graphics = App->tex->Load("textures/Objects.png");
 	book_collider = App->collision->AddCollider({ book_position.x, book_position.y, 28, 25 }, COLLIDER_TYPE::COLLIDER_POWER_UP, this);
-
+	
 	return ret;
 }
 
@@ -69,7 +69,15 @@ bool j1Book::Update(float dt)
 {
 	bool ret = true;
 
-	App->render->Blit(graphics, book_position.x, book_position.y, (&current_animation->GetCurrentFrame()),1);
+	if (firstUpdate == true)
+	{
+		book_position.x = App->map->spawn_book.x;
+		book_position.y = App->map->spawn_book.y;
+		firstUpdate = false;
+	}
+	
+	if(graphics!=nullptr)
+	App->render->Blit(graphics, book_position.x, book_position.y, (&current_animation->GetCurrentFrame()));
 
 	return ret;
 }

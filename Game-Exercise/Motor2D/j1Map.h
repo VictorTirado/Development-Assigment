@@ -102,6 +102,7 @@ public:
 	MapData data;
 	uint Get_gid(int x, int y);
 	iPoint spawn;
+	iPoint spawn_book;
 private:
 
 	pugi::xml_document	map_file;

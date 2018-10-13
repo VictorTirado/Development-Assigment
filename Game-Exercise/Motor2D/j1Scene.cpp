@@ -65,10 +65,10 @@ bool j1Scene::Update(float dt)
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
-		map_number = 2;
-		ChangeMap(map_number);
 		App->player->can_tp = false;
 		App->book->Start();
+
+		App->player->firstUpdate = true;
 
 		/*App->fade_to_black->FadeToBlack(this, this, 2.0f);
 		change_map = true;

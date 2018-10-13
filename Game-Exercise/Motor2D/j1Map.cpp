@@ -66,19 +66,17 @@ void j1Map::Draw()
 								{
 									App->render->Blit(tileset->texture, coords.x, coords.y, &tile, 1.0f);
 								}
-								if (App->map->data.map_layers.end->data->data[gid] == 52) {
+								if (App->map->data.map_layers.end->data->data[gid] == 52)
+								{
 									spawn.x = coords.x;
 									spawn.y = coords.y;
-
 								}
-								if (App->map->data.map_layers.end->data->data[gid] == 73) {
+								if (App->map->data.map_layers.end->data->data[gid] == 73) 
+								{
 									spawn_book.x = coords.x;
 									spawn_book.y = coords.y;
-
 								}
-
 							}
-
 						}
 					}
 				}

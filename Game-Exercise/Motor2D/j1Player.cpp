@@ -89,7 +89,7 @@ bool j1Player::Update(float dt)
 	{
 			player_position.x = App->map->spawn.x;
 			player_position.y = App->map->spawn.y;
-		firstUpdate = false;
+		    firstUpdate = false;
 	}
 
 	else if (!is_backwards)

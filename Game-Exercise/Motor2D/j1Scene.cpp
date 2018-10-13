@@ -70,12 +70,19 @@ bool j1Scene::Update(float dt)
 	{
 		map_number = 1;
 		ChangeMap(map_number);
+		App->player->can_tp = false;
+		
+		App->book->Start();
+		
 		is_faded = true;
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
 		map_number = 2;
 		ChangeMap(map_number);
+		
+		App->book->Start();
+
 		/*App->fade_to_black->FadeToBlack(this, this, 2.0f);
 		change_map = true;
 		App->map->Load("Map1.tmx");*/

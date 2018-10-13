@@ -136,7 +136,7 @@ bool j1Player::Update(float dt)
 		player_position.y = App->map->spawn.y;
 		App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
 		App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
-		App->book->Start();
+		App->book->Start(); //Spawns the book after player's death
 	}
 
 	if (App->map->data.map_layers.end->data->data[gid] == 72)

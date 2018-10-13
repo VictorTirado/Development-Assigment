@@ -10,12 +10,12 @@
 	<scene />
 	<:anonymous />
 	<player>
-		<map level="2" />
-		<position x="869" y="189" />
+		<map level="1" />
+		<position x="423" y="573" />
 	</player>
 	<:anonymous />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-2092" y="-183" />
+		<camera x="-760" y="-1335" />
 	</renderer>
 </game_state>

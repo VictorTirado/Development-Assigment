@@ -131,11 +131,14 @@ bool j1Player::Update(float dt)
 		{
 			App->map->Load("ForestMap.tmx");
 		}
+		can_tp = false;
 		player_position.x = App->map->spawn.x;
 		player_position.y = App->map->spawn.y;
 		App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
 		App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
+		App->book->Start();
 	}
+
 	if (App->map->data.map_layers.end->data->data[gid] == 72)
 	{
 		App->fade_to_black->FadeToBlack(this, this, 3.0f);

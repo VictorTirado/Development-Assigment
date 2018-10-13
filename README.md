@@ -9,7 +9,9 @@ You will need to get a parchment to reach the end of every level that gives you 
 
 - A/D to move forwards and backwards
 - SPACEBAR to jump
-- LeftShif to teleport
+- Left Shift to teleport
+
+- Right Plus/Right Minus: higher/lower the volume level
 
 ## Debug functionalities
 
@@ -38,5 +40,7 @@ Link to the release: https://github.com/VictorTirado/Development-Assigment/relea
 Character: https://www.spriters-resource.com/ds_dsi/narutoshippudenninjacouncil3/sheet/66530/
 Parchment: https://www.spriters-resource.com/ds_dsi/narutoshippudenninjacouncil3/sheet/98840/
 Tilesets: https://allfenom.itch.io/hills-simple-pack
+FX: http://soundbible.com/462-Male-Grunt.html
+Background Song: http://www.twinmusicom.org/download_file?fileid=99
 
 All art used in this game belongs to their authors

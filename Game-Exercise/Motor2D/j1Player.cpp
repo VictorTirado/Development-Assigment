@@ -97,6 +97,8 @@ bool j1Player::Update(float dt)
 	else if (is_backwards)
 		current_animation = &idleBackwards;
 
+	
+
 	//LOGIC
 	gid = App->map->Get_gid(player_position.x + 10, player_position.y + 51);
 	App->render->DrawQuad({ player_position.x + 10,player_position.y + 51,16,16 }, 0, 0, 255, 255);
@@ -117,12 +119,11 @@ bool j1Player::Update(float dt)
 		if (App->scene->map_number == 1)
 		{
 			App->map->Load("Map2.tmx");
+			can_tp = false;
 		}
 		else if (App->scene->map_number == 2)
-		{
 			App->map->Load("ForestMap.tmx");
-		}
-		can_tp = false;
+		
 		player_position.x = App->map->spawn.x;
 		player_position.y = App->map->spawn.y;
 		App->book->CleanUp();
@@ -147,6 +148,8 @@ bool j1Player::Update(float dt)
 			App->map->Load("Map2.tmx");
 			App->scene->map_number = 1;
 			firstUpdate = true;
+			can_tp = false;
+			App->book->Start();
 		}
 		
 		player_position.x = App->map->spawn.x;

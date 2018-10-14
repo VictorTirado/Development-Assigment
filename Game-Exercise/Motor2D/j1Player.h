@@ -55,14 +55,14 @@ public:
 	int player_position_y0 = 0;
 	uint gravity = 5;
 	float jumping_time = 0.0f;
-	
+	float tp_time = 0.0f;
 	uint gid = 0;
 
 	bool check = false;
 
 	bool can_tp = false;
 	bool is_tp = false;
-	float tp_time = 0.0f;
+	
 
 	Collider* player_collider = nullptr;
 };

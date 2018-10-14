@@ -41,7 +41,8 @@ public:
 	
 	SDL_Texture* graphics = nullptr;
 	p2SString path = nullptr;
-	p2SString fx_path = nullptr;
+	p2SString deathfx_path = nullptr;
+	p2SString teleportfx_path = nullptr;
 	bool firstUpdate = true;
 	bool is_backwards = false;
 

@@ -52,7 +52,8 @@ j1Player::j1Player() : j1Module()
 			LoadAnimation(animations, &fallBackwards);
 	}
 
-	fx_path = player.child("audio").attribute("path").as_string();
+	deathfx_path = player.child("audio").attribute("path").as_string();
+	teleportfx_path = player.child("audio2").attribute("tp_path").as_string();
 	
 	current_animation = &idle;
 }
@@ -68,7 +69,8 @@ bool j1Player::Start()
 	graphics = App->tex->Load(path.GetString());
 
 	player_collider = App->collision->AddCollider({ 0, 0, 38, 54 }, COLLIDER_PLAYER, this);
-	App->audio->LoadFx(fx_path.GetString());
+	App->audio->LoadFx(deathfx_path.GetString());
+	App->audio->LoadFx(teleportfx_path.GetString());
 	
 	return ret;
 }
@@ -206,9 +208,10 @@ bool j1Player::Update(float dt)
 		current_animation = &jump;
 
 	//TELEPORT
-	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] == 51 && can_tp)
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN && App->map->data.map_layers.end->data->data[gid + 1] == 51 && can_tp)
 	{
 		is_tp = true;
+		App->audio->PlayFx(2); //Teleport fx
 	}
 
 	if (is_tp)
@@ -264,8 +267,6 @@ bool j1Player::CleanUp()
 		player_collider->to_delete = true;
 		player_collider = nullptr;
 	}
-
-	
 
 	return true;
 }

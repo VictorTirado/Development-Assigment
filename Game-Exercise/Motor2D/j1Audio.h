@@ -44,11 +44,12 @@ public:
 private:
 
 	_Mix_Music*			music = nullptr;
-	p2List<Mix_Chunk*>	fx;
+	
 
 public:
 	int volume = 64;
 	p2SString  path = nullptr;
+	p2List<Mix_Chunk*>	fx;
 };
 
 #endif // __j1AUDIO_H__

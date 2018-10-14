@@ -54,7 +54,7 @@ j1Player::j1Player() : j1Module()
 	}
 
 	fx_path = player.child("audio").attribute("path").as_string();
-
+	
 	current_animation = &idle;
 }
 
@@ -69,8 +69,8 @@ bool j1Player::Start()
 	graphics = App->tex->Load(path.GetString());
 
 	player_collider = App->collision->AddCollider({ 0, 0, 38, 54 }, COLLIDER_PLAYER, this);
-
 	App->audio->LoadFx(fx_path.GetString());
+	
 	return ret;
 }
 
@@ -112,7 +112,7 @@ bool j1Player::Update(float dt)
 	}
 	if (App->map->data.map_layers.end->data->data[gid] == 71)
 	{
-		App->fade_to_black->FadeToBlack(this, this, 3.0f);
+		
 		App->map->CleanUp();
 		if (App->scene->map_number == 1)
 		{
@@ -125,8 +125,11 @@ bool j1Player::Update(float dt)
 		can_tp = false;
 		player_position.x = App->map->spawn.x;
 		player_position.y = App->map->spawn.y;
+		App->book->CleanUp();
 		App->book->Start(); //Spawns the book after player's death
 		App->audio->PlayFx(1); //player's death fx
+		App->fade_to_black->FadeToBlack(this, this, 3.0f);
+		//App->fade_to_black->FadeToBlack(App->book, App->book, 3.0f);
 	}
 
 	if (App->map->data.map_layers.end->data->data[gid] == 72)
@@ -166,7 +169,7 @@ bool j1Player::Update(float dt)
 	}
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->fade_to_black->IsFading() == false)
 	{
-		//if (App->map->data.map_layers.end->data->data[gid] == 51)
+		if (App->map->data.map_layers.end->data->data[gid] == 51)
 			is_jumping = true;
 	}
 	//JUMP
@@ -254,6 +257,18 @@ bool j1Player::CleanUp()
 	
 	App->tex->UnLoad(graphics);
 	graphics = nullptr;
+	current_animation = nullptr;
+
+	
+	App->audio->fx.clear();
+	if (player_collider != nullptr)
+	{
+		player_collider->to_delete = true;
+		player_collider = nullptr;
+	}
+
+	//App->audio->CleanUp();
+	//App->fade_to_black->FadeToBlack(App->audio, App->audio, 3.0f);
 
 	return true;
 }

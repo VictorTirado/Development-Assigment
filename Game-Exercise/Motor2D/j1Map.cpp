@@ -124,7 +124,6 @@ SDL_Rect TileSet::GetTileRect(int id) const
 bool j1Map::CleanUp()
 {
 	LOG("Unloading map");
-
 	// Remove all tilesets
 	p2List_item<TileSet*>* item;
 	item = data.tilesets.start;
@@ -145,6 +144,9 @@ bool j1Map::CleanUp()
 		RELEASE(item2->data);
 		item2 = item2->next;
 	}
+	
+
+
 	data.map_layers.clear();
 
 	// Clean up the pugui tree

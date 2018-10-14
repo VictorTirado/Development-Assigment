@@ -19,7 +19,6 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 
-	void LoadAnimation(pugi::xml_node&, Animation* player);
 	void OnCollision(Collider* collider);
 
 public:

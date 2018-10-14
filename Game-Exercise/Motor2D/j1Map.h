@@ -12,6 +12,7 @@ struct MapLayer{
 	p2SString name = nullptr;
 	uint width = 0;
 	uint height = 0;
+	float parallax = 0.0f;
 	uint* data = 0;
 	~MapLayer(){
 		delete[]data;

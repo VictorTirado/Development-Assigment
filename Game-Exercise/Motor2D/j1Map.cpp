@@ -60,7 +60,7 @@ void j1Map::Draw()
 
 								
 								if(layers_list->data->name !="Logic")
-								App->render->Blit(tileset->texture, coords.x, coords.y, &tile, 1.0f);
+								App->render->Blit(tileset->texture, coords.x, coords.y, &tile, layers_list->data->parallax);
 								
 								else if (App->scene->collision_debug)
 								{
@@ -376,6 +376,7 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	layer->name = node.attribute("name").as_string();
 	layer->width = node.attribute("width").as_uint();
 	layer->height = node.attribute("height").as_uint();
+	layer->parallax = node.child("properties").child("property").attribute("value").as_float();
 
 	layer->data = new uint[layer->width*layer->height];
 	memset(layer->data, 0, layer->width * layer->height * sizeof(uint));

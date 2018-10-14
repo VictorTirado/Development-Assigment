@@ -10,12 +10,12 @@
 	<scene />
 	<collisions />
 	<player>
-		<map level="1" />
-		<position x="825" y="445" />
+		<map level="2" />
+		<position x="280" y="317" />
 	</player>
 	<book />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-1963" y="-951" />
+		<camera x="-328" y="-567" />
 	</renderer>
 </game_state>

@@ -105,7 +105,7 @@ bool j1Player::Update(float dt)
 	App->render->DrawQuad({ player_position.x + 10,player_position.y + 51,16,16 }, 0, 0, 255, 255);
 	if (App->map->data.map_layers.end->data->data[gid + 1] != 72 || App->map->data.map_layers.end->data->data[gid] == 71)
 	{
-		if (App->map->data.map_layers.end->data->data[gid + 1] != 51 && App->map->data.map_layers.end->data->data[gid] != 51 && !App->scene->is_god)
+		if (App->map->data.map_layers.end->data->data[gid + 1] != 51 && App->map->data.map_layers.end->data->data[gid] != 51 )
 		{
 			player_position.y += 1;
 			is_falling = true;
@@ -135,7 +135,7 @@ bool j1Player::Update(float dt)
 
 	if (App->map->data.map_layers.end->data->data[gid] == 72)
 	{
-		App->fade_to_black->FadeToBlack(this, this, 3.0f);
+		
 		App->map->CleanUp();
 		if (App->scene->map_number == 1)
 		{
@@ -151,10 +151,9 @@ bool j1Player::Update(float dt)
 			can_tp = false;
 			App->book->Start();
 		}
-		
-		player_position.x = App->map->spawn.x;
-		player_position.y = App->map->spawn.y;
-		
+		//player_position.x = App->map->spawn.x;
+		//player_position.y = App->map->spawn.y;
+		App->fade_to_black->FadeToBlack(this, this, 3.0f);		
 	}
 	//MOVEMENT PLAYER
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid-1] != 53 && App->fade_to_black->IsFading() == false)

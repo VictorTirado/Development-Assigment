@@ -102,7 +102,7 @@ bool j1Player::Update(float dt)
 
 	//LOGIC
 	gid = App->map->Get_gid(player_position.x + 10, player_position.y + 51);
-	App->render->DrawQuad({ player_position.x + 10,player_position.y + 51,16,16 }, 0, 0, 255, 255);
+	
 	if (App->map->data.map_layers.end->data->data[gid + 1] != 72 || App->map->data.map_layers.end->data->data[gid] == 71)
 	{
 		if (App->map->data.map_layers.end->data->data[gid + 1] != 51 && App->map->data.map_layers.end->data->data[gid] != 51 )

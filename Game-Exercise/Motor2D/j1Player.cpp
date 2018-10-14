@@ -13,9 +13,8 @@
 #include "j1Audio.h"
 #include "j1Scene.h"
 
-//#include "j1Particles.h"
 #include "j1FadeToBlack.h"
-//#include "ModuleCollision.h"
+
 
 
 j1Player::j1Player() : j1Module()
@@ -130,7 +129,6 @@ bool j1Player::Update(float dt)
 		App->book->Start(); //Spawns the book after player's death
 		App->audio->PlayFx(1); //player's death fx
 		App->fade_to_black->FadeToBlack(this, this, 3.0f);
-		//App->fade_to_black->FadeToBlack(App->book, App->book, 3.0f);
 	}
 
 	if (App->map->data.map_layers.end->data->data[gid] == 72)
@@ -161,14 +159,14 @@ bool j1Player::Update(float dt)
 	{	
 		current_animation = &runBackwards;
 		is_backwards = true;
-		player_position.x -= MOVEMENT_SPEED;
+		player_position.x -= App->map->prop->movement_speed;
 	}
 
 	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] != 53 && App->fade_to_black->IsFading() == false)
 	{
 		current_animation = &run;
 		is_backwards = false;
-		player_position.x += MOVEMENT_SPEED;
+		player_position.x += App->map->prop->movement_speed;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->fade_to_black->IsFading() == false)
 	{
@@ -176,20 +174,20 @@ bool j1Player::Update(float dt)
 			is_jumping = true;
 	}
 	//JUMP
-	if (jumping_time == 0.0f)
-	   player_position_y0 = - 1 * player_position.y;
+	if (App->map->prop->jumping_time == 0.0f)
+	   App->map->prop->player_position_y0 = - 1 * player_position.y;
 
 
 	if (is_jumping)
 	{
-		jumping_time += 0.1f;
+		App->map->prop->jumping_time += 0.1f;
 		
-		player_position.y -= gravity;
+		player_position.y -= App->map->prop->gravity;
 
-		if (player_position.y > player_position_y0 && jumping_time >= 1.5f)
+		if (player_position.y > App->map->prop->player_position_y0 && App->map->prop->jumping_time >= 1.5f)
 		{
 			player_position.y += 5;
-			jumping_time = 0.0f;
+			App->map->prop->jumping_time = 0.0f;
 			is_jumping = false;
 			is_falling = true;
 		}
@@ -216,21 +214,17 @@ bool j1Player::Update(float dt)
 	if (is_tp)
 	{
 		current_animation = &teleport;
-		tp_time += 0.1f;
+		App->map->prop->tp_time += 0.1f;
 
-		if (tp_time == 0.6f)
+		if (App->map->prop->tp_time == 0.6f)
 		{
 			player_position.y -= 100;
 			is_tp = false;
-			tp_time = 0.0f;
+			App->map->prop->tp_time = 0.0f;
 		}
 	}
 
-		
-
-
 	//GOD MODE  The player can fly and move everywhere and is not affected by gravity
-
 	if (App->scene->is_god)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
@@ -239,6 +233,7 @@ bool j1Player::Update(float dt)
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 			player_position.y += 4;		
 	}
+	
 
 	App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
 	App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
@@ -270,8 +265,7 @@ bool j1Player::CleanUp()
 		player_collider = nullptr;
 	}
 
-	//App->audio->CleanUp();
-	//App->fade_to_black->FadeToBlack(App->audio, App->audio, 3.0f);
+	
 
 	return true;
 }
@@ -309,8 +303,6 @@ bool j1Player::Load(pugi::xml_node& data)
 		player_position.x = data.child("position").attribute("x").as_int();
 		player_position.y = data.child("position").attribute("y").as_int();
 	}
-
-
 	return true;
 }
 
@@ -331,14 +323,5 @@ void j1Player::OnCollision(Collider* c1, Collider* c2)
 	}
 }
 
-void j1Player::Teleport()
-{
-	player_position.y -= 100;
-	
-	float tp_time = 0.0f;
-	tp_time += 0.5f;
 
-	if (tp_time == 0.5f)
-	current_animation = &teleport;
-}
 

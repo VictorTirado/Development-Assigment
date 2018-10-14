@@ -67,12 +67,7 @@ bool j1Scene::Update(float dt)
 	{
 		App->player->can_tp = false;
 		App->book->Start();
-
 		App->player->firstUpdate = true;
-
-		/*App->fade_to_black->FadeToBlack(this, this, 2.0f);
-		change_map = true;
-		App->map->Load("Map1.tmx");*/
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		App->SaveGame();

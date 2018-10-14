@@ -22,7 +22,15 @@ struct MapLayer{
 
 	// TODO 6: Short function to get the value of x,y
 
-
+struct Properties
+{
+	p2SString name;
+	int gravity = 0;
+	int player_position_y0 = 0;
+	float jumping_time = 0.0f;
+	float tp_time = 0.0f;
+	int movement_speed = 0;
+};
 
 // ----------------------------------------------------
 struct TileSet
@@ -98,10 +106,12 @@ private:
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 
+	bool LoadProperties(pugi::xml_node& node, Properties* prop);
+
 	TileSet* GetTilesetFromTileId(int id) const;
 
 public:
-
+	Properties* prop = new Properties();
 	MapData data;
 	uint Get_gid(int x, int y);
 	iPoint spawn;

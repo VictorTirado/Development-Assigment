@@ -193,6 +193,16 @@ bool j1Map::Load(const char* file_name)
 
 		data.tilesets.add(set);
 	}
+	pugi::xml_node properties;
+	for (properties = map_file.child("map").child("properties"); properties && ret; properties = properties.next_sibling("properties"))
+	{
+		
+		if (ret == true)
+		{
+			ret = LoadProperties(properties,prop);
+		}
+	}
+	
 
 	// TODO 4: Iterate all layers and load each of them
 	// Load layer info ----------------------------------------------
@@ -387,6 +397,31 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	{
 		layer->data[i] = gids.attribute("gid").as_uint();
 		i++;
+	}
+	return true;
+}
+bool j1Map::LoadProperties(pugi::xml_node& node, Properties* prop)
+{
+	for (pugi::xml_node& gids = node.child("property"); gids; gids = gids.next_sibling("property"))
+	{
+		prop->name = gids.attribute("name").as_string();
+
+		if(prop->name == "gravity")
+			prop->gravity = gids.attribute("value").as_int();
+
+		if (prop->name == "jumping time")
+			prop->jumping_time = gids.attribute("value").as_float();
+
+		if (prop->name == "movement speed")
+			prop->movement_speed = gids.attribute("value").as_int();
+
+		if (prop->name == "player_positon_y0")
+			prop->player_position_y0 = gids.attribute("value").as_int();
+
+		if (prop->name == "tp_time")
+			prop->tp_time = gids.attribute("value").as_float();
+
+	
 	}
 	return true;
 }

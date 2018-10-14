@@ -12,9 +12,8 @@
 #include "j1Player.h"
 #include "j1Scene.h"
 
-//#include "j1Particles.h"
 #include "j1FadeToBlack.h"
-//#include "ModuleCollision.h"
+
 
 
 j1Book::j1Book() : j1Module()

@@ -6,10 +6,6 @@
 #include "j1Module.h"
 #include "Animation.h"
 
-
-#define MOVEMENT_SPEED 1
-
-
 class j1Player : public j1Module
 {
 public:
@@ -26,7 +22,7 @@ public:
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 	void OnCollision(Collider*, Collider*);
-	void Teleport();
+	
 
 public:
 	Animation idle;
@@ -52,10 +48,7 @@ public:
 	bool is_falling = true;
 	bool is_jumping = false;
 	bool is_teleporting = false;
-	int player_position_y0 = 0;
-	uint gravity = 5;
-	float jumping_time = 0.0f;
-	float tp_time = 0.0f;
+
 	uint gid = 0;
 
 	bool check = false;

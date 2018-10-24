@@ -1,8 +1,6 @@
-
-
+<entities>
 <player>
   <folder path="textures/Sasuke_sprites.png" ></folder>
-  
    <animation name ="idle" speed="0.05f" loop="true">
     <frame x="4" y="12" w="37" h="54"/>
     <frame x="79" y="12" w="38" h="54"/>
@@ -79,3 +77,24 @@
   <audio path ="audio/fx/player_death.wav"></audio>
   <audio2 tp_path ="audio/fx/teleport.wav"></audio2>
 </player>
+<enemies>
+    <bat>
+        <folder path="textures/" ></folder>
+        <animation name ="idle" speed="0.05f" loop="true">
+        <frame x="4" y="12" w="37" h="54"/>
+        <frame x="79" y="12" w="38" h="54"/>
+        <frame x="158" y="12" w="38" h="54"/>
+        <frame x="224" y="12" w="36" h="54"/>
+    </animation>
+    </bat>
+    <ninja>
+        <folder path="textures/" ></folder>
+        <animation name ="idle" speed="0.05f" loop="true">
+        <frame x="4" y="12" w="37" h="54"/>
+        <frame x="79" y="12" w="38" h="54"/>
+        <frame x="158" y="12" w="38" h="54"/>
+        <frame x="224" y="12" w="36" h="54"/>
+        </animation>
+    </ninja>
+ </enemies>
+</entities>

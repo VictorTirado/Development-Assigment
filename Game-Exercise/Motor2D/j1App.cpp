@@ -15,7 +15,7 @@
 #include "j1Collision.h"
 #include "j1Player.h"
 #include "j1Book.h"
-
+#include "j1Entitites.h"
 
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
@@ -34,6 +34,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	player = new j1Player();
 	collision = new j1Collision();
 	book = new j1Book();
+	entities = new j1Entities();
 	
 
 	// Ordered for awake / Start / Update
@@ -48,6 +49,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(player);
 	AddModule(book);
 	AddModule(fade_to_black);
+	AddModule(entities);
 
 	
 

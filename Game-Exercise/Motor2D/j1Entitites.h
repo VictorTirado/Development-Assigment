@@ -2,6 +2,9 @@
 #define __j1ENTITIES_H__
 
 #include "j1Module.h"
+#include "p2DynArray.h"
+
+class Entity_Player;
 
 enum Entities_Type
 {
@@ -11,6 +14,9 @@ enum Entities_Type
 	NINJA,
 	NONE,
 };
+
+class Entity;
+class Player;
 class j1Entities : public j1Module
 {
 
@@ -26,6 +32,13 @@ public:
 	bool PostUpdate();
 	bool SpawnEntities(int x, int y, Entities_Type type);
 	void OnCollision(Collider* c1, Collider* c2);
+
+
+	p2DynArray<Entity*> entities;
+
+	Entity_Player* player;
+
+	p2SString textures;
 };
 
 

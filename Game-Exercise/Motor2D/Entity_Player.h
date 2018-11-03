@@ -5,17 +5,18 @@
 #include "p2Point.h"
 #include "j1Module.h"
 #include "Animation.h"
+#include "Entity.h"
 
-class j1Player : public j1Module
+class Entity_Player : public Entity
 {
 public:
-	j1Player();
-	~j1Player();
+	Entity_Player(int x,int y);
+	~Entity_Player();
 
 	bool Start();
 	bool CleanUp();
 	bool PreUpdate();
-	bool Update(float dt);
+	void Update(float dt);
 	bool PostUpdate();
 
 	void LoadAnimation(pugi::xml_node&, Animation* player);
@@ -36,10 +37,8 @@ public:
 	Animation fall;
 	Animation jumpBackwards;
 	Animation fallBackwards;
-	Animation* current_animation = nullptr;
 	iPoint player_position = { 0,0 };
 	
-	SDL_Texture* graphics = nullptr;
 	p2SString path = nullptr;
 	p2SString deathfx_path = nullptr;
 	p2SString teleportfx_path = nullptr;
@@ -57,7 +56,5 @@ public:
 	bool can_tp = false;
 	bool is_tp = false;
 	
-
-	Collider* player_collider = nullptr;
 };
 #endif

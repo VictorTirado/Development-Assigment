@@ -4,7 +4,7 @@
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Map.h"
-#include "j1Player.h"
+#include "Entity_Player.h"
 #include "j1Input.h"
 #include "j1Window.h"
 #include "j1Render.h"
@@ -12,14 +12,15 @@
 #include "j1Book.h"
 #include "j1Audio.h"
 #include "j1Scene.h"
+#include "j1Entitites.h"
 
 #include "j1FadeToBlack.h"
 
 
 
-j1Player::j1Player() : j1Module()
+Entity_Player::Entity_Player(int x, int y) : Entity(x , y)
 {
-	name.create("player");
+	sprites = App->tex->Load(App->entities->textures.GetString());
 	pugi::xml_document player_file;
 	pugi::xml_node player;
 	player = App->LoadPlayer(player_file);
@@ -55,59 +56,59 @@ j1Player::j1Player() : j1Module()
 	deathfx_path = player.child("audio").attribute("path").as_string();
 	teleportfx_path = player.child("audio2").attribute("tp_path").as_string();
 	
-	current_animation = &idle;
+	animation = &idle;
+	
+	
+	
+	collider = App->collision->AddCollider({ 0, 0, 38, 54 }, COLLIDER_PLAYER, App->scene);
+	App->audio->LoadFx(deathfx_path.GetString());
+	App->audio->LoadFx(teleportfx_path.GetString());
 }
 
-j1Player::~j1Player()
+Entity_Player::~Entity_Player()
 {}
 
 
-bool j1Player::Start()
+bool Entity_Player::Start()
 {
 	bool ret = true;
 
-	graphics = App->tex->Load(path.GetString());
-
-	player_collider = App->collision->AddCollider({ 0, 0, 38, 54 }, COLLIDER_PLAYER, this);
-	App->audio->LoadFx(deathfx_path.GetString());
-	App->audio->LoadFx(teleportfx_path.GetString());
+	
 	
 	return ret;
 }
 
-bool j1Player::PreUpdate()
+bool Entity_Player::PreUpdate()
 {
 	bool ret = true;
 
 	return ret;
 }
 
-bool j1Player::Update(float dt)
+void Entity_Player::Update(float dt)
 {
-	bool ret = true;
-
 	if (firstUpdate == true)
 	{
-			player_position.x = App->map->spawn.x;
-			player_position.y = App->map->spawn.y;
+			position.x = App->map->spawn.x;
+			position.y = App->map->spawn.y;
 		    firstUpdate = false;
 	}
 
 	else if (!is_backwards)
-		current_animation = &idle;
+		animation = &idle;
 	else if (is_backwards)
-		current_animation = &idleBackwards;
+		animation = &idleBackwards;
 
 	
 
 	//LOGIC
-	gid = App->map->Get_gid(player_position.x + 10, player_position.y + 51);
+	gid = App->map->Get_gid(position.x + 10, position.y + 51);
 	
 	if (App->map->data.map_layers.end->data->data[gid + 1] != 72 || App->map->data.map_layers.end->data->data[gid] == 71)
 	{
 		if (App->map->data.map_layers.end->data->data[gid + 1] != 51 && App->map->data.map_layers.end->data->data[gid] != 51 )
 		{
-			player_position.y += 1;
+			position.y += 1;
 			is_falling = true;
 		}
 		else
@@ -125,12 +126,13 @@ bool j1Player::Update(float dt)
 		else if (App->scene->map_number == 2)
 			App->map->Load("ForestMap.tmx");
 		
-		player_position.x = App->map->spawn.x;
-		player_position.y = App->map->spawn.y;
+		position.x = App->map->spawn.x;
+		position.y = App->map->spawn.y;
+		App->entities->CleanUp();
 		App->book->CleanUp();
 		App->book->Start(); //Spawns the book after player's death
 		App->audio->PlayFx(1); //player's death fx
-		App->fade_to_black->FadeToBlack(this, this, 3.0f);
+		App->fade_to_black->FadeToBlack(App->entities, App->entities, 3.0f);
 	}
 
 	if (App->map->data.map_layers.end->data->data[gid] == 72)
@@ -151,23 +153,21 @@ bool j1Player::Update(float dt)
 			can_tp = false;
 			App->book->Start();
 		}
-		//player_position.x = App->map->spawn.x;
-		//player_position.y = App->map->spawn.y;
-		App->fade_to_black->FadeToBlack(this, this, 3.0f);		
+		App->fade_to_black->FadeToBlack(App->scene, App->scene, 3.0f);
 	}
 	//MOVEMENT PLAYER
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid-1] != 53 && App->fade_to_black->IsFading() == false)
 	{	
-		current_animation = &runBackwards;
+		animation = &runBackwards;
 		is_backwards = true;
-		player_position.x -= App->map->prop->movement_speed;
+		position.x -= App->map->prop->movement_speed;
 	}
 
 	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] != 53 && App->fade_to_black->IsFading() == false)
 	{
-		current_animation = &run;
+		animation = &run;
 		is_backwards = false;
-		player_position.x += App->map->prop->movement_speed;
+		position.x += App->map->prop->movement_speed;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->fade_to_black->IsFading() == false)
 	{
@@ -183,11 +183,11 @@ bool j1Player::Update(float dt)
 	{
 		App->map->prop->jumping_time += 0.1f;
 		
-		player_position.y -= App->map->prop->gravity;
+		position.y -= App->map->prop->gravity;
 
-		if (player_position.y > App->map->prop->player_position_y0 && App->map->prop->jumping_time >= 1.5f)
+		if (position.y > App->map->prop->player_position_y0 && App->map->prop->jumping_time >= 1.5f)
 		{
-			player_position.y += 5;
+			position.y += 5;
 			App->map->prop->jumping_time = 0.0f;
 			is_jumping = false;
 			is_falling = true;
@@ -195,16 +195,16 @@ bool j1Player::Update(float dt)
 	}
 	
 	if (is_falling && !is_backwards)
-		current_animation = &fall;
+		animation = &fall;
 
 	if (is_falling && is_backwards)
-		current_animation = &fallBackwards;
+		animation = &fallBackwards;
 
 	if (is_jumping && is_backwards)
-		current_animation = &jumpBackwards;
+		animation = &jumpBackwards;
 
 	if(is_jumping && !is_backwards)
-		current_animation = &jump;
+		animation = &jump;
 
 	//TELEPORT
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN && App->map->data.map_layers.end->data->data[gid + 1] == 51 && can_tp)
@@ -215,12 +215,12 @@ bool j1Player::Update(float dt)
 
 	if (is_tp)
 	{
-		current_animation = &teleport;
+		animation = &teleport;
 		App->map->prop->tp_time += 0.1f;
 
 		if (App->map->prop->tp_time == 0.6f)
 		{
-			player_position.y -= 100;
+			position.y -= 100;
 			is_tp = false;
 			App->map->prop->tp_time = 0.0f;
 		}
@@ -230,48 +230,46 @@ bool j1Player::Update(float dt)
 	if (App->scene->is_god)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-			player_position.y -= 4;
+			position.y -= 4;
 
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-			player_position.y += 4;		
+			position.y += 4;
 	}
 	
 
-	App->render->camera.x = (-player_position.x * App->win->render_scale) + (App->win->width / 2);
-	App->render->camera.y = (-player_position.y * App->win->render_scale) + (App->win->height / 2);
-	player_collider->SetPos(player_position.x, player_position.y);
-	App->render->Blit(graphics, player_position.x, player_position.y, &current_animation->GetCurrentFrame());
+	App->render->camera.x = (-position.x * App->win->render_scale) + (App->win->width / 2);
+	App->render->camera.y = (-position.y * App->win->render_scale) + (App->win->height / 2);
+	collider->SetPos(position.x, position.y);
+	
 
-	return ret;
+	
 }
 
-bool j1Player::PostUpdate()
+bool Entity_Player::PostUpdate()
 {
 	bool ret = true;
 	return ret;
 }
 
-bool j1Player::CleanUp()
+bool Entity_Player::CleanUp()
 {
 	LOG("Unloading player");
 	
-	App->tex->UnLoad(graphics);
-	graphics = nullptr;
-	current_animation = nullptr;
-
+	App->tex->UnLoad(sprites);
+	sprites = nullptr;
 	
 	App->audio->fx.clear();
-	if (player_collider != nullptr)
+	if (collider != nullptr)
 	{
-		player_collider->to_delete = true;
-		player_collider = nullptr;
+		collider->to_delete = true;
+		collider = nullptr;
 	}
 
 	return true;
 }
 
 
-void j1Player::LoadAnimation(pugi::xml_node& animation, Animation* player)
+void Entity_Player::LoadAnimation(pugi::xml_node& animation, Animation* player)
 {
 	for (pugi::xml_node frame = animation.child("frame"); frame; frame = frame.next_sibling("frame"))
 	{
@@ -282,14 +280,14 @@ void j1Player::LoadAnimation(pugi::xml_node& animation, Animation* player)
 	player->loop = animation.attribute("loop").as_bool();
 }
 
-bool j1Player::Load(pugi::xml_node& data)
+bool Entity_Player::Load(pugi::xml_node& data)
 {
 	if(data.child("map") != NULL)
 		App->scene->map_number = data.child("map").attribute("level").as_int();
 
 	if (App->scene->map_number == 2 && data.child("map") != NULL)
 	{
-		App->fade_to_black->FadeToBlack(this, this, 3.0f);
+		App->fade_to_black->FadeToBlack(App->scene, App->scene, 3.0f);
 		App->map->CleanUp();
 		App->map->Load("ForestMap.tmx");
 		player_position.x = data.child("position").attribute("x").as_int();
@@ -297,7 +295,7 @@ bool j1Player::Load(pugi::xml_node& data)
 	}
 	else if (App->scene->map_number == 1 && data.child("map") != NULL)
 	{
-		App->fade_to_black->FadeToBlack(this, this, 3.0f);
+		App->fade_to_black->FadeToBlack(App->scene, App->scene, 3.0f);
 		App->map->CleanUp();
 		App->map->Load("Map2.tmx");
 		player_position.x = data.child("position").attribute("x").as_int();
@@ -306,7 +304,7 @@ bool j1Player::Load(pugi::xml_node& data)
 	return true;
 }
 
-bool j1Player::Save(pugi::xml_node& data)const
+bool Entity_Player::Save(pugi::xml_node& data)const
 {
 	data.append_child("map").append_attribute("level") = App->scene->map_number;
 	data.append_child("position").append_attribute("x") = player_position.x;
@@ -314,7 +312,7 @@ bool j1Player::Save(pugi::xml_node& data)const
 	return true;
 }
 
-void j1Player::OnCollision(Collider* c1, Collider* c2)
+void Entity_Player::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == COLLIDER_POWER_UP)
 	{

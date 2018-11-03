@@ -1,4 +1,4 @@
-<entities>
+
 <player>
   <folder path="textures/Sasuke_sprites.png" ></folder>
    <animation name ="idle" speed="0.05f" loop="true">
@@ -97,4 +97,3 @@
         </animation>
     </ninja>
  </enemies>
-</entities>

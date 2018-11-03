@@ -24,7 +24,9 @@
   <file_system>
     <path>data.zip</path>
   </file_system>
-
+  <entities>
+    <folder path="textures/Sasuke_sprites.png" ></folder>
+  </entities>
   <map>
     <folder>maps/</folder>
   </map>

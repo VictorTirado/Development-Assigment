@@ -9,10 +9,12 @@
 #include "j1Window.h"
 #include "j1Collision.h"
 #include "j1Render.h"
-#include "j1Player.h"
+#include "j1Entitites.h"
 #include "j1Scene.h"
 
 #include "j1FadeToBlack.h"
+
+#include "Entity_Player.h"
 
 
 
@@ -93,7 +95,7 @@ bool j1Book::CleanUp()
 void j1Book::OnCollision(Collider* collider)
 {
 	LOG("COLLISION");
-	App->player->can_tp = true;
+	App->entities->player->can_tp = true;
 	CleanUp();
 }
 

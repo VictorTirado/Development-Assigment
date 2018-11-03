@@ -7,10 +7,12 @@
 #include "j1Render.h"
 #include "j1Window.h"
 #include "j1Map.h"
-#include "j1Player.h"
 #include "j1Book.h"
 #include "j1FadeToBlack.h"
 #include "j1Scene.h"
+#include "j1Entitites.h"
+
+#include "Entity_Player.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -37,6 +39,7 @@ bool j1Scene::Start()
 	{
 		map_number = 1;
 		App->map->Load("Map2.tmx");
+		App->entities->SpawnEntities(0,0,PLAYER);
 	}
 	App->audio->PlayMusic(App->audio->path.GetString());
 	App->audio->StartVolume(App->audio->volume);
@@ -65,9 +68,9 @@ bool j1Scene::Update(float dt)
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
-		App->player->can_tp = false;
+		App->entities->player->can_tp = false;
 		App->book->Start();
-		App->player->firstUpdate = true;
+		App->entities->player->firstUpdate = true;
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		App->SaveGame();
@@ -129,11 +132,11 @@ bool j1Scene::ChangeMap(int map_number)
 		App->map->CleanUp();
 		App->map->Load("Map2.tmx");
 		App->book->graphics = App->tex->Load("textures/Objects.png");
-		App->player->firstUpdate = true;
+		App->entities->player->firstUpdate = true;
 		App->book->book_position.x = App->map->spawn_book.x;
 		App->book->book_position.y = App->map->spawn_book.y;
-		App->render->camera.x = (-App->player->player_position.x * App->win->render_scale) + (App->win->width / 2);
-		App->render->camera.y = (-App->player->player_position.y * App->win->render_scale) + (App->win->height / 2);
+		App->render->camera.x = (-App->entities->player->player_position.x * App->win->render_scale) + (App->win->width / 2);
+		App->render->camera.y = (-App->entities->player->player_position.y * App->win->render_scale) + (App->win->height / 2);
 	}
 	else if (map_number == 2)
 	{

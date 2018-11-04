@@ -39,7 +39,7 @@ private:
 	bool change_music = false;
 
 public:
-	int map_number = 0;
+	int map_number = 1;
 	bool collision_debug = false;
 	bool is_god = false;
 };

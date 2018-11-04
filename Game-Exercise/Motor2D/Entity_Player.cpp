@@ -60,7 +60,7 @@ Entity_Player::Entity_Player(int x, int y) : Entity(x , y)
 	
 	
 	
-	collider = App->collision->AddCollider({ 0, 0, 38, 54 }, COLLIDER_PLAYER, App->scene);
+	//collider = App->collision->AddCollider({ 0, 0, 38, 54 }, COLLIDER_PLAYER, App->scene);
 	App->audio->LoadFx(deathfx_path.GetString());
 	App->audio->LoadFx(teleportfx_path.GetString());
 }
@@ -128,11 +128,11 @@ void Entity_Player::Update(float dt)
 		
 		position.x = App->map->spawn.x;
 		position.y = App->map->spawn.y;
-		App->entities->CleanUp();
+		//App->entities->CleanUp();
 		App->book->CleanUp();
 		App->book->Start(); //Spawns the book after player's death
 		App->audio->PlayFx(1); //player's death fx
-		App->fade_to_black->FadeToBlack(App->entities, App->entities, 3.0f);
+		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 	}
 
 	if (App->map->data.map_layers.end->data->data[gid] == 72)
@@ -153,7 +153,7 @@ void Entity_Player::Update(float dt)
 			can_tp = false;
 			App->book->Start();
 		}
-		App->fade_to_black->FadeToBlack(App->scene, App->scene, 3.0f);
+		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 	}
 	//MOVEMENT PLAYER
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid-1] != 53 && App->fade_to_black->IsFading() == false)
@@ -176,7 +176,7 @@ void Entity_Player::Update(float dt)
 	}
 	//JUMP
 	if (App->map->prop->jumping_time == 0.0f)
-	   App->map->prop->player_position_y0 = - 1 * player_position.y;
+	   App->map->prop->player_position_y0 = - 1 * position.y;
 
 
 	if (is_jumping)
@@ -239,7 +239,7 @@ void Entity_Player::Update(float dt)
 
 	App->render->camera.x = (-position.x * App->win->render_scale) + (App->win->width / 2);
 	App->render->camera.y = (-position.y * App->win->render_scale) + (App->win->height / 2);
-	collider->SetPos(position.x, position.y);
+	//collider->SetPos(position.x, position.y);
 	
 
 	
@@ -290,16 +290,16 @@ bool Entity_Player::Load(pugi::xml_node& data)
 		App->fade_to_black->FadeToBlack(App->scene, App->scene, 3.0f);
 		App->map->CleanUp();
 		App->map->Load("ForestMap.tmx");
-		player_position.x = data.child("position").attribute("x").as_int();
-		player_position.y = data.child("position").attribute("y").as_int();
+		position.x = data.child("position").attribute("x").as_int();
+		position.y = data.child("position").attribute("y").as_int();
 	}
 	else if (App->scene->map_number == 1 && data.child("map") != NULL)
 	{
 		App->fade_to_black->FadeToBlack(App->scene, App->scene, 3.0f);
 		App->map->CleanUp();
 		App->map->Load("Map2.tmx");
-		player_position.x = data.child("position").attribute("x").as_int();
-		player_position.y = data.child("position").attribute("y").as_int();
+		position.x = data.child("position").attribute("x").as_int();
+		position.y = data.child("position").attribute("y").as_int();
 	}
 	return true;
 }
@@ -307,8 +307,8 @@ bool Entity_Player::Load(pugi::xml_node& data)
 bool Entity_Player::Save(pugi::xml_node& data)const
 {
 	data.append_child("map").append_attribute("level") = App->scene->map_number;
-	data.append_child("position").append_attribute("x") = player_position.x;
-	data.child("position").append_attribute("y") = player_position.y;
+	data.append_child("position").append_attribute("x") = position.x;
+	data.child("position").append_attribute("y") = position.y;
 	return true;
 }
 

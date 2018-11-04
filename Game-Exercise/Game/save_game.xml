@@ -9,13 +9,13 @@
 	<map />
 	<scene />
 	<collisions />
-	<player>
-		<map level="2" />
-		<position x="280" y="317" />
-	</player>
+	<entities>
+		<map level="1" />
+		<position x="401" y="701" />
+	</entities>
 	<book />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-328" y="-567" />
+		<camera x="-691" y="-1719" />
 	</renderer>
 </game_state>

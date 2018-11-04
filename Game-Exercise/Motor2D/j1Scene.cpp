@@ -35,12 +35,13 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	if (!is_faded)
+	if (!is_faded && map_number == 1)
 	{
 		map_number = 1;
 		App->map->Load("Map2.tmx");
-		App->entities->SpawnEntities(0,0,PLAYER);
+		
 	}
+	//App->entities->SpawnEntities(0, 0, PLAYER);
 	App->audio->PlayMusic(App->audio->path.GetString());
 	App->audio->StartVolume(App->audio->volume);
 
@@ -135,8 +136,8 @@ bool j1Scene::ChangeMap(int map_number)
 		App->entities->player->firstUpdate = true;
 		App->book->book_position.x = App->map->spawn_book.x;
 		App->book->book_position.y = App->map->spawn_book.y;
-		App->render->camera.x = (-App->entities->player->player_position.x * App->win->render_scale) + (App->win->width / 2);
-		App->render->camera.y = (-App->entities->player->player_position.y * App->win->render_scale) + (App->win->height / 2);
+		App->render->camera.x = (-App->entities->player->position.x * App->win->render_scale) + (App->win->width / 2);
+		App->render->camera.y = (-App->entities->player->position.y * App->win->render_scale) + (App->win->height / 2);
 	}
 	else if (map_number == 2)
 	{

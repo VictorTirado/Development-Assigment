@@ -37,7 +37,6 @@ public:
 	Animation fall;
 	Animation jumpBackwards;
 	Animation fallBackwards;
-	iPoint player_position = { 0,0 };
 	
 	p2SString path = nullptr;
 	p2SString deathfx_path = nullptr;

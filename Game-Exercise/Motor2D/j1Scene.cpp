@@ -7,7 +7,7 @@
 #include "j1Render.h"
 #include "j1Window.h"
 #include "j1Map.h"
-#include "j1Book.h"
+#include "Entity_Book.h"
 #include "j1FadeToBlack.h"
 #include "j1Scene.h"
 #include "j1Entitites.h"
@@ -64,13 +64,13 @@ bool j1Scene::Update(float dt)
 	{
 		map_number = 1;
 		ChangeMap(map_number);
-		App->book->Start();
+		//App->entities->book->Start();
 		is_faded = true;
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
 		App->entities->player->can_tp = false;
-		App->book->Start();
+		//App->entities->book->Start();
 		App->entities->player->firstUpdate = true;
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
@@ -132,10 +132,10 @@ bool j1Scene::ChangeMap(int map_number)
 		App->fade_to_black->FadeToBlack(this, this, 3.0f);
 		App->map->CleanUp();
 		App->map->Load("Map2.tmx");
-		App->book->graphics = App->tex->Load("textures/Objects.png");
+		App->entities->book->sprites = App->tex->Load("textures/Objects.png");
 		App->entities->player->firstUpdate = true;
-		App->book->book_position.x = App->map->spawn_book.x;
-		App->book->book_position.y = App->map->spawn_book.y;
+		//App->entities->book->book_position.x = App->map->spawn_book.x;
+		//App->entities->book->book_position.y = App->map->spawn_book.y;
 		App->render->camera.x = (-App->entities->player->position.x * App->win->render_scale) + (App->win->width / 2);
 		App->render->camera.y = (-App->entities->player->position.y * App->win->render_scale) + (App->win->height / 2);
 	}

@@ -5,6 +5,7 @@
 #include "p2DynArray.h"
 
 class Entity_Player;
+class Entity_Book;
 
 enum Entities_Type
 {
@@ -17,6 +18,8 @@ enum Entities_Type
 
 class Entity;
 class Player;
+class Book;
+
 class j1Entities : public j1Module
 {
 
@@ -37,8 +40,10 @@ public:
 	bool Save(pugi::xml_node&) const;
 
 	p2DynArray<Entity*> entities;
-
+	
 	Entity_Player* player;
+	Entity_Book* book;
+
 
 	p2SString textures;
 };

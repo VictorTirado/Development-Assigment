@@ -11,11 +11,11 @@
 	<collisions />
 	<entities>
 		<map level="1" />
-		<position x="401" y="701" />
+		<position x="1079" y="205" />
 	</entities>
 	<book />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-691" y="-1719" />
+		<camera x="-2725" y="-231" />
 	</renderer>
 </game_state>

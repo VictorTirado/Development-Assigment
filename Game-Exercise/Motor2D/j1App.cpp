@@ -14,7 +14,7 @@
 #include "j1App.h"
 #include "j1Collision.h"
 
-#include "j1Book.h"
+
 #include "j1Entitites.h"
 
 // Constructor
@@ -33,7 +33,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	fade_to_black = new j1FadeToBlack();
 	//player = new j1Player();
 	collision = new j1Collision();
-	book = new j1Book();
+	//book = new j1Book();
 	entities = new j1Entities();
 	
 
@@ -47,7 +47,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 	AddModule(collision);
 	AddModule(entities);
-	AddModule(book);
+	//AddModule(book);
 	AddModule(fade_to_black);
 
 	

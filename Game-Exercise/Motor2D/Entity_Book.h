@@ -5,28 +5,26 @@
 #include "p2Point.h"
 #include "j1Module.h"
 #include "Animation.h"
+#include "Entity.h"
 
 
-class j1Book: public j1Module
+class Entity_Book: public Entity
 {
 public:
-	j1Book();
-	~j1Book();
+	Entity_Book(int x,int y);
+	~Entity_Book();
 
-	bool Start();
+	
 	bool CleanUp();
 	bool PreUpdate();
-	bool Update(float dt);
+	void Update(float dt);
 	bool PostUpdate();
 
 	void OnCollision(Collider* collider);
 
 public:
-	iPoint book_position;
+	
 	Animation idle;
-	SDL_Texture* graphics = nullptr;
-	Animation* current_animation = nullptr;
-	Collider* book_collider = nullptr;
 	bool is_caught = false;
 	bool firstUpdate = true;
 };

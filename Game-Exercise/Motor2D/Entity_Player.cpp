@@ -4,19 +4,17 @@
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Map.h"
-#include "Entity_Player.h"
 #include "j1Input.h"
 #include "j1Window.h"
 #include "j1Render.h"
 #include "j1Collision.h"
-#include "j1Book.h"
 #include "j1Audio.h"
 #include "j1Scene.h"
 #include "j1Entitites.h"
-
 #include "j1FadeToBlack.h"
 
-
+#include "Entity_Player.h"
+#include "Entity_Book.h"
 
 Entity_Player::Entity_Player(int x, int y) : Entity(x , y)
 {
@@ -60,7 +58,7 @@ Entity_Player::Entity_Player(int x, int y) : Entity(x , y)
 	
 	
 	
-	//collider = App->collision->AddCollider({ 0, 0, 38, 54 }, COLLIDER_PLAYER, App->scene);
+	
 	App->audio->LoadFx(deathfx_path.GetString());
 	App->audio->LoadFx(teleportfx_path.GetString());
 }
@@ -91,6 +89,7 @@ void Entity_Player::Update(float dt)
 	{
 			position.x = App->map->spawn.x;
 			position.y = App->map->spawn.y;
+			collider = App->collision->AddCollider({ 0, 0, 38, 54 }, COLLIDER_TYPE::COLLIDER_PLAYER, App->entities);
 		    firstUpdate = false;
 	}
 
@@ -129,8 +128,8 @@ void Entity_Player::Update(float dt)
 		position.x = App->map->spawn.x;
 		position.y = App->map->spawn.y;
 		//App->entities->CleanUp();
-		App->book->CleanUp();
-		App->book->Start(); //Spawns the book after player's death
+		App->entities->book->CleanUp();
+		//App->entities->book->Start(); //Spawns the book after player's death
 		App->audio->PlayFx(1); //player's death fx
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 	}
@@ -151,7 +150,7 @@ void Entity_Player::Update(float dt)
 			App->scene->map_number = 1;
 			firstUpdate = true;
 			can_tp = false;
-			App->book->Start();
+			//App->entities->book->Start();
 		}
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 	}
@@ -316,7 +315,7 @@ void Entity_Player::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == COLLIDER_POWER_UP)
 	{
-		App->book->CleanUp();
+		App->entities->book->CleanUp();
 		can_tp = true;
 	}
 }

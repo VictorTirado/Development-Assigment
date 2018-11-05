@@ -11,7 +11,7 @@ class Entity
 {
 private:
 	SDL_Rect last_frame = { 0,0,0,0 };
-protected:
+public:
 	Animation* animation = nullptr;
 	Collider* collider = nullptr;
 	

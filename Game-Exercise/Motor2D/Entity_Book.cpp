@@ -20,7 +20,7 @@
 
 Entity_Book::Entity_Book(int x, int y) : Entity(x, y)
 {
-	sprites = App->tex->Load("textures/Objects.png");
+	
 	idle.PushBack({2,13,28,29});
 	idle.PushBack({ 0,0,0,0});
 	idle.speed = 0.05f;
@@ -47,6 +47,7 @@ bool Entity_Book::PreUpdate()
 void Entity_Book::Update(float dt)
 {
 	if (firstUpdate == true) {
+		sprites = App->tex->Load("textures/Objects.png");
 		position.x = App->map->spawn_book.x;
 		position.y = App->map->spawn_book.y;
 		collider = App->collision->AddCollider({ 0, 0, 28, 25 }, COLLIDER_TYPE::COLLIDER_POWER_UP, App->entities);
@@ -65,10 +66,10 @@ bool Entity_Book::CleanUp()
 	LOG("Unloading book");
 
 	App->tex->UnLoad(sprites);
-	if (collider != nullptr)
+	if (App->entities->book->collider != nullptr)
 	{
-		collider->to_delete = true;
-		collider = nullptr;
+		App->entities->book->collider->to_delete = true;
+		App->entities->book->collider = nullptr;
 	}
 	sprites = nullptr;
 
@@ -80,9 +81,11 @@ bool Entity_Book::CleanUp()
 
 void Entity_Book::OnCollision(Collider* collider)
 {
-	LOG("COLLISION");
-	App->entities->player->can_tp = true;
-	CleanUp();
+	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER) {
+		LOG("COLLISION");
+		App->entities->player->can_tp = true;
+		App->entities->book->CleanUp();
+	}
 }
 
 

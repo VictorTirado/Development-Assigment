@@ -106,6 +106,12 @@ bool j1Entities::SpawnEntities(int x, int y, Entities_Type type)
 
 void j1Entities::OnCollision(Collider* c1, Collider* c2)
 {
+	
+	for(int i =0 ;i<entities.Count();i++)
+	{
+		if(entities[i]->GetCollider() == c1)
+		entities[i]->OnCollision(c2); 
+	}
 
 }
 

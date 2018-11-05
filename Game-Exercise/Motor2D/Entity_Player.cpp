@@ -87,10 +87,11 @@ void Entity_Player::Update(float dt)
 {
 	if (firstUpdate == true)
 	{
-			position.x = App->map->spawn.x;
-			position.y = App->map->spawn.y;
-			collider = App->collision->AddCollider({ 0, 0, 38, 54 }, COLLIDER_TYPE::COLLIDER_PLAYER, App->entities);
-		    firstUpdate = false;
+		can_tp = false;
+		position.x = App->map->spawn.x;
+		position.y = App->map->spawn.y;
+		collider = App->collision->AddCollider({ 0, 0, 38, 54 }, COLLIDER_TYPE::COLLIDER_PLAYER, App->entities);
+		firstUpdate = false;
 	}
 
 	else if (!is_backwards)
@@ -121,6 +122,7 @@ void Entity_Player::Update(float dt)
 		{
 			App->map->Load("Map2.tmx");
 			can_tp = false;
+			App->entities->book->firstUpdate = true;
 		}
 		else if (App->scene->map_number == 2)
 			App->map->Load("ForestMap.tmx");
@@ -129,7 +131,7 @@ void Entity_Player::Update(float dt)
 		position.y = App->map->spawn.y;
 		//App->entities->CleanUp();
 		App->entities->book->CleanUp();
-		//App->entities->book->Start(); //Spawns the book after player's death
+		
 		App->audio->PlayFx(1); //player's death fx
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 	}
@@ -238,7 +240,7 @@ void Entity_Player::Update(float dt)
 
 	App->render->camera.x = (-position.x * App->win->render_scale) + (App->win->width / 2);
 	App->render->camera.y = (-position.y * App->win->render_scale) + (App->win->height / 2);
-	//collider->SetPos(position.x, position.y);
+	collider->SetPos(position.x, position.y);
 	
 
 	
@@ -315,8 +317,8 @@ void Entity_Player::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == COLLIDER_POWER_UP)
 	{
-		App->entities->book->CleanUp();
-		can_tp = true;
+		/*App->entities->book->CleanUp();
+		can_tp = true;*/
 	}
 }
 

@@ -42,6 +42,7 @@ bool j1Scene::Start()
 		
 	}
 	//App->entities->SpawnEntities(0, 0, PLAYER);
+	//App->entities->SpawnEntities(0, 0, BOOK);
 	App->audio->PlayMusic(App->audio->path.GetString());
 	App->audio->StartVolume(App->audio->volume);
 
@@ -69,9 +70,13 @@ bool j1Scene::Update(float dt)
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
-		App->entities->player->can_tp = false;
-		//App->entities->book->Start();
-		App->entities->player->firstUpdate = true;
+		if (map_number = 1)
+		{
+			App->entities->player->can_tp = false;
+			App->entities->player->firstUpdate = true;
+			App->entities->book->firstUpdate = true;
+		}
+		
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		App->SaveGame();
@@ -132,10 +137,8 @@ bool j1Scene::ChangeMap(int map_number)
 		App->fade_to_black->FadeToBlack(this, this, 3.0f);
 		App->map->CleanUp();
 		App->map->Load("Map2.tmx");
-		App->entities->book->sprites = App->tex->Load("textures/Objects.png");
 		App->entities->player->firstUpdate = true;
-		//App->entities->book->book_position.x = App->map->spawn_book.x;
-		//App->entities->book->book_position.y = App->map->spawn_book.y;
+		App->entities->book->firstUpdate = true;
 		App->render->camera.x = (-App->entities->player->position.x * App->win->render_scale) + (App->win->width / 2);
 		App->render->camera.y = (-App->entities->player->position.y * App->win->render_scale) + (App->win->height / 2);
 	}

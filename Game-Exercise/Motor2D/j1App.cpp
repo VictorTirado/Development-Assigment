@@ -175,7 +175,7 @@ pugi::xml_node j1App::LoadPlayer(pugi::xml_document& player_file) const
 {
 	pugi::xml_node ret;
 
-	pugi::xml_parse_result result = player_file.load_file("player.xml");
+	pugi::xml_parse_result result = player_file.load_file("entities.xml");
 	if (result == NULL)
 		LOG("Could not load map xml file config.xml. pugi error: %s", result.description());
 	else

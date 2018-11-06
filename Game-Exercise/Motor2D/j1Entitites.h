@@ -6,6 +6,7 @@
 
 class Entity_Player;
 class Entity_Book;
+class Entity_Bat;
 
 enum Entities_Type
 {
@@ -19,6 +20,7 @@ enum Entities_Type
 class Entity;
 class Player;
 class Book;
+class Bat;
 
 class j1Entities : public j1Module
 {
@@ -43,7 +45,7 @@ public:
 	
 	Entity_Player* player;
 	Entity_Book* book;
-
+	Entity_Bat* bat;
 
 	p2SString textures;
 };

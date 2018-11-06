@@ -15,6 +15,7 @@
 
 #include "Entity_Player.h"
 #include "Entity_Book.h"
+#include "Entity_Bat.h"
 
 j1Entities::j1Entities() : j1Module()
 {
@@ -38,6 +39,8 @@ bool j1Entities::Start()
 	bool ret = true;
 	SpawnEntities(0, 0, PLAYER);
 	SpawnEntities(0, 0, BOOK);
+	SpawnEntities(0, 0, BAT);
+
 	return ret;
 }
 
@@ -94,6 +97,13 @@ bool j1Entities::SpawnEntities(int x, int y, Entities_Type type)
 		book = new Entity_Book(x, y);
 		book->entity_type = Entities_Type::BOOK;
 		entities.PushBack(book);
+		ret = true;
+		break;
+	}
+	case Entities_Type::BAT: {
+		bat = new Entity_Bat(x, y);
+		bat->entity_type = Entities_Type::BAT;
+		entities.PushBack(bat);
 		ret = true;
 		break;
 	}

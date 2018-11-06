@@ -79,12 +79,12 @@
 </player>
 <enemies>
     <bat>
-        <folder path="textures/" ></folder>
+        <folder path="textures/Bat" ></folder>
         <animation name ="idle" speed="0.05f" loop="true">
-        <frame x="4" y="12" w="37" h="54"/>
-        <frame x="79" y="12" w="38" h="54"/>
-        <frame x="158" y="12" w="38" h="54"/>
-        <frame x="224" y="12" w="36" h="54"/>
+        <frame x="213" y="40" w="26" h="35"/>
+        <frame x="262" y="44" w="29" h="30"/>
+        <frame x="312" y="55" w="25" h="31"/>
+        <frame x="360" y="56" w="29" h="28"/>
     </animation>
     </bat>
     <ninja>

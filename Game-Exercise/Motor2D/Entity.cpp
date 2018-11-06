@@ -33,6 +33,10 @@ void Entity::Draw(SDL_Texture* sprites)
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 		collider->SetPos(position.x, position.y);
 	}
+	if (this->entity_type == BAT)
+	{
+		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
+	}
 }
 
 void Entity::OnCollision(Collider* collider)

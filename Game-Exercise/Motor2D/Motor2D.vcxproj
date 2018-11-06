@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Entity_Bat.cpp" />
     <ClCompile Include="Entity_Book.cpp" />
     <ClCompile Include="j1Collision.cpp" />
     <ClCompile Include="j1Entities.cpp" />
@@ -96,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Entity_Bat.h" />
     <ClInclude Include="Entity_Book.h" />
     <ClInclude Include="j1Collision.h" />
     <ClInclude Include="j1Entitites.h" />

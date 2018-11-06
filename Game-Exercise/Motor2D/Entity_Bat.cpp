@@ -43,9 +43,9 @@ void Entity_Bat::Update(float dt)
 {
 	if (firstUpdate == true) {
 		sprites = App->tex->Load("textures/Bat.png");
-		position.x = App->map->spawn.x;
-		position.y = App->map->spawn.y;
-		//collider = App->collision->AddCollider({ 0, 0, 28, 25 }, COLLIDER_TYPE::COLLIDER_POWER_UP, App->entities);
+		position.x = 100;
+		position.y = 100;
+		collider = App->collision->AddCollider({ 0, 0, 29, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->entities);
 		firstUpdate = false;
 	}
 }
@@ -61,6 +61,11 @@ bool Entity_Bat::CleanUp()
 	LOG("Unloading book");
 
 	App->tex->UnLoad(sprites);
+	if (App->entities->bat->collider != nullptr)
+	{
+		App->entities->bat->collider->to_delete = true;
+		App->entities->bat->collider = nullptr;
+	}
 	sprites = nullptr;
 
 	return true;
@@ -68,5 +73,8 @@ bool Entity_Bat::CleanUp()
 
 void Entity_Bat::OnCollision(Collider* collider)
 {
-	
+	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER) {
+		LOG("COLLISION");
+		App->entities->bat->CleanUp();
+	}
 }

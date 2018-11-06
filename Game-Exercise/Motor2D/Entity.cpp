@@ -6,6 +6,7 @@
 #include "j1Scene.h"
 
 #include "Entity_Book.h"
+#include "Entity_Bat.h"
 
 Entity::Entity(int x, int y) : position(x, y)
 {
@@ -33,9 +34,10 @@ void Entity::Draw(SDL_Texture* sprites)
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 		collider->SetPos(position.x, position.y);
 	}
-	if (this->entity_type == BAT)
+	if (this->entity_type == BAT && App->entities->bat->collider != nullptr)
 	{
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
+		collider->SetPos(position.x, position.y);
 	}
 }
 

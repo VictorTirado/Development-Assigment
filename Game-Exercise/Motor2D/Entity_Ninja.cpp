@@ -7,7 +7,8 @@
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Map.h"
-#include "Entity_Bat.h"
+#include "Entity_Ninja.h"
+
 #include "j1Window.h"
 #include "j1Collision.h"
 #include "j1Render.h"
@@ -19,9 +20,9 @@
 #include "Entity_Player.h"
 
 
-Entity_Bat::Entity_Bat(int x, int y):Entity(x, y)
+Entity_Ninja::Entity_Ninja(int x, int y) :Entity(x, y)
 {
-	idle.PushBack({ 213,40,26,35 });
+	idle.PushBack({ 4,1,33,47 });
 	idle.PushBack({ 0,0,0,0 });
 	idle.speed = 0.05f;
 	idle.loop = true;
@@ -29,51 +30,51 @@ Entity_Bat::Entity_Bat(int x, int y):Entity(x, y)
 	animation = &idle;
 }
 
-Entity_Bat::~Entity_Bat(){}
+Entity_Ninja::~Entity_Ninja() {}
 
-bool Entity_Bat::PreUpdate()
+bool Entity_Ninja::PreUpdate()
 {
 	bool ret = true;
 
 	return ret;
 }
 
-void Entity_Bat::Update(float dt)
+void Entity_Ninja::Update(float dt)
 {
 	if (firstUpdate == true) {
-		sprites = App->tex->Load("textures/Bat.png");
-		position.x = 100;
+		sprites = App->tex->Load("textures/Enemy_Ninja.png");
+		position.x = 200;
 		position.y = 100;
-		collider = App->collision->AddCollider({ 0, 0, 29, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->entities);
+		collider = App->collision->AddCollider({ 0, 0, 33, 47 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->entities);
 		firstUpdate = false;
 	}
 }
 
-bool Entity_Bat::PostUpdate()
+bool Entity_Ninja::PostUpdate()
 {
 	bool ret = true;
 	return ret;
 }
 
-bool Entity_Bat::CleanUp()
+bool Entity_Ninja::CleanUp()
 {
 	LOG("Unloading book");
 
 	App->tex->UnLoad(sprites);
-	if (App->entities->bat->collider != nullptr)
+	if (App->entities->ninja->collider != nullptr)
 	{
-		App->entities->bat->collider->to_delete = true;
-		App->entities->bat->collider = nullptr;
+		App->entities->ninja->collider->to_delete = true;
+		App->entities->ninja->collider = nullptr;
 	}
 	sprites = nullptr;
 
 	return true;
 }
 
-void Entity_Bat::OnCollision(Collider* collider)
+void Entity_Ninja::OnCollision(Collider* collider)
 {
 	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER) {
 		LOG("COLLISION");
-		App->entities->bat->CleanUp();
+		App->entities->ninja->CleanUp();
 	}
 }

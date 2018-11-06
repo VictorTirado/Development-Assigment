@@ -7,6 +7,7 @@
 
 #include "Entity_Book.h"
 #include "Entity_Bat.h"
+#include "Entity_Ninja.h"
 
 Entity::Entity(int x, int y) : position(x, y)
 {
@@ -35,6 +36,12 @@ void Entity::Draw(SDL_Texture* sprites)
 		collider->SetPos(position.x, position.y);
 	}
 	if (this->entity_type == BAT && App->entities->bat->collider != nullptr)
+	{
+		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
+		collider->SetPos(position.x, position.y);
+	}
+
+	if (this->entity_type == NINJA && App->entities->ninja->collider != nullptr)
 	{
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 		collider->SetPos(position.x, position.y);

@@ -20,6 +20,8 @@ j1Collision::j1Collision()
 	matrix[COLLIDER_ENEMY][COLLIDER_POWER_UP] = false;
 	matrix[COLLIDER_POWER_UP][COLLIDER_ENEMY] = false;
 
+	matrix[COLLIDER_ENEMY][COLLIDER_ENEMY] = false;
+
 }
 
 // Destructor

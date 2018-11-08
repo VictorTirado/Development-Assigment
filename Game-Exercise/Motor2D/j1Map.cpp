@@ -6,6 +6,7 @@
 #include "j1Map.h"
 #include "Entity_Player.h"
 #include "j1Scene.h"
+#include "j1Entitites.h"
 
 #include "j1Input.h"
 #include <math.h>
@@ -28,6 +29,51 @@ bool j1Map::Awake(pugi::xml_node& config)
 	folder.create(config.child("folder").child_value());
 
 	return ret;
+}
+void j1Map::Spawn()
+{
+	if (map_loaded == false)
+		return;
+
+
+	p2List_item<MapLayer*>* layers_list = this->data.map_layers.start;
+
+	while (layers_list != NULL)
+	{
+		for (int i = 0; i < layers_list->data->width; i++)
+		{
+			for (int j = 0; j < layers_list->data->height; j++)
+			{
+				int tile_id = layers_list->data->Get(i, j);
+				if (tile_id > 0)
+				{
+
+					TileSet* tileset = GetTilesetFromTileId(tile_id);
+					if (tileset != nullptr)
+					{
+
+						if (layers_list->data->Get(i, j) != 0)
+						{
+							SDL_Rect tile = tileset->GetTileRect(tile_id);
+							iPoint coords = MapToWorld(i, j);
+							uint gid = Get_gid(coords.x, coords.y);
+
+
+							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 66)
+							{
+								App->entities->SpawnEntities(coords.x, coords.y, BAT);
+							}
+							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 46)
+							{
+								App->entities->SpawnEntities(coords.x, coords.y, NINJA);
+							}
+						}
+					}
+				}
+			}
+		}
+		layers_list = layers_list->next;
+	}
 }
 
 void j1Map::Draw()

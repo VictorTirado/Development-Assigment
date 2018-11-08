@@ -40,8 +40,9 @@ bool j1Entities::Start()
 	bool ret = true;
 	SpawnEntities(0, 0, PLAYER);
 	SpawnEntities(0, 0, BOOK);
-	SpawnEntities(0, 0, BAT);
-	SpawnEntities(0, 0, NINJA);
+	App->map->Spawn();
+	//SpawnEntities(0, 0, BAT);
+	//SpawnEntities(400, 700, BAT);
 
 	return ret;
 }

@@ -90,6 +90,8 @@ public:
 	// Called each loop iteration
 	void Draw();
 
+	void Spawn();
+
 	// Called before quitting
 	bool CleanUp();
 
@@ -116,6 +118,7 @@ public:
 	uint Get_gid(int x, int y);
 	iPoint spawn;
 	iPoint spawn_book;
+	 p2List<iPoint*> coords_bat;
 private:
 
 	pugi::xml_document	map_file;

@@ -41,6 +41,7 @@ bool j1Scene::Start()
 		App->map->Load("Map2.tmx");
 		
 	}
+	//App->map->Spawn();
 	//App->entities->SpawnEntities(0, 0, PLAYER);
 	//App->entities->SpawnEntities(0, 0, BOOK);
 	App->audio->PlayMusic(App->audio->path.GetString());

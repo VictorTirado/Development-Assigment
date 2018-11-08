@@ -42,8 +42,8 @@ void Entity_Bat::Update(float dt)
 {
 	if (firstUpdate == true) {
 		sprites = App->tex->Load("textures/Bat.png");
-		position.x = 100;
-		position.y = 100;
+		//position.x = 400;
+		//position.y = 700;
 		collider = App->collision->AddCollider({ 0, 0, 29, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->entities);
 		firstUpdate = false;
 	}
@@ -57,7 +57,7 @@ bool Entity_Bat::PostUpdate()
 
 bool Entity_Bat::CleanUp()
 {
-	LOG("Unloading book");
+	LOG("Unloading bat");
 
 	App->tex->UnLoad(sprites);
 	if (App->entities->bat->collider != nullptr)

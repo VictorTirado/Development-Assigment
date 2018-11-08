@@ -43,8 +43,6 @@ void Entity_Ninja::Update(float dt)
 {
 	if (firstUpdate == true) {
 		sprites = App->tex->Load("textures/Enemy_Ninja.png");
-		position.x = 200;
-		position.y = 100;
 		collider = App->collision->AddCollider({ 0, 0, 33, 47 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->entities);
 		firstUpdate = false;
 	}
@@ -58,7 +56,7 @@ bool Entity_Ninja::PostUpdate()
 
 bool Entity_Ninja::CleanUp()
 {
-	LOG("Unloading book");
+	LOG("Unloading ninja");
 
 	App->tex->UnLoad(sprites);
 	if (App->entities->ninja->collider != nullptr)

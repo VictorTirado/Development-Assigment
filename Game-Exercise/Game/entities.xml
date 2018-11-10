@@ -77,20 +77,20 @@
   <audio path ="audio/fx/player_death.wav"></audio>
   <audio2 tp_path ="audio/fx/teleport.wav"></audio2>
 </player>
-<enemies>
-    <bat>
-        <folder path="textures/Bat.png" ></folder>
-        <animation name ="idle" speed="0.05f" loop="true">
-        <frame x="8" y="4" w="26" h="35"/>
-        <frame x="57" y="8" w="29" h="30"/>
-        <frame x="107" y="19" w="25" h="31"/>
-        <frame x="155" y="20" w="29" h="28"/>
-    </animation>
-    </bat>
-    <ninja>
+
+<bat>
+   <folder path="textures/Bat.png" ></folder>
+   <animation name ="idle" speed="0.05f" loop="true">
+      <frame x="8" y="4" w="26" h="35"/>
+      <frame x="57" y="8" w="29" h="30"/>
+      <frame x="107" y="19" w="25" h="31"/>
+      <frame x="155" y="20" w="29" h="28"/>
+   </animation>
+</bat>
+<ninja>
         <folder path="textures/Enemy_Ninja.png" ></folder>
         <animation name ="idle" speed="0.05f" loop="true">
         <frame x="4" y="1" w="33" h="47"/>
         </animation>
-    </ninja>
-</enemies>
+</ninja>
+

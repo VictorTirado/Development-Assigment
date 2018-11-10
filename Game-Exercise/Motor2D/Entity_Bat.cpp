@@ -21,12 +21,24 @@
 
 Entity_Bat::Entity_Bat(int x, int y):Entity(x, y)
 {
-	//sprites = App->tex->Load(App->entities->textures.GetString());
+	sprites = App->tex->Load(App->entities->textures.GetString());
+	pugi::xml_document bat_file;
+	pugi::xml_node bat;
+	bat = App->LoadEntities(bat_file, Entities::BAT_ENTITY);
 
-	idle.PushBack({ 213,40,26,35 });
+	path = bat.child("folder").attribute("path").as_string();
+
+	for (pugi::xml_node animations = bat.child("animation"); animations; animations = animations.next_sibling("animation"))
+	{
+		p2SString name = animations.attribute("name").as_string();
+		if (name == "idle")
+			LoadAnimation(animations, &idle);
+	}
+
+	/*idle.PushBack({ 8,4,26,35 });
 	idle.PushBack({ 0,0,0,0 });
 	idle.speed = 0.05f;
-	idle.loop = true;
+	idle.loop = true;*/
 
 	animation = &idle;
 }
@@ -44,8 +56,8 @@ void Entity_Bat::Update(float dt)
 {
 	if (firstUpdate == true) {
 		sprites = App->tex->Load("textures/Bat.png");
-		//position.x = 400;
-		//position.y = 700;
+		position.x = 400;
+		position.y = 700;
 		collider = App->collision->AddCollider({ 0, 0, 29, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->entities);
 		firstUpdate = false;
 	}
@@ -78,4 +90,15 @@ void Entity_Bat::OnCollision(Collider* collider)
 		LOG("COLLISION");
 		App->entities->bat->CleanUp();
 	}
+}
+
+void Entity_Bat::LoadAnimation(pugi::xml_node& animation, Animation* bat)
+{
+	for (pugi::xml_node frame = animation.child("frame"); frame; frame = frame.next_sibling("frame"))
+	{
+		bat->PushBack({ frame.attribute("x").as_int(),frame.attribute("y").as_int(),frame.attribute("w").as_int(),frame.attribute("h").as_int() });
+
+	}
+	bat->speed = animation.attribute("speed").as_float();
+	bat->loop = animation.attribute("loop").as_bool();
 }

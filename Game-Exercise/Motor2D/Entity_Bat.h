@@ -20,12 +20,15 @@ public:
 	bool PostUpdate();
 
 	void OnCollision(Collider* collider);
+	void LoadAnimation(pugi::xml_node&, Animation* bat);
 
 public:
 
 	p2SString path = nullptr;
 	Animation idle;
 	bool firstUpdate = true;
+	iPoint position;
+
 };
 
 #endif

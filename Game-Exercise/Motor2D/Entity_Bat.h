@@ -23,6 +23,7 @@ public:
 
 public:
 
+	p2SString path = nullptr;
 	Animation idle;
 	bool firstUpdate = true;
 };

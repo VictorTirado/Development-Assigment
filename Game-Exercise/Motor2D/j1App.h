@@ -19,7 +19,13 @@ class j1Collision;
 class j1FadeToBlack;
 class j1Entities;
 
-
+enum Entities
+{
+	PLAYER_ENTITY,
+	NINJA_ENTITY,
+	BAT_ENTITY,
+	NONE_ENTITY,
+};
 
 class j1App
 {
@@ -56,7 +62,7 @@ public:
 	void SaveGame() const;
 	void GetSaveGames(p2List<p2SString>& list_to_fill) const;
 
-	pugi::xml_node LoadPlayer(pugi::xml_document&) const;
+	pugi::xml_node LoadEntities(pugi::xml_document&, Entities) const;
 
 private:
 

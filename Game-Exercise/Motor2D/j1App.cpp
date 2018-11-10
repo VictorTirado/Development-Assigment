@@ -11,6 +11,7 @@
 #include "j1Scene.h"
 #include "j1Map.h"
 #include "j1FadeToBlack.h"
+#include "j1Entitites.h"
 #include "j1App.h"
 #include "j1Collision.h"
 
@@ -171,7 +172,7 @@ pugi::xml_node j1App::LoadConfig(pugi::xml_document& config_file) const
 	return ret;
 }
 
-pugi::xml_node j1App::LoadPlayer(pugi::xml_document& player_file) const
+pugi::xml_node j1App::LoadEntities(pugi::xml_document& player_file, Entities type) const
 {
 	pugi::xml_node ret;
 
@@ -179,7 +180,24 @@ pugi::xml_node j1App::LoadPlayer(pugi::xml_document& player_file) const
 	if (result == NULL)
 		LOG("Could not load map xml file config.xml. pugi error: %s", result.description());
 	else
-		ret = player_file.child("player");
+	{
+		switch (type)
+		{
+		case Entities::PLAYER_ENTITY:
+			ret = player_file.child("player");
+			break;
+
+		case Entities::BAT_ENTITY:
+			ret = player_file.child("bat");
+			break;
+
+		case Entities::NINJA_ENTITY:
+			ret = player_file.child("ninja");
+			break;
+
+		}
+	}
+		
 
 	return ret;
 }

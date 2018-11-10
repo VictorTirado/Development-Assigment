@@ -21,7 +21,7 @@ Entity_Player::Entity_Player(int x, int y) : Entity(x , y)
 	sprites = App->tex->Load(App->entities->textures.GetString());
 	pugi::xml_document player_file;
 	pugi::xml_node player;
-	player = App->LoadPlayer(player_file);
+	player = App->LoadEntities(player_file, Entities::PLAYER_ENTITY);
 
 	path = player.child("folder").attribute("path").as_string();
 	for (pugi::xml_node animations = player.child("animation"); animations; animations = animations.next_sibling("animation"))

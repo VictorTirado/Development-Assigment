@@ -21,6 +21,8 @@
 
 Entity_Bat::Entity_Bat(int x, int y):Entity(x, y)
 {
+	//sprites = App->tex->Load(App->entities->textures.GetString());
+
 	idle.PushBack({ 213,40,26,35 });
 	idle.PushBack({ 0,0,0,0 });
 	idle.speed = 0.05f;

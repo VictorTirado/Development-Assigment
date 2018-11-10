@@ -15,6 +15,7 @@ enum Entities_Type
 	BOOK,
 	BAT,
 	NINJA,
+	ENEMY,
 	NONE,
 };
 

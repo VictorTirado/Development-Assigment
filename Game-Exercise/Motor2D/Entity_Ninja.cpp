@@ -22,10 +22,20 @@
 
 Entity_Ninja::Entity_Ninja(int x, int y) :Entity(x, y)
 {
-	idle.PushBack({ 4,1,33,47 });
-	idle.PushBack({ 0,0,0,0 });
-	idle.speed = 0.05f;
-	idle.loop = true;
+
+	sprites = App->tex->Load(App->entities->textures.GetString());
+	pugi::xml_document ninja_file;
+	pugi::xml_node ninja;
+	ninja = App->LoadEntities(ninja_file, Entities::NINJA_ENTITY);
+
+	path = ninja.child("folder").attribute("path").as_string();
+
+	for (pugi::xml_node animations = ninja.child("animation"); animations; animations = animations.next_sibling("animation"))
+	{
+		p2SString name = animations.attribute("name").as_string();
+		if (name == "idle")
+			LoadAnimation(animations, &idle);
+	}
 
 	animation = &idle;
 }
@@ -75,4 +85,15 @@ void Entity_Ninja::OnCollision(Collider* collider)
 		LOG("COLLISION");
 		App->entities->ninja->CleanUp();
 	}
+}
+
+void Entity_Ninja::LoadAnimation(pugi::xml_node& animation, Animation* ninja)
+{
+	for (pugi::xml_node frame = animation.child("frame"); frame; frame = frame.next_sibling("frame"))
+	{
+		ninja->PushBack({ frame.attribute("x").as_int(),frame.attribute("y").as_int(),frame.attribute("w").as_int(),frame.attribute("h").as_int() });
+
+	}
+	ninja->speed = animation.attribute("speed").as_float();
+	ninja->loop = animation.attribute("loop").as_bool();
 }

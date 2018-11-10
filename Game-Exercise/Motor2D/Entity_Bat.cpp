@@ -51,8 +51,6 @@ void Entity_Bat::Update(float dt)
 {
 	if (firstUpdate == true) {
 		sprites = App->tex->Load("textures/Bat.png");
-		/*position.x = 400;
-		position.y = 700;*/
 		collider = App->collision->AddCollider({ 0, 0, 29, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->entities);
 		firstUpdate = false;
 	}

@@ -91,9 +91,9 @@
 <ninja>
    <folder path="textures/Enemy_Ninja.png" ></folder>
    <animation name ="idle" speed="0.05f" loop="true">
-      <frame x="4" y="8" w="33" h="47"/>
-     <frame x="48" y="9" w="32" h="46"/>
-     <frame x="90" y="11" w="35" h="44"/>
+      <frame x="4" y="8" w="36" h="47"/>
+     <frame x="48" y="9" w="34" h="46"/>
+     <frame x="90" y="11" w="36" h="44"/>
      <frame x="136" y="9" w="34" h="46"/>
    </animation>
 </ninja>

@@ -317,8 +317,8 @@ void Entity_Player::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == COLLIDER_POWER_UP)
 	{
-		/*App->entities->book->CleanUp();
-		can_tp = true;*/
+		//App->entities->book->CleanUp();
+		can_tp = true;
 	}
 }
 

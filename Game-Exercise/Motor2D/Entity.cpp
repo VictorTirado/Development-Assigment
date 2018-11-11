@@ -8,6 +8,7 @@
 #include "Entity_Book.h"
 #include "Entity_Bat.h"
 #include "Entity_Ninja.h"
+#include "Entity_Player.h"
 
 Entity::Entity(int x, int y) : position(x, y)
 {
@@ -30,7 +31,7 @@ void Entity::Draw(SDL_Texture* sprites)
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 		collider->SetPos(position.x, position.y);
 	}
-	if (this->entity_type == BOOK && App->entities->book->collider != nullptr)
+	if (this->entity_type == BOOK && App->entities->book->collider != nullptr && App->entities->player->can_tp == false)
 	{
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 		collider->SetPos(position.x, position.y);

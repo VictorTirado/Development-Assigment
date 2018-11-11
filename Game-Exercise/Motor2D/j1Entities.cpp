@@ -140,24 +140,32 @@ void j1Entities::OnCollision(Collider* c1, Collider* c2)
 bool j1Entities::Load(pugi::xml_node& data)
 {
 	bool ret = true;
-	if (data.child("map") != NULL)
-		App->scene->map_number = data.child("map").attribute("level").as_int();
 
-	if (App->scene->map_number == 2 && data.child("map") != NULL)
+
+
+	for (int i = 0; i < entities.Count(); i++)
 	{
-		App->fade_to_black->FadeToBlack(App->scene, App->scene, 3.0f);
-		App->map->CleanUp();
-		App->map->Load("ForestMap.tmx");
-		App->entities->player->position.x = data.child("position").attribute("x").as_int();
-		App->entities->player->position.y = data.child("position").attribute("y").as_int();
-	}
-	else if (App->scene->map_number == 1 && data.child("map") != NULL)
-	{
-		App->fade_to_black->FadeToBlack(App->scene, App->scene, 3.0f);
-		App->map->CleanUp();
-		App->map->Load("Map2.tmx");
-		App->entities->player->position.x = data.child("position").attribute("x").as_int();
-		App->entities->player->position.y = data.child("position").attribute("y").as_int();
+		if (entities[i]->entity_type == PLAYER)
+		{
+			pugi::xml_node player_stats = data.child("player");
+			entities[i]->Load(player_stats);
+		}
+		if (entities[i]->entity_type == NINJA)
+		{
+			pugi::xml_node ninja_stats = data.child("ninja");
+			entities[i]->Load(ninja_stats);
+		}
+		if (entities[i]->entity_type == BAT)
+		{
+			pugi::xml_node bat_stats = data.child("bat");
+			entities[i]->Load(bat_stats);
+		}
+		if (entities[i]->entity_type == BOOK)
+		{
+			pugi::xml_node book_stats = data.child("book");
+			entities[i]->Load(book_stats);
+		}
+
 	}
 	
 
@@ -168,10 +176,30 @@ bool j1Entities::Save(pugi::xml_node& data)const
 {
 	bool ret = true;
 
-	data.append_child("map").append_attribute("level") = App->scene->map_number;
-	data.append_child("position").append_attribute("x") = App->entities->player->position.x;
-	data.child("position").append_attribute("y") = App->entities->player->position.y;
-
+	
+	for (int i = 0; i < entities.Count(); i++)
+	{
+		if (entities[i]->entity_type == PLAYER)
+		{
+			pugi::xml_node player_stats = data.append_child("player");
+			entities[i]->Save(player_stats);
+		}
+		if (entities[i]->entity_type == NINJA)
+		{
+			pugi::xml_node ninja_stats = data.append_child("ninja");
+			entities[i]->Save(ninja_stats);
+		}
+		if (entities[i]->entity_type == BAT)
+		{
+			pugi::xml_node bat_stats = data.append_child("bat");
+			entities[i]->Save(bat_stats);
+		}
+		if (entities[i]->entity_type == BOOK)
+		{
+			pugi::xml_node book_stats = data.append_child("book");
+			entities[i]->Save(book_stats);
+		}
+	}
 
 	return ret;
 }

@@ -97,3 +97,19 @@ void Entity_Ninja::LoadAnimation(pugi::xml_node& animation, Animation* ninja)
 	ninja->speed = animation.attribute("speed").as_float();
 	ninja->loop = animation.attribute("loop").as_bool();
 }
+
+bool Entity_Ninja::Load(pugi::xml_node& data)
+{
+	position.x = data.child("position").attribute("x").as_int();
+	position.y = data.child("position").attribute("y").as_int();
+
+	return true;
+}
+
+bool Entity_Ninja::Save(pugi::xml_node& data)const
+{
+	data.append_child("position").append_attribute("x") = position.x;
+	data.child("position").append_attribute("y") = position.y;
+
+	return true;
+}

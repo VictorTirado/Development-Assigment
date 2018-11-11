@@ -76,9 +76,6 @@ bool Entity_Book::CleanUp()
 	return true;
 }
 
-
-
-
 void Entity_Book::OnCollision(Collider* collider)
 {
 	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER) {
@@ -88,4 +85,22 @@ void Entity_Book::OnCollision(Collider* collider)
 	}
 }
 
+
+bool Entity_Book::Load(pugi::xml_node& data)
+{
+	App->entities->player->can_tp = data.child("book").attribute("caught").as_bool();
+	position.x = data.child("position").attribute("x").as_int();
+	position.y = data.child("position").attribute("y").as_int();
+
+	return true;
+}
+
+bool Entity_Book::Save(pugi::xml_node& data)const
+{
+	data.append_child("book").append_attribute("caught") = App->entities->player->can_tp;
+	data.append_child("position").append_attribute("x") = position.x;
+	data.child("position").append_attribute("y") = position.y;
+
+	return true;
+}
 

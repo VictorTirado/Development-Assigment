@@ -10,12 +10,38 @@
 	<scene />
 	<collisions />
 	<entities>
-		<map level="1" />
-		<position x="1079" y="205" />
+		<player>
+			<map level="1" />
+			<position x="145" y="557" />
+		</player>
+		<book>
+			<book caught="true" />
+			<position x="240" y="576" />
+		</book>
+		<bat>
+			<position x="0" y="0" />
+		</bat>
+		<ninja>
+			<position x="304" y="720" />
+		</ninja>
+		<bat>
+			<position x="0" y="0" />
+		</bat>
+		<ninja>
+			<position x="416" y="704" />
+		</ninja>
+		<bat>
+			<position x="0" y="0" />
+		</bat>
+		<bat>
+			<position x="0" y="0" />
+		</bat>
+		<ninja>
+			<position x="512" y="656" />
+		</ninja>
 	</entities>
-	<book />
 	<fadeToBlack />
 	<renderer>
-		<camera x="-2725" y="-231" />
+		<camera x="77" y="-1287" />
 	</renderer>
 </game_state>

@@ -19,6 +19,9 @@ public:
 	void Update(float dt);
 	bool PostUpdate();
 
+	bool Load(pugi::xml_node&);
+	bool Save(pugi::xml_node&) const;
+
 	void OnCollision(Collider* collider);
 	void LoadAnimation(pugi::xml_node&, Animation* bat);
 

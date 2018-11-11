@@ -20,6 +20,7 @@ class j1Collision;
 //class j1Book;
 class j1FadeToBlack;
 class j1Entities;
+class j1PathFinding;
 
 enum Entities
 {
@@ -108,6 +109,7 @@ public:
 	//j1Book*				book = nullptr;
 	j1FadeToBlack*		fade_to_black = nullptr;
 	j1Entities*			entities = nullptr;
+	j1PathFinding* pathfinding = nullptr;
 
 
 private:

@@ -14,6 +14,7 @@
 #include "j1Entitites.h"
 #include "j1App.h"
 #include "j1Collision.h"
+#include "j1Pathfinding.h"
 
 
 #include "j1Entitites.h"
@@ -38,6 +39,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	collision = new j1Collision();
 	//book = new j1Book();
 	entities = new j1Entities();
+	pathfinding = new j1PathFinding();
 	
 
 	// Ordered for awake / Start / Update
@@ -52,6 +54,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entities);
 	//AddModule(book);
 	AddModule(fade_to_black);
+	AddModule(pathfinding);
 	
 
 	// render last to swap buffer

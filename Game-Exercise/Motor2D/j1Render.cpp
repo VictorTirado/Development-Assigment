@@ -2,6 +2,7 @@
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1Window.h"
+#include "j1Scene.h"
 #include "j1Render.h"
 
 //#define VSYNC true
@@ -47,6 +48,8 @@ bool j1Render::Awake(pugi::xml_node& config)
 		camera.x = 0;
 		camera.y = 0;
 	}
+
+	using_vsync = config.child("vsync").attribute("value").as_bool();
 
 	return ret;
 }

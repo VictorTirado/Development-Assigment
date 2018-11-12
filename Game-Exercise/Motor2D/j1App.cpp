@@ -108,6 +108,8 @@ bool j1App::Awake()
 		app_config = config.child("app");
 		title.create(app_config.child("title").child_value());
 		organization.create(app_config.child("organization").child_value());
+		frame_cap_value = app_config.attribute("framerate_cap").as_int();
+		frame_cap_value = 1000 / frame_cap_value;
 	}
 
 	if(ret == true)
@@ -121,6 +123,8 @@ bool j1App::Awake()
 			item = item->next;
 		}
 	}
+
+	
 
 	PERF_PEEK(ptimer);
 
@@ -245,9 +249,34 @@ void j1App::FinishUpdate()
 	uint32 frames_on_last_update = prev_last_sec_frame_count;
 
 	static char title[256];
-	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu ",
-		avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
+
+	if (App->scene->fps_are_cap && !App->render->using_vsync)
+	{
+		sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu Vsync: OFF Frame Cap: ON",
+			avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
+	}
+
+	if (!App->scene->fps_are_cap && App->render->using_vsync)
+	{
+		sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu Vsync: ON Frame Cap: OFF",
+			avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
+	}
+	
+
 	App->win->SetTitle(title);
+
+	if (App->scene->fps_are_cap)
+	{
+		frame_delay = frame_cap_value - last_frame_ms;
+		SDL_Delay(frame_delay);
+		App->render->using_vsync = false;
+	}
+
+	if (!App->scene->fps_are_cap)
+		App->render->using_vsync = true;
+
+
+
 
 }
 

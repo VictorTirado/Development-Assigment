@@ -88,6 +88,11 @@ bool j1Scene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 		is_god = !is_god;
 
+	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
+		fps_are_cap = !fps_are_cap;
+	
+		
+
 	else if (App->input->GetKey(SDL_SCANCODE_KP_PLUS) == KEY_DOWN)
 	{
 		change_music = true;

@@ -11,6 +11,7 @@
 #include "j1FadeToBlack.h"
 #include "j1Scene.h"
 #include "j1Entitites.h"
+#include "j1PathFinding.h"
 
 #include "Entity_Player.h"
 
@@ -38,7 +39,16 @@ bool j1Scene::Start()
 	if (!is_faded && map_number == 1)
 	{
 		map_number = 1;
-		App->map->Load("Map2.tmx");
+		if (App->map->Load("Map2.tmx") == true)
+		{
+			int w, h;
+			uchar* data = NULL;
+			if (App->map->CreateWalkabilityMap(w, h, &data))
+				App->pathfinding->SetMap(w, h, data);
+
+			RELEASE_ARRAY(data);
+
+		}
 		
 	}
 	//App->map->Spawn();

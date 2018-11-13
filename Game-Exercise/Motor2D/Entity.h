@@ -16,7 +16,7 @@ public:
 	Collider* collider = nullptr;
 	
 public:
-	fPoint position = fPoint(0, 0);
+	iPoint position = iPoint(0, 0);
 	int entity_type = 0;
 	bool to_destroy = false;
 
@@ -43,6 +43,7 @@ public:
 	}
 
 	SDL_Texture* sprites;
+	SDL_Texture* X;
 };
 
 #endif // __ENTITY_H__

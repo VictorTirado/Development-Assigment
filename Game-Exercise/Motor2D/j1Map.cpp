@@ -58,7 +58,14 @@ void j1Map::Spawn()
 							iPoint coords = MapToWorld(i, j);
 							uint gid = Get_gid(coords.x, coords.y);
 
-
+							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 52)
+							{
+								App->entities->SpawnEntities(coords.x, coords.y, PLAYER);
+							}
+							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 73)
+							{
+								App->entities->SpawnEntities(coords.x, coords.y, BOOK);
+							}
 							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 66)
 							{
 								App->entities->SpawnEntities(coords.x, coords.y, BAT);
@@ -131,6 +138,20 @@ void j1Map::Draw()
 		}
 }
 
+int Properties_::Get(const char* value, int default_value) const
+{
+	p2List_item<Property*>* item = list.start;
+
+	while (item)
+	{
+		if (item->data->name == value)
+			return item->data->value;
+		item = item->next;
+	}
+
+	return default_value;
+}
+
 
 iPoint j1Map::MapToWorld(int x, int y) const
 {
@@ -138,6 +159,31 @@ iPoint j1Map::MapToWorld(int x, int y) const
 
 	ret.x = x * data.tile_width;
 	ret.y = y * data.tile_height;
+
+	return ret;
+}
+iPoint j1Map::WorldToMap(int x, int y) const
+{
+	iPoint ret(0, 0);
+
+	if (data.type == MAPTYPE_ORTHOGONAL)
+	{
+		ret.x = x / data.tile_width;
+		ret.y = y / data.tile_height;
+	}
+	else if (data.type == MAPTYPE_ISOMETRIC)
+	{
+
+		float half_width = data.tile_width * 0.5f;
+		float half_height = data.tile_height * 0.5f;
+		ret.x = int((x / half_width + y / half_height) / 2) - 1;
+		ret.y = int((y / half_height - (x / half_width)) / 2);
+	}
+	else
+	{
+		LOG("Unknown map type");
+		ret.x = x; ret.y = y;
+	}
 
 	return ret;
 }
@@ -435,6 +481,8 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	layer->width = node.attribute("width").as_uint();
 	layer->height = node.attribute("height").as_uint();
 	layer->parallax = node.child("properties").child("property").attribute("value").as_float();
+	LoadProperties2(node, layer->properties);
+	
 
 	layer->data = new uint[layer->width*layer->height];
 	memset(layer->data, 0, layer->width * layer->height * sizeof(uint));
@@ -471,6 +519,29 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties* prop)
 	}
 	return true;
 }
+bool j1Map::LoadProperties2(pugi::xml_node& node, Properties_& properties)
+{
+	bool ret = false;
+
+	pugi::xml_node data = node.child("properties");
+
+	if (data != NULL)
+	{
+		pugi::xml_node prop;
+
+		for (prop = data.child("property"); prop; prop = prop.next_sibling("property"))
+		{
+			Properties_::Property* p = new Properties_::Property();
+
+			p->name = prop.attribute("name").as_string();
+			p->value = prop.attribute("value").as_int();
+
+			properties.list.add(p);
+		}
+	}
+
+	return ret;
+}
 
  uint MapLayer::Get(int x, int y)const
 {
@@ -482,4 +553,52 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties* prop)
 	 ret.x = x / data.tile_width;
 	 ret.y = y / data.tile_height;
 	 return data.map_layers.start->data->width*ret.y + ret.x;
+ }
+
+ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
+ {
+	 bool ret = false;
+	 p2List_item<MapLayer*>* item;
+	 item = data.map_layers.start;
+
+	 for (item = data.map_layers.start; item != NULL; item = item->next)
+	 {
+		 MapLayer* layer = item->data;
+
+		 if (layer->properties.Get("Navigation", 0) == 0)
+			 continue;
+
+		 uchar* map = new uchar[layer->width*layer->height];
+		 memset(map, 1, layer->width*layer->height);
+
+		 for (int y = 0; y < data.height; ++y)
+		 {
+			 for (int x = 0; x < data.width; ++x)
+			 {
+				 int i = (y*layer->width) + x;
+
+				 int tile_id = layer->Get(x, y);
+				 TileSet* tileset = (tile_id > 0) ? GetTilesetFromTileId(tile_id) : NULL;
+
+				 if (tileset != NULL)
+				 {
+					 /*map[i] = (tile_id - tileset->firstgid) > 0 ? 0 : 1;*/
+					 if (tile_id - tileset->firstgid > 0)
+						 map[i] = 0;
+					 else
+						 map[i] = 1;
+					
+				 }
+			 }
+		 }
+
+		 *buffer = map;
+		 width = data.width;
+		 height = data.height;
+		 ret = true;
+
+		 break;
+	 }
+
+	 return ret;
  }

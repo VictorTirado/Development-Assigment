@@ -88,8 +88,6 @@ void Entity_Player::Update(float dt)
 	if (firstUpdate == true)
 	{
 		can_tp = false;
-		position.x = App->map->spawn.x;
-		position.y = App->map->spawn.y;
 		collider = App->collision->AddCollider({ 0, 0, 38, 54 }, COLLIDER_TYPE::COLLIDER_PLAYER, App->entities);
 		firstUpdate = false;
 	}
@@ -99,7 +97,7 @@ void Entity_Player::Update(float dt)
 	else if (is_backwards)
 		animation = &idleBackwards;
 
-	
+	player_pos = App->map->WorldToMap(position.x, position.y);
 
 	//LOGIC
 	gid = App->map->Get_gid(position.x + 10, position.y + 51);

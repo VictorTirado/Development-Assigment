@@ -38,11 +38,8 @@ bool j1Entities::Awake(pugi::xml_node& config)
 bool j1Entities::Start()
 {
 	bool ret = true;
-	SpawnEntities(0, 0, PLAYER);
-	SpawnEntities(0, 0, BOOK);
 	App->map->Spawn();
-	//SpawnEntities(0, 0, BAT);
-	//SpawnEntities(400, 700, BAT);
+
 
 	return ret;
 }

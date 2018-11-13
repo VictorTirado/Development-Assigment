@@ -7,15 +7,16 @@
 		<music value="64" />
 	</audio>
 	<map />
+	<pathfinding />
 	<scene />
 	<collisions />
 	<entities>
 		<player>
 			<map level="1" />
-			<position x="145" y="557" />
+			<position x="208" y="717" />
 		</player>
 		<book>
-			<book caught="true" />
+			<book caught="false" />
 			<position x="240" y="576" />
 		</book>
 		<bat>
@@ -42,6 +43,6 @@
 	</entities>
 	<fadeToBlack />
 	<renderer>
-		<camera x="77" y="-1287" />
+		<camera x="-112" y="-1767" />
 	</renderer>
 </game_state>

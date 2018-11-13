@@ -49,7 +49,7 @@ public:
 	bool is_teleporting = false;
 
 	uint gid = 0;
-
+	iPoint player_pos;
 	bool check = false;
 
 	bool can_tp = false;

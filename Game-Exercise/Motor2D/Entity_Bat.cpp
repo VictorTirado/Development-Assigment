@@ -13,6 +13,7 @@
 #include "j1Render.h"
 #include "j1Entitites.h"
 #include "j1Scene.h"
+#include "j1Pathfinding.h"
 
 #include "j1FadeToBlack.h"
 
@@ -51,9 +52,87 @@ void Entity_Bat::Update(float dt)
 {
 	if (firstUpdate == true) {
 		sprites = App->tex->Load("textures/Bat.png");
+		X = App->tex->Load("textures/x.png");
+		original_pos= App->map->WorldToMap(position.x, position.y);
 		collider = App->collision->AddCollider({ 0, 0, 29, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->entities);
 		firstUpdate = false;
 	}
+	iPoint bat_pos = App->map->WorldToMap(position.x, position.y);
+	iPoint player_pos = App->entities->player->player_pos;
+	player_pos.x += 1;
+	player_pos.y -= 1;
+	if (original_pos.x < player_pos.x + range && original_pos.x > player_pos.x - range && original_pos.y < player_pos.y + range && original_pos.y > player_pos.y - range) {
+		if (App->pathfinding->CreatePath(bat_pos, player_pos) != -1)
+		{
+			const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
+			if (App->collision->debug == true)
+			{
+				for (int i = 0; i < path->Count(); ++i)
+				{
+					iPoint x_pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+					App->render->Blit(X, x_pos.x, x_pos.y);
+				}
+			}
+			if (path->Count() > 0)
+			{
+				path_to_follow = iPoint(path->At(0)->x, path->At(0)->y);
+				if (path_to_follow.x < bat_pos.x)
+				{
+					speed.x = -1;
+
+				}
+				else if (path_to_follow.x > bat_pos.x)
+				{
+					speed.x = 1;
+				}
+				if (path_to_follow.y < bat_pos.y)
+				{
+					speed.y = -1;
+				}
+				if (path_to_follow.y > bat_pos.y)
+				{
+					speed.y = +1;
+				}
+			}
+		}
+	}
+	else if (bat_pos != original_pos)
+	{
+		if (App->pathfinding->CreatePath(bat_pos, original_pos) != -1)
+		{
+			const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
+			if (App->collision->debug == true)
+			{
+				for (int i = 0; i < path->Count(); ++i)
+				{
+					iPoint x_pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+					App->render->Blit(X, x_pos.x, x_pos.y);
+				}
+			}
+			if (path->Count() > 0)
+			{
+				path_to_follow = iPoint(path->At(0)->x, path->At(0)->y);
+				if (path_to_follow.x < bat_pos.x)
+				{
+					speed.x = -1;
+
+				}
+				else if (path_to_follow.x > bat_pos.x)
+				{
+					speed.x = 1;
+				}
+				if (path_to_follow.y < bat_pos.y)
+				{
+					speed.y = -1;
+				}
+				if (path_to_follow.y > bat_pos.y)
+				{
+					speed.y = +1;
+				}
+			}
+		}
+	}
+	position += speed;
 }
 
 bool Entity_Bat::PostUpdate()

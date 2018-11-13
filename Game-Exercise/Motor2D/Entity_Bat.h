@@ -30,7 +30,10 @@ public:
 	p2SString path = nullptr;
 	Animation idle;
 	bool firstUpdate = true;
-	iPoint position;
+	uint range=10;
+	iPoint speed = iPoint(0,0);
+	iPoint path_to_follow;
+	iPoint original_pos;
 
 };
 

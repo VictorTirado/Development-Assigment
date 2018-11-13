@@ -269,9 +269,7 @@ void j1App::FinishUpdate()
 	if (App->scene->fps_are_cap)
 	{
 		frame_delay = frame_cap_value - last_frame_ms;
-		//delay_ptimer.Start();
-		//if(last_frame_ms < frame_delay)
-			SDL_Delay(frame_delay);
+		SDL_Delay(frame_delay);
 		
 		App->render->using_vsync = false;
 	}

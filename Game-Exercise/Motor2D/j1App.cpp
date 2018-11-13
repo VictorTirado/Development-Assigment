@@ -261,6 +261,7 @@ void j1App::FinishUpdate()
 		sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu Vsync: ON Frame Cap: OFF",
 			avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
 	}
+
 	
 
 	App->win->SetTitle(title);
@@ -268,7 +269,10 @@ void j1App::FinishUpdate()
 	if (App->scene->fps_are_cap)
 	{
 		frame_delay = frame_cap_value - last_frame_ms;
-		SDL_Delay(frame_delay);
+		delay_ptimer.Start();
+		if(last_frame_ms < frame_delay)
+			SDL_Delay(frame_delay);
+		
 		App->render->using_vsync = false;
 	}
 

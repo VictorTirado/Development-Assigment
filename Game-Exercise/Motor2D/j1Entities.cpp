@@ -77,6 +77,12 @@ bool j1Entities::PostUpdate()
 
 bool j1Entities::CleanUp()
 {
+	DestroyEntities();
+	
+	return true;
+}
+void j1Entities::DestroyEntities()
+{
 	//App->entities->player->CleanUp();
 	for (uint i = 0; i < entities.Count(); i++)
 	{
@@ -84,12 +90,11 @@ bool j1Entities::CleanUp()
 		{
 			entities[i]->collider->to_delete = true;
 			delete entities[i];
-			
 			entities[i] = nullptr;
 		}
 	}
 	entities.Clear();
-	return true;
+
 }
 
 bool j1Entities::SpawnEntities(int x, int y, Entities_Type type)
@@ -211,3 +216,5 @@ bool j1Entities::Save(pugi::xml_node& data)const
 
 	return ret;
 }
+
+

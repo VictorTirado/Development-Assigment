@@ -64,7 +64,9 @@ Entity_Player::Entity_Player(int x, int y) : Entity(x , y)
 }
 
 Entity_Player::~Entity_Player()
-{}
+{
+	CleanUp();
+}
 
 
 bool Entity_Player::Start()
@@ -125,10 +127,8 @@ void Entity_Player::Update(float dt)
 		else if (App->scene->map_number == 2)
 			App->map->Load("ForestMap.tmx");
 		
-		position.x = App->map->spawn.x;
-		position.y = App->map->spawn.y;
-		App->entities->CleanUp();
-		App->entities->book->CleanUp();
+		App->entities->DestroyEntities();
+		//App->entities->book->CleanUp();
 		
 		App->audio->PlayFx(1); //player's death fx
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);

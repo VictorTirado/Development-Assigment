@@ -39,7 +39,10 @@ Entity_Bat::Entity_Bat(int x, int y):Entity(x, y)
 	animation = &idle;
 }
 
-Entity_Bat::~Entity_Bat(){}
+Entity_Bat::~Entity_Bat()
+{
+	CleanUp();
+}
 
 bool Entity_Bat::PreUpdate()
 {

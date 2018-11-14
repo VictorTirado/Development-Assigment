@@ -40,7 +40,10 @@ Entity_Ninja::Entity_Ninja(int x, int y) :Entity(x, y)
 	animation = &idle;
 }
 
-Entity_Ninja::~Entity_Ninja() {}
+Entity_Ninja::~Entity_Ninja() 
+{
+	CleanUp();
+}
 
 bool Entity_Ninja::PreUpdate()
 {

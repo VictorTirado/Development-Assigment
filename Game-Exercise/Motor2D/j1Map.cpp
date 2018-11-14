@@ -54,7 +54,6 @@ void j1Map::Spawn()
 
 						if (layers_list->data->Get(i, j) != 0)
 						{
-							SDL_Rect tile = tileset->GetTileRect(tile_id);
 							iPoint coords = MapToWorld(i, j);
 							uint gid = Get_gid(coords.x, coords.y);
 
@@ -76,11 +75,14 @@ void j1Map::Spawn()
 							}
 						}
 					}
-				}
+					tileset = nullptr;
+				}	
 			}
 		}
 		layers_list = layers_list->next;
 	}
+	layers_list = nullptr;
+
 }
 
 void j1Map::Draw()

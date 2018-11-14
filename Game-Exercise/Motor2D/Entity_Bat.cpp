@@ -145,13 +145,13 @@ bool Entity_Bat::CleanUp()
 {
 	LOG("Unloading bat");
 
-	App->tex->UnLoad(sprites);
+	/*App->tex->UnLoad(sprites);
 	if (App->entities->bat->collider != nullptr)
 	{
 		App->entities->bat->collider->to_delete = true;
 		App->entities->bat->collider = nullptr;
 	}
-	sprites = nullptr;
+	sprites = nullptr;*/
 
 	return true;
 }

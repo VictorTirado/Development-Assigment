@@ -76,7 +76,6 @@ bool j1Scene::Update(float dt)
 	{
 		map_number = 1;
 		ChangeMap(map_number);
-		//App->entities->book->Start();
 		is_faded = true;
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)

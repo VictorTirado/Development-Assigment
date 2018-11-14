@@ -102,9 +102,9 @@ void Entity_Player::Update(float dt)
 	//LOGIC
 	gid = App->map->Get_gid(position.x + 10, position.y + 51);
 	
-	if (App->map->data.map_layers.end->data->data[gid + 1] != 72 || App->map->data.map_layers.end->data->data[gid] == 71)
+	if (App->map->data.map_layers.end->data->data[gid + 1] != Collision_Type::COLLISION_CHANGE_MAP || App->map->data.map_layers.end->data->data[gid] == Collision_Type::COLLISION_DEATH)
 	{
-		if (App->map->data.map_layers.end->data->data[gid + 1] != 51 && App->map->data.map_layers.end->data->data[gid] != 51 )
+		if (App->map->data.map_layers.end->data->data[gid + 1] != Collision_Type::COLLISION_WALL && App->map->data.map_layers.end->data->data[gid] != Collision_Type::COLLISION_WALL)
 		{
 			position.y += 1;
 			is_falling = true;
@@ -112,7 +112,7 @@ void Entity_Player::Update(float dt)
 		else
 			is_falling = false;
 	}
-	if (App->map->data.map_layers.end->data->data[gid] == 71)
+	if (App->map->data.map_layers.end->data->data[gid] == Collision_Type::COLLISION_DEATH)
 	{
 		
 		App->map->CleanUp();
@@ -127,14 +127,15 @@ void Entity_Player::Update(float dt)
 		
 		position.x = App->map->spawn.x;
 		position.y = App->map->spawn.y;
-		//App->entities->CleanUp();
+		App->entities->CleanUp();
 		App->entities->book->CleanUp();
 		
 		App->audio->PlayFx(1); //player's death fx
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
+		App->map->Spawn();
 	}
 
-	if (App->map->data.map_layers.end->data->data[gid] == 72)
+	if (App->map->data.map_layers.end->data->data[gid] == Collision_Type::COLLISION_CHANGE_MAP)
 	{
 		
 		App->map->CleanUp();
@@ -238,10 +239,7 @@ void Entity_Player::Update(float dt)
 
 	App->render->camera.x = (-position.x * App->win->render_scale) + (App->win->width / 2);
 	App->render->camera.y = (-position.y * App->win->render_scale) + (App->win->height / 2);
-	collider->SetPos(position.x, position.y);
-	
-
-	
+//	collider->SetPos(position.x, position.y);
 }
 
 bool Entity_Player::PostUpdate()

@@ -7,6 +7,8 @@
 #include "Animation.h"
 #include "Entity.h"
 
+
+
 class Entity_Player : public Entity
 {
 public:
@@ -54,6 +56,16 @@ public:
 
 	bool can_tp = false;
 	bool is_tp = false;
+
+	enum Collision_Type
+	{
+		NONE,
+		COLLISION_WALL = 51,
+		COLLISION_DEATH = 71,
+		COLLISION_CHANGE_MAP =72,
+		
+
+	};
 	
 };
 #endif

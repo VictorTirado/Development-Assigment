@@ -77,7 +77,18 @@ bool j1Entities::PostUpdate()
 
 bool j1Entities::CleanUp()
 {
-	App->entities->player->CleanUp();
+	//App->entities->player->CleanUp();
+	for (uint i = 0; i < entities.Count(); i++)
+	{
+		if (entities[i] != nullptr)
+		{
+			entities[i]->collider->to_delete = true;
+			delete entities[i];
+			
+			entities[i] = nullptr;
+		}
+	}
+	entities.Clear();
 	return true;
 }
 

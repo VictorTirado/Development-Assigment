@@ -42,7 +42,6 @@ public:
 	int map_number = 1;
 	bool collision_debug = false;
 	bool is_god = false;
-	bool fps_are_cap = true;
 };
 
 #endif // __j1SCENE_H__

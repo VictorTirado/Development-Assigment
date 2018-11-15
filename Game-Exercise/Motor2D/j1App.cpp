@@ -110,7 +110,7 @@ bool j1App::Awake()
 		title.create(app_config.child("title").child_value());
 		organization.create(app_config.child("organization").child_value());
 		frame_cap_value = app_config.attribute("framerate_cap").as_int();
-		frame_cap_value = 1000 / frame_cap_value;
+		frame_cap_value = 1000.0f / frame_cap_value;
 	}
 
 	if(ret == true)
@@ -244,43 +244,41 @@ void j1App::FinishUpdate()
 		last_sec_frame_count = 0;
 	}
 
+	if (App->render->using_vsync == true)
+		vsync_value = "On";
+	else if(App->render->using_vsync == false)
+		vsync_value = "Off";
+
+	if (cap == true)
+		cap_value = "On";
+	else if (cap == false)
+		cap_value = "Off";
+	
 	float avg_fps = float(frame_count) / startup_time.ReadSec();
 	float seconds_since_startup = startup_time.ReadSec();
 	uint32 last_frame_ms = frame_time.Read();
 	uint32 frames_on_last_update = prev_last_sec_frame_count;
 
-	static char title[256];
+	if (App->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
+		cap = !cap;
 
-	if (App->scene->fps_are_cap && !App->render->using_vsync)
+	if (cap == true)
 	{
-		sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu Vsync: OFF Frame Cap: ON",
-			avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
+		if (last_frame_ms < frame_cap_value)
+			frame_delay = frame_cap_value - last_frame_ms;
+		SDL_Delay(frame_delay);
 	}
 
-	if (!App->scene->fps_are_cap && App->render->using_vsync)
-	{
-		sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu Vsync: ON Frame Cap: OFF",
-			avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
-	}
-
-	
+	double fps = 1000.0f / perf_timer.ReadMs();
+	dt = 1.0f / fps;
+	static char title[256];	
+		sprintf_s(title, 256, "FPS: %.2f Av.FPS: %.2f Last Frame Ms: %.3u Time since startup: %.3f Frame Count: %lu (Cap: %d %s Vsync: %s)",
+			fps,avg_fps, last_frame_ms, seconds_since_startup, frame_count, cap_value.GetString(), vsync_value.GetString());
 
 	App->win->SetTitle(title);
 
-	if (App->scene->fps_are_cap)
-	{
-		frame_delay = frame_cap_value - last_frame_ms;
-		SDL_Delay(frame_delay);
-		
-		App->render->using_vsync = false;
-	}
 
-	if (!App->scene->fps_are_cap)
-		App->render->using_vsync = true;
-
-
-
-
+	
 }
 
 // Call modules before each loop iteration

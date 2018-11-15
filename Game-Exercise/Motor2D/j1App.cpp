@@ -221,6 +221,7 @@ pugi::xml_node j1App::LoadEntities(pugi::xml_document& player_file, Entities typ
 // ---------------------------------------------
 void j1App::PrepareUpdate()
 {
+	perf_timer.Start();
 	frame_count++;
 	last_sec_frame_count++;
 	frame_time.Start();

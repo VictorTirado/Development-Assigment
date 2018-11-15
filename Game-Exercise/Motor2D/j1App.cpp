@@ -15,6 +15,7 @@
 #include "j1App.h"
 #include "j1Collision.h"
 #include "j1Pathfinding.h"
+#include "j1Particles.h"
 
 
 #include "j1Entitites.h"
@@ -40,6 +41,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	//book = new j1Book();
 	entities = new j1Entities();
 	pathfinding = new j1PathFinding();
+	particles = new j1Particles();
 	
 
 	// Ordered for awake / Start / Update
@@ -52,6 +54,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(pathfinding);
 	AddModule(scene);
 	AddModule(collision);
+	AddModule(particles);
 	AddModule(entities);
 	//AddModule(book);
 	AddModule(fade_to_black);

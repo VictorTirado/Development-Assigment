@@ -21,6 +21,7 @@ class j1Collision;
 class j1FadeToBlack;
 class j1Entities;
 class j1PathFinding;
+class j1Particles;
 
 enum Entities
 {
@@ -110,6 +111,7 @@ public:
 	j1FadeToBlack*		fade_to_black = nullptr;
 	j1Entities*			entities = nullptr;
 	j1PathFinding* pathfinding = nullptr;
+	j1Particles* particles = nullptr;
 
 
 private:

@@ -108,7 +108,7 @@ void Entity_Player::Update(float dt)
 	{
 		if (App->map->data.map_layers.end->data->data[gid + 1] != Collision_Type::COLLISION_WALL && App->map->data.map_layers.end->data->data[gid] != Collision_Type::COLLISION_WALL)
 		{
-			position.y += 1;
+			position.y += 70 * dt;
 			is_falling = true;
 		}
 		else
@@ -160,14 +160,14 @@ void Entity_Player::Update(float dt)
 	{	
 		animation = &runBackwards;
 		is_backwards = true;
-		position.x -= App->map->prop->movement_speed;
+		position.x -= 80*dt;
 	}
 
 	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] != 53 && App->fade_to_black->IsFading() == false)
 	{
 		animation = &run;
 		is_backwards = false;
-		position.x += App->map->prop->movement_speed;
+		position.x += 100*dt;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->fade_to_black->IsFading() == false)
 	{
@@ -183,11 +183,11 @@ void Entity_Player::Update(float dt)
 	{
 		App->map->prop->jumping_time += 0.1f;
 		
-		position.y -= App->map->prop->gravity;
+		position.y -= 150*dt;
 
 		if (position.y > App->map->prop->player_position_y0 && App->map->prop->jumping_time >= 1.5f)
 		{
-			position.y += 5;
+			position.y += 70*dt;
 			App->map->prop->jumping_time = 0.0f;
 			is_jumping = false;
 			is_falling = true;

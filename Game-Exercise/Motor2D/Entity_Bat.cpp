@@ -81,20 +81,20 @@ void Entity_Bat::Update(float dt)
 				path_to_follow = iPoint(path->At(0)->x, path->At(0)->y);
 				if (path_to_follow.x < bat_pos.x)
 				{
-					speed.x = -1;
+					speed.x = -60 * dt;
 
 				}
 				else if (path_to_follow.x > bat_pos.x)
 				{
-					speed.x = 1;
+					speed.x = 60 * dt;
 				}
 				if (path_to_follow.y < bat_pos.y)
 				{
-					speed.y = -1;
+					speed.y = -60 * dt;
 				}
 				if (path_to_follow.y > bat_pos.y)
 				{
-					speed.y = +1;
+					speed.y = +60 * dt;
 				}
 			}
 		}
@@ -117,20 +117,20 @@ void Entity_Bat::Update(float dt)
 				path_to_follow = iPoint(path->At(0)->x, path->At(0)->y);
 				if (path_to_follow.x < bat_pos.x)
 				{
-					speed.x = -1;
+					speed.x = -60 * dt;
 
 				}
 				else if (path_to_follow.x > bat_pos.x)
 				{
-					speed.x = 1;
+					speed.x = 60 * dt;
 				}
 				if (path_to_follow.y < bat_pos.y)
 				{
-					speed.y = -1;
+					speed.y = -60 * dt;
 				}
 				if (path_to_follow.y > bat_pos.y)
 				{
-					speed.y = +1;
+					speed.y = +60 * dt;
 				}
 			}
 		}

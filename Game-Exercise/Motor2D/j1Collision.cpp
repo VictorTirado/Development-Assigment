@@ -22,6 +22,15 @@ j1Collision::j1Collision()
 
 	matrix[COLLIDER_ENEMY][COLLIDER_ENEMY] = false;
 
+	//matrix[COLLIDER_ENEMY][COLLIDER_PLAYER_SHOT] = true;
+	//matrix[COLLIDER_PLAYER_SHOT][COLLIDER_ENEMY] = true;
+
+	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_POWER_UP] = false;
+	matrix[COLLIDER_POWER_UP][COLLIDER_PLAYER_SHOT] = false;
+
+	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_PLAYER] = false;
+	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER_SHOT] = false;
+
 }
 
 // Destructor
@@ -117,6 +126,9 @@ void j1Collision::DebugDraw()
 		case COLLIDER_ENEMY: //red
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 			break;
+
+		case COLLIDER_PLAYER_SHOT: //yellow
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 		
 		}
 	}

@@ -14,18 +14,13 @@ j1Particles::j1Particles()
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
 
-	// Template for a new particle "explosion_shot"
-	//explosion_shot.anim.PushBack({ 760, 764, 7, 8 });
-	//explosion_shot.anim.PushBack({ 776, 762, 12, 12 });
-	//explosion_shot.anim.loop = false;
-	//explosion_shot.anim.speed = 0.2f;
+	kunai_particle.anim.PushBack({ 0, 0, 20, 7 });
+	kunai_particle.anim.loop = false;
+	kunai_particle.anim.speed = 0.3f;
 
-	//// Template for a new particle "laser"
-	//laser.anim.PushBack({ 791, 767, 16, 3 });
-	//laser.anim.loop = false;
-	//laser.anim.speed = 0.3f;
-	//laser.speed.x = 10;
-	//laser.life = 600;
+	kunai_particle_backwards.anim.PushBack({ 31, 0, 20, 7 });
+	kunai_particle_backwards.anim.loop = false;
+	kunai_particle_backwards.anim.speed = 0.3f;
 
 }
 
@@ -37,6 +32,7 @@ j1Particles::~j1Particles()
 bool j1Particles::Start()
 {
 	LOG("Loading particles");
+	graphics = App->tex->Load("textures/Kunai.png");
 
 	return true;
 }
@@ -103,6 +99,7 @@ void j1Particles::AddParticle(const Particle& particle, int x, int y, COLLIDER_T
 			break;
 		}
 	}
+
 }
 
 void j1Particles::OnCollision(Collider* c1, Collider* c2)

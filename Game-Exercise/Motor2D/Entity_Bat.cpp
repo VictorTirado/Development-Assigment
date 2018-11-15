@@ -165,6 +165,11 @@ void Entity_Bat::OnCollision(Collider* collider)
 		LOG("COLLISION");
 		App->entities->bat->CleanUp();
 	}
+
+	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
+		LOG("COLLISION");
+		App->entities->bat->CleanUp();
+	}
 }
 
 void Entity_Bat::LoadAnimation(pugi::xml_node& animation, Animation* bat)

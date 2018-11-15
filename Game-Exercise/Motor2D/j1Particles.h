@@ -55,6 +55,7 @@ public:
 
 	int cd = 0;
 	Particle kunai_particle;
+	Particle kunai_particle_backwards;
 
 };
 

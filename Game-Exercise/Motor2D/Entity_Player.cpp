@@ -12,7 +12,7 @@
 #include "j1Scene.h"
 #include "j1Entitites.h"
 #include "j1FadeToBlack.h"
-
+#include "j1Particles.h"
 #include "Entity_Player.h"
 #include "Entity_Book.h"
 
@@ -174,6 +174,24 @@ void Entity_Player::Update(float dt)
 		if (App->map->data.map_layers.end->data->data[gid] == 51)
 			is_jumping = true;
 	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+	{
+		if (is_backwards)
+		{
+			App->particles->kunai_particle_backwards.speed.x = -10;
+			App->particles->AddParticle(App->particles->kunai_particle_backwards, position.x, position.y, COLLIDER_PLAYER_SHOT);
+		}
+			
+		else
+		{
+			App->particles->kunai_particle.speed.x = 10;
+			App->particles->AddParticle(App->particles->kunai_particle, position.x, position.y, COLLIDER_PLAYER_SHOT);
+		}
+			
+
+	}
+		
 	//JUMP
 	if (App->map->prop->jumping_time == 0.0f)
 	   App->map->prop->player_position_y0 = - 1 * position.y;

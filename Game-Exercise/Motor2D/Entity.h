@@ -18,7 +18,6 @@ public:
 public:
 	iPoint position = iPoint(0, 0);
 	int entity_type = 0;
-	bool to_destroy = false;
 
 public:
 	Entity(int x, int y);

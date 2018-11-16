@@ -47,18 +47,10 @@ bool j1Scene::Start()
 				App->pathfinding->SetMap(w, h, data);
 
 			RELEASE_ARRAY(data);
-
-		}
-		
+		}	
 	}
-	//App->map->Spawn();
-	//App->entities->SpawnEntities(0, 0, PLAYER);
-	//App->entities->SpawnEntities(0, 0, BOOK);
 	App->audio->PlayMusic(App->audio->path.GetString());
 	App->audio->StartVolume(App->audio->volume);
-
-	
-
 	return true;
 }
 
@@ -80,13 +72,7 @@ bool j1Scene::Update(float dt)
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
-		if (map_number = 1)
-		{
-			App->entities->player->can_tp = false;
-			App->entities->player->firstUpdate = true;
-			App->entities->book->firstUpdate = true;
-		}
-		
+		ChangeMap(map_number);
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		App->SaveGame();
@@ -111,11 +97,6 @@ bool j1Scene::Update(float dt)
 
 	App->map->Draw();
 
-	//p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
-	//				App->map->data.width, App->map->data.height,
-	//				App->map->data.tile_width, App->map->data.tile_height,
-	//				App->map->data.tilesets.count());
-	//App->win->SetTitle(title.GetString());
 	return true;
 }
 
@@ -145,23 +126,21 @@ bool j1Scene::ChangeMap(int map_number)
 
 	if (map_number == 1)
 	{
-		App->fade_to_black->FadeToBlack(this, this, 3.0f);
 		App->map->CleanUp();
-		App->map->Load("Map2.tmx");
-		App->entities->player->firstUpdate = true;
-		App->entities->book->firstUpdate = true;
-		App->render->camera.x = (-App->entities->player->position.x * App->win->render_scale) + (App->win->width / 2);
-		App->render->camera.y = (-App->entities->player->position.y * App->win->render_scale) + (App->win->height / 2);
+		App->entities->DestroyEntities();
+		App->fade_to_black->FadeToBlack(this, App->entities, 3.0f);
+		App->map->Load("Map3.tmx");
+		App->map->Spawn();
 	}
 	else if (map_number == 2)
 	{
-		App->fade_to_black->FadeToBlack(this, this, 3.0f);
 		App->map->CleanUp();
+		App->entities->DestroyEntities();
+		App->fade_to_black->FadeToBlack(this, App->entities, 3.0f);
 		App->map->Load("ForestMap.tmx");
+		App->map->Spawn();
 	}
-
 	return true;
-
 }
 
 

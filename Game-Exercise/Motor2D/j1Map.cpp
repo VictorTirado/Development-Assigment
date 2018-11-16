@@ -111,26 +111,13 @@ void j1Map::Draw()
 							{
 								SDL_Rect tile = tileset->GetTileRect(tile_id);
 								iPoint coords = MapToWorld(i, j);
-								uint gid = Get_gid(coords.x, coords.y);
-
 								
 								if(layers_list->data->name !="Logic" && layers_list->data->name != "path_bat")
-								App->render->Blit(tileset->texture, coords.x, coords.y, &tile, layers_list->data->parallax);
+									App->render->Blit(tileset->texture, coords.x, coords.y, &tile, layers_list->data->parallax);
 								
 								else if (App->scene->collision_debug)
-								{
 									App->render->Blit(tileset->texture, coords.x, coords.y, &tile, 1.0f);
-								}
-								if (App->map->data.map_layers.end->data->data[gid] == 52)
-								{
-									spawn.x = coords.x;
-									spawn.y = coords.y;
-								}
-								if (App->map->data.map_layers.end->data->data[gid] == 73) 
-								{
-									spawn_book.x = coords.x;
-									spawn_book.y = coords.y;
-								}
+								
 							}
 						}
 					}

@@ -53,14 +53,10 @@ Entity_Player::Entity_Player(int x, int y) : Entity(x , y)
 
 	deathfx_path = player.child("audio").attribute("path").as_string();
 	teleportfx_path = player.child("audio2").attribute("tp_path").as_string();
-	
 	animation = &idle;
-	
-	
-	
-	
 	App->audio->LoadFx(deathfx_path.GetString());
 	App->audio->LoadFx(teleportfx_path.GetString());
+	collider = App->collision->AddCollider({ 0, 0, 38, 54 }, COLLIDER_TYPE::COLLIDER_PLAYER, App->entities);
 }
 
 Entity_Player::~Entity_Player()
@@ -89,8 +85,7 @@ void Entity_Player::Update(float dt)
 {
 	if (firstUpdate == true)
 	{
-		can_tp = false;
-		collider = App->collision->AddCollider({ 0, 0, 38, 54 }, COLLIDER_TYPE::COLLIDER_PLAYER, App->entities);
+		//can_tp = false;
 		firstUpdate = false;
 	}
 
@@ -117,6 +112,7 @@ void Entity_Player::Update(float dt)
 	if (App->map->data.map_layers.end->data->data[gid] == Collision_Type::COLLISION_DEATH)
 	{
 		App->map->CleanUp();
+		App->entities->DestroyEntities();
 		if (App->scene->map_number == 1)
 		{
 			App->map->Load("Map3.tmx");
@@ -126,7 +122,6 @@ void Entity_Player::Update(float dt)
 		else if (App->scene->map_number == 2)
 			App->map->Load("ForestMap.tmx");
 		
-		App->entities->DestroyEntities();
 		App->audio->PlayFx(1); //player's death fx
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 		App->map->Spawn();
@@ -136,21 +131,23 @@ void Entity_Player::Update(float dt)
 	{
 		
 		App->map->CleanUp();
+		App->entities->DestroyEntities();
 		if (App->scene->map_number == 1)
 		{
 			App->map->Load("ForestMap.tmx");
+			can_tp = true;
 			App->scene->map_number = 2;
 			firstUpdate = true;
 		}
 		else if (App->scene->map_number == 2)
 		{
-			App->map->Load("Map2.tmx");
+			App->map->Load("Map3.tmx");
 			App->scene->map_number = 1;
 			firstUpdate = true;
 			can_tp = false;
-			//App->entities->book->Start();
 		}
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
+		App->map->Spawn();
 	}
 	//MOVEMENT PLAYER
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid-1] != 53 && App->fade_to_black->IsFading() == false)
@@ -254,7 +251,6 @@ void Entity_Player::Update(float dt)
 
 	App->render->camera.x = (-position.x * App->win->render_scale) + (App->win->width / 2);
 	App->render->camera.y = (-position.y * App->win->render_scale) + (App->win->height / 2);
-//	collider->SetPos(position.x, position.y);
 }
 
 bool Entity_Player::PostUpdate()
@@ -276,7 +272,6 @@ bool Entity_Player::CleanUp()
 		collider->to_delete = true;
 		collider = nullptr;
 	}
-
 	return true;
 }
 
@@ -309,7 +304,7 @@ bool Entity_Player::Load(pugi::xml_node& data)
 	{
 		App->fade_to_black->FadeToBlack(App->scene, App->scene, 3.0f);
 		App->map->CleanUp();
-		App->map->Load("Map2.tmx");
+		App->map->Load("Map3.tmx");
 		position.x = data.child("position").attribute("x").as_int();
 		position.y = data.child("position").attribute("y").as_int();
 	}

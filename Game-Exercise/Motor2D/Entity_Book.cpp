@@ -50,8 +50,6 @@ void Entity_Book::Update(float dt)
 {
 	if (firstUpdate == true) {
 		sprites = App->tex->Load("textures/Objects.png");
-		position.x = App->map->spawn_book.x;
-		position.y = App->map->spawn_book.y;
 		collider = App->collision->AddCollider({ 0, 0, 28, 25 }, COLLIDER_TYPE::COLLIDER_POWER_UP, App->entities);
 		firstUpdate = false;
 	}

@@ -22,7 +22,7 @@
 
 Entity_Bat::Entity_Bat(int x, int y):Entity(x, y)
 {
-	sprites = App->tex->Load(App->entities->textures.GetString());
+	sprites = App->tex->Load("textures/Bat.png");
 	pugi::xml_document bat_file;
 	pugi::xml_node bat;
 	bat = App->LoadEntities(bat_file, Entities::BAT_ENTITY);
@@ -53,22 +53,24 @@ bool Entity_Bat::PreUpdate()
 
 void Entity_Bat::Update(float dt)
 {
-	if (firstUpdate == true) {
-		sprites = App->tex->Load("textures/Bat.png");
+	if (firstUpdate == true)
+	{
 		X = App->tex->Load("textures/x.png");
 		original_pos= App->map->WorldToMap(position.x, position.y);
 		collider = App->collision->AddCollider({ 0, 0, 29, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->entities);
 		firstUpdate = false;
 	}
-	iPoint bat_pos = App->map->WorldToMap(position.x, position.y);
-	iPoint player_pos = App->entities->player->player_pos;
+
+	bat_pos = App->map->WorldToMap(position.x, position.y);
+	player_pos = App->entities->player->player_pos;
 	player_pos.x += 1;
 	player_pos.y -= 1;
-	if (original_pos.x < player_pos.x + range && original_pos.x > player_pos.x - range && original_pos.y < player_pos.y + range && original_pos.y > player_pos.y - range) {
+
+	if (Radar() == true) {
 		if (App->pathfinding->CreatePath(bat_pos, player_pos) != -1)
 		{
 			const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
-			if (App->collision->debug == true)
+			if (App->scene->collision_debug == true)
 			{
 				for (int i = 0; i < path->Count(); ++i)
 				{
@@ -197,4 +199,9 @@ bool Entity_Bat::Save(pugi::xml_node& data)const
 	data.child("position").append_attribute("y") = position.y;
 
 	return true;
+}
+
+bool Entity_Bat::Radar()
+{
+	return (original_pos.x < player_pos.x + range && original_pos.x > player_pos.x - range && original_pos.y < player_pos.y + range && original_pos.y > player_pos.y - range);
 }

@@ -10,39 +10,25 @@
 	<pathfinding />
 	<scene />
 	<collisions />
+	<particles />
 	<entities>
 		<player>
 			<map level="1" />
-			<position x="208" y="717" />
+			<position x="192" y="256" />
 		</player>
+		<bat>
+			<position x="464" y="240" />
+		</bat>
+		<bat>
+			<position x="736" y="240" />
+		</bat>
 		<book>
 			<book caught="false" />
-			<position x="240" y="576" />
+			<position x="1552" y="272" />
 		</book>
-		<bat>
-			<position x="0" y="0" />
-		</bat>
-		<ninja>
-			<position x="304" y="720" />
-		</ninja>
-		<bat>
-			<position x="0" y="0" />
-		</bat>
-		<ninja>
-			<position x="416" y="704" />
-		</ninja>
-		<bat>
-			<position x="0" y="0" />
-		</bat>
-		<bat>
-			<position x="0" y="0" />
-		</bat>
-		<ninja>
-			<position x="512" y="656" />
-		</ninja>
 	</entities>
 	<fadeToBlack />
 	<renderer>
-		<camera x="-112" y="-1767" />
+		<camera x="-64" y="-384" />
 	</renderer>
 </game_state>

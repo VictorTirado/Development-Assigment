@@ -83,7 +83,6 @@ bool j1Entities::CleanUp()
 }
 void j1Entities::DestroyEntities()
 {
-	//App->entities->player->CleanUp();
 	for (uint i = 0; i < entities.Count(); i++)
 	{
 		if (entities[i] != nullptr)
@@ -94,7 +93,6 @@ void j1Entities::DestroyEntities()
 		}
 	}
 	entities.Clear();
-
 }
 
 bool j1Entities::SpawnEntities(int x, int y, Entities_Type type)

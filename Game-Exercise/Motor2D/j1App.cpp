@@ -16,7 +16,7 @@
 #include "j1Collision.h"
 #include "j1Pathfinding.h"
 #include "j1Particles.h"
-
+#include "Brofiler/Brofiler.h"
 
 #include "j1Entitites.h"
 
@@ -157,6 +157,7 @@ bool j1App::Start()
 // Called each loop iteration
 bool j1App::Update()
 {
+	BROFILER_CATEGORY("AppUpdate", Profiler::Color::Aquamarine);
 	bool ret = true;
 	PrepareUpdate();
 
@@ -224,6 +225,7 @@ pugi::xml_node j1App::LoadEntities(pugi::xml_document& player_file, Entities typ
 // ---------------------------------------------
 void j1App::PrepareUpdate()
 {
+	BROFILER_CATEGORY("AppPrepareUpdate", Profiler::Color::DarkRed);
 	perf_timer.Start();
 	frame_count++;
 	last_sec_frame_count++;
@@ -233,6 +235,7 @@ void j1App::PrepareUpdate()
 // ---------------------------------------------
 void j1App::FinishUpdate()
 {
+	BROFILER_CATEGORY("AppFinishUpdate", Profiler::Color::Beige);
 	if(want_to_save == true)
 		SavegameNow();
 
@@ -288,6 +291,7 @@ void j1App::FinishUpdate()
 // Call modules before each loop iteration
 bool j1App::PreUpdate()
 {
+	BROFILER_CATEGORY("AppPreUpdate", Profiler::Color::GreenYellow);
 	bool ret = true;
 	p2List_item<j1Module*>* item;
 	item = modules.start;
@@ -310,6 +314,7 @@ bool j1App::PreUpdate()
 // Call modules on each loop iteration
 bool j1App::DoUpdate()
 {
+	BROFILER_CATEGORY("AppUpdate", Profiler::Color::Gold);
 	bool ret = true;
 	p2List_item<j1Module*>* item;
 	item = modules.start;
@@ -332,6 +337,7 @@ bool j1App::DoUpdate()
 // Call modules after each loop iteration
 bool j1App::PostUpdate()
 {
+	BROFILER_CATEGORY("AppUpdate", Profiler::Color::Olive);
 	bool ret = true;
 	p2List_item<j1Module*>* item;
 	j1Module* pModule = NULL;

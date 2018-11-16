@@ -41,6 +41,7 @@ Entity_Book::~Entity_Book()
 
 bool Entity_Book::PreUpdate()
 {
+
 	bool ret = true;
 
 	return ret;
@@ -48,6 +49,7 @@ bool Entity_Book::PreUpdate()
 
 void Entity_Book::Update(float dt)
 {
+
 	if (firstUpdate == true) {
 		sprites = App->tex->Load("textures/Objects.png");
 		collider = App->collision->AddCollider({ 0, 0, 28, 25 }, COLLIDER_TYPE::COLLIDER_POWER_UP, App->entities);

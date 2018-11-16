@@ -12,7 +12,7 @@
 #include "j1Scene.h"
 #include "j1Entitites.h"
 #include "j1PathFinding.h"
-
+#include "Brofiler\Brofiler.h"
 #include "Entity_Player.h"
 
 j1Scene::j1Scene() : j1Module()
@@ -57,12 +57,14 @@ bool j1Scene::Start()
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
+	BROFILER_CATEGORY("ScenePreUpdate", Profiler::Color::BlanchedAlmond);
 	return true;
 }
 
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
+	BROFILER_CATEGORY("SceneUpdate", Profiler::Color::MediumOrchid);
 	//DEBUG KEYS
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
@@ -103,6 +105,7 @@ bool j1Scene::Update(float dt)
 // Called each loop iteration
 bool j1Scene::PostUpdate()
 {
+	BROFILER_CATEGORY("ScenePostUpdate", Profiler::Color::Navy);
 	bool ret = true;
 
 	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
@@ -122,6 +125,7 @@ bool j1Scene::CleanUp()
 
 bool j1Scene::ChangeMap(int map_number)
 {
+	BROFILER_CATEGORY("SceneChangeMap", Profiler::Color::DeepPink);
 	bool ret = true;
 
 	if (map_number == 1)

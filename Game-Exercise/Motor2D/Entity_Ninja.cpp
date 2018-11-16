@@ -16,7 +16,7 @@
 #include "j1Scene.h"
 
 #include "j1FadeToBlack.h"
-
+#include "Brofiler\Brofiler.h"
 #include "Entity_Player.h"
 
 
@@ -47,6 +47,7 @@ Entity_Ninja::~Entity_Ninja()
 
 bool Entity_Ninja::PreUpdate()
 {
+	BROFILER_CATEGORY("EntityNinjaPreUpdate", Profiler::Color::Azure);
 	bool ret = true;
 
 	return ret;
@@ -54,6 +55,7 @@ bool Entity_Ninja::PreUpdate()
 
 void Entity_Ninja::Update(float dt)
 {
+	BROFILER_CATEGORY("EntityNinjaUpdate", Profiler::Color::PowderBlue);
 	if (firstUpdate == true) {
 		sprites = App->tex->Load("textures/Enemy_Ninja.png");
 		collider = App->collision->AddCollider({ 0, 0, 33, 47 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->entities);
@@ -63,6 +65,7 @@ void Entity_Ninja::Update(float dt)
 
 bool Entity_Ninja::PostUpdate()
 {
+	BROFILER_CATEGORY("EntityNinjaPostUpdate", Profiler::Color::Ivory);
 	bool ret = true;
 	return ret;
 }

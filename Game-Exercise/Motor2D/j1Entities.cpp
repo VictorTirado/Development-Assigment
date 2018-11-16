@@ -12,7 +12,7 @@
 #include "j1Entitites.h"
 #include "Entity.h"
 #include "j1FadeToBlack.h"
-
+#include "Brofiler\Brofiler.h"
 #include "Entity_Player.h"
 #include "Entity_Book.h"
 #include "Entity_Bat.h"
@@ -46,6 +46,8 @@ bool j1Entities::Start()
 
 bool j1Entities::PreUpdate()
 {
+	BROFILER_CATEGORY("ModuleEntitiesPreUpdate", Profiler::Color::FireBrick);
+
 	bool ret = true;
 	
 	return ret;
@@ -53,6 +55,8 @@ bool j1Entities::PreUpdate()
 
 bool j1Entities::Update(float dt)
 {
+	BROFILER_CATEGORY("ModuleEntitiesUpdate", Profiler::Color::LawnGreen);
+
 	for (uint i = 0; i < entities.Count(); i++)
 	{
 		if (entities.At(i) != nullptr)
@@ -71,6 +75,8 @@ bool j1Entities::Update(float dt)
 
 bool j1Entities::PostUpdate()
 {
+	BROFILER_CATEGORY("ModuleEntitiesPostUpdate", Profiler::Color::Chartreuse);
+
 	bool ret = true;
 	return ret;
 }
@@ -97,6 +103,8 @@ void j1Entities::DestroyEntities()
 
 bool j1Entities::SpawnEntities(int x, int y, Entities_Type type)
 {
+	BROFILER_CATEGORY("ModuleEntitiesSpawnEntitiesFunction", Profiler::Color::Gainsboro);
+
 	bool ret = false;
 	switch (type)
 	{

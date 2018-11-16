@@ -7,6 +7,7 @@
 #include "j1Particles.h"
 #include "Entity_Player.h"
 #include "j1Collision.h"
+#include "Brofiler\Brofiler.h"
 #include "SDL/include/SDL_timer.h"
 
 j1Particles::j1Particles()
@@ -57,6 +58,7 @@ bool j1Particles::CleanUp()
 // Update: draw background
 bool j1Particles::Update(float dt)
 {
+	BROFILER_CATEGORY("ModuleParticlesUpdate", Profiler::Color::PaleGreen);
 	bool ret = true;
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -87,6 +89,7 @@ bool j1Particles::Update(float dt)
 
 void j1Particles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, Uint32 delay)
 {
+	BROFILER_CATEGORY("AddParticlesUpdate", Profiler::Color::DeepPink);
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		if (active[i] == nullptr)
@@ -138,6 +141,7 @@ Particle::~Particle()
 
 bool Particle::Update(float dt)
 {
+	BROFILER_CATEGORY("ParticlesUpdate", Profiler::Color::Moccasin);
 	bool ret = true;
 
 	if (life > 0)

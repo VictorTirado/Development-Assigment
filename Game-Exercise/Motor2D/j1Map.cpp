@@ -7,7 +7,7 @@
 #include "Entity_Player.h"
 #include "j1Scene.h"
 #include "j1Entitites.h"
-
+#include "Brofiler\Brofiler.h"
 #include "j1Input.h"
 #include <math.h>
 
@@ -32,6 +32,8 @@ bool j1Map::Awake(pugi::xml_node& config)
 }
 void j1Map::Spawn()
 {
+	BROFILER_CATEGORY("MapSpawnFunction", Profiler::Color::MintCream);
+
 	if (map_loaded == false)
 		return;
 
@@ -87,6 +89,8 @@ void j1Map::Spawn()
 
 void j1Map::Draw()
 {
+	BROFILER_CATEGORY("MapDrawFunction", Profiler::Color::PaleTurquoise);
+
 	if(map_loaded == false)
 		return;
 
@@ -239,6 +243,8 @@ bool j1Map::CleanUp()
 // Load new map
 bool j1Map::Load(const char* file_name)
 {
+	BROFILER_CATEGORY("MapLoadFunction", Profiler::Color::SandyBrown);
+
 	bool ret = true;
 	p2SString tmp("%s%s", folder.GetString(), file_name);
 
@@ -339,6 +345,8 @@ bool j1Map::Load(const char* file_name)
 // Load map general properties
 bool j1Map::LoadMap()
 {
+	BROFILER_CATEGORY("MapLoadMapFunction", Profiler::Color::Plum);
+
 	bool ret = true;
 	pugi::xml_node map = map_file.child("map");
 
@@ -546,6 +554,7 @@ bool j1Map::LoadProperties2(pugi::xml_node& node, Properties_& properties)
 
  bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
  {
+	 BROFILER_CATEGORY("MapCreateWalkabilityMapFunction", Profiler::Color::Teal);
 	 bool ret = false;
 	 p2List_item<MapLayer*>* item;
 	 item = data.map_layers.start;

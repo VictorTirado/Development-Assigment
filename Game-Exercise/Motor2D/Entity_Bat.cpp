@@ -16,7 +16,7 @@
 #include "j1Pathfinding.h"
 
 #include "j1FadeToBlack.h"
-
+#include "Brofiler\Brofiler.h"
 #include "Entity_Player.h"
 
 
@@ -46,6 +46,7 @@ Entity_Bat::~Entity_Bat()
 
 bool Entity_Bat::PreUpdate()
 {
+	BROFILER_CATEGORY("EntityBatPreUpdate", Profiler::Color::DarkSlateBlue);
 	bool ret = true;
 
 	return ret;
@@ -53,6 +54,7 @@ bool Entity_Bat::PreUpdate()
 
 void Entity_Bat::Update(float dt)
 {
+	BROFILER_CATEGORY("EntityBatUpdate", Profiler::Color::Maroon);
 	if (firstUpdate == true)
 	{
 		X = App->tex->Load("textures/x.png");
@@ -142,6 +144,7 @@ void Entity_Bat::Update(float dt)
 
 bool Entity_Bat::PostUpdate()
 {
+	BROFILER_CATEGORY("EntityBatPostUpdate", Profiler::Color::MistyRose);
 	bool ret = true;
 	return ret;
 }

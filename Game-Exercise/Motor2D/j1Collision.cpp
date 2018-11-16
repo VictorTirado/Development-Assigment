@@ -2,7 +2,7 @@
 #include "j1Input.h"
 #include "j1Render.h"
 #include "j1Collision.h"
-
+#include "Brofiler\Brofiler.h"
 #include "Entity_Player.h"
 
 j1Collision::j1Collision()
@@ -39,6 +39,8 @@ j1Collision::~j1Collision()
 
 bool j1Collision::PreUpdate()
 {
+	BROFILER_CATEGORY("CollisionPreUpdate", Profiler::Color::Crimson);
+
 	bool ret = true;
 	// Remove all colliders scheduled for deletion
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
@@ -88,6 +90,8 @@ bool j1Collision::PreUpdate()
 // Called before render is available
 bool j1Collision::Update(float dt)
 {
+	BROFILER_CATEGORY("CollisionUpdate", Profiler::Color::CornflowerBlue);
+
 	bool ret = true;
 	DebugDraw();
 
@@ -97,6 +101,8 @@ bool j1Collision::Update(float dt)
 
 void j1Collision::DebugDraw()
 {
+	BROFILER_CATEGORY("CollisionDebugDrawFunction", Profiler::Color::BurlyWood);
+
 	if (App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 		debug = !debug;
 

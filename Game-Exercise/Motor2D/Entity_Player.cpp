@@ -15,6 +15,7 @@
 #include "j1Particles.h"
 #include "Entity_Player.h"
 #include "Entity_Book.h"
+#include "Brofiler\Brofiler.h"
 
 Entity_Player::Entity_Player(int x, int y) : Entity(x , y)
 {
@@ -76,6 +77,7 @@ bool Entity_Player::Start()
 
 bool Entity_Player::PreUpdate()
 {
+	BROFILER_CATEGORY("EntityPlayerPreUpdate", Profiler::Color::FireBrick);
 	bool ret = true;
 
 	return ret;
@@ -83,6 +85,7 @@ bool Entity_Player::PreUpdate()
 
 void Entity_Player::Update(float dt)
 {
+	BROFILER_CATEGORY("EntityPlayerUpdate", Profiler::Color::SpringGreen);
 	if (firstUpdate == true)
 	{
 		//can_tp = false;
@@ -255,6 +258,7 @@ void Entity_Player::Update(float dt)
 
 bool Entity_Player::PostUpdate()
 {
+	BROFILER_CATEGORY("EntityPlayerPostUpdate", Profiler::Color::LemonChiffon);
 	bool ret = true;
 	return ret;
 }

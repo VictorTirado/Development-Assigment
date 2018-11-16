@@ -4,6 +4,7 @@
 #include "j1Window.h"
 #include "j1Scene.h"
 #include "j1Render.h"
+#include "Brofiler\Brofiler.h"
 
 //#define VSYNC true
 
@@ -67,17 +68,20 @@ bool j1Render::Start()
 // Called each loop iteration
 bool j1Render::PreUpdate()
 {
+	BROFILER_CATEGORY("j1RenderPreUpdate", Profiler::Color::Salmon);
 	SDL_RenderClear(renderer);
 	return true;
 }
 
 bool j1Render::Update(float dt)
 {
+	BROFILER_CATEGORY("j1RenderUpdate", Profiler::Color::Chocolate);
 	return true;
 }
 
 bool j1Render::PostUpdate()
 {
+	BROFILER_CATEGORY("j1RenderPostUpdate", Profiler::Color::Magenta);
 	SDL_SetRenderDrawColor(renderer, background.r, background.g, background.g, background.a);
 	SDL_RenderPresent(renderer);
 	return true;
@@ -131,6 +135,7 @@ void j1Render::ResetViewPort()
 // Blit to screen
 bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivot_x, int pivot_y) const
 {
+	BROFILER_CATEGORY("j1RenderBlit", Profiler::Color::Silver);
 	bool ret = true;
 	uint scale = App->win->GetScale()*3;
 

@@ -3,7 +3,7 @@
 #include "j1App.h"
 #include "j1Render.h"
 #include "j1Textures.h"
-
+#include "Brofiler\Brofiler.h"
 #include "SDL_image/include/SDL_image.h"
 #pragma comment( lib, "SDL_image/libx86/SDL2_image.lib" )
 
@@ -61,6 +61,7 @@ bool j1Textures::CleanUp()
 // Load new texture from file path
 SDL_Texture* const j1Textures::Load(const char* path)
 {
+	BROFILER_CATEGORY("ModuleTexturesLoadFunction", Profiler::Color::GoldenRod);
 	SDL_Texture* texture = NULL;
 	SDL_Surface* surface = IMG_Load(path);
 
@@ -98,6 +99,8 @@ bool j1Textures::UnLoad(SDL_Texture* texture)
 // Translate a surface into a texture
 SDL_Texture* const j1Textures::LoadSurface(SDL_Surface* surface)
 {
+	BROFILER_CATEGORY("ModuleTexturesLoadSurfaceFunction", Profiler::Color::PapayaWhip);
+
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(App->render->renderer, surface);
 
 	if(texture == NULL)

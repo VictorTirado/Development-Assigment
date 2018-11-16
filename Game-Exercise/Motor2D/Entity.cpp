@@ -4,7 +4,7 @@
 #include "j1Entitites.h"
 #include "j1Render.h"
 #include "j1Scene.h"
-
+#include "Brofiler\Brofiler.h"
 #include "Entity_Book.h"
 #include "Entity_Bat.h"
 #include "Entity_Ninja.h"
@@ -26,6 +26,7 @@ const Collider* Entity::GetCollider() const
 
 void Entity::Draw(SDL_Texture* sprites)
 {
+	BROFILER_CATEGORY("EntityDrawFunction", Profiler::Color::HotPink);
 	SDL_Rect r = animation->GetCurrentFrame();
 	if (this->entity_type == PLAYER) {
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));

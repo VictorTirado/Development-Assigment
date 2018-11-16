@@ -65,7 +65,7 @@ void j1Map::Spawn()
 							{
 								App->entities->SpawnEntities(coords.x, coords.y, BOOK);
 							}
-							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 66)
+							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 74)
 							{
 								App->entities->SpawnEntities(coords.x, coords.y, BAT);
 							}
@@ -114,7 +114,7 @@ void j1Map::Draw()
 								uint gid = Get_gid(coords.x, coords.y);
 
 								
-								if(layers_list->data->name !="Logic")
+								if(layers_list->data->name !="Logic" && layers_list->data->name != "path_bat")
 								App->render->Blit(tileset->texture, coords.x, coords.y, &tile, layers_list->data->parallax);
 								
 								else if (App->scene->collision_debug)

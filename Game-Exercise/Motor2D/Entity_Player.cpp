@@ -116,11 +116,10 @@ void Entity_Player::Update(float dt)
 	}
 	if (App->map->data.map_layers.end->data->data[gid] == Collision_Type::COLLISION_DEATH)
 	{
-		
 		App->map->CleanUp();
 		if (App->scene->map_number == 1)
 		{
-			App->map->Load("Map2.tmx");
+			App->map->Load("Map3.tmx");
 			can_tp = false;
 			App->entities->book->firstUpdate = true;
 		}
@@ -128,8 +127,6 @@ void Entity_Player::Update(float dt)
 			App->map->Load("ForestMap.tmx");
 		
 		App->entities->DestroyEntities();
-		//App->entities->book->CleanUp();
-		
 		App->audio->PlayFx(1); //player's death fx
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 		App->map->Spawn();

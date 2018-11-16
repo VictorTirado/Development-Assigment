@@ -36646,7 +36646,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <layer name="path_bat" width="95" height="55">
+ <layer name="path_bat" width="95" height="55" visible="0">
   <properties>
    <property name="Navigation" type="int" value="1"/>
   </properties>
@@ -46079,7 +46079,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="66"/>
+   <tile gid="74"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>

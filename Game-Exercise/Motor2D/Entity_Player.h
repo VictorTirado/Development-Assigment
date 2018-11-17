@@ -15,11 +15,11 @@ public:
 	Entity_Player(int x,int y);
 	~Entity_Player();
 
-	bool Start();
-	bool CleanUp();
-	bool PreUpdate();
+
+	
+
 	void Update(float dt);
-	bool PostUpdate();
+
 
 	void LoadAnimation(pugi::xml_node&, Animation* player);
 	bool Load(pugi::xml_node&);
@@ -66,8 +66,6 @@ public:
 		COLLISION_WALL = 51,
 		COLLISION_DEATH = 71,
 		COLLISION_CHANGE_MAP =72,
-		
-
 	};
 
 	iPoint old_player_position;

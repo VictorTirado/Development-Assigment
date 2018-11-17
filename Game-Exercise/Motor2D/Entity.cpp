@@ -16,7 +16,10 @@ Entity::Entity(int x, int y) : position(x, y)
 
 Entity::~Entity()
 {
-
+	if (collider != nullptr) {
+		App->collision->EraseCollider(collider);
+		collider = nullptr;
+	}
 }
 
 const Collider* Entity::GetCollider() const

@@ -43,16 +43,9 @@ Entity_Bat::Entity_Bat(int x, int y):Entity(x, y)
 
 Entity_Bat::~Entity_Bat()
 {
-	CleanUp();
+
 }
 
-bool Entity_Bat::PreUpdate()
-{
-	BROFILER_CATEGORY("EntityBatPreUpdate", Profiler::Color::DarkSlateBlue);
-	bool ret = true;
-
-	return ret;
-}
 
 void Entity_Bat::Update(float dt)
 {
@@ -144,38 +137,18 @@ void Entity_Bat::Update(float dt)
 	position += speed;
 }
 
-bool Entity_Bat::PostUpdate()
-{
-	BROFILER_CATEGORY("EntityBatPostUpdate", Profiler::Color::MistyRose);
-	bool ret = true;
-	return ret;
-}
 
-bool Entity_Bat::CleanUp()
-{
-	LOG("Unloading bat");
 
-	/*App->tex->UnLoad(sprites);
-	if (App->entities->bat->collider != nullptr)
-	{
-		App->entities->bat->collider->to_delete = true;
-		App->entities->bat->collider = nullptr;
-	}
-	sprites = nullptr;*/
 
-	return true;
-}
 
 void Entity_Bat::OnCollision(Collider* collider)
 {
 	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER) {
 		LOG("COLLISION");
-		App->entities->bat->CleanUp();
 	}
 
 	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
-		LOG("COLLISION");
-		App->entities->bat->CleanUp();
+		LOG("COLLISION");	
 	}
 }
 

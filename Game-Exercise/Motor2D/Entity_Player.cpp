@@ -110,7 +110,7 @@ void Entity_Player::Update(float dt)
 		{
 			App->map->Load("Map4.tmx");
 			can_tp = false;
-			App->entities->book->firstUpdate = true;
+			//App->entities->book->firstUpdate = true;
 		}
 		else if (App->scene->map_number == 2)
 			App->map->Load("ForestMap.tmx");

@@ -39,7 +39,7 @@ bool j1Scene::Start()
 	if (!is_faded && map_number == 1)
 	{
 		map_number = 1;
-		if (App->map->Load("Map3.tmx") == true)
+		if (App->map->Load("Map4.tmx") == true)
 		{
 			int w, h;
 			uchar* data = NULL;

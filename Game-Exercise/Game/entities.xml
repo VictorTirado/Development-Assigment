@@ -73,6 +73,16 @@
     <frame x="64" y="711" w="48" h="20"/>
     <frame x="3" y="721" w="51" h="17"/>
   </animation>
+  <animation name="throwKunai" speed="0.05f" loop="true">
+    <frame x="3" y="596" w="51" h="54"/>
+    <frame x="63" y="596" w="45" h="54"/>
+    <frame x="123" y="596" w="39" h="54"/>
+  </animation>
+  <animation name="throwKunaiBackwards" speed="0.05f" loop="true">
+    <frame x="531" y="596" w="51" h="54"/>
+    <frame x="477" y="596" w="45" h="54"/>
+    <frame x="423" y="596" w="39" h="54"/>
+  </animation>
 
   <audio path ="audio/fx/player_death.wav"></audio>
   <audio2 tp_path ="audio/fx/teleport.wav"></audio2>

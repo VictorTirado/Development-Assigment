@@ -39,8 +39,8 @@ public:
 	Animation fall;
 	Animation jumpBackwards;
 	Animation fallBackwards;
-	//Animation throwKunai;
-	//Animation throwKunaiBackwards;
+	Animation throwKunai;
+	Animation throwKunaiBackwards;
 	
 	p2SString path = nullptr;
 	p2SString deathfx_path = nullptr;
@@ -58,6 +58,7 @@ public:
 
 	bool can_tp = false;
 	bool is_tp = false;
+	bool is_shooting = false;
 
 	enum Collision_Type
 	{

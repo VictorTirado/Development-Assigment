@@ -50,10 +50,10 @@ Entity_Player::Entity_Player(int x, int y) : Entity(x , y)
 			LoadAnimation(animations, &jumpBackwards);
 		if (name == "fallBackwards")
 			LoadAnimation(animations, &fallBackwards);
-	/*	if (name == "throwKunai")
+		if (name == "throwKunai")
 			LoadAnimation(animations, &throwKunai);
 		if (name == "throwKunaiBackwards")
-			LoadAnimation(animations, &throwKunaiBackwards);*/
+			LoadAnimation(animations, &throwKunaiBackwards);
 	}
 
 	deathfx_path = player.child("audio").attribute("path").as_string();
@@ -178,18 +178,31 @@ void Entity_Player::Update(float dt)
 
 	//THROW KUNAI
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+		is_shooting = true;
+	
+
+	if (is_shooting)
 	{
 		if (is_backwards)
 		{
-			App->particles->kunai_particle_backwards.speed.x = -30;
+			animation = &throwKunaiBackwards;
+			App->particles->kunai_particle_backwards.speed.x = -800*dt;
 			App->particles->AddParticle(App->particles->kunai_particle_backwards, position.x, position.y + 20, COLLIDER_PLAYER_SHOT);
 		}
 
 		else
 		{
-			App->particles->kunai_particle.speed.x = 30;
+			animation = &throwKunai;
+			App->particles->kunai_particle.speed.x = 800 * dt;
 			App->particles->AddParticle(App->particles->kunai_particle, position.x + 12, position.y + 20, COLLIDER_PLAYER_SHOT);
 		}
+		is_shooting = false;
+	}
+
+	if(!is_shooting)
+	{
+		throwKunaiBackwards.Reset();
+		throwKunai.Reset();
 	}
 	
 	//JUMP

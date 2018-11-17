@@ -579,11 +579,11 @@ bool j1Map::LoadProperties2(pugi::xml_node& node, Properties_& properties)
 
 				 if (tileset != NULL)
 				 {
-					 /*map[i] = (tile_id - tileset->firstgid) > 0 ? 0 : 1;*/
-					 if (tile_id - tileset->firstgid == 50)
+					 map[i] = (tile_id - tileset->firstgid) > 0 ? 0 : 1;
+					/* if (tile_id - tileset->firstgid == 50)
 						 map[i] = 0;
 					 else
-						 map[i] = 1;
+						 map[i] = 1;*/
 					
 				 }
 			 }

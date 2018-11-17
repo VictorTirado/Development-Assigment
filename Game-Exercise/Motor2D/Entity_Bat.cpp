@@ -71,7 +71,7 @@ void Entity_Bat::Update(float dt)
 	player_pos.y -= 1;
 
 	if (Radar() == true) {
-		if (App->pathfinding->CreatePath(bat_pos, player_pos) != -1)
+		if (App->pathfinding->CreatePath(bat_pos, player_pos,BAT) != -1)
 		{
 			const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
 			if (App->scene->collision_debug == true)
@@ -107,7 +107,7 @@ void Entity_Bat::Update(float dt)
 	}
 	else if (bat_pos != original_pos)
 	{
-		if (App->pathfinding->CreatePath(bat_pos, original_pos) != -1)
+		if (App->pathfinding->CreatePath(bat_pos, original_pos,BAT) != -1)
 		{
 			const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
 			if (App->collision->debug == true)

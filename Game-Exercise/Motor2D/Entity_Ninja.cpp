@@ -71,16 +71,18 @@ void Entity_Ninja::Update(float dt)
 	}
 	ninja_pos = App->map->WorldToMap(position.x, position.y);
 	player_pos = App->entities->player->player_pos;
-	player_pos.x += 1;
-	player_pos.y -= 1;
-	gid = App->map->Get_gid(position.x + 10, position.y + 45);
-	App->render->DrawQuad({ position.x + 10,position.y + 45,16,16 }, 0, 0, 255, 255);
+	player_pos.y += 1;
+	gid = App->map->Get_gid(position.x + 10, position.y + 35);
+	App->render->DrawQuad({ position.x + 10,position.y + 35,16,16 }, 0, 0, 255, 255);
 
 	if (App->map->data.map_layers.end->data->data[gid + 1] != 51 && App->map->data.map_layers.end->data->data[gid] != 51)
 		position.y += 70 * dt;
-
+	if (Radar() == false && ninja_pos == original_pos)
+	{
+		animation = &idle;
+	}
 	if (Radar() == true) {
-		if (App->pathfinding->CreatePath(ninja_pos, player_pos) != -1)
+		if (App->pathfinding->CreatePath(ninja_pos, player_pos,NINJA) != -1)
 		{
 			const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
 			if (App->scene->collision_debug == true)
@@ -96,21 +98,62 @@ void Entity_Ninja::Update(float dt)
 				path_to_follow = iPoint(path->At(0)->x, path->At(0)->y);
 				if (path_to_follow.x < ninja_pos.x)
 				{
+					animation = &runLeft;
 					speed.x = -60 * dt;
 
 				}
 				else if (path_to_follow.x > ninja_pos.x)
 				{
+					animation = &runRight;
 					speed.x = 60 * dt;
 				}
-				if (path_to_follow.y < ninja_pos.y)
+				/*if (path_to_follow.y < ninja_pos.y)
 				{
 					speed.y = -60 * dt;
 				}
 				if (path_to_follow.y > ninja_pos.y)
 				{
 					speed.y = +60 * dt;
+				}*/
+			}
+
+		}
+	}
+	else if (ninja_pos != original_pos)
+	{
+		if (App->pathfinding->CreatePath(ninja_pos, original_pos,NINJA) != -1)
+		{
+			const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
+			if (App->collision->debug == true)
+			{
+				for (int i = 0; i < path->Count(); ++i)
+				{
+					iPoint x_pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+					App->render->Blit(X, x_pos.x, x_pos.y);
 				}
+			}
+			if (path->Count() > 0)
+			{
+				path_to_follow = iPoint(path->At(0)->x, path->At(0)->y);
+				if (path_to_follow.x < ninja_pos.x)
+				{
+					animation = &runLeft;
+					speed.x = -60 * dt;
+
+				}
+				else if (path_to_follow.x > ninja_pos.x)
+				{
+					animation = &runRight;
+					speed.x = 60 * dt;
+				}
+				/*if (path_to_follow.y < ninja_pos.y)
+				{
+					speed.y = -60 * dt;
+				}
+				if (path_to_follow.y > ninja_pos.y)
+				{
+					speed.y = +60 * dt;
+				}*/
 			}
 		}
 	}

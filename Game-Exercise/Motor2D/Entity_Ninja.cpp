@@ -36,6 +36,12 @@ Entity_Ninja::Entity_Ninja(int x, int y) :Entity(x, y)
 		p2SString name = animations.attribute("name").as_string();
 		if (name == "idle")
 			LoadAnimation(animations, &idle);
+		if (name == "idleRight")
+			LoadAnimation(animations, &idleRight);
+		if (name == "runLeft")
+			LoadAnimation(animations, &runLeft);
+		if (name == "runRight")
+			LoadAnimation(animations, &runRight);
 	}
 
 	animation = &idle;

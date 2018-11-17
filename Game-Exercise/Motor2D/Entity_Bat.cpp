@@ -34,6 +34,8 @@ Entity_Bat::Entity_Bat(int x, int y):Entity(x, y)
 		p2SString name = animations.attribute("name").as_string();
 		if (name == "idle")
 			LoadAnimation(animations, &idle);
+		if (name == "idleRight")
+			LoadAnimation(animations, &idleRight);
 	}
 
 	animation = &idle;

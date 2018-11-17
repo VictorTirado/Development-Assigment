@@ -30,6 +30,9 @@ public:
 public:
 
 	Animation idle;
+	Animation idleRight;
+	Animation runLeft;
+	Animation runRight;
 	bool firstUpdate = true;
 	p2SString path = nullptr;
 	uint gid = 0;

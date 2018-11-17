@@ -31,6 +31,7 @@ public:
 
 	p2SString path = nullptr;
 	Animation idle;
+	Animation idleRight;
 	bool firstUpdate = true;
 	uint range = 8;
 

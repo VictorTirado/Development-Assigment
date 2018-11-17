@@ -93,7 +93,7 @@ void j1Entities::DestroyEntities()
 	{
 		if (entities[i] != nullptr)
 		{
-			entities[i]->collider->to_delete = true;
+			//entities[i]->collider->to_delete = true;
 			delete entities[i];
 			entities[i] = nullptr;
 		}

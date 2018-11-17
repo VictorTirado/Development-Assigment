@@ -71,7 +71,7 @@ void j1Map::Spawn()
 							{
 								App->entities->SpawnEntities(coords.x, coords.y, BAT);
 							}
-							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 46)
+							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 54)
 							{
 								App->entities->SpawnEntities(coords.x, coords.y, NINJA);
 							}

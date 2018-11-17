@@ -25,12 +25,21 @@ public:
 	void OnCollision(Collider* collider);
 	void LoadAnimation(pugi::xml_node&, Animation*);
 
+	bool Radar();
 
 public:
 
 	Animation idle;
 	bool firstUpdate = true;
 	p2SString path = nullptr;
+	uint gid = 0;
+
+	iPoint original_pos;
+	iPoint ninja_pos;
+	iPoint player_pos;
+	iPoint speed = iPoint(0, 0);
+	iPoint path_to_follow;
+	uint range = 8;
 
 };
 

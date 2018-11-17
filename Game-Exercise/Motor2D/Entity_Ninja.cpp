@@ -14,6 +14,7 @@
 #include "j1Render.h"
 #include "j1Entitites.h"
 #include "j1Scene.h"
+#include "j1Pathfinding.h"
 
 #include "j1FadeToBlack.h"
 #include "Brofiler\Brofiler.h"
@@ -23,7 +24,7 @@
 Entity_Ninja::Entity_Ninja(int x, int y) :Entity(x, y)
 {
 
-	sprites = App->tex->Load(App->entities->textures.GetString());
+	sprites = App->tex->Load("textures/Enemy_Ninja.png");
 	pugi::xml_document ninja_file;
 	pugi::xml_node ninja;
 	ninja = App->LoadEntities(ninja_file, Entities::NINJA_ENTITY);
@@ -38,6 +39,7 @@ Entity_Ninja::Entity_Ninja(int x, int y) :Entity(x, y)
 	}
 
 	animation = &idle;
+	collider = App->collision->AddCollider({ 0, 0, 33, 47 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->entities);
 }
 
 Entity_Ninja::~Entity_Ninja() 
@@ -57,10 +59,56 @@ void Entity_Ninja::Update(float dt)
 {
 	BROFILER_CATEGORY("EntityNinjaUpdate", Profiler::Color::PowderBlue);
 	if (firstUpdate == true) {
-		sprites = App->tex->Load("textures/Enemy_Ninja.png");
-		collider = App->collision->AddCollider({ 0, 0, 33, 47 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->entities);
+		X = App->tex->Load("textures/x.png");
+		original_pos = App->map->WorldToMap(position.x, position.y);
 		firstUpdate = false;
 	}
+	ninja_pos = App->map->WorldToMap(position.x, position.y);
+	player_pos = App->entities->player->player_pos;
+	player_pos.x += 1;
+	player_pos.y -= 1;
+	gid = App->map->Get_gid(position.x + 10, position.y + 45);
+	App->render->DrawQuad({ position.x + 10,position.y + 45,16,16 }, 0, 0, 255, 255);
+
+	if (App->map->data.map_layers.end->data->data[gid + 1] != 51 && App->map->data.map_layers.end->data->data[gid] != 51)
+		position.y += 70 * dt;
+
+	if (Radar() == true) {
+		if (App->pathfinding->CreatePath(ninja_pos, player_pos) != -1)
+		{
+			const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
+			if (App->scene->collision_debug == true)
+			{
+				for (int i = 0; i < path->Count(); ++i)
+				{
+					iPoint x_pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+					App->render->Blit(X, x_pos.x, x_pos.y);
+				}
+			}
+			if (path->Count() > 0)
+			{
+				path_to_follow = iPoint(path->At(0)->x, path->At(0)->y);
+				if (path_to_follow.x < ninja_pos.x)
+				{
+					speed.x = -60 * dt;
+
+				}
+				else if (path_to_follow.x > ninja_pos.x)
+				{
+					speed.x = 60 * dt;
+				}
+				if (path_to_follow.y < ninja_pos.y)
+				{
+					speed.y = -60 * dt;
+				}
+				if (path_to_follow.y > ninja_pos.y)
+				{
+					speed.y = +60 * dt;
+				}
+			}
+		}
+	}
+	position += speed;
 }
 
 bool Entity_Ninja::PostUpdate()
@@ -87,10 +135,10 @@ bool Entity_Ninja::CleanUp()
 
 void Entity_Ninja::OnCollision(Collider* collider)
 {
-	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER) {
+	/*if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER) {
 		LOG("COLLISION");
 		App->entities->ninja->CleanUp();
-	}
+	}*/
 }
 
 void Entity_Ninja::LoadAnimation(pugi::xml_node& animation, Animation* ninja)
@@ -118,4 +166,9 @@ bool Entity_Ninja::Save(pugi::xml_node& data)const
 	data.child("position").append_attribute("y") = position.y;
 
 	return true;
+}
+
+bool Entity_Ninja::Radar()
+{
+	return (original_pos.x < player_pos.x + range && original_pos.x > player_pos.x - range && original_pos.y < player_pos.y + range && original_pos.y > player_pos.y - range);
 }

@@ -41,6 +41,7 @@ public:
 	iPoint bat_pos;
 	iPoint player_pos;
 
+
 };
 
 #endif

@@ -47,7 +47,7 @@ void Entity::Draw(SDL_Texture* sprites)
 	if (this->entity_type == NINJA && App->entities->ninja->collider != nullptr)
 	{
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
-		//collider->SetPos(position.x, position.y);
+		collider->SetPos(position.x, position.y);
 	}
 }
 

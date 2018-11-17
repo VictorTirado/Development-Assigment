@@ -39,6 +39,8 @@ public:
 	Animation fall;
 	Animation jumpBackwards;
 	Animation fallBackwards;
+	//Animation throwKunai;
+	//Animation throwKunaiBackwards;
 	
 	p2SString path = nullptr;
 	p2SString deathfx_path = nullptr;

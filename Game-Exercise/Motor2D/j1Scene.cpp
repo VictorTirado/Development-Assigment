@@ -133,7 +133,7 @@ bool j1Scene::ChangeMap(int map_number)
 		App->map->CleanUp();
 		App->entities->DestroyEntities();
 		App->fade_to_black->FadeToBlack(this, App->entities, 3.0f);
-		App->map->Load("Map3.tmx");
+		App->map->Load("Map4.tmx");
 		App->map->Spawn();
 	}
 	else if (map_number == 2)

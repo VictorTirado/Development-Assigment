@@ -83,6 +83,7 @@ bool j1Entities::PostUpdate()
 
 bool j1Entities::CleanUp()
 {
+	
 	DestroyEntities();
 	
 	return true;
@@ -93,7 +94,6 @@ void j1Entities::DestroyEntities()
 	{
 		if (entities[i] != nullptr)
 		{
-			//entities[i]->collider->to_delete = true;
 			delete entities[i];
 			entities[i] = nullptr;
 		}

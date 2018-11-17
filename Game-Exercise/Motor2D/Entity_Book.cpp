@@ -33,19 +33,11 @@ Entity_Book::Entity_Book(int x, int y) : Entity(x, y)
 
 Entity_Book::~Entity_Book()
 {
-	CleanUp();
 }
 
 
 
 
-bool Entity_Book::PreUpdate()
-{
-
-	bool ret = true;
-
-	return ret;
-}
 
 void Entity_Book::Update(float dt)
 {
@@ -57,33 +49,14 @@ void Entity_Book::Update(float dt)
 	}
 }
 
-bool Entity_Book::PostUpdate()
-{
-	bool ret = true;
-	return ret;
-}
 
-bool Entity_Book::CleanUp()
-{
-	LOG("Unloading book");
-
-	App->tex->UnLoad(sprites);
-	if (App->entities->book->collider != nullptr)
-	{
-		App->entities->book->collider->to_delete = true;
-		App->entities->book->collider = nullptr;
-	}
-	sprites = nullptr;
-
-	return true;
-}
 
 void Entity_Book::OnCollision(Collider* collider)
 {
 	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER) {
 		LOG("COLLISION");
 		App->entities->player->can_tp = true;
-		App->entities->book->CleanUp();
+		
 	}
 }
 

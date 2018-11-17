@@ -66,26 +66,12 @@ Entity_Player::Entity_Player(int x, int y) : Entity(x , y)
 
 Entity_Player::~Entity_Player()
 {
-	CleanUp();
-}
-
-
-bool Entity_Player::Start()
-{
-	bool ret = true;
-
 	
-	
-	return ret;
 }
 
-bool Entity_Player::PreUpdate()
-{
-	BROFILER_CATEGORY("EntityPlayerPreUpdate", Profiler::Color::FireBrick);
-	bool ret = true;
 
-	return ret;
-}
+
+
 
 void Entity_Player::Update(float dt)
 {
@@ -118,17 +104,17 @@ void Entity_Player::Update(float dt)
 	}
 	if (App->map->data.map_layers.end->data->data[gid] == Collision_Type::COLLISION_DEATH)
 	{
+		
 		App->map->CleanUp();
-		App->entities->DestroyEntities();
 		if (App->scene->map_number == 1)
 		{
-			App->map->Load("Map3.tmx");
+			App->map->Load("Map4.tmx");
 			can_tp = false;
 			App->entities->book->firstUpdate = true;
 		}
 		else if (App->scene->map_number == 2)
 			App->map->Load("ForestMap.tmx");
-		
+		App->entities->DestroyEntities();
 		App->audio->PlayFx(1); //player's death fx
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 		App->map->Spawn();
@@ -271,29 +257,6 @@ void Entity_Player::Update(float dt)
 	App->render->camera.y = (-position.y * App->win->render_scale) + (App->win->height / 2);
 }
 
-bool Entity_Player::PostUpdate()
-{
-	BROFILER_CATEGORY("EntityPlayerPostUpdate", Profiler::Color::LemonChiffon);
-	bool ret = true;
-	return ret;
-}
-
-bool Entity_Player::CleanUp()
-{
-	LOG("Unloading player");
-	
-	App->tex->UnLoad(sprites);
-	sprites = nullptr;
-	
-	App->audio->fx.clear();
-	if (collider != nullptr)
-	{
-		collider->to_delete = true;
-		collider = nullptr;
-	}
-	return true;
-}
-
 
 void Entity_Player::LoadAnimation(pugi::xml_node& animation, Animation* player)
 {
@@ -342,7 +305,6 @@ void Entity_Player::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == COLLIDER_POWER_UP)
 	{
-		//App->entities->book->CleanUp();
 		can_tp = true;
 	}
 }

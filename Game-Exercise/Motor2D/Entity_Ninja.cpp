@@ -45,21 +45,14 @@ Entity_Ninja::Entity_Ninja(int x, int y) :Entity(x, y)
 	}
 
 	animation = &idle;
-	collider = App->collision->AddCollider({ 0, 0, 33, 47 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->entities);
+	collider = App->collision->AddCollider({ 0, 0, 30, 45 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->entities);
 }
 
 Entity_Ninja::~Entity_Ninja() 
 {
-	CleanUp();
+	
 }
 
-bool Entity_Ninja::PreUpdate()
-{
-	BROFILER_CATEGORY("EntityNinjaPreUpdate", Profiler::Color::Azure);
-	bool ret = true;
-
-	return ret;
-}
 
 void Entity_Ninja::Update(float dt)
 {
@@ -77,10 +70,7 @@ void Entity_Ninja::Update(float dt)
 
 	if (App->map->data.map_layers.end->data->data[gid + 1] != 51 && App->map->data.map_layers.end->data->data[gid] != 51)
 		position.y += 70 * dt;
-	if (Radar() == false && ninja_pos == original_pos)
-	{
-		animation = &idle;
-	}
+
 	if (Radar() == true) {
 		if (App->pathfinding->CreatePath(ninja_pos, player_pos,NINJA) != -1)
 		{
@@ -146,41 +136,21 @@ void Entity_Ninja::Update(float dt)
 					animation = &runRight;
 					speed.x = 60 * dt;
 				}
-				/*if (path_to_follow.y < ninja_pos.y)
+				if (path_to_follow.y < ninja_pos.y)
 				{
 					speed.y = -60 * dt;
 				}
 				if (path_to_follow.y > ninja_pos.y)
 				{
 					speed.y = +60 * dt;
-				}*/
+				}
 			}
 		}
 	}
 	position += speed;
 }
 
-bool Entity_Ninja::PostUpdate()
-{
-	BROFILER_CATEGORY("EntityNinjaPostUpdate", Profiler::Color::Ivory);
-	bool ret = true;
-	return ret;
-}
 
-bool Entity_Ninja::CleanUp()
-{
-	LOG("Unloading ninja");
-
-	App->tex->UnLoad(sprites);
-	if (App->entities->ninja->collider != nullptr)
-	{
-		App->entities->ninja->collider->to_delete = true;
-		App->entities->ninja->collider = nullptr;
-	}
-	sprites = nullptr;
-
-	return true;
-}
 
 void Entity_Ninja::OnCollision(Collider* collider)
 {

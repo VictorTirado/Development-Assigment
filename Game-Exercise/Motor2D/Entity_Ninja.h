@@ -14,10 +14,8 @@ public:
 	~Entity_Ninja();
 
 
-	bool CleanUp();
-	bool PreUpdate();
+	
 	void Update(float dt);
-	bool PostUpdate();
 
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;

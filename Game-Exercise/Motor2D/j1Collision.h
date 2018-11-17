@@ -50,6 +50,7 @@ public:
 	bool CleanUp() override;
 
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr);
+	bool EraseCollider(Collider* collider);
 	void DebugDraw();
 	bool debug = false;
 private:

@@ -193,24 +193,37 @@ void Entity_Player::Update(float dt)
 	}
 	
 	//JUMP
-	if (App->map->prop->jumping_time == 0.0f)
-	   App->map->prop->player_position_y0 = - 1 * position.y;
-
+	if (!is_jumping)
+	{
+		old_player_position.y = position.y;
+		velocity.y = 0;
+	}
+	  
 
 	if (is_jumping)
 	{
-		App->map->prop->jumping_time += 0.1f;
+		/*App->map->prop->jumping_time += 0.01f*dt;
 		
 		position.y -= 150*dt;
 
-		if (position.y > App->map->prop->player_position_y0 && App->map->prop->jumping_time >= 1.5f)
+		if (position.y > App->map->prop->player_position_y0 && App->map->prop->jumping_time >= 2.0f)
 		{
 			position.y += 70*dt;
 			App->map->prop->jumping_time = 0.0f;
 			is_jumping = false;
 			is_falling = true;
+		}*/
+		velocity.y = -200*dt;
+
+		if (position.y < old_player_position.y - 60)
+		{
+			velocity.y = 1*dt;
+			is_jumping = false;
 		}
+
 	}
+	velocity.y += App->map->prop->gravity;
+	position.y += velocity.y;
 	
 	if (is_falling && !is_backwards)
 		animation = &fall;
@@ -248,13 +261,12 @@ void Entity_Player::Update(float dt)
 	if (App->scene->is_god)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-			position.y -= 4;
+			position.y -= 120*dt;
 
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-			position.y += 4;
+			position.y += 120 * dt;
 	}
 	
-
 	App->render->camera.x = (-position.x * App->win->render_scale) + (App->win->width / 2);
 	App->render->camera.y = (-position.y * App->win->render_scale) + (App->win->height / 2);
 }

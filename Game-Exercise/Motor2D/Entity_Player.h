@@ -68,6 +68,8 @@ public:
 		
 
 	};
-	
+
+	iPoint old_player_position;
+	iPoint velocity;
 };
 #endif

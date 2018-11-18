@@ -52,6 +52,7 @@ void Entity_Bat::Update(float dt)
 	BROFILER_CATEGORY("EntityBatUpdate", Profiler::Color::Maroon);
 	if (firstUpdate == true)
 	{
+		lives = 1;
 		X = App->tex->Load("textures/x.png");
 		original_pos= App->map->WorldToMap(position.x, position.y);
 		collider = App->collision->AddCollider({ 0, 0, 29, 30 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->entities);
@@ -148,8 +149,10 @@ void Entity_Bat::OnCollision(Collider* collider)
 	}
 
 	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
-		LOG("COLLISION");	
+		lives--;
 	}
+	if (lives <= 0)
+		delete_entity = true;
 }
 
 void Entity_Bat::LoadAnimation(pugi::xml_node& animation, Animation* bat)

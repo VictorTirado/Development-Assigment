@@ -45,7 +45,7 @@ Entity_Ninja::Entity_Ninja(int x, int y) :Entity(x, y)
 	}
 
 	animation = &idle;
-	collider = App->collision->AddCollider({ 0, 0, 30, 45 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->entities);
+
 }
 
 Entity_Ninja::~Entity_Ninja() 
@@ -58,6 +58,8 @@ void Entity_Ninja::Update(float dt)
 {
 	BROFILER_CATEGORY("EntityNinjaUpdate", Profiler::Color::PowderBlue);
 	if (firstUpdate == true) {
+		lives = 2;
+		collider = App->collision->AddCollider({ 0, 0, 30, 45 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->entities);
 		X = App->tex->Load("textures/x.png");
 		original_pos = App->map->WorldToMap(position.x, position.y);
 		firstUpdate = false;
@@ -154,10 +156,14 @@ void Entity_Ninja::Update(float dt)
 
 void Entity_Ninja::OnCollision(Collider* collider)
 {
-	/*if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER) {
-		LOG("COLLISION");
-		App->entities->ninja->CleanUp();
-	}*/
+	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
+		lives--;
+		
+	}
+	if (lives <= 0)
+	{
+		delete_entity = true;
+	}
 }
 
 void Entity_Ninja::LoadAnimation(pugi::xml_node& animation, Animation* ninja)

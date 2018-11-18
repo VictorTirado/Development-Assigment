@@ -18,7 +18,8 @@ public:
 public:
 	iPoint position = iPoint(0, 0);
 	int entity_type = 0;
-
+	bool delete_entity = false;
+	int lives = 0;
 public:
 	Entity(int x, int y);
 	virtual ~Entity();

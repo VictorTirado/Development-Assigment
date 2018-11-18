@@ -46,9 +46,17 @@ bool j1Entities::Start()
 
 bool j1Entities::PreUpdate()
 {
-	BROFILER_CATEGORY("ModuleEntitiesPreUpdate", Profiler::Color::FireBrick);
-
 	bool ret = true;
+	for (uint i = 0; i < entities.Count(); i++)
+	{
+		if (entities[i]->delete_entity == true)
+		{		
+				delete (entities[i]);
+				entities[i] = nullptr;
+				entities.Pop(entities[i]);
+		}
+	}
+	
 	
 	return ret;
 }
@@ -152,6 +160,7 @@ void j1Entities::OnCollision(Collider* c1, Collider* c2)
 		if(entities[i]->GetCollider() == c1)
 		entities[i]->OnCollision(c2); 
 	}
+	
 
 }
 

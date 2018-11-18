@@ -56,7 +56,7 @@ void Entity_Book::OnCollision(Collider* collider)
 	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER) {
 		LOG("COLLISION");
 		App->entities->player->can_tp = true;
-		
+		delete_entity = true;
 	}
 }
 

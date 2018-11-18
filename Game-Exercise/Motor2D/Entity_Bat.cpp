@@ -43,7 +43,8 @@ Entity_Bat::Entity_Bat(int x, int y):Entity(x, y)
 
 Entity_Bat::~Entity_Bat()
 {
-
+	sprites = nullptr;
+	X = nullptr;
 }
 
 

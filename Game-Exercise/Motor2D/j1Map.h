@@ -118,6 +118,7 @@ public:
 	void Draw();
 
 	void Spawn();
+	void SpawnEnemies();
 
 	// Called before quitting
 	bool CleanUp();

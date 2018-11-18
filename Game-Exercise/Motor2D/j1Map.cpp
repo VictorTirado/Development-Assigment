@@ -86,6 +86,60 @@ void j1Map::Spawn()
 	layers_list = nullptr;
 
 }
+void j1Map::SpawnEnemies()
+{
+	BROFILER_CATEGORY("MapSpawnFunction", Profiler::Color::MintCream);
+
+	if (map_loaded == false)
+		return;
+
+
+	p2List_item<MapLayer*>* layers_list = this->data.map_layers.start;
+
+	while (layers_list != NULL)
+	{
+		for (int i = 0; i < layers_list->data->width; i++)
+		{
+			for (int j = 0; j < layers_list->data->height; j++)
+			{
+				int tile_id = layers_list->data->Get(i, j);
+				if (tile_id > 0)
+				{
+
+					TileSet* tileset = GetTilesetFromTileId(tile_id);
+					if (tileset != nullptr)
+					{
+
+						if (layers_list->data->Get(i, j) != 0)
+						{
+							iPoint coords = MapToWorld(i, j);
+							uint gid = Get_gid(coords.x, coords.y);
+
+						
+						
+							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 73)
+							{
+								App->entities->SpawnEntities(coords.x, coords.y, BOOK);
+							}
+							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 74)
+							{
+								App->entities->SpawnEntities(coords.x, coords.y, BAT);
+							}
+							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 54)
+							{
+								App->entities->SpawnEntities(coords.x, coords.y, NINJA);
+							}
+						}
+					}
+					tileset = nullptr;
+				}
+			}
+		}
+		layers_list = layers_list->next;
+	}
+	layers_list = nullptr;
+
+}
 
 void j1Map::Draw()
 {

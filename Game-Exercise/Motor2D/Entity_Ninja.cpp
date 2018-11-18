@@ -50,7 +50,8 @@ Entity_Ninja::Entity_Ninja(int x, int y) :Entity(x, y)
 
 Entity_Ninja::~Entity_Ninja() 
 {
-	
+	sprites = nullptr;
+	X = nullptr;
 }
 
 

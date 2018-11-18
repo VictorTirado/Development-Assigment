@@ -13,6 +13,7 @@
 #include "j1Entitites.h"
 #include "j1FadeToBlack.h"
 #include "j1Particles.h"
+#include "j1Pathfinding.h"
 #include "Entity_Player.h"
 #include "Entity_Book.h"
 #include "Brofiler\Brofiler.h"
@@ -66,7 +67,7 @@ Entity_Player::Entity_Player(int x, int y) : Entity(x , y)
 
 Entity_Player::~Entity_Player()
 {
-	
+	sprites = nullptr;
 }
 
 
@@ -125,7 +126,7 @@ void Entity_Player::Update(float dt)
 	{
 		
 		App->map->CleanUp();
-		App->entities->DestroyEntities();
+		
 		if (App->scene->map_number == 1)
 		{
 			App->map->Load("ForestMap.tmx");
@@ -140,6 +141,7 @@ void Entity_Player::Update(float dt)
 			firstUpdate = true;
 			can_tp = false;
 		}
+		App->entities->DestroyEntities();
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 		App->map->Spawn();
 	}
@@ -296,17 +298,40 @@ bool Entity_Player::Load(pugi::xml_node& data)
 	{
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 		App->map->CleanUp();
-		App->map->Load("ForestMap.tmx");
+		App->entities->DestroyEntities();
+		if (App->map->Load("ForestMap.tmx"))
+		{
+			
+			int w, h;
+			uchar* data = NULL;
+			if (App->map->CreateWalkabilityMap(w, h, &data))
+				App->pathfinding->SetMap(w, h, data);
+
+			RELEASE_ARRAY(data);
+			
+		}
+		App->map->SpawnEnemies();
 		position.x = data.child("position").attribute("x").as_int();
 		position.y = data.child("position").attribute("y").as_int();
+		App->entities->SpawnEntities(position.x, position.y, PLAYER);
 	}
 	else if (App->scene->map_number == 1 && data.child("map") != NULL)
 	{
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 		App->map->CleanUp();
-		App->map->Load("Map4.tmx");
+		App->entities->DestroyEntities();
+		if(App->map->Load("Map4.tmx"))
+		{
+			int w, h;
+			uchar* data = NULL;
+			if (App->map->CreateWalkabilityMap(w, h, &data))
+				App->pathfinding->SetMap(w, h, data);
+			RELEASE_ARRAY(data);
+		}
+		App->map->SpawnEnemies();
 		position.x = data.child("position").attribute("x").as_int();
 		position.y = data.child("position").attribute("y").as_int();
+		App->entities->SpawnEntities(position.x,position.y,PLAYER);
 	}
 	return true;
 }

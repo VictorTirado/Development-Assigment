@@ -64,8 +64,10 @@ public:
 	{
 		NONE,
 		COLLISION_WALL = 51,
+		COLLISION_FLOOR = 53,
 		COLLISION_DEATH = 71,
 		COLLISION_CHANGE_MAP =72,
+
 	};
 
 	iPoint old_player_position;

@@ -40,7 +40,7 @@ public:
 	iPoint player_pos;
 	iPoint speed = iPoint(0, 0);
 	iPoint path_to_follow;
-	uint range = 8;
+	uint range = 10;
 
 };
 

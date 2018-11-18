@@ -153,12 +153,15 @@ void Entity_Bat::Update(float dt)
 
 void Entity_Bat::OnCollision(Collider* collider)
 {
-	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER) {
-		LOG("COLLISION");
-	}
+	if (App->scene->is_god == false)
+	{
+		if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER)
+			App->entities->ResetMap(App->scene->map_number);
 
-	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
-		lives--;
+
+		else if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
+			lives--;
+		}
 	}
 	if (lives <= 0)
 		delete_entity = true;

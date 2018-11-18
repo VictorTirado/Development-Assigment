@@ -64,6 +64,7 @@ void Entity_Ninja::Update(float dt)
 		original_pos = App->map->WorldToMap(position.x, position.y);
 		firstUpdate = false;
 	}
+
 	ninja_pos = App->map->WorldToMap(position.x, position.y);
 	player_pos = App->entities->player->player_pos;
 	player_pos.y += 1;
@@ -80,6 +81,7 @@ void Entity_Ninja::Update(float dt)
 			const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
 			if (App->scene->collision_debug == true)
 			{
+				// SEE THE PATH
 				for (int i = 0; i < path->Count(); ++i)
 				{
 					iPoint x_pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
@@ -89,13 +91,13 @@ void Entity_Ninja::Update(float dt)
 			if (path->Count() > 0)
 			{
 				path_to_follow = iPoint(path->At(0)->x, path->At(0)->y);
-				if (path_to_follow.x < ninja_pos.x)
+				if (path_to_follow.x < ninja_pos.x  )
 				{
 					animation = &runLeft;
 					speed.x = -60 * dt;
 
 				}
-				else if (path_to_follow.x > ninja_pos.x)
+				else if (path_to_follow.x > ninja_pos.x  && App->map->data.map_layers.end->data->data[gid + 1] != 53)
 				{
 					animation = &runRight;
 					speed.x = 60 * dt;
@@ -128,13 +130,13 @@ void Entity_Ninja::Update(float dt)
 			if (path->Count() > 0)
 			{
 				path_to_follow = iPoint(path->At(0)->x, path->At(0)->y);
-				if (path_to_follow.x < ninja_pos.x)
+				if (path_to_follow.x < ninja_pos.x  && App->map->data.map_layers.end->data->data[gid + 1] != 53 && App->map->data.map_layers.end->data->data[gid - 1] != 53)
 				{
 					animation = &runLeft;
 					speed.x = -60 * dt;
 
 				}
-				else if (path_to_follow.x > ninja_pos.x)
+				else if (path_to_follow.x > ninja_pos.x && App->map->data.map_layers.end->data->data[gid + 1] != 53 && App->map->data.map_layers.end->data->data[gid - 1] != 53)
 				{
 					animation = &runRight;
 					speed.x = 60 * dt;
@@ -158,20 +160,20 @@ void Entity_Ninja::Update(float dt)
 
 void Entity_Ninja::OnCollision(Collider* collider)
 {
-	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
-		lives--;
-		
-	}
-	if (lives <= 0)
+	if (App->scene->is_god == false)
 	{
-		delete_entity = true;
-	}
-	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER) 
-	{
-		App->entities->ResetMap(App->scene->map_number);
-		
+		if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT)
+			lives--;
 
+		else if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER)
+			App->entities->ResetMap(App->scene->map_number);
+
+
+		if (lives <= 0)
+			delete_entity = true;
 	}
+	
+
 
 }
 

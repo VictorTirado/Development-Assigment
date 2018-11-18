@@ -195,7 +195,7 @@ void Entity_Player::Update(float dt)
 		can_tp = true;
 
 	//THROW KUNAI
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
 		is_shooting = true;
 	
 

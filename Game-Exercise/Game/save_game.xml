@@ -14,21 +14,33 @@
 	<entities>
 		<player>
 			<map level="1" />
-			<position x="192" y="256" />
+			<position x="251" y="206" />
 		</player>
+		<ninja>
+			<position x="392" y="222" />
+		</ninja>
 		<bat>
-			<position x="464" y="240" />
+			<position x="432" y="352" />
 		</bat>
 		<bat>
-			<position x="736" y="240" />
+			<position x="697" y="321" />
 		</bat>
+		<bat>
+			<position x="697" y="305" />
+		</bat>
+		<ninja>
+			<position x="665" y="335" />
+		</ninja>
 		<book>
 			<book caught="false" />
-			<position x="1552" y="272" />
+			<position x="1184" y="240" />
 		</book>
+		<bat>
+			<position x="697" y="345" />
+		</bat>
 	</entities>
 	<fadeToBlack />
 	<renderer>
-		<camera x="-64" y="-384" />
+		<camera x="-241" y="-234" />
 	</renderer>
 </game_state>

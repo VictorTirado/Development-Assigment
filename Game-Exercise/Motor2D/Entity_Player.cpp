@@ -114,6 +114,7 @@ void Entity_Player::Update(float dt)
 		}
 		else if (App->scene->map_number == 2)
 			App->map->Load("ForestMap.tmx");
+
 		App->entities->DestroyEntities();
 		App->audio->PlayFx(1); //player's death fx
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
@@ -289,7 +290,7 @@ bool Entity_Player::Load(pugi::xml_node& data)
 
 	if (App->scene->map_number == 2 && data.child("map") != NULL)
 	{
-		App->fade_to_black->FadeToBlack(App->scene, App->scene, 3.0f);
+		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 		App->map->CleanUp();
 		App->map->Load("ForestMap.tmx");
 		position.x = data.child("position").attribute("x").as_int();
@@ -297,9 +298,9 @@ bool Entity_Player::Load(pugi::xml_node& data)
 	}
 	else if (App->scene->map_number == 1 && data.child("map") != NULL)
 	{
-		App->fade_to_black->FadeToBlack(App->scene, App->scene, 3.0f);
+		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 		App->map->CleanUp();
-		App->map->Load("Map3.tmx");
+		App->map->Load("Map4.tmx");
 		position.x = data.child("position").attribute("x").as_int();
 		position.y = data.child("position").attribute("y").as_int();
 	}

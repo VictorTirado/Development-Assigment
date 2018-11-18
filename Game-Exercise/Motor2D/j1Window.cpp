@@ -31,6 +31,7 @@ bool j1Window::Awake(pugi::xml_node& config)
 	}
 	else
 	{
+		icon = SDL_LoadBMP("textures/Shuriken_icon.bmp");
 		//Create window
 		Uint32 flags = SDL_WINDOW_SHOWN;
 		bool fullscreen = config.child("fullscreen").attribute("value").as_bool(false);
@@ -64,7 +65,7 @@ bool j1Window::Awake(pugi::xml_node& config)
 		}
 
 		window = SDL_CreateWindow(App->GetTitle(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
-
+		SDL_SetWindowIcon(window, icon);
 		if(window == NULL)
 		{
 			LOG("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -90,6 +91,8 @@ bool j1Window::CleanUp()
 	{
 		SDL_DestroyWindow(window);
 	}
+	if (icon != NULL)
+		SDL_FreeSurface(icon);
 
 	//Quit SDL subsystems
 	SDL_Quit();

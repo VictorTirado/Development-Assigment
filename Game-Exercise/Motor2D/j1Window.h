@@ -37,6 +37,7 @@ public:
 
 	//The surface contained by the window
 	SDL_Surface* screen_surface;
+	SDL_Surface* icon;
 
 public:
 	p2SString	title = nullptr;

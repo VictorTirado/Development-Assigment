@@ -321,9 +321,9 @@ bool Entity_Player::Save(pugi::xml_node& data)const
 
 void Entity_Player::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c2->type == COLLIDER_POWER_UP)
+	if (c2->type == COLLIDER_TYPE::COLLIDER_ENEMY)
 	{
-		can_tp = true;
+		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 	}
 }
 

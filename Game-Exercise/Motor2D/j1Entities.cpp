@@ -231,5 +231,20 @@ bool j1Entities::Save(pugi::xml_node& data)const
 
 	return ret;
 }
+void j1Entities::ResetMap(int map)
+{
+	App->map->CleanUp();
+	if (App->scene->map_number == 1)
+	{
+		App->map->Load("Map4.tmx");
+	}
+	else if (App->scene->map_number == 2)
+	{
+		App->map->Load("ForestMap.tmx");
+	}
+	App->entities->DestroyEntities();
+	App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
+	App->map->Spawn();
+}
 
 

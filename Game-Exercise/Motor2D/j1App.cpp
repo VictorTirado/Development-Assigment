@@ -197,6 +197,7 @@ pugi::xml_node j1App::LoadEntities(pugi::xml_document& player_file, Entities typ
 	pugi::xml_node ret;
 
 	pugi::xml_parse_result result = player_file.load_file("entities.xml");
+	pugi::xml_node entities = player_file.child("entities");
 	if (result == NULL)
 		LOG("Could not load map xml file config.xml. pugi error: %s", result.description());
 	else
@@ -204,15 +205,15 @@ pugi::xml_node j1App::LoadEntities(pugi::xml_document& player_file, Entities typ
 		switch (type)
 		{
 		case Entities::PLAYER_ENTITY:
-			ret = player_file.child("player");
+			ret = entities.child("player");
 			break;
 
 		case Entities::BAT_ENTITY:
-			ret = player_file.child("bat");
+			ret = entities.child("bat");
 			break;
 
 		case Entities::NINJA_ENTITY:
-			ret = player_file.child("ninja");
+			ret = entities.child("ninja");
 			break;
 
 		}

@@ -44,6 +44,8 @@ public:
 
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
+	
+	void ResetMap(int map);
 
 	p2DynArray<Entity*> entities;
 	

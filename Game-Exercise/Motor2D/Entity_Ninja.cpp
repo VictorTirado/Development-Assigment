@@ -72,6 +72,7 @@ void Entity_Ninja::Update(float dt)
 
 	if (App->map->data.map_layers.end->data->data[gid + 1] != 51 && App->map->data.map_layers.end->data->data[gid] != 51)
 		position.y += 70 * dt;
+	
 
 	if (Radar() == true) {
 		if (App->pathfinding->CreatePath(ninja_pos, player_pos,NINJA) != -1)
@@ -138,18 +139,19 @@ void Entity_Ninja::Update(float dt)
 					animation = &runRight;
 					speed.x = 60 * dt;
 				}
-				if (path_to_follow.y < ninja_pos.y)
+			/*	if (path_to_follow.y < ninja_pos.y)
 				{
 					speed.y = -60 * dt;
 				}
 				if (path_to_follow.y > ninja_pos.y)
 				{
 					speed.y = +60 * dt;
-				}
+				}*/
 			}
 		}
 	}
 	position += speed;
+
 }
 
 
@@ -164,6 +166,13 @@ void Entity_Ninja::OnCollision(Collider* collider)
 	{
 		delete_entity = true;
 	}
+	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER) 
+	{
+		App->entities->ResetMap(App->scene->map_number);
+		
+
+	}
+
 }
 
 void Entity_Ninja::LoadAnimation(pugi::xml_node& animation, Animation* ninja)

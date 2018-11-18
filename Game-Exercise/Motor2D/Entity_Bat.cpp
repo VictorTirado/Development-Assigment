@@ -64,6 +64,12 @@ void Entity_Bat::Update(float dt)
 	player_pos.x += 1;
 	player_pos.y -= 1;
 
+	if (Radar() == false && original_pos == bat_pos)
+	{
+		animation = &idle;
+		speed.x = 0;
+		speed.y = 0;
+	}
 	if (Radar() == true) {
 		if (App->pathfinding->CreatePath(bat_pos, player_pos,BAT) != -1)
 		{
@@ -81,18 +87,19 @@ void Entity_Bat::Update(float dt)
 				path_to_follow = iPoint(path->At(0)->x, path->At(0)->y);
 				if (path_to_follow.x < bat_pos.x)
 				{
+					animation = &idle;
 					speed.x = -60 * dt;
-
 				}
 				else if (path_to_follow.x > bat_pos.x)
 				{
+					animation = &idleRight;
 					speed.x = 60 * dt;
 				}
 				if (path_to_follow.y < bat_pos.y)
 				{
 					speed.y = -60 * dt;
 				}
-				if (path_to_follow.y > bat_pos.y)
+				else if (path_to_follow.y > bat_pos.y)
 				{
 					speed.y = +60 * dt;
 				}
@@ -117,11 +124,13 @@ void Entity_Bat::Update(float dt)
 				path_to_follow = iPoint(path->At(0)->x, path->At(0)->y);
 				if (path_to_follow.x < bat_pos.x)
 				{
+					animation = &idle;
 					speed.x = -60 * dt;
 
 				}
 				else if (path_to_follow.x > bat_pos.x)
 				{
+						animation = &idleRight;
 					speed.x = 60 * dt;
 				}
 				if (path_to_follow.y < bat_pos.y)

@@ -24,7 +24,9 @@ You will need to get a parchment to reach the end of every level that gives you 
 - B: Show the logic of the player and the parchment
 
 ## Innovation
-	- Player loaded with xml.
+	- Flying enemy can use diagonals
+
+        - Turn up and down the volume level
 
 ## Authors
 
@@ -37,6 +39,12 @@ You will need to get a parchment to reach the end of every level that gives you 
 Repository of the game: https://github.com/VictorTirado/Development-Assigment
 
 Link to the release: https://github.com/VictorTirado/Development-Assigment/releases
+
+## Accomplishments
+
+Enric Pérez Rifà: FPS, game normalized with dt, brofiler, particles
+
+Víctor Tirado Fernández: flying enemy, walking enemy, enemy radar, save&load, entity system
 
 ## License
 
@@ -65,11 +73,17 @@ SOFTWARE.
 
 Character: https://www.spriters-resource.com/ds_dsi/narutoshippudenninjacouncil3/sheet/66530/
 
-Parchment: https://www.spriters-resource.com/ds_dsi/narutoshippudenninjacouncil3/sheet/98840/
+Parchment and Kunai: https://www.spriters-resource.com/ds_dsi/narutoshippudenninjacouncil3/sheet/98840/
+
+Flying enemy: https://www.spriters-resource.com/ds_dsi/narutoshippudenninjacouncil3/sheet/98844/
+
+Walking enemy: https://www.spriters-resource.com/ds_dsi/narutoshippudenninjacouncil3/sheet/98855/
 
 Tilesets: https://allfenom.itch.io/hills-simple-pack
 
-FX: http://soundbible.com/462-Male-Grunt.html
+FX: - http://soundbible.com/462-Male-Grunt.html
+
+    - https://www.zapsplat.com/music/knife-dagger-swing-swipe-through-air-whoosh-2/
 
 Background Song: http://www.twinmusicom.org/download_file?fileid=99
 

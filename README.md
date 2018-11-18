@@ -4,12 +4,14 @@ Welcome to our platformer game!
 
 This game is about to reach the goal passing through diferent handicaps.
 You will need to get a parchment to reach the end of every level that gives you the hability to teleport yourself vertically.
+Enemies will die if you shoot them with a kunai.
 
 ## Controls
 
 - A/D to move forwards and backwards
 - SPACEBAR to jump
 - Left Shift to teleport
+- F to shoot the kunai
 
 - Right Plus/Right Minus: higher/lower the volume level
 

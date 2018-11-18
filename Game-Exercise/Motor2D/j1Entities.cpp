@@ -40,7 +40,6 @@ bool j1Entities::Start()
 	bool ret = true;
 	App->map->Spawn();
 
-
 	return ret;
 }
 

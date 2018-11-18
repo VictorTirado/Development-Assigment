@@ -117,7 +117,7 @@ void Entity_Ninja::Update(float dt)
 	}
 	else if (ninja_pos != original_pos)
 	{
-		if (App->pathfinding->CreatePath(ninja_pos, original_pos,NINJA) != -1)
+		if (App->pathfinding->CreatePath(ninja_pos, original_pos,NINJA) != -1 && App->fade_to_black->IsFading() == false)
 		{
 			const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
 			if (App->collision->debug == true)
@@ -163,18 +163,14 @@ void Entity_Ninja::OnCollision(Collider* collider)
 {
 	if (App->scene->is_god == false)
 	{
-		if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT)
+		if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER)
+		App->entities->ResetMap(App->scene->map_number);
+
+		else if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT)
 			lives--;
-
-		else if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER)
-			App->entities->ResetMap(App->scene->map_number);
-
-
-		if (lives <= 0)
-			delete_entity = true;
 	}
-	
-
+	if (lives <= 0)
+		delete_entity = true;
 
 }
 
@@ -191,9 +187,11 @@ void Entity_Ninja::LoadAnimation(pugi::xml_node& animation, Animation* ninja)
 
 bool Entity_Ninja::Load(pugi::xml_node& data)
 {
-	position.x = data.child("position").attribute("x").as_int();
-	position.y = data.child("position").attribute("y").as_int();
-
+	if (data.child("position") != NULL)
+	{
+		position.x = data.child("position").attribute("x").as_int();
+		position.y = data.child("position").attribute("y").as_int();
+	}
 	return true;
 }
 

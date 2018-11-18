@@ -14,7 +14,6 @@ public:
 	~Entity_Bat();
 
 
-	
 	void Update(float dt);
 
 	bool Load(pugi::xml_node&);
@@ -26,17 +25,18 @@ public:
 	bool Radar();
 
 public:
+	bool firstUpdate = true;
 
 	p2SString path = nullptr;
+
 	Animation idle;
 	Animation idleRight;
-	bool firstUpdate = true;
+	
 	uint range = 8;
 
 	iPoint speed = iPoint(0,0);
 	iPoint path_to_follow;
 	iPoint original_pos;
-
 	iPoint bat_pos;
 	iPoint player_pos;
 

@@ -107,32 +107,35 @@ void Entity_Player::Update(float dt)
 	}
 	if (App->map->data.map_layers.end->data->data[gid] == Collision_Type::COLLISION_DEATH)
 	{
-		
 		App->map->CleanUp();
+		App->entities->DestroyEntities();
 		if (App->scene->map_number == 1)
 		{
 			App->map->Load("Map4.tmx");
+			App->map->Spawn();
 			can_tp = false;
-			//App->entities->book->firstUpdate = true;
 		}
 		else if (App->scene->map_number == 2)
+		{
 			App->map->Load("ForestMap.tmx");
-
-		App->entities->DestroyEntities();
+			App->map->Spawn();
+		}
+	
 		App->audio->PlayFx(1); //player's death fx
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
-		App->map->Spawn();
+	
 	}
 
 	if (App->map->data.map_layers.end->data->data[gid] == Collision_Type::COLLISION_CHANGE_MAP)
 	{
 		
 		App->map->CleanUp();
-		
+		App->entities->DestroyEntities();
 		if (App->scene->map_number == 1)
 		{
 			if (App->map->Load("ForestMap.tmx"))
 			{
+				App->map->Spawn();
 
 				int w, h;
 				uchar* data = NULL;
@@ -150,6 +153,7 @@ void Entity_Player::Update(float dt)
 		{
 			if (App->map->Load("Map4.tmx"))
 			{
+				App->map->Spawn();
 
 				int w, h;
 				uchar* data = NULL;
@@ -163,9 +167,8 @@ void Entity_Player::Update(float dt)
 			firstUpdate = true;
 			can_tp = false;
 		}
-		App->entities->DestroyEntities();
+		
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
-		App->map->Spawn();
 	}
 	//MOVEMENT PLAYER
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid-1] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
@@ -278,10 +281,10 @@ void Entity_Player::Update(float dt)
 	//GOD MODE  The player can fly and move everywhere and is not affected by gravity
 	if (App->scene->is_god)
 	{
-		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && App->fade_to_black->IsFading() == false)
 			position.y -= 120*dt;
 
-		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && App->fade_to_black->IsFading() == false)
 			position.y += 120 * dt;
 	}
 	

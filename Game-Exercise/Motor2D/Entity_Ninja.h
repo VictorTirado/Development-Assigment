@@ -13,8 +13,6 @@ public:
 	Entity_Ninja(int x, int y);
 	~Entity_Ninja();
 
-
-	
 	void Update(float dt);
 
 	bool Load(pugi::xml_node&);
@@ -26,21 +24,22 @@ public:
 	bool Radar();
 
 public:
-
+	bool firstUpdate = true;
 	Animation idle;
 	Animation idleRight;
 	Animation runLeft;
 	Animation runRight;
-	bool firstUpdate = true;
+	
 	p2SString path = nullptr;
-	uint gid = 0;
-
+	
 	iPoint original_pos;
 	iPoint ninja_pos;
 	iPoint player_pos;
 	iPoint speed = iPoint(0, 0);
 	iPoint path_to_follow;
+
 	uint range = 10;
+	uint gid = 0;
 
 };
 

@@ -54,7 +54,6 @@ public:
 	Entity_Bat* bat;
 	Entity_Ninja* ninja;
 	
-
 	p2SString textures;
 };
 

@@ -72,7 +72,7 @@ void Entity_Bat::Update(float dt)
 		speed.y = 0;
 	}
 	if (Radar() == true) {
-		if (App->pathfinding->CreatePath(bat_pos, player_pos,BAT) != -1)
+		if (App->pathfinding->CreatePath(bat_pos, player_pos,BAT) != -1 && App->fade_to_black->IsFading() == false)
 		{
 			const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
 			if (App->scene->collision_debug == true)
@@ -160,9 +160,9 @@ void Entity_Bat::OnCollision(Collider* collider)
 			App->entities->ResetMap(App->scene->map_number);
 
 
-		else if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) {
+		else if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) 
 			lives--;
-		}
+		
 	}
 	if (lives <= 0)
 		delete_entity = true;
@@ -181,9 +181,11 @@ void Entity_Bat::LoadAnimation(pugi::xml_node& animation, Animation* bat)
 
 bool Entity_Bat::Load(pugi::xml_node& data)
 {
-	position.x = data.child("position").attribute("x").as_int();
-	position.y = data.child("position").attribute("y").as_int();
-
+	if (data.child("position") != NULL)
+	{
+		position.x = data.child("position").attribute("x").as_int();
+		position.y = data.child("position").attribute("y").as_int();
+	}
 	return true;
 }
 

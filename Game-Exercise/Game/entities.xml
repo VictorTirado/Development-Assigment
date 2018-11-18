@@ -86,6 +86,7 @@
 
     <audio path ="audio/fx/player_death.wav"></audio>
     <audio2 tp_path ="audio/fx/teleport.wav"></audio2>
+    <audio3 kunai_path ="audio/fx/kunai_fx.wav"></audio3>
   </player>
 
   <bat>

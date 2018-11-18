@@ -45,6 +45,7 @@ public:
 	p2SString path = nullptr;
 	p2SString deathfx_path = nullptr;
 	p2SString teleportfx_path = nullptr;
+	p2SString kunai_path = nullptr;
 	bool firstUpdate = true;
 	bool is_backwards = false;
 

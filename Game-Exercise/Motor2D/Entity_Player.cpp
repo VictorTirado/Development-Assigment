@@ -59,9 +59,11 @@ Entity_Player::Entity_Player(int x, int y) : Entity(x , y)
 
 	deathfx_path = player.child("audio").attribute("path").as_string();
 	teleportfx_path = player.child("audio2").attribute("tp_path").as_string();
+	kunai_path = player.child("audio3").attribute("kunai_path").as_string();
 	animation = &idle;
 	App->audio->LoadFx(deathfx_path.GetString());
 	App->audio->LoadFx(teleportfx_path.GetString());
+	App->audio->LoadFx(kunai_path.GetString());
 	collider = App->collision->AddCollider({ 0, 0, 38, 54 }, COLLIDER_TYPE::COLLIDER_PLAYER, App->entities);
 }
 
@@ -129,14 +131,34 @@ void Entity_Player::Update(float dt)
 		
 		if (App->scene->map_number == 1)
 		{
-			App->map->Load("ForestMap.tmx");
+			if (App->map->Load("ForestMap.tmx"))
+			{
+
+				int w, h;
+				uchar* data = NULL;
+				if (App->map->CreateWalkabilityMap(w, h, &data))
+					App->pathfinding->SetMap(w, h, data);
+
+				RELEASE_ARRAY(data);
+
+			}
 			can_tp = true;
 			App->scene->map_number = 2;
 			firstUpdate = true;
 		}
 		else if (App->scene->map_number == 2)
 		{
-			App->map->Load("Map4.tmx");
+			if (App->map->Load("Map4.tmx"))
+			{
+
+				int w, h;
+				uchar* data = NULL;
+				if (App->map->CreateWalkabilityMap(w, h, &data))
+					App->pathfinding->SetMap(w, h, data);
+
+				RELEASE_ARRAY(data);
+
+			}
 			App->scene->map_number = 1;
 			firstUpdate = true;
 			can_tp = false;
@@ -176,6 +198,7 @@ void Entity_Player::Update(float dt)
 
 	if (is_shooting)
 	{
+		App->audio->PlayFx(3);
 		if (is_backwards)
 		{
 			animation = &throwKunaiBackwards;
@@ -208,17 +231,6 @@ void Entity_Player::Update(float dt)
 
 	if (is_jumping)
 	{
-		/*App->map->prop->jumping_time += 0.01f*dt;
-		
-		position.y -= 150*dt;
-
-		if (position.y > App->map->prop->player_position_y0 && App->map->prop->jumping_time >= 2.0f)
-		{
-			position.y += 70*dt;
-			App->map->prop->jumping_time = 0.0f;
-			is_jumping = false;
-			is_falling = true;
-		}*/
 		velocity.y = -200*dt;
 
 		if (position.y < old_player_position.y - 60)

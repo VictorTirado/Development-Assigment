@@ -26928,7 +26928,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <layer name="Logic" width="160" height="28" visible="0">
+ <layer name="Logic" width="160" height="28">
   <properties>
    <property name="Logic" type="float" value="1"/>
   </properties>

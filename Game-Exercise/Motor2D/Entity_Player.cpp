@@ -135,7 +135,7 @@ void Entity_Player::Update(float dt)
 		}
 		else if (App->scene->map_number == 2)
 		{
-			App->map->Load("Map3.tmx");
+			App->map->Load("Map4.tmx");
 			App->scene->map_number = 1;
 			firstUpdate = true;
 			can_tp = false;
@@ -162,6 +162,10 @@ void Entity_Player::Update(float dt)
 		if (App->map->data.map_layers.end->data->data[gid] == 51)
 			is_jumping = true;
 	}
+
+	//DEBUG KEY FOR TP
+	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
+		can_tp = true;
 
 	//THROW KUNAI
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)

@@ -1,0 +1,18 @@
+<languages>
+  <english>
+    <main_menu>
+      <play value ="Play" />
+      <continue value="Continue"/>
+      <settings value ="Settings"/>
+      <exit value ="Exit"/>
+    </main_menu>
+  </english>
+  <spanish>
+    <menu_principal>
+      <jugar value ="Jugar"/>
+      <continuar value ="Continuar"/>
+      <opciones value ="Opciones"/>
+      <salir value ="Salir"/>
+    </menu_principal>
+  </spanish>
+</languages>

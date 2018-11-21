@@ -22,6 +22,7 @@ class j1FadeToBlack;
 class j1Entities;
 class j1PathFinding;
 class j1Particles;
+class j1Languages;
 
 enum Entities
 {
@@ -29,6 +30,11 @@ enum Entities
 	NINJA_ENTITY,
 	BAT_ENTITY,
 	NONE_ENTITY,
+};
+enum Languages
+{
+	ENGLISH,
+	ESPAÑOL,
 };
 
 class j1App
@@ -68,6 +74,10 @@ public:
 
 	pugi::xml_node LoadEntities(pugi::xml_document&, Entities) const;
 
+	pugi::xml_node LoadLanguages(pugi::xml_document&, Languages) const;
+
+	p2SString language;
+
 private:
 
 	// Load config file
@@ -106,13 +116,11 @@ public:
 	j1Scene*			scene = nullptr;
 	j1Map*				map = nullptr;
 	j1Collision*		collision = nullptr;
-	//j1Player*			player = nullptr;
-	//j1Book*				book = nullptr;
 	j1FadeToBlack*		fade_to_black = nullptr;
 	j1Entities*			entities = nullptr;
 	j1PathFinding*		pathfinding = nullptr;
 	j1Particles*		particles = nullptr;
-
+	j1Languages*		languages = nullptr;
 
 private:
 

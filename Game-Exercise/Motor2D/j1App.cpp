@@ -16,6 +16,7 @@
 #include "j1Collision.h"
 #include "j1Pathfinding.h"
 #include "j1Particles.h"
+#include "j1Languages.h"
 #include "Brofiler/Brofiler.h"
 
 #include "j1Entitites.h"
@@ -36,12 +37,11 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new j1Scene();
 	map = new j1Map();
 	fade_to_black = new j1FadeToBlack();
-	//player = new j1Player();
 	collision = new j1Collision();
-	//book = new j1Book();
 	entities = new j1Entities();
 	pathfinding = new j1PathFinding();
 	particles = new j1Particles();
+	languages = new j1Languages();
 	
 
 	// Ordered for awake / Start / Update
@@ -49,6 +49,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(input);
 	AddModule(win);
 	AddModule(tex);
+	AddModule(languages);
 	AddModule(audio);
 	AddModule(map);
 	AddModule(pathfinding);
@@ -56,10 +57,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(collision);
 	AddModule(particles);
 	AddModule(entities);
-	//AddModule(book);
 	AddModule(fade_to_black);
-
-	
 
 	// render last to swap buffer
 	AddModule(render);
@@ -103,6 +101,8 @@ bool j1App::Awake()
 	bool ret = false;
 		
 	config = LoadConfig(config_file);
+
+	//language = config.child("languages").child("language").attribute("value").as_string();
 	
 
 	if(config.empty() == false)
@@ -199,7 +199,7 @@ pugi::xml_node j1App::LoadEntities(pugi::xml_document& player_file, Entities typ
 	pugi::xml_parse_result result = player_file.load_file("entities.xml");
 	pugi::xml_node entities = player_file.child("entities");
 	if (result == NULL)
-		LOG("Could not load map xml file config.xml. pugi error: %s", result.description());
+		LOG("Could not load map xml file entities.xml. pugi error: %s", result.description());
 	else
 	{
 		switch (type)
@@ -223,6 +223,31 @@ pugi::xml_node j1App::LoadEntities(pugi::xml_document& player_file, Entities typ
 	return ret;
 }
 
+pugi::xml_node j1App::LoadLanguages(pugi::xml_document& languages_file, Languages language) const
+{
+	pugi::xml_node ret;
+
+	pugi::xml_parse_result result = languages_file.load_file("languages.xml");
+	pugi::xml_node languages = languages_file.child("languages");
+	if (result == NULL)
+		LOG("Could not load map xml file languages.xml. pugi error: %s", result.description());
+	else 
+	{
+		switch (language)
+		{
+		case Languages::ENGLISH:
+			ret = languages.child("english");
+			break;
+		case Languages::ESPAÑOL:
+			ret = languages.child("spanish");
+			break;
+		}
+
+	}
+
+
+	return ret;
+}
 // ---------------------------------------------
 void j1App::PrepareUpdate()
 {

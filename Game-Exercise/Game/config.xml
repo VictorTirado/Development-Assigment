@@ -30,5 +30,8 @@
   <map>
     <folder>maps/</folder>
   </map>
+  <languages>
+    <language value ="English"/>
+  </languages>
 
 </config>

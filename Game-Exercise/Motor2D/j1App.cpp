@@ -15,6 +15,8 @@
 #include "j1App.h"
 #include "j1Collision.h"
 #include "j1Pathfinding.h"
+#include "j1Fonts.h"
+#include "j1Gui.h"
 #include "j1Particles.h"
 #include "j1Languages.h"
 #include "Brofiler/Brofiler.h"
@@ -32,6 +34,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	input = new j1Input();
 	win = new j1Window();
 	render = new j1Render();
+	font = new j1Fonts();
+	gui = new j1Gui();
 	tex = new j1Textures();
 	audio = new j1Audio();
 	scene = new j1Scene();
@@ -48,6 +52,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	// Reverse order of CleanUp
 	AddModule(input);
 	AddModule(win);
+	AddModule(font);
+	AddModule(gui);
 	AddModule(tex);
 	AddModule(languages);
 	AddModule(audio);

@@ -18,6 +18,8 @@ class j1Map;
 class j1Collision;
 //class j1Player;
 //class j1Book;
+class j1Fonts;
+class j1Gui;
 class j1FadeToBlack;
 class j1Entities;
 class j1PathFinding;
@@ -113,6 +115,8 @@ public:
 	j1Render*			render = nullptr;
 	j1Textures*			tex = nullptr;
 	j1Audio*			audio = nullptr;
+	j1Fonts*            font = nullptr;
+	j1Gui*              gui = nullptr;
 	j1Scene*			scene = nullptr;
 	j1Map*				map = nullptr;
 	j1Collision*		collision = nullptr;

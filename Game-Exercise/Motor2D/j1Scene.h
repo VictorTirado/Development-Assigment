@@ -4,6 +4,10 @@
 #include "j1Module.h"
 
 struct SDL_Texture;
+class GuiImage;
+class GuiText;
+class GUI;
+class GUI_Button;
 
 class j1Scene : public j1Module
 {
@@ -37,6 +41,7 @@ private:
 	bool is_faded = false;
 	bool change_map = false;
 	bool change_music = false;
+	GUI* back_heart = NULL;
 
 public:
 	int map_number = 1;

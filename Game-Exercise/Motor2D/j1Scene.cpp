@@ -12,6 +12,8 @@
 #include "j1Scene.h"
 #include "j1Entitites.h"
 #include "j1PathFinding.h"
+#include "j1Gui.h"
+#include "j1Fonts.h"
 #include "Brofiler\Brofiler.h"
 #include "Entity_Player.h"
 
@@ -36,6 +38,9 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
+
+	back_heart = App->gui->AddImage(20, 20, { 1, 1, 15, 13 });
+
 	if (!is_faded && map_number == 1)
 	{
 		map_number = 1;
@@ -66,6 +71,9 @@ bool j1Scene::Update(float dt)
 {
 	BROFILER_CATEGORY("SceneUpdate", Profiler::Color::MediumOrchid);
 	//DEBUG KEYS
+
+	
+	App->gui->MoveGui(back_heart, dt);
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		map_number = 1;

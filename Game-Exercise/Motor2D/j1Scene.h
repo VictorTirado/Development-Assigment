@@ -41,7 +41,7 @@ private:
 	bool is_faded = false;
 	bool change_map = false;
 	bool change_music = false;
-	GUI* back_heart = NULL;
+	GUI* full_heart = NULL;
 
 public:
 	int map_number = 1;

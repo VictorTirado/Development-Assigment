@@ -39,7 +39,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 
-	back_heart = App->gui->AddImage(20, 20, { 1, 1, 15, 13 });
+	full_heart = App->gui->AddImage(20, 20, { 55, 48, 26, 22 });
 
 	if (!is_faded && map_number == 1)
 	{
@@ -73,7 +73,7 @@ bool j1Scene::Update(float dt)
 	//DEBUG KEYS
 
 	
-	App->gui->MoveGui(back_heart, dt);
+	App->gui->MoveGui(full_heart, dt);
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		map_number = 1;

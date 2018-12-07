@@ -28,7 +28,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 	bool ret = true;
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
-	background_heart_file_name = conf.child("background_heart").attribute("file").as_string("");
+	//background_heart_file_name = conf.child("background_heart").attribute("file").as_string("");
 
 	return ret;
 }
@@ -36,8 +36,8 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool j1Gui::Start()
 {
-	atlas = App->tex->Load(atlas_file_name.GetString());
-	background_heart = App->tex->Load("gui/background_heart.png");
+	atlas = App->tex->Load("gui/atlas.png");
+	//background_heart = App->tex->Load("gui/background_heart.png");
 
 	return true;
 }
@@ -55,7 +55,7 @@ bool j1Gui::Update(float dt)
 			ui_list[i]->Update();
 	for (int i = 0; i < ui_list.Count(); i++)
 		if (ui_list.At(i) != nullptr)
-			ui_list[i]->Draw(background_heart);
+			ui_list[i]->Draw(atlas);
 
 	return true;
 }

@@ -14,7 +14,7 @@ GUI_Button::GUI_Button(int x, int y, SDL_Rect rect, SDL_Rect rec2, SDL_Rect rect
 	this->normal = rect;
 	this->mouse_in = rec2;
 	this->clicked = rect3;
-	this->animation = rect;
+	this->animation = normal;
 
 }
 

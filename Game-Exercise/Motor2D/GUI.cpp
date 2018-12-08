@@ -31,6 +31,6 @@ void GUI::Draw(SDL_Texture* sprites)
 	}
 	else
 	{
-		App->render->Blit(sprites, position.x, position.y, &animation, 1);
+		App->render->Blit_UI(sprites, position.x, position.y, &animation, 1);
 	}
 }

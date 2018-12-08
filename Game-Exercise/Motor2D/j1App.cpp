@@ -19,6 +19,7 @@
 #include "j1Gui.h"
 #include "j1Particles.h"
 #include "j1Languages.h"
+#include "MainMenu.h"
 #include "Brofiler/Brofiler.h"
 
 #include "j1Entitites.h"
@@ -46,6 +47,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	pathfinding = new j1PathFinding();
 	particles = new j1Particles();
 	languages = new j1Languages();
+	main_menu = new MainMenu();
 	
 
 	// Ordered for awake / Start / Update
@@ -58,15 +60,20 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	AddModule(map);
 	AddModule(pathfinding);
+	AddModule(main_menu);
 	AddModule(scene);
-	AddModule(gui);
+	
 	AddModule(collision);
 	AddModule(particles);
 	AddModule(entities);
 	AddModule(fade_to_black);
+	AddModule(gui);
 
 	// render last to swap buffer
 	AddModule(render);
+
+	main_menu->active = true;
+	scene->active = false;
 
 	PERF_PEEK(ptimer);
 }
@@ -149,12 +156,21 @@ bool j1App::Start()
 	p2List_item<j1Module*>* item;
 	item = modules.start;
 
-	while(item != NULL && ret == true)
+	while(item != NULL && ret == true )
 	{
-		ret = item->data->Start();
-		item = item->next;
+		if (item->data->active == false) {
+			item = item->next;
+			continue;
+		}
+			ret = item->data->Start();
+			item = item->next;
 	}
+	
+	//startup_time.Start();
 
+	PERF_PEEK(ptimer);
+
+	return ret;
 	PERF_PEEK(ptimer);
 
 	return ret;

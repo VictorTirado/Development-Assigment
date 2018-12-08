@@ -16,8 +16,6 @@ class j1Audio;
 class j1Scene;
 class j1Map;
 class j1Collision;
-//class j1Player;
-//class j1Book;
 class j1Fonts;
 class j1Gui;
 class j1FadeToBlack;
@@ -25,6 +23,7 @@ class j1Entities;
 class j1PathFinding;
 class j1Particles;
 class j1Languages;
+class MainMenu;
 
 enum Entities
 {
@@ -125,6 +124,7 @@ public:
 	j1PathFinding*		pathfinding = nullptr;
 	j1Particles*		particles = nullptr;
 	j1Languages*		languages = nullptr;
+	MainMenu*			main_menu = nullptr;
 
 private:
 

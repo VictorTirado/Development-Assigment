@@ -33,5 +33,8 @@
   <languages>
     <language value ="English"/>
   </languages>
+  <gui>
+    <atlas file="gui/atlas.png"/>
+  </gui>
 
 </config>

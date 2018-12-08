@@ -36,9 +36,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool j1Gui::Start()
 {
-	atlas = App->tex->Load("gui/atlas.png");
-	//background_heart = App->tex->Load("gui/background_heart.png");
-
+	atlas = App->tex->Load(atlas_file_name.GetString());
 	return true;
 }
 

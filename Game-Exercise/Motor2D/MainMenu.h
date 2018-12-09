@@ -37,7 +37,7 @@ public:
 	bool CleanUp();
 
 	void MouseIn(GUI* button);
-
+	void Interact(GUI* g);
 private:
 	bool is_faded = false;
 	bool change_map = false;

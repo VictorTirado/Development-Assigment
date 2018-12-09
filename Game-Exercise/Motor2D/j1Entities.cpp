@@ -38,7 +38,7 @@ bool j1Entities::Awake(pugi::xml_node& config)
 bool j1Entities::Start()
 {
 	bool ret = true;
-	App->map->Spawn();
+
 
 	return ret;
 }

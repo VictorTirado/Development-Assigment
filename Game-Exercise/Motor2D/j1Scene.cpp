@@ -56,6 +56,7 @@ bool j1Scene::Start()
 	}
 	App->audio->PlayMusic(App->audio->path.GetString());
 	App->audio->StartVolume(App->audio->volume);
+	App->map->Spawn();
 	return true;
 }
 

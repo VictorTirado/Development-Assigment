@@ -16,6 +16,7 @@
 #include "j1Fonts.h"
 #include "Brofiler\Brofiler.h"
 #include "Entity_Player.h"
+#include "j1Scene.h"
 
 #include "GUI_Button.h"
 
@@ -40,8 +41,8 @@ bool MainMenu::Awake()
 // Called before the first frame
 bool MainMenu::Start()
 {
-	background = App->gui->AddImage(0, 0, {941,881,362,401});
-	btn_play = App->gui->AddButton(10, 10, { 1213,293,209,52 }, { 1431,293,209,52 }, { 1657,293,209,52 });
+	//background = App->gui->AddImage(0, 0, {1385,881,362,401});
+	btn_play = App->gui->AddButton(App->win->width/2 -128, App->win->height/2, { 1523,919,256,64 } , { 1523,679,256,64 }, { 1523,759,256,64 });
 	return true;
 }
 
@@ -99,6 +100,8 @@ void MainMenu::MouseIn(GUI* element)
 			{
 
 				ex2->setAnimation(3);
+
+				Interact(element);
 			}
 		}
 		else
@@ -106,4 +109,20 @@ void MainMenu::MouseIn(GUI* element)
 			ex2->setAnimation(1);
 		}
 	}
+	if(App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
+	{ }
+}
+
+void MainMenu::Interact(GUI* g)
+{
+	if (g->type == BUTTON)
+	{
+		App->fade_to_black->FadeToBlack(this,App->scene, 3.0f);
+		App->scene->active = true;
+		App->scene->Start();
+		
+		this->active = false;
+		delete g;
+	}
+	
 }

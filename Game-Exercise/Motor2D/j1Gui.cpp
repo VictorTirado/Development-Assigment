@@ -37,6 +37,12 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
+	shuriken.PushBack({ 863,1383,40,40 });
+	shuriken.PushBack({ 985,1382,40,40 });
+	shuriken.PushBack({ 1043,1384,40,40 });
+	shuriken.PushBack({ 1106,1383,40,40 });
+	shuriken.PushBack({ 1175,1384,40,40 });
+
 	return true;
 }
 
@@ -89,9 +95,9 @@ const SDL_Texture* j1Gui::GetAtlas() const
 
 // class Gui ---------------------------------------------------
 
-GUI* j1Gui::AddImage(int x, int y, SDL_Rect rect)
+GUI* j1Gui::AddImage(int x, int y, SDL_Rect* rect, Animation* anim)
 {
-	GUI* image = new GUI_Image(x, y, rect, IMAGE);
+	GUI* image = new GUI_Image(x, y, IMAGE,anim, rect);
 	ui_list.PushBack(image);
 	return image;
 }

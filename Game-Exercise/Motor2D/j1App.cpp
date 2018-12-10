@@ -60,7 +60,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	AddModule(map);
 	AddModule(pathfinding);
-	AddModule(main_menu);
+	
 	AddModule(scene);
 	
 	AddModule(collision);
@@ -68,7 +68,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entities);
 	AddModule(fade_to_black);
 	AddModule(gui);
-
+	AddModule(main_menu);
 	// render last to swap buffer
 	AddModule(render);
 

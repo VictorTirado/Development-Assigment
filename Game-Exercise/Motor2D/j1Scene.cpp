@@ -39,7 +39,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 
-	full_heart = App->gui->AddImage(20, 20, { 55, 48, 26, 22 });
+	//full_heart = App->gui->AddImage(20, 20, { 55, 48, 26, 22 });
 
 	if (!is_faded && map_number == 1)
 	{

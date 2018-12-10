@@ -17,6 +17,7 @@ public:
 	UI type = UI::NON;
 	iPoint position;
 	SDL_Rect animation = { 0,0,0,0 };
+	Animation* animation2;
 	SDL_Texture* texture = nullptr;
 	bool delete_ui = false;
 

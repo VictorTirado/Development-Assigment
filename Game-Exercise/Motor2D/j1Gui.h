@@ -2,6 +2,8 @@
 #define __j1GUI_H__
 
 #include "j1Module.h"
+#include "Animation.h"
+#include "p2Defs.h"
 #include "p2DynArray.h"
 
 #define CURSOR_WIDTH 2
@@ -47,7 +49,7 @@ public:
 
 	// TODO 2: Create the factory methods
 	// Gui creation functions
-	GUI* AddImage(int x, int y, SDL_Rect rect);
+	GUI* AddImage(int x, int y, SDL_Rect* rect, Animation* anim);
 	GUI* AddLabel(int x, int y, p2SString text);
 	GUI* AddButton(int x, int y, SDL_Rect normal, SDL_Rect mouse_in, SDL_Rect clicked);
 	void MoveGui(GUI* type, float dt);
@@ -62,6 +64,8 @@ private:
 	p2SString background_heart_file_name = nullptr;
 	SDL_Texture* background_heart = nullptr;
 	p2DynArray<GUI*> ui_list;
+public:
+	Animation shuriken;
 };
 
 #endif // __j1GUI_H__

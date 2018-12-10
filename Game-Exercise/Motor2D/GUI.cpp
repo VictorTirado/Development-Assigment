@@ -29,8 +29,12 @@ void GUI::Draw(SDL_Texture* sprites)
 	{
 		App->render->Blit(texture, position.x, position.y, &animation, 1);
 	}
-	else
+	else if (type == BUTTON)
 	{
-		App->render->Blit_UI(sprites, position.x, position.y, &animation, 1);
+		App->render->Blit_UI(sprites, position.x, position.y,&animation);
 	}
+	if(animation2 != nullptr)
+	App->render->Blit_UI(sprites, position.x, position.y, &(animation2->GetCurrentFrame()), 1);
+	if(animation2 == nullptr)
+		App->render->Blit_UI(sprites, position.x, position.y, &animation);
 }

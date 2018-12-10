@@ -2,6 +2,7 @@
 #define _GUI_IMAGE_H__
 
 #include "GUI.h"
+#include "p2Defs.h"
 
 
 class GUI_Image : public GUI
@@ -11,7 +12,7 @@ private:
 	Animation anim;
 
 public:
-	GUI_Image(int x, int y, SDL_Rect rect, UI type);
+	GUI_Image(int x, int y, UI type, Animation* anim, SDL_Rect* rect = NULL);
 
 };
 #endif //_GUI_IMAGE_H__

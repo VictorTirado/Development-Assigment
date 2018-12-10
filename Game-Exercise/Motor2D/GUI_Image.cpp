@@ -1,15 +1,22 @@
 #include "j1App.h"
+#include "p2Defs.h"
 #include "GUI_Image.h"
 #include "p2Log.h"
 
 
-GUI_Image::GUI_Image(int x, int y, SDL_Rect rect, UI type) : GUI(x, y)
+GUI_Image::GUI_Image(int x, int y, UI type,Animation* anim, SDL_Rect* rect) : GUI(x, y)
 {
 	position.x = x;
 	position.y = y;
-	animation = rect;
+	if(rect != nullptr)
+	animation = *rect;
+
 	LOG("UIImage created in x:%i, y:%i", x, y);
 
-	anim.PushBack()
-
+	if (anim != nullptr)
+	{
+		animation2 = anim;
+		animation2->speed = 0.15f;
+		animation2->loop = true;
+	}
 }

@@ -41,8 +41,11 @@ bool MainMenu::Awake()
 // Called before the first frame
 bool MainMenu::Start()
 {
-	//background = App->gui->AddImage(0, 0, {1385,881,362,401});
-	btn_play = App->gui->AddButton(App->win->width/2 -128, App->win->height/2, { 1523,919,256,64 } , { 1523,679,256,64 }, { 1523,759,256,64 });
+	SDL_Rect bck = { 0,0,1024,768 };
+	background = App->gui->AddImage(0, 0, &bck,nullptr);
+	btn_play = App->gui->AddButton(App->win->width/2 -150,50, { 1523,919,256,64 } , { 1523,679,256,64 }, { 1523,759,256,64 });
+	btn_exit = App->gui->AddButton(App->win->width / 2 - 150, 150, { 1523,919,256,64 }, { 1523,679,256,64 }, { 1523,759,256,64 });
+	btn_settings = App->gui->AddButton(App->win->width / 2 - 150, 250, { 1523,919,256,64 }, { 1523,679,256,64 }, { 1523,759,256,64 });
 	return true;
 }
 
@@ -59,6 +62,8 @@ bool MainMenu::Update(float dt)
 	BROFILER_CATEGORY("SceneUpdate", Profiler::Color::MediumOrchid);
 	//DEBUG KEYS
 	MouseIn(btn_play);
+	MouseIn(btn_exit);
+	MouseIn(btn_settings);
 
 
 	App->input->GetMousePosition(mouse_x, mouse_y);
@@ -71,7 +76,7 @@ bool MainMenu::PostUpdate()
 	BROFILER_CATEGORY("ScenePostUpdate", Profiler::Color::Navy);
 	bool ret = true;
 
-	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	if (close == true)
 		ret = false;
 
 	return ret;
@@ -94,8 +99,9 @@ void MainMenu::MouseIn(GUI* element)
 		{
 			ex2->setAnimation(2);
 			if (delete_kunais == false) {
-				kunai_left = App->gui->AddImage(element->position.x - 150, element->position.y + 10, { 1346,685,135,42 });
-				kunai_right = App->gui->AddImage(element->position.x + 270, element->position.y + 10, { 1346,739,135,42 });
+				App->gui->AddImage(0, 0, nullptr, nullptr);
+				kunai_left = App->gui->AddImage(element->position.x - 60, element->position.y + 10,nullptr, &App->gui->shuriken);
+				kunai_right = App->gui->AddImage(element->position.x + 270, element->position.y + 10, nullptr, &App->gui->shuriken);
 				delete_kunais = true;
 			}
 		}
@@ -126,7 +132,7 @@ void MainMenu::MouseIn(GUI* element)
 
 void MainMenu::Interact(GUI* g)
 {
-	if (g->type == BUTTON)
+	if (g->position.y == 50)
 	{
 		App->fade_to_black->FadeToBlack(this,App->scene, 3.0f);
 		App->scene->active = true;
@@ -134,6 +140,10 @@ void MainMenu::Interact(GUI* g)
 		
 		this->active = false;
 		delete g;
+	}
+	else if (g->position.y == 250)
+	{
+		close = true;
 	}
 	
 }

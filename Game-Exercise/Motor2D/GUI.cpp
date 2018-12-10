@@ -38,3 +38,4 @@ void GUI::Draw(SDL_Texture* sprites)
 	if(animation2 == nullptr)
 		App->render->Blit_UI(sprites, position.x, position.y, &animation);
 }
+

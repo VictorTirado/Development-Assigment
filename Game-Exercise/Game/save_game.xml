@@ -2,7 +2,9 @@
 <game_state>
 	<input />
 	<window />
+	<fonts />
 	<textures />
+	<language />
 	<audio>
 		<music value="64" />
 	</audio>
@@ -13,9 +15,36 @@
 	<particles />
 	<entities>
 		<player>
+			<map level="1" />
+			<position x="192" y="384" />
 		</player>
+		<bat>
+			<position x="432" y="320" />
+		</bat>
+		<bat>
+			<position x="592" y="288" />
+		</bat>
+		<bat>
+			<position x="720" y="224" />
+		</bat>
+		<bat>
+			<position x="800" y="448" />
+		</bat>
+		<ninja>
+			<position x="1120" y="238" />
+		</ninja>
+		<book>
+			<book caught="false" />
+			<position x="1184" y="240" />
+		</book>
+		<ninja>
+			<position x="1296" y="382" />
+		</ninja>
 	</entities>
 	<fadeToBlack />
+	<gui />
+	<MainMenu />
 	<renderer>
+		<camera x="-64" y="-768" />
 	</renderer>
 </game_state>

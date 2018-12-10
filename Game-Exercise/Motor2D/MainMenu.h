@@ -42,15 +42,18 @@ private:
 	bool is_faded = false;
 	bool change_map = false;
 	bool change_music = false;
-	bool close = false;
-	GUI* background = NULL;
-	GUI* btn_play = NULL;
-	GUI* btn_settings;
-	GUI* btn_exit = NULL;
-	GUI* kunai_left;
-	GUI* kunai_right;
-
 	bool delete_kunais = false;
+	bool close = false;
+
+	GUI* background = nullptr;
+	GUI* btn_play = nullptr;
+	GUI* btn_settings = nullptr;
+	GUI* btn_exit = nullptr;
+	GUI* kunai_left = nullptr;
+	GUI* kunai_right = nullptr;
+
+	SDL_Rect bck = { 0,0,1024,768 };
+	
 
 public:
 	int mouse_x, mouse_y;

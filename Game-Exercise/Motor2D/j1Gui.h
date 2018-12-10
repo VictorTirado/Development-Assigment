@@ -54,6 +54,8 @@ public:
 	GUI* AddButton(int x, int y, SDL_Rect normal, SDL_Rect mouse_in, SDL_Rect clicked);
 	void MoveGui(GUI* type, float dt);
 
+	void DestroyAllUi();
+
 
 	const SDL_Texture* GetAtlas() const;
 

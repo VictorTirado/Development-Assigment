@@ -41,11 +41,18 @@ bool MainMenu::Awake()
 // Called before the first frame
 bool MainMenu::Start()
 {
-	SDL_Rect bck = { 0,0,1024,768 };
+	pugi::xml_document data;
+	pugi::xml_node root;
+	pugi::xml_parse_result result = data.load_file("save_game.xml");
+	root = data.child("game_state");
+
+	//MENU _UI
 	background = App->gui->AddImage(0, 0, &bck,nullptr);
 	btn_play = App->gui->AddButton(App->win->width/2 -150,50, { 1523,919,256,64 } , { 1523,679,256,64 }, { 1523,759,256,64 });
 	btn_exit = App->gui->AddButton(App->win->width / 2 - 150, 150, { 1523,919,256,64 }, { 1523,679,256,64 }, { 1523,759,256,64 });
+	if(root.child("entities").child("player").child("position").attribute("x").as_int() != NULL)
 	btn_settings = App->gui->AddButton(App->win->width / 2 - 150, 250, { 1523,919,256,64 }, { 1523,679,256,64 }, { 1523,759,256,64 });
+
 	return true;
 }
 
@@ -63,6 +70,7 @@ bool MainMenu::Update(float dt)
 	//DEBUG KEYS
 	MouseIn(btn_play);
 	MouseIn(btn_exit);
+	if(btn_settings!=nullptr)
 	MouseIn(btn_settings);
 
 
@@ -99,7 +107,6 @@ void MainMenu::MouseIn(GUI* element)
 		{
 			ex2->setAnimation(2);
 			if (delete_kunais == false) {
-				App->gui->AddImage(0, 0, nullptr, nullptr);
 				kunai_left = App->gui->AddImage(element->position.x - 60, element->position.y + 10,nullptr, &App->gui->shuriken);
 				kunai_right = App->gui->AddImage(element->position.x + 270, element->position.y + 10, nullptr, &App->gui->shuriken);
 				delete_kunais = true;
@@ -126,8 +133,6 @@ void MainMenu::MouseIn(GUI* element)
 			}
 		}
 	}
-	if(App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
-	{ }
 }
 
 void MainMenu::Interact(GUI* g)
@@ -135,14 +140,15 @@ void MainMenu::Interact(GUI* g)
 	if (g->position.y == 50)
 	{
 		App->fade_to_black->FadeToBlack(this,App->scene, 3.0f);
+		App->gui->DestroyAllUi();
 		App->scene->active = true;
 		App->scene->Start();
 		
 		this->active = false;
-		delete g;
 	}
 	else if (g->position.y == 250)
 	{
+		App->gui->DestroyAllUi();
 		close = true;
 	}
 	

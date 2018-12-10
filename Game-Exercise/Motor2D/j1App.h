@@ -158,7 +158,6 @@ private:
 	bool				cap = true;
 	float				frame_delay;
 
-	
 };
 
 extern j1App* App; // No student is asking me about that ... odd :-S

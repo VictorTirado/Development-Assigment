@@ -63,13 +63,21 @@ bool j1Gui::PreUpdate()
 
 bool j1Gui::Update(float dt)
 {
-	for (int i = 0; i < ui_list.Count(); i++)
+	for (int i = 0; i < ui_list.Count(); i++) {
 		if (ui_list.At(i) != nullptr)
 			ui_list[i]->Update();
-	for (int i = 0; i < ui_list.Count(); i++)
+	}
+	for (int i = 0; i < ui_list.Count(); i++) {
 		if (ui_list.At(i) != nullptr)
 			ui_list[i]->Draw(atlas);
+	}
+	/*for (int i = 0; i < ui_list.Count(); i++) {
+		if (ui_list.At(i) != nullptr)
+			ui_list[i]->MouseIn(ui_list[i]);
+	}*/
 
+
+	LOG("elements ui: %d", ui_list.Count());
 	return true;
 }
 
@@ -128,4 +136,17 @@ void j1Gui::MoveGui(GUI* type, float dt)
 
 	else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 		type->position.y -= 200 * dt;
+}
+
+void j1Gui::DestroyAllUi()
+{
+	for (uint i = 0; i < ui_list.Count(); i++)
+	{
+		if (ui_list[i] != nullptr)
+		{
+			delete ui_list[i];
+			ui_list[i] = nullptr;
+		}
+	}
+	ui_list.Clear();
 }

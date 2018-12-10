@@ -10,4 +10,6 @@ GUI_Image::GUI_Image(int x, int y, SDL_Rect rect, UI type) : GUI(x, y)
 	animation = rect;
 	LOG("UIImage created in x:%i, y:%i", x, y);
 
+	anim.PushBack()
+
 }

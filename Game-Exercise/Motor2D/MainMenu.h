@@ -44,6 +44,10 @@ private:
 	bool change_music = false;
 	GUI* background = NULL;
 	GUI* btn_play = NULL;
+	GUI* kunai_left;
+	GUI* kunai_right;
+
+	bool delete_kunais = false;
 
 public:
 	int mouse_x, mouse_y;

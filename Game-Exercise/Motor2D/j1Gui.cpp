@@ -43,6 +43,15 @@ bool j1Gui::Start()
 // Update all guis
 bool j1Gui::PreUpdate()
 {
+	for (uint i = 0; i < ui_list.Count(); i++)
+	{
+		if (ui_list[i]->delete_ui == true)
+		{
+			delete (ui_list[i]);
+			ui_list[i] = nullptr;
+			ui_list.Pop(ui_list[i]);
+		}
+	}
 	return true;
 }
 

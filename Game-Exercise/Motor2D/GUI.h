@@ -2,6 +2,7 @@
 #define __GUI_H__
 
 #include "p2Point.h"
+#include "Animation.h"
 #include "j1Gui.h"
 #include "SDL/include/SDL.h"
 
@@ -17,6 +18,7 @@ public:
 	iPoint position;
 	SDL_Rect animation = { 0,0,0,0 };
 	SDL_Texture* texture = nullptr;
+	bool delete_ui = false;
 
 public:
 	GUI(int x, int y);

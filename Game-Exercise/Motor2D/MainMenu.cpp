@@ -93,6 +93,11 @@ void MainMenu::MouseIn(GUI* element)
 		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
 		{
 			ex2->setAnimation(2);
+			if (delete_kunais == false) {
+				kunai_left = App->gui->AddImage(element->position.x - 150, element->position.y + 10, { 1346,685,135,42 });
+				kunai_right = App->gui->AddImage(element->position.x + 270, element->position.y + 10, { 1346,739,135,42 });
+				delete_kunais = true;
+			}
 		}
 		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
 		{
@@ -107,6 +112,12 @@ void MainMenu::MouseIn(GUI* element)
 		else
 		{
 			ex2->setAnimation(1);
+			if(kunai_left != nullptr || kunai_right != nullptr && delete_kunais == true){
+				kunai_left->delete_ui = true;
+				kunai_right->delete_ui = true;
+				delete_kunais = false;
+				
+			}
 		}
 	}
 	if(App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)

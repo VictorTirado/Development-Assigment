@@ -48,10 +48,16 @@ bool MainMenu::Start()
 
 	//MENU _UI
 	background = App->gui->AddImage(0, 0, &bck,nullptr);
-	btn_play = App->gui->AddButton(App->win->width/2 -150,50, { 1523,919,256,64 } , { 1523,679,256,64 }, { 1523,759,256,64 });
-	btn_exit = App->gui->AddButton(App->win->width / 2 - 150, 150, { 1523,919,256,64 }, { 1523,679,256,64 }, { 1523,759,256,64 });
-	if(root.child("entities").child("player").child("position").attribute("x").as_int() != NULL)
-	btn_settings = App->gui->AddButton(App->win->width / 2 - 150, 250, { 1523,919,256,64 }, { 1523,679,256,64 }, { 1523,759,256,64 });
+	background = App->gui->AddImage(App->win->width/2 - 165, 150, &bck2, nullptr);
+
+	btn_play = App->gui->AddButton(App->win->width/2 -150,180 , { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 });
+	if (root.child("entities").child("player").child("position").attribute("x").as_int() != NULL)
+	btn_continue = App->gui->AddButton(App->win->width / 2 - 150, 320,{ 1316,382,300,77 }, { 1316,299,300,77 },{ 1317,466,300,77 });
+
+	btn_credits = App->gui->AddButton(App->win->width / 2 - 150, 460, { 1316,382,300,77 }, { 1316,299,300,77 },{ 1317,466,300,77 });
+	btn_settings = App->gui->AddButton(App->win->width - 150, 150, { 1137,298,55,55 }, { 1138,361,55,55 }, { 1137,419,55,55 });
+
+	btn_exit = App->gui->AddButton(App->win->width - 150, 50, { 1207,298,55,55 }, { 1207,361,55,55 }, { 1207,420,55,55 });
 
 	return true;
 }
@@ -69,10 +75,11 @@ bool MainMenu::Update(float dt)
 	BROFILER_CATEGORY("SceneUpdate", Profiler::Color::MediumOrchid);
 	//DEBUG KEYS
 	MouseIn(btn_play);
-	MouseIn(btn_exit);
-	if(btn_settings!=nullptr)
 	MouseIn(btn_settings);
-
+	MouseIn(btn_credits);
+	MouseIn(btn_exit);
+	if (btn_continue != nullptr)
+	MouseIn(btn_continue);
 
 	App->input->GetMousePosition(mouse_x, mouse_y);
 	return true;
@@ -107,8 +114,8 @@ void MainMenu::MouseIn(GUI* element)
 		{
 			ex2->setAnimation(2);
 			if (delete_kunais == false) {
-				kunai_left = App->gui->AddImage(element->position.x - 60, element->position.y + 10,nullptr, &App->gui->shuriken);
-				kunai_right = App->gui->AddImage(element->position.x + 270, element->position.y + 10, nullptr, &App->gui->shuriken);
+			//	kunai_left = App->gui->AddImage(element->position.x - 60, element->position.y + 10,nullptr, &App->gui->shuriken);
+				//kunai_right = App->gui->AddImage(element->position.x + 270, element->position.y + 10, nullptr, &App->gui->shuriken);
 				delete_kunais = true;
 			}
 		}
@@ -116,9 +123,7 @@ void MainMenu::MouseIn(GUI* element)
 		{
 			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
 			{
-
 				ex2->setAnimation(3);
-
 				Interact(element);
 			}
 		}
@@ -137,7 +142,7 @@ void MainMenu::MouseIn(GUI* element)
 
 void MainMenu::Interact(GUI* g)
 {
-	if (g->position.y == 50)
+	if (g->position.y == 180)
 	{
 		App->fade_to_black->FadeToBlack(this,App->scene, 3.0f);
 		App->gui->DestroyAllUi();
@@ -146,7 +151,16 @@ void MainMenu::Interact(GUI* g)
 		
 		this->active = false;
 	}
-	else if (g->position.y == 250)
+	else if(g->position.y == 320)
+	{ 
+	}
+	else if (g->position.y == 460)
+	{
+	}
+	else if (g->position.y == 600)
+	{
+	}
+	else if (g->position.y == 50)
 	{
 		App->gui->DestroyAllUi();
 		close = true;

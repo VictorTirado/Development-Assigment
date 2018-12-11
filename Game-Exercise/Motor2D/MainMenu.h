@@ -46,13 +46,18 @@ private:
 	bool close = false;
 
 	GUI* background = nullptr;
+	GUI* background2 = nullptr;
+	GUI* cross = nullptr;
 	GUI* btn_play = nullptr;
+	GUI* btn_continue = nullptr;
 	GUI* btn_settings = nullptr;
+	GUI* btn_credits = nullptr;
 	GUI* btn_exit = nullptr;
 	GUI* kunai_left = nullptr;
 	GUI* kunai_right = nullptr;
 
 	SDL_Rect bck = { 0,0,1024,768 };
+	SDL_Rect bck2 = { 1625,299,330,421 };
 	
 
 public:

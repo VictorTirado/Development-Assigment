@@ -4,7 +4,7 @@
 #include "p2Log.h"
 
 
-GUI_Image::GUI_Image(int x, int y, UI type,Animation* anim, SDL_Rect* rect) : GUI(x, y)
+GUI_Image::GUI_Image(int x, int y, UI type,GUI* parent,Animation* anim, SDL_Rect* rect) : GUI(x, y,parent)
 {
 	position.x = x;
 	position.y = y;

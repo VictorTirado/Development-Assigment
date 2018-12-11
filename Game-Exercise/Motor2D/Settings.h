@@ -1,5 +1,5 @@
-#ifndef __MAINMENU_H__
-#define __MAINMENU_H__
+#ifndef __SETTINGS_H__
+#define __SETTINGS_H__
 
 #include "j1Module.h"
 
@@ -8,15 +8,16 @@ class GuiImage;
 class GuiText;
 class GUI;
 class GUI_Button;
+class Gui_Slider;
 
-class MainMenu : public j1Module
+class Settings : public j1Module
 {
 public:
 
-	MainMenu();
+	Settings();
 
 	// Destructor
-	virtual ~MainMenu();
+	virtual ~Settings();
 
 	// Called before render is available
 	bool Awake();
@@ -46,22 +47,18 @@ private:
 	bool close = false;
 
 	GUI* background = nullptr;
-	GUI* background2 = nullptr;
-	GUI* cross = nullptr;
-	GUI* btn_play = nullptr;
-	GUI* btn_continue = nullptr;
-	GUI* btn_settings = nullptr;
-	GUI* btn_credits = nullptr;
-	GUI* btn_exit = nullptr;
-	GUI* kunai_left = nullptr;
-	GUI* kunai_right = nullptr;
+	GUI* go_back = nullptr;
+	GUI* music = nullptr;
+	Gui_Slider* slider;
+	GUI_Button* button;
+
 
 	
-	
+
 
 public:
 	int mouse_x, mouse_y;
-	
+
 };
 
-#endif // __MAINMENU_H__
+#endif // Settings

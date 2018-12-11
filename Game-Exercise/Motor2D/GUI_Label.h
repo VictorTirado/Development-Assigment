@@ -10,7 +10,7 @@ private:
 	SDL_Rect img_normal;
 
 public:
-	Gui_Label(int x, int y, p2SString text, UI type);
+	Gui_Label(int x, int y, p2SString text, UI type,GUI* parent);
 public:
 	p2SString text;
 };

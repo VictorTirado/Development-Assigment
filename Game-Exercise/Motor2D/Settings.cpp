@@ -20,18 +20,19 @@
 #include "Settings.h"
 
 #include "GUI_Button.h"
+#include "GUI_Slider.h"
 
-MainMenu::MainMenu() : j1Module()
+Settings::Settings() : j1Module()
 {
-	name.create("MainMenu");
+	name.create("Settings");
 }
 
 // Destructor
-MainMenu::~MainMenu()
+Settings::~Settings()
 {}
 
 // Called before render is available
-bool MainMenu::Awake()
+bool Settings::Awake()
 {
 	LOG("Loading main menu");
 	bool ret = true;
@@ -40,55 +41,49 @@ bool MainMenu::Awake()
 }
 
 // Called before the first frame
-bool MainMenu::Start()
+bool Settings::Start()
 {
 	pugi::xml_document data;
 	pugi::xml_node root;
 	pugi::xml_parse_result result = data.load_file("save_game.xml");
 	root = data.child("game_state");
-	SDL_Rect bck = { 0,0,1024,768 };
-	SDL_Rect bck2 = { 1625,299,330,421 };
+
 	//MENU _UI
-	background = App->gui->AddImage(0, 0, &bck,nullptr, nullptr);
-	background2 = App->gui->AddImage(App->win->width/2 - 165, 150, &bck2, nullptr, nullptr);
 
-	btn_play = App->gui->AddButton(App->win->width/2 -150,180 , { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 }, nullptr);
-	if (root.child("entities").child("player").child("position").attribute("x").as_int() != NULL)
-	btn_continue = App->gui->AddButton(App->win->width / 2 - 150, 320,{ 1316,382,300,77 }, { 1316,299,300,77 },{ 1317,466,300,77 }, nullptr);
-
-	btn_credits = App->gui->AddButton(App->win->width / 2 - 150, 460, { 1316,382,300,77 }, { 1316,299,300,77 },{ 1317,466,300,77 }, nullptr);
-	btn_settings = App->gui->AddButton(App->win->width - 150, 150, { 1137,298,55,55 }, { 1138,361,55,55 }, { 1137,419,55,55 },nullptr);
-
-	btn_exit = App->gui->AddButton(App->win->width - 150, 50, { 1207,298,55,55 }, { 1207,361,55,55 }, { 1207,420,55,55 }, nullptr);
-
+	SDL_Rect bck = { 0,0,1024,768 };
+	background = App->gui->AddImage(0, 0, &bck, nullptr, nullptr);
+	go_back = App->gui->AddButton(50, 50, {1129,95,48,51}, {1128,160,48,51}, { 1128,160,48,51 }, nullptr);
+	music = App->gui->AddLabel(100,300,"Music volume", nullptr);
+	slider = (Gui_Slider*)App->gui->AddSlider(400, 290, music);
+	button = (GUI_Button*)App->gui->AddButton(0, 0, { 1068,297,55,55 }, { 1069,362,55,55 }, { 1069,421,55,55 }, (GUI*)slider);
+	slider->SetNumStart(App->audio->volume, button);
+	
 	return true;
 }
 
 // Called each loop iteration
-bool MainMenu::PreUpdate()
+bool Settings::PreUpdate()
 {
 	BROFILER_CATEGORY("ScenePreUpdate", Profiler::Color::BlanchedAlmond);
 	return true;
 }
 
 // Called each loop iteration
-bool MainMenu::Update(float dt)
+bool Settings::Update(float dt)
 {
 	BROFILER_CATEGORY("SceneUpdate", Profiler::Color::MediumOrchid);
 	//DEBUG KEYS
-	MouseIn(btn_play);
-	MouseIn(btn_settings);
-	MouseIn(btn_credits);
-	MouseIn(btn_exit);
-	if (btn_continue != nullptr)
-	MouseIn(btn_continue);
+	MouseIn(go_back);
+
+	if (MouseIn(button) == true)
+		slider->MoveButton(button);
 
 	App->input->GetMousePosition(mouse_x, mouse_y);
 	return true;
 }
 
 // Called each loop iteration
-bool MainMenu::PostUpdate()
+bool Settings::PostUpdate()
 {
 	BROFILER_CATEGORY("ScenePostUpdate", Profiler::Color::Navy);
 	bool ret = true;
@@ -100,14 +95,14 @@ bool MainMenu::PostUpdate()
 }
 
 // Called before quitting
-bool MainMenu::CleanUp()
+bool Settings::CleanUp()
 {
 	LOG("Freeing main menu");
 
 	return true;
 }
 
-bool MainMenu::MouseIn(GUI* element)
+bool Settings::MouseIn(GUI* element)
 {
 
 	GUI_Button*  ex2 = (GUI_Button*)element;
@@ -115,12 +110,7 @@ bool MainMenu::MouseIn(GUI* element)
 		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
 		{
 			ex2->setAnimation(2);
-			if (delete_kunais == false) {
-			//	kunai_left = App->gui->AddImage(element->position.x - 60, element->position.y + 10,nullptr, &App->gui->shuriken);
-				//kunai_right = App->gui->AddImage(element->position.x + 270, element->position.y + 10, nullptr, &App->gui->shuriken);
-				delete_kunais = true;
-				return true;
-			}
+			return true;
 			
 		}
 		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
@@ -131,32 +121,24 @@ bool MainMenu::MouseIn(GUI* element)
 				Interact(element);
 				return true;
 			}
-			
 		}
 		else
 		{
 			ex2->setAnimation(1);
-			if(kunai_left != nullptr || kunai_right != nullptr && delete_kunais == true){
-				kunai_left->delete_ui = true;
-				kunai_right->delete_ui = true;
-				delete_kunais = false;
-				return false;
-				
-			}
-			
+			return false;
 		}
 	}
 }
 
-void MainMenu::Interact(GUI* g)
+void Settings::Interact(GUI* g)
 {
 	if (g->position.y == 180)
 	{
-		App->fade_to_black->FadeToBlack(this,App->scene, 3.0f);
+		App->fade_to_black->FadeToBlack(this, App->scene, 3.0f);
 		App->gui->DestroyAllUi();
 		App->scene->active = true;
 		App->scene->Start();
-		
+
 		this->active = false;
 	}
 	else if (g->position.y == 320)
@@ -164,21 +146,18 @@ void MainMenu::Interact(GUI* g)
 	}
 	else if (g->position.y == 460)
 	{
-		
-		App->fade_to_black->FadeToBlack(this, App->settings, 3.0f);
-		App->gui->DestroyAllUi();
-		App->settings->active = true;
-		App->settings->Start();
-
-		this->active = false;
 	}
 	else if (g->position.y == 600)
 	{
 	}
 	else if (g->position.y == 50)
 	{
+		App->fade_to_black->FadeToBlack(this, App->main_menu, 3.0f);
 		App->gui->DestroyAllUi();
-		close = true;
+		App->main_menu->active = true;
+		App->main_menu->Start();
+
+		this->active = false;
 	}
-	
+
 }

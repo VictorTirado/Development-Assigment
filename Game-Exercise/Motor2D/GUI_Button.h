@@ -12,7 +12,7 @@ private:
 	SDL_Rect clicked;
 
 public:
-	GUI_Button(int x, int y, SDL_Rect rect, SDL_Rect rect2, SDL_Rect rect3, UI type);
+	GUI_Button(int x, int y, SDL_Rect rect, SDL_Rect rect2, SDL_Rect rect3, UI type,GUI* parent);
 	void setAnimation(int state);
 
 };

@@ -11,6 +11,7 @@
 #include "GUI_Image.h"
 #include "GUI_Label.h"
 #include "GUI_button.h"
+#include "GUI_Slider.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -103,24 +104,31 @@ const SDL_Texture* j1Gui::GetAtlas() const
 
 // class Gui ---------------------------------------------------
 
-GUI* j1Gui::AddImage(int x, int y, SDL_Rect* rect, Animation* anim)
+GUI* j1Gui::AddImage(int x, int y, SDL_Rect* rect, Animation* anim,GUI* parent)
 {
-	GUI* image = new GUI_Image(x, y, IMAGE,anim, rect);
+	GUI* image = new GUI_Image(x, y, IMAGE, parent,anim, rect);
 	ui_list.PushBack(image);
 	return image;
 }
-GUI* j1Gui::AddLabel(int x, int y, p2SString text)
+GUI* j1Gui::AddLabel(int x, int y, p2SString text, GUI* parent)
 {
-	GUI* label = new Gui_Label(x, y, text, LABEL);
+	GUI* label = new Gui_Label(x, y, text, LABEL,parent);
 	ui_list.PushBack(label);
 	return label;
 }
 
-GUI* j1Gui::AddButton(int x, int y, SDL_Rect normal, SDL_Rect mouse_in, SDL_Rect clicked)
+GUI* j1Gui::AddButton(int x, int y, SDL_Rect normal, SDL_Rect mouse_in, SDL_Rect clicked, GUI* parent)
 {
-	GUI* button = new GUI_Button(x, y, normal, mouse_in, clicked, BUTTON);
+	GUI* button = new GUI_Button(x, y, normal, mouse_in, clicked, BUTTON,parent);
 	ui_list.PushBack(button);
 	return button;
+}
+
+GUI* j1Gui::AddSlider(int x, int y, GUI* parent)
+{
+	GUI* slider = new Gui_Slider(x, y, SLIDER, parent);
+	ui_list.PushBack(slider);
+	return slider;
 }
 
 void j1Gui::MoveGui(GUI* type, float dt)

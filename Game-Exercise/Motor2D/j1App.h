@@ -24,6 +24,7 @@ class j1PathFinding;
 class j1Particles;
 class j1Languages;
 class MainMenu;
+class Settings;
 
 enum Entities
 {
@@ -125,6 +126,7 @@ public:
 	j1Particles*		particles = nullptr;
 	j1Languages*		languages = nullptr;
 	MainMenu*			main_menu = nullptr;
+	Settings*			settings = nullptr;
 
 private:
 

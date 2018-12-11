@@ -20,6 +20,7 @@
 #include "j1Particles.h"
 #include "j1Languages.h"
 #include "MainMenu.h"
+#include "Settings.h"
 #include "Brofiler/Brofiler.h"
 
 #include "j1Entitites.h"
@@ -48,6 +49,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	particles = new j1Particles();
 	languages = new j1Languages();
 	main_menu = new MainMenu();
+	settings = new Settings();
 	
 
 	// Ordered for awake / Start / Update
@@ -69,10 +71,12 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(fade_to_black);
 	AddModule(gui);
 	AddModule(main_menu);
+	AddModule(settings);
 	// render last to swap buffer
 	AddModule(render);
 
 	main_menu->active = true;
+	settings->active = false;
 	scene->active = false;
 
 	PERF_PEEK(ptimer);

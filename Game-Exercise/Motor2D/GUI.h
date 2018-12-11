@@ -19,10 +19,12 @@ public:
 	SDL_Rect animation = { 0,0,0,0 };
 	Animation* animation2;
 	SDL_Texture* texture = nullptr;
+	iPoint screen_position = iPoint(0, 0);
+	GUI* parent;
 	bool delete_ui = false;
 
 public:
-	GUI(int x, int y);
+	GUI(int x, int y,GUI* parent);
 	virtual ~GUI();
 
 	virtual void Update();

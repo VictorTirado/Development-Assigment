@@ -52,7 +52,7 @@ private:
 
 	GUI* cross = nullptr;
 	GUI_Button* btn_play = nullptr;
-	GUI* btn_continue = nullptr;
+	GUI_Button* btn_continue = nullptr;
 	GUI* btn_settings = nullptr;
 	GUI* btn_credits = nullptr;
 	GUI* btn_exit = nullptr;
@@ -60,6 +60,8 @@ private:
 	GUI* kunai_right = nullptr;
 
 	Gui_Label* text_play = nullptr;
+	Gui_Label* text_continue = nullptr;
+	Gui_Label* text_credits = nullptr;
 
 	
 	

@@ -31,7 +31,6 @@ public:
 	bool Awake(pugi::xml_node&);
 	bool Start();
 	bool CleanUp();
-	void DestroyEntities();
 	bool PreUpdate();
 	bool Update(float dt);
 	bool PostUpdate();

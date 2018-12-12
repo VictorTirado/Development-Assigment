@@ -54,7 +54,7 @@ private:
 	GUI_Button* btn_play = nullptr;
 	GUI_Button* btn_continue = nullptr;
 	GUI* btn_settings = nullptr;
-	GUI* btn_credits = nullptr;
+	GUI_Button* btn_credits = nullptr;
 	GUI* btn_exit = nullptr;
 	GUI* kunai_left = nullptr;
 	GUI* kunai_right = nullptr;

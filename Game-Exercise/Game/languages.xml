@@ -3,7 +3,7 @@
     <main_menu>
       <play value ="Play" />
       <continue value="Continue"/>
-      <settings value ="Settings"/>
+      <credits value ="Credits"/>
       <exit value ="Exit"/>
     </main_menu>
   </english>
@@ -11,7 +11,7 @@
     <menu_principal>
       <jugar value ="Jugar"/>
       <continuar value ="Continuar"/>
-      <opciones value ="Opciones"/>
+      <creditos value ="Creditos"/>
       <salir value ="Salir"/>
     </menu_principal>
   </spanish>

@@ -31,7 +31,7 @@ bool j1Languages::Awake(pugi::xml_node& config)
 	English.current = Language::ENLGLISH;
 	English.play = language.child("main_menu").child("play").attribute("value").as_string();
 	English.continue_ = language.child("main_menu").child("continue").attribute("value").as_string();
-	English.settings = language.child("main_menu").child("settings").attribute("value").as_string();
+	English.credits = language.child("main_menu").child("credits").attribute("value").as_string();
 	English.exit = language.child("main_menu").child("exit").attribute("value").as_string();
 
 	current_language = English;
@@ -42,17 +42,12 @@ bool j1Languages::Awake(pugi::xml_node& config)
 bool j1Languages::Start()
 {
 	bool ret = true;
-	
-
 	return ret;
 }
 
 bool j1Languages::PreUpdate()
 {
 	bool ret = true;
-	
-
-
 	return ret;
 }
 
@@ -60,17 +55,13 @@ bool j1Languages::Update(float dt)
 {
 	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
 		ChangeLanguage();
-
-	LOG("Language: %s", current_language.play.GetString());
 	
 	bool ret = true;
-
 	return ret;
 }
 
 bool j1Languages::PostUpdate()
 {
-
 	bool ret = true;
 	return ret;
 }
@@ -89,8 +80,6 @@ bool j1Languages::Load(pugi::xml_node& data)
 bool j1Languages::Save(pugi::xml_node& data)const
 {
 	bool ret = true;
-
-
 	return ret;
 }
 
@@ -115,7 +104,7 @@ void j1Languages::DeleteLanguage()
 	current_language.continue_ = nullptr;
 	current_language.exit = nullptr;
 	current_language.play = nullptr;
-	current_language.settings = nullptr;
+	current_language.credits = nullptr;
 	
 }
 bool j1Languages::LoadLanguage(Language _language_)
@@ -130,12 +119,10 @@ bool j1Languages::LoadLanguage(Language _language_)
 		spanish.current = Language::SPANISH;
 		spanish.play = language_spanish.child("menu_principal").child("jugar").attribute("value").as_string();
 		spanish.continue_ = language_spanish.child("menu_principal").child("continuar").attribute("value").as_string();
-		spanish.settings = language_spanish.child("menu_principal").child("opciones").attribute("value").as_string();
+		spanish.credits = language_spanish.child("menu_principal").child("creditos").attribute("value").as_string();
 		spanish.exit = language_spanish.child("menu_principal").child("salir").attribute("value").as_string();
 
-		current_language = spanish;
-
-		
+		current_language = spanish;	
 	}
 	if (current_language.current == ENLGLISH/* && Language::ENLGLISH*/)
 	{
@@ -145,7 +132,7 @@ bool j1Languages::LoadLanguage(Language _language_)
 		English.current = Language::ENLGLISH;
 		English.play = language_english.child("main_menu").child("play").attribute("value").as_string();
 		English.continue_ = language_english.child("main_menu").child("continue").attribute("value").as_string();
-		English.settings = language_english.child("main_menu").child("opcions").attribute("value").as_string();
+		English.credits = language_english.child("main_menu").child("credits").attribute("value").as_string();
 		English.exit = language_english.child("main_menu").child("exit").attribute("value").as_string();
 
 		current_language = English;

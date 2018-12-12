@@ -16,7 +16,7 @@ struct LanguageContent
 	Language current;
 	p2SString play;
 	p2SString continue_;
-	p2SString settings;
+	p2SString credits;
 	p2SString exit;
 };
 

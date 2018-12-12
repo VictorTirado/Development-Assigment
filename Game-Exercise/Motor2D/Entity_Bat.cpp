@@ -43,6 +43,7 @@ Entity_Bat::Entity_Bat(int x, int y):Entity(x, y)
 
 Entity_Bat::~Entity_Bat()
 {
+	App->tex->UnLoad(sprites);
 	sprites = nullptr;
 	X = nullptr;
 }

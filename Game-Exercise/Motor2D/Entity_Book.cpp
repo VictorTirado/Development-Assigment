@@ -33,6 +33,7 @@ Entity_Book::Entity_Book(int x, int y) : Entity(x, y)
 
 Entity_Book::~Entity_Book()
 {
+	App->tex->UnLoad(sprites);
 }
 
 

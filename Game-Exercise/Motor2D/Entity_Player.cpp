@@ -70,6 +70,7 @@ Entity_Player::Entity_Player(int x, int y) : Entity(x , y)
 
 Entity_Player::~Entity_Player()
 {
+	App->tex->UnLoad(sprites);
 	sprites = nullptr;
 }
 

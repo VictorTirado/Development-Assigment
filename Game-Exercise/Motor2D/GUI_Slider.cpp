@@ -21,14 +21,15 @@ void Gui_Slider::SetNumStart(int num, GUI_Button * button)
 {
 	this->slider_btn = button;
 	num = num * 243 / 100;
-	this->slider_btn->position.x = position.x - 15;
-	this->slider_btn->position.y = position.y + 1 /*+ animation.h - num - slider_btn->animation.h*/;
+	this->slider_btn->position.x = position.x ;
+	this->slider_btn->position.y = position.y + 2 /*+ animation.h - num - slider_btn->animation.h*/;
 }
 
 void Gui_Slider::MoveButton(GUI_Button* button)
 {
-	if (slider_btn->position.y >= 550)
-		slider_btn->position.y = 449;
+	LOG("X: %d, Y:%d", slider_btn->position.x, slider_btn->position.y);
+	if (slider_btn->position.x >= this->animation.w + this->position.x)
+		slider_btn->position.x = animation.h + position.x - 1;
 	if (slider_btn->position.y <= 300)
 		slider_btn->position.y = 301;
 	this->slider_btn = button;

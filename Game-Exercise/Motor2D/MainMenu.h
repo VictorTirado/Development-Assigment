@@ -8,6 +8,7 @@ class GuiImage;
 class GuiText;
 class GUI;
 class GUI_Button;
+class Gui_Label;
 
 class MainMenu : public j1Module
 {
@@ -47,14 +48,18 @@ private:
 
 	GUI* background = nullptr;
 	GUI* background2 = nullptr;
+	GUI* adjust;
+
 	GUI* cross = nullptr;
-	GUI* btn_play = nullptr;
+	GUI_Button* btn_play = nullptr;
 	GUI* btn_continue = nullptr;
 	GUI* btn_settings = nullptr;
 	GUI* btn_credits = nullptr;
 	GUI* btn_exit = nullptr;
 	GUI* kunai_left = nullptr;
 	GUI* kunai_right = nullptr;
+
+	Gui_Label* text_play = nullptr;
 
 	
 	

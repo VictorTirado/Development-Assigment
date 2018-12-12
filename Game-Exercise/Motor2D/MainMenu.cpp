@@ -48,16 +48,23 @@ bool MainMenu::Start()
 	root = data.child("game_state");
 	SDL_Rect bck = { 0,0,1024,768 };
 	SDL_Rect bck2 = { 1625,299,330,421 };
+	SDL_Rect set = { 1067,54,37,37 };
 	//MENU _UI
 	background = App->gui->AddImage(0, 0, &bck,nullptr, nullptr);
 	background2 = App->gui->AddImage(App->win->width/2 - 165, 150, &bck2, nullptr, nullptr);
+	
 
-	btn_play = App->gui->AddButton(App->win->width/2 -150,180 , { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 }, nullptr);
+	btn_play = (GUI_Button*)App->gui->AddButton(App->win->width/2 -150,180 , { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 }, nullptr);
+	text_play = (Gui_Label*)App->gui->AddLabel(10, 10, "play",nullptr);
+	btn_play->SetText(text_play);
+
+
 	if (root.child("entities").child("player").child("position").attribute("x").as_int() != NULL)
 	btn_continue = App->gui->AddButton(App->win->width / 2 - 150, 320,{ 1316,382,300,77 }, { 1316,299,300,77 },{ 1317,466,300,77 }, nullptr);
 
 	btn_credits = App->gui->AddButton(App->win->width / 2 - 150, 460, { 1316,382,300,77 }, { 1316,299,300,77 },{ 1317,466,300,77 }, nullptr);
 	btn_settings = App->gui->AddButton(App->win->width - 150, 150, { 1137,298,55,55 }, { 1138,361,55,55 }, { 1137,419,55,55 },nullptr);
+	adjust = App->gui->AddImage(btn_settings->position.x + btn_settings->animation.w/6, btn_settings->position.y - 3 + btn_settings->animation.h / 6, &set, nullptr, btn_settings);
 
 	btn_exit = App->gui->AddButton(App->win->width - 150, 50, { 1207,298,55,55 }, { 1207,361,55,55 }, { 1207,420,55,55 }, nullptr);
 

@@ -110,7 +110,7 @@ bool Settings::MouseIn(GUI* element)
 		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
 		{
 			ex2->setAnimation(2);
-			return true;
+			
 			
 		}
 		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)

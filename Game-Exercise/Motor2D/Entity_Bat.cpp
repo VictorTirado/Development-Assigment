@@ -155,7 +155,7 @@ void Entity_Bat::Update(float dt)
 
 void Entity_Bat::OnCollision(Collider* collider)
 {
-	if (App->scene->is_god == false)
+	if (App->scene->is_god == false && damage_cd == 0)
 	{
 		/*if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER)
 			App->entities->ResetMap(App->scene->map_number);
@@ -165,6 +165,11 @@ void Entity_Bat::OnCollision(Collider* collider)
 			lives--;*/
 		App->entities->player->HurtPlayer();
 	}
+
+	damage_cd += 1;
+	if (damage_cd == 50)
+		damage_cd = 0;
+
 	if (lives <= 0)
 		delete_entity = true;
 }

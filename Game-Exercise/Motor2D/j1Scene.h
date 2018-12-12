@@ -50,9 +50,9 @@ public:
 
 	GUI* hearts = nullptr;
 	SDL_Rect hearts3 = { 1603, 926, 94, 22 };
-	SDL_Rect hearts2 = {1603, 959, 84, 22};
-	SDL_Rect hearts1 = { 1603, 988, 84, 22 };
-	SDL_Rect hearts0 = { 1603, 1020, 84, 22 };
+	SDL_Rect hearts2 = {1603, 959, 94, 22};
+	SDL_Rect hearts1 = { 1603, 988, 94, 22 };
+	SDL_Rect hearts0 = { 1603, 1020, 94, 22 };
 };
 
 #endif // __j1SCENE_H__

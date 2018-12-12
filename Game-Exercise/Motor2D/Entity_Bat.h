@@ -40,7 +40,7 @@ public:
 	iPoint bat_pos;
 	iPoint player_pos;
 
-
+	uint damage_cd = 0;
 };
 
 #endif

@@ -41,7 +41,8 @@ private:
 	bool is_faded = false;
 	bool change_map = false;
 	bool change_music = false;
-	GUI* full_heart = NULL;
+	GUI* full_heart = nullptr;
+	SDL_Rect heart_rect = { 1605, 1037, 26, 22 };
 
 public:
 	int map_number = 1;

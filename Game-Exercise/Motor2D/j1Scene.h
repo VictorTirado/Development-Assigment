@@ -41,13 +41,18 @@ private:
 	bool is_faded = false;
 	bool change_map = false;
 	bool change_music = false;
-	GUI* full_heart = nullptr;
-	SDL_Rect heart_rect = { 1605, 1037, 26, 22 };
+	
 
 public:
 	int map_number = 1;
 	bool collision_debug = false;
 	bool is_god = false;
+
+	GUI* hearts = nullptr;
+	SDL_Rect hearts3 = { 1603, 926, 94, 22 };
+	SDL_Rect hearts2 = {1603, 959, 84, 22};
+	SDL_Rect hearts1 = { 1603, 988, 84, 22 };
+	SDL_Rect hearts0 = { 1603, 1020, 84, 22 };
 };
 
 #endif // __j1SCENE_H__

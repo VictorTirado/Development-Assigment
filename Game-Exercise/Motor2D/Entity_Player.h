@@ -25,7 +25,8 @@ public:
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 	void OnCollision(Collider*, Collider*);
-	
+	void UpdateLifes(int lifes);
+	int HurtPlayer();
 
 public:
 	Animation idle;
@@ -70,6 +71,8 @@ public:
 		COLLISION_CHANGE_MAP =72,
 
 	};
+
+	int player_lifes = 4;
 
 	iPoint old_player_position;
 	iPoint velocity;

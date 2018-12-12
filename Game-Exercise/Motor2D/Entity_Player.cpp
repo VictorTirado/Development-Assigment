@@ -15,6 +15,7 @@
 #include "j1Particles.h"
 #include "j1Pathfinding.h"
 #include "Entity_Player.h"
+#include "j1Gui.h"
 #include "Entity_Book.h"
 #include "Brofiler\Brofiler.h"
 
@@ -365,6 +366,28 @@ void Entity_Player::OnCollision(Collider* c1, Collider* c2)
 	{
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 	}
+}
+
+void Entity_Player::UpdateLifes(int lifes)
+{
+	if (lifes == 4)
+		App->scene->hearts = App->gui->AddImage(20, 20, &App->scene->hearts3, nullptr, nullptr);
+
+	if(lifes == 3)
+		App->scene->hearts = App->gui->AddImage(20, 20, &App->scene->hearts2, nullptr, nullptr);
+
+	if(lifes == 2)
+		App->scene->hearts = App->gui->AddImage(20, 20, &App->scene->hearts1, nullptr, nullptr);
+
+	if(lifes == 1)
+		App->scene->hearts = App->gui->AddImage(20, 20, &App->scene->hearts0, nullptr, nullptr);
+}
+
+int Entity_Player::HurtPlayer()
+{
+	player_lifes--;
+
+	return player_lifes;
 }
 
 

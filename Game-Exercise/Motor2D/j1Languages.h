@@ -40,6 +40,7 @@ public:
 
 	bool ChangeLanguage();
 	bool LoadLanguage(Language);
+	void DeleteLanguage();
 
 public:
 	LanguageContent English;

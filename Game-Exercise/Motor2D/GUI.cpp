@@ -14,6 +14,9 @@ GUI::GUI(int x, int y,GUI* parent)
 
 GUI::~GUI()
 {
+	animation2 = nullptr;
+	texture = nullptr;
+	parent = nullptr;
 }
 
 void GUI::Update()

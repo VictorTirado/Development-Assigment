@@ -62,7 +62,7 @@ bool MainMenu::Start()
 	//BTN_CONTINUE
 	if (root.child("entities").child("player").child("position").attribute("x").as_int() != NULL) {
 		btn_continue = (GUI_Button*)App->gui->AddButton(App->win->width / 2 - 150, 320, { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 }, nullptr);
-		text_play = (Gui_Label*)App->gui->AddLabel(10, 10,App->languages->current_language.continue_.GetString(), btn_continue);
+		text_play = (Gui_Label*)App->gui->AddLabel(10, 10,App->languages->current_language.continue_.GetString(), nullptr);
 		btn_continue->SetText(text_play);
 	}
 
@@ -98,8 +98,9 @@ bool MainMenu::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		App->gui->DestroyAllUi();
-		App->languages->ChangeLanguage();
-		App->Start();
+		//App->languages->DeleteLanguage();
+		//App->languages->ChangeLanguage();
+		App->main_menu->Start();
 
 	}
 

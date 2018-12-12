@@ -17,7 +17,7 @@ public:
 	bool IsFading() const;
 
 
-private:
+public:
 
 	enum fade_step
 	{

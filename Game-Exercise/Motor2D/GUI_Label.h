@@ -11,6 +11,7 @@ private:
 
 public:
 	Gui_Label(int x, int y, p2SString text, UI type,GUI* parent);
+	~Gui_Label();
 public:
 	p2SString text;
 };

@@ -110,7 +110,14 @@ bool j1Languages::ChangeLanguage()
 	}
 	return ret;
 }
-
+void j1Languages::DeleteLanguage()
+{
+	current_language.continue_ = nullptr;
+	current_language.exit = nullptr;
+	current_language.play = nullptr;
+	current_language.settings = nullptr;
+	
+}
 bool j1Languages::LoadLanguage(Language _language_)
 {
 	bool ret = false;

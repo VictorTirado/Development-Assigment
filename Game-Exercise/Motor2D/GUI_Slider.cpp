@@ -28,15 +28,16 @@ void Gui_Slider::SetNumStart(int num, GUI_Button * button)
 void Gui_Slider::MoveButton(GUI_Button* button)
 {
 	LOG("X: %d, Y:%d", slider_btn->position.x, slider_btn->position.y);
-	if (slider_btn->position.x >= this->animation.w + this->position.x)
-		slider_btn->position.x = animation.h + position.x - 1;
-	if (slider_btn->position.y <= 300)
-		slider_btn->position.y = 301;
+	if (slider_btn->position.x >= (this->animation.w + this->position.x - button->animation.w)) {
+		slider_btn->position.x = animation.w + position.x - button->animation.w - 1;
+	}
+	/*if (slider_btn->position.y <= 300)
+		slider_btn->position.y = 301;*/
 	this->slider_btn = button;
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT && App->settings->MouseIn(button) == true)
 	{
 
-		if (slider_btn->position.x < (550))
+		if (slider_btn->position.x < (this->animation.w + this->position.x - button->animation.w))
 		{
 			LOG("PATATTA");
 			this->slider_btn->position.x = App->settings->mouse_x - slider_btn->animation.h / 2 ;

@@ -164,12 +164,20 @@ void Entity_Ninja::OnCollision(Collider* collider)
 {
 	if (App->scene->is_god == false)
 	{
-		if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER)
+		if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER && damage_cd == 0)
+			App->entities->player->HurtPlayer();
+
+		if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER&& App->entities->player->player_lifes == 0)
 		App->entities->ResetMap(App->scene->map_number);
 
 		else if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT)
 			lives--;
 	}
+
+	damage_cd += 1;
+	if (damage_cd == 50)
+		damage_cd = 0;
+
 	if (lives <= 0)
 		delete_entity = true;
 

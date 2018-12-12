@@ -366,6 +366,7 @@ void Entity_Player::OnCollision(Collider* c1, Collider* c2)
 	if (c2->type == COLLIDER_TYPE::COLLIDER_ENEMY)
 	{
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
+
 	}
 }
 

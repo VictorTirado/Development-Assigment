@@ -30,6 +30,7 @@ class Characters;
 enum Entities
 {
 	PLAYER_ENTITY,
+	GAARA_ENTITY,
 	NINJA_ENTITY,
 	BAT_ENTITY,
 	NONE_ENTITY,

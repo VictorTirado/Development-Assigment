@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClCompile Include="Entity_Bat.cpp" />
     <ClCompile Include="Entity_Book.cpp" />
+    <ClCompile Include="Entity_Gaara.cpp" />
     <ClCompile Include="Entity_Ninja.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="GUI_Button.cpp" />
@@ -115,6 +116,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Entity_Bat.h" />
     <ClInclude Include="Entity_Book.h" />
+    <ClInclude Include="Entity_Gaara.h" />
     <ClInclude Include="Entity_Ninja.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="GUI_Button.h" />

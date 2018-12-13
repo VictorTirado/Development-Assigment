@@ -17,6 +17,7 @@
 #include "Entity_Book.h"
 #include "Entity_Bat.h"
 #include "Entity_Ninja.h"
+#include "Entity_Gaara.h"
 
 j1Entities::j1Entities() : j1Module()
 {
@@ -120,13 +121,13 @@ bool j1Entities::SpawnEntities(int x, int y, Entities_Type type)
 		ret = true;
 		break;
 	}
-	/*case Entities_Type::GAARA: {
+	case Entities_Type::GAARA_PLAYER: {
 		gaara = new Entity_Gaara(x, y);
-		gaara->entity_type = Entities_Type::GAARA;
+		gaara->entity_type = Entities_Type::GAARA_PLAYER;
 		entities.PushBack(gaara);
 		ret = true;
 		break;
-	}*/
+	}
 	case Entities_Type::BOOK: {
 		book = new Entity_Book(x, y);
 		book->entity_type = Entities_Type::BOOK;

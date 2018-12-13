@@ -247,6 +247,10 @@ pugi::xml_node j1App::LoadEntities(pugi::xml_document& player_file, Entities typ
 			ret = entities.child("ninja");
 			break;
 
+		case Entities::GAARA_ENTITY:
+			ret = entities.child("gaara");
+			break;
+
 		}
 	}
 		

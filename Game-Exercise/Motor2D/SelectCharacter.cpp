@@ -152,11 +152,11 @@ void Characters::Interact(GUI* g)
 		type = SASUKE;
 		start_game = true;
 	}
-	//else if (g->position.y == 400)
-	//{
-	//	type = GAARA;
-	//	start_game = true;
-	//}
+	else if (g->position.y == 400)
+	{
+		type = GAARA;
+		start_game = true;
+	}
 	else if (g->position.y == 600)
 	{
 	}
@@ -195,7 +195,13 @@ bool Characters::ShowStats(GUI* g)
 }
 void Characters::StartGame()
 {
-	if (type != Player_Type::NO_SELECTED) {
+	/*if (type != Player_Type::NO_SELECTED) {
+		btn_play = (GUI_Button*)App->gui->AddButton(App->win->width / 2 - 150, 180, { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 }, nullptr);
+		text_play = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->current_language.play.GetString(), btn_play);
+		btn_play->SetText(text_play);
+		start_game = false;
+	}*/
+	if (type == Player_Type::GAARA) {
 		btn_play = (GUI_Button*)App->gui->AddButton(App->win->width / 2 - 150, 180, { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 }, nullptr);
 		text_play = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->current_language.play.GetString(), btn_play);
 		btn_play->SetText(text_play);

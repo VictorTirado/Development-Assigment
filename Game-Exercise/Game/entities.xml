@@ -136,4 +136,13 @@
       <frame x="0" y="207" w="53" h="38"/>
     </animation>
   </ninja>
+  <gaara>
+    <folder path="textures/Gaara_sprites.png"></folder>
+    <animation name="idle" speed="0.05f" loop="true">
+      <frame x="3" y="13"  w="26" h="57"/>
+      <frame x="39" y="13" w="26" h="57"/>
+      <frame x="75" y="13" w="26" h="57"/>
+      <frame x="111" y="13" w="26" h="57"/>
+      </animation>
+    </gaara>
 </entities>

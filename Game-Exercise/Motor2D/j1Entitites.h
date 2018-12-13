@@ -8,10 +8,12 @@ class Entity_Player;
 class Entity_Book;
 class Entity_Bat;
 class Entity_Ninja;
+class Entity_Gaara;
 
 enum Entities_Type
 {
 	PLAYER,
+	GAARA,
 	BOOK,
 	BAT,
 	NINJA,
@@ -24,6 +26,7 @@ class Player;
 class Book;
 class Bat;
 class Ninja;
+class Gaara;
 
 class j1Entities : public j1Module
 {
@@ -50,6 +53,7 @@ public:
 	p2DynArray<Entity*> entities;
 	
 	Entity_Player* player;
+	Entity_Gaara* gaara;
 	Entity_Book* book;
 	Entity_Bat* bat;
 	Entity_Ninja* ninja;

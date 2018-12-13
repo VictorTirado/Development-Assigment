@@ -120,6 +120,13 @@ bool j1Entities::SpawnEntities(int x, int y, Entities_Type type)
 		ret = true;
 		break;
 	}
+	/*case Entities_Type::GAARA: {
+		gaara = new Entity_Gaara(x, y);
+		gaara->entity_type = Entities_Type::GAARA;
+		entities.PushBack(gaara);
+		ret = true;
+		break;
+	}*/
 	case Entities_Type::BOOK: {
 		book = new Entity_Book(x, y);
 		book->entity_type = Entities_Type::BOOK;

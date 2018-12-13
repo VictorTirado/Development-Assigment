@@ -7,6 +7,7 @@
 #include "Entity_Player.h"
 #include "j1Scene.h"
 #include "j1Entitites.h"
+#include "SelectCharacter.h"
 #include "Brofiler\Brofiler.h"
 #include "j1Input.h"
 #include <math.h>
@@ -61,6 +62,7 @@ void j1Map::Spawn()
 
 							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 52)
 							{
+								if(App->characters->type == Player_Type::SASUKE)
 								App->entities->SpawnEntities(coords.x, coords.y, PLAYER);
 							}
 							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 73)

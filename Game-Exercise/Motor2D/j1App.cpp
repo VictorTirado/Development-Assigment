@@ -21,6 +21,7 @@
 #include "j1Languages.h"
 #include "MainMenu.h"
 #include "Settings.h"
+#include "SelectCharacter.h"
 #include "Brofiler/Brofiler.h"
 
 #include "j1Entitites.h"
@@ -50,6 +51,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	languages = new j1Languages();
 	main_menu = new MainMenu();
 	settings = new Settings();
+	characters = new Characters();
 	
 
 	// Ordered for awake / Start / Update
@@ -72,12 +74,15 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(gui);
 	AddModule(main_menu);
 	AddModule(settings);
+	AddModule(characters);
 	// render last to swap buffer
 	AddModule(render);
 
 	main_menu->active = true;
 	settings->active = false;
 	scene->active = false;
+	
+	characters->active = false;
 
 	PERF_PEEK(ptimer);
 }

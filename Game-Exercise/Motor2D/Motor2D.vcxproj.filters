@@ -100,6 +100,9 @@
     <ClCompile Include="GUI_Slider.cpp">
       <Filter>Desenvolupament  ========\UI</Filter>
     </ClCompile>
+    <ClCompile Include="SelectCharacter.cpp">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -221,6 +224,9 @@
     </ClInclude>
     <ClInclude Include="GUI_Slider.h">
       <Filter>Desenvolupament  ========\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectCharacter.h">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -15,9 +15,6 @@ public:
 	Entity_Player(int x,int y);
 	~Entity_Player();
 
-
-	
-
 	void Update(float dt);
 
 

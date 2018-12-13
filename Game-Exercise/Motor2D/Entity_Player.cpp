@@ -75,9 +75,6 @@ Entity_Player::~Entity_Player()
 }
 
 
-
-
-
 void Entity_Player::Update(float dt)
 {
 	BROFILER_CATEGORY("EntityPlayerUpdate", Profiler::Color::SpringGreen);

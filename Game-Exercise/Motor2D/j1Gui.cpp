@@ -73,7 +73,7 @@ bool j1Gui::Update(float dt)
 			ui_list[i]->Draw(atlas);
 	}
 	/*for (int i = 0; i < ui_list.Count(); i++) {
-		if (ui_list.At(i) != nullptr)
+		if (ui_list.At(i) != nullptr && ui_list[i]->type == BUTTON)
 			ui_list[i]->MouseIn(ui_list[i]);
 	}*/
 

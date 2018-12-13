@@ -18,6 +18,7 @@
 #include "Entity_Player.h"
 #include "j1Scene.h"
 #include "Settings.h"
+#include "SelectCharacter.h"
 #include "j1Languages.h"
 
 #include "GUI_Button.h"
@@ -137,8 +138,8 @@ bool MainMenu::MouseIn(GUI* element)
 		{
 			ex2->setAnimation(2);
 			if (delete_kunais == false) {
-			//	kunai_left = App->gui->AddImage(element->position.x - 60, element->position.y + 10,nullptr, &App->gui->shuriken);
-				//kunai_right = App->gui->AddImage(element->position.x + 270, element->position.y + 10, nullptr, &App->gui->shuriken);
+			//	kunai_left = App->gui->AddImage(element->position.x - 60, element->position.y + 10,nullptr, &App->gui->shuriken,nullptr);
+				//kunai_right = App->gui->AddImage(element->position.x + 270, element->position.y + 10, nullptr, &App->gui->shuriken,nullptr);
 				delete_kunais = true;
 				return true;
 			}
@@ -175,8 +176,8 @@ void MainMenu::Interact(GUI* g)
 	{
 		App->fade_to_black->FadeToBlack(this,App->scene, 3.0f);
 		App->gui->DestroyAllUi();
-		App->scene->active = true;
-		App->scene->Start();
+		App->characters->active = true;
+		App->characters->Start();
 		
 		this->active = false;
 	}

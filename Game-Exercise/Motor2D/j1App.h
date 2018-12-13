@@ -25,6 +25,7 @@ class j1Particles;
 class j1Languages;
 class MainMenu;
 class Settings;
+class Characters;
 
 enum Entities
 {
@@ -127,6 +128,7 @@ public:
 	j1Languages*		languages = nullptr;
 	MainMenu*			main_menu = nullptr;
 	Settings*			settings = nullptr;
+	Characters*			characters = nullptr;
 
 private:
 

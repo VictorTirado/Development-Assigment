@@ -57,6 +57,9 @@ public:
 	GUI* book_caught_ui = nullptr;
 	SDL_Rect book_caught_rect = { 1855, 947, 28, 25 };
 	SDL_Rect book_not_caught_rect = { 1789, 947, 28, 25 };
+
+	GUI* ui_background = nullptr;
+	SDL_Rect ui_backround_rect = {1057, 573, 243, 61};
 };
 
 #endif // __j1SCENE_H__

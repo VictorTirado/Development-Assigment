@@ -39,7 +39,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 
-	
+	ui_background = App->gui->AddImage(0, 0, &ui_backround_rect, nullptr, nullptr);
 
 	if (!is_faded && map_number == 1)
 	{

@@ -11,7 +11,7 @@
 #include "j1Render.h"
 #include "j1Entitites.h"
 #include "j1Scene.h"
-
+#include "j1Gui.h"
 #include "j1FadeToBlack.h"
 
 #include "Entity_Player.h"
@@ -48,6 +48,7 @@ void Entity_Book::Update(float dt)
 		collider = App->collision->AddCollider({ 0, 0, 28, 25 }, COLLIDER_TYPE::COLLIDER_POWER_UP, App->entities);
 		firstUpdate = false;
 	}
+
 }
 
 
@@ -57,6 +58,7 @@ void Entity_Book::OnCollision(Collider* collider)
 	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER) {
 		LOG("COLLISION");
 		App->entities->player->can_tp = true;
+		is_caught = true;
 		delete_entity = true;
 	}
 }
@@ -78,5 +80,14 @@ bool Entity_Book::Save(pugi::xml_node& data)const
 	data.child("position").append_attribute("y") = position.y;
 
 	return true;
+}
+
+void Entity_Book::UpdateBookUI(bool book_caught)
+{
+	if(book_caught)
+		App->scene->book_caught_ui = App->gui->AddImage(200, 20, &App->scene->book_caught_rect, nullptr, nullptr);
+
+	if(!book_caught)
+		App->scene->book_caught_ui = App->gui->AddImage(200, 20, &App->scene->book_not_caught_rect, nullptr, nullptr);
 }
 

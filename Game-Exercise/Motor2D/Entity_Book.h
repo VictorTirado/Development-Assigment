@@ -23,6 +23,8 @@ public:
 
 	void OnCollision(Collider* collider);
 
+	void UpdateBookUI(bool book_caught);
+
 public:
 	
 	Animation idle;

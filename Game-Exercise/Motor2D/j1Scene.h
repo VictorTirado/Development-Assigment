@@ -53,6 +53,10 @@ public:
 	SDL_Rect hearts2 = {1603, 959, 94, 22};
 	SDL_Rect hearts1 = { 1603, 988, 94, 22 };
 	SDL_Rect hearts0 = { 1603, 1020, 94, 22 };
+
+	GUI* book_caught_ui = nullptr;
+	SDL_Rect book_caught_rect = { 1855, 947, 28, 25 };
+	SDL_Rect book_not_caught_rect = { 1789, 947, 28, 25 };
 };
 
 #endif // __j1SCENE_H__

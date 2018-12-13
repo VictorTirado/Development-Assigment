@@ -84,6 +84,7 @@ bool j1Scene::Update(float dt)
 	}*/
 
 	App->entities->player->UpdateLifes(App->entities->player->player_lifes);
+	App->entities->book->UpdateBookUI(App->entities->book->is_caught);
 	
 	App->gui->MoveGui(hearts, dt);
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)

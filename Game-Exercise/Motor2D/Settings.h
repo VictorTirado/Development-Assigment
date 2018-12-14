@@ -9,6 +9,7 @@ class GuiText;
 class GUI;
 class GUI_Button;
 class Gui_Slider;
+class Gui_Label;
 
 class Settings : public j1Module
 {
@@ -39,6 +40,7 @@ public:
 
 	//bool MouseIn(GUI* button);
 	void Interact(GUI* g);
+	void SelectLanguage(GUI_Button* btn_language);
 private:
 	bool is_faded = false;
 	bool first_update = true;
@@ -52,6 +54,10 @@ private:
 	GUI* music = nullptr;
 	Gui_Slider* slider;
 	GUI_Button* button;
+	GUI_Button* btn_spanish;
+	GUI_Button* btn_english;
+	Gui_Label* text_language = nullptr;
+	GUI_Button* btn_language;
 
 
 	

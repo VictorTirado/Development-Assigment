@@ -9,6 +9,7 @@ class GuiText;
 class GUI;
 class GUI_Button;
 class Gui_Label;
+class GUI_Box;
 
 class MainMenu : public j1Module
 {
@@ -39,6 +40,8 @@ public:
 
 	bool MouseIn(GUI* button);
 	void Interact(GUI* g);
+
+	
 private:
 	bool is_faded = false;
 	bool change_map = false;
@@ -58,6 +61,11 @@ private:
 	GUI* btn_exit = nullptr;
 	GUI* kunai_left = nullptr;
 	GUI* kunai_right = nullptr;
+	GUI_Button* btn_language;
+	Gui_Label* text_language = nullptr;
+	GUI* btn_options = nullptr;
+	GUI_Box* select_lng; 
+	GUI_Button* btn_spanish;
 
 	Gui_Label* text_play = nullptr;
 	Gui_Label* text_continue = nullptr;

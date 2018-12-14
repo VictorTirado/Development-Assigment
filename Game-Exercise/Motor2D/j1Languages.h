@@ -14,6 +14,7 @@ enum Language
 struct LanguageContent
 {
 	Language current;
+	p2SString language;
 	p2SString play;
 	p2SString continue_;
 	p2SString credits;
@@ -44,6 +45,7 @@ public:
 
 public:
 	LanguageContent English;
+	LanguageContent spanish;
 	LanguageContent current_language;
 	
 };

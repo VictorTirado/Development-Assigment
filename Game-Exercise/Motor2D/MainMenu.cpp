@@ -23,6 +23,7 @@
 
 #include "GUI_Button.h"
 
+
 MainMenu::MainMenu() : j1Module()
 {
 	name.create("MainMenu");
@@ -55,6 +56,8 @@ bool MainMenu::Start()
 	background = App->gui->AddImage(0, 0, &bck,nullptr,this, nullptr);
 	background2 = App->gui->AddImage(App->win->width/2 - 165, 150, &bck2, nullptr,this, nullptr);
 	
+
+	
 	//BTN_CONTINUE
 	btn_play = (GUI_Button*)App->gui->AddButton(App->win->width/2 -150,180 , { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 },this, nullptr);
 	text_play = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->current_language.play.GetString(),this,btn_play);
@@ -74,6 +77,11 @@ bool MainMenu::Start()
 
 	adjust = App->gui->AddImage(btn_settings->position.x + btn_settings->animation.w/6, btn_settings->position.y - 3 + btn_settings->animation.h / 6, &set, nullptr,this, btn_settings);
 	btn_exit = App->gui->AddButton(App->win->width - 150, 50, { 1207,298,55,55 }, { 1207,361,55,55 }, { 1207,420,55,55 },this, nullptr);
+
+	//select_lng = (GUI_Box*)App->gui->AddBox(0, 0, (GUI_Button*)btn_language,(GUI_Button*)btn_options, this, nullptr);
+	//select_lng->SetOptions((GUI_Button*)btn_options);
+
+
 	return true;
 }
 
@@ -178,8 +186,9 @@ void MainMenu::Interact(GUI* g)
 		
 		this->active = false;
 	}
-	else if (g->position.y == 320)
+	else if (g->position.y == 140)
 	{
+		
 	}
 	else if (g->position.y == 150)
 	{
@@ -199,5 +208,14 @@ void MainMenu::Interact(GUI* g)
 		App->gui->DestroyAllUi();
 		close = true;
 	}
+	else if (g == btn_spanish)
+	{
+		App->gui->DestroyAllUi();
+		App->languages->DeleteLanguage();
+		App->languages->ChangeLanguage();
+		App->main_menu->Start();
+	}
 	
 }
+
+

@@ -13,6 +13,7 @@
 #include "GUI_button.h"
 #include "GUI_Slider.h"
 
+
 j1Gui::j1Gui() : j1Module()
 {
 	name.create("gui");
@@ -124,7 +125,7 @@ GUI* j1Gui::AddButton(int x, int y, SDL_Rect normal, SDL_Rect mouse_in, SDL_Rect
 
 GUI* j1Gui::AddSlider(int x, int y, j1Module* callback, GUI* parent)
 {
-	GUI* slider = new Gui_Slider(x, y,callback, SLIDER, parent);
+	GUI* slider = new Gui_Slider(x, y, callback, SLIDER, parent);
 	ui_list.PushBack(slider);
 	return slider;
 }

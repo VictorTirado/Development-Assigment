@@ -29,10 +29,15 @@ bool j1Languages::Awake(pugi::xml_node& config)
 	
 	language = App->LoadLanguages(languages,ENGLISH);
 	English.current = Language::ENLGLISH;
+	English.language = language.child("main_menu").child("language").attribute("value").as_string();
 	English.play = language.child("main_menu").child("play").attribute("value").as_string();
 	English.continue_ = language.child("main_menu").child("continue").attribute("value").as_string();
 	English.credits = language.child("main_menu").child("credits").attribute("value").as_string();
 	English.exit = language.child("main_menu").child("exit").attribute("value").as_string();
+
+	pugi::xml_node language_spanish;
+	language_spanish = App->LoadLanguages(languages, ESPAÑOL);
+	spanish.language = language_spanish.child("menu_principal").child("idioma").attribute("value").as_string();
 
 	current_language = English;
 	bool ret = true;
@@ -115,8 +120,8 @@ bool j1Languages::LoadLanguage(Language _language_)
 	{
 		pugi::xml_node language_spanish;
 		language_spanish = App->LoadLanguages(languages, ESPAÑOL);
-		LanguageContent spanish;
 		spanish.current = Language::SPANISH;
+		
 		spanish.play = language_spanish.child("menu_principal").child("jugar").attribute("value").as_string();
 		spanish.continue_ = language_spanish.child("menu_principal").child("continuar").attribute("value").as_string();
 		spanish.credits = language_spanish.child("menu_principal").child("creditos").attribute("value").as_string();
@@ -130,6 +135,7 @@ bool j1Languages::LoadLanguage(Language _language_)
 		language_english = App->LoadLanguages(languages, ENGLISH);
 		LanguageContent English;
 		English.current = Language::ENLGLISH;
+		English.language = language_english.child("main_menu").child("language").attribute("value").as_string();
 		English.play = language_english.child("main_menu").child("play").attribute("value").as_string();
 		English.continue_ = language_english.child("main_menu").child("continue").attribute("value").as_string();
 		English.credits = language_english.child("main_menu").child("credits").attribute("value").as_string();

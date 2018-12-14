@@ -1,6 +1,7 @@
 <languages>
   <english>
     <main_menu>
+      <language value="English"/>
       <play value ="Play" />
       <continue value="Continue"/>
       <credits value ="Credits"/>
@@ -9,6 +10,7 @@
   </english>
   <spanish>
     <menu_principal>
+      <idioma value="Español"/>
       <jugar value ="Jugar"/>
       <continuar value ="Continuar"/>
       <creditos value ="Creditos"/>

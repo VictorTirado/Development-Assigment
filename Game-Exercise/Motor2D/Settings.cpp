@@ -14,6 +14,7 @@
 #include "j1PathFinding.h"
 #include "j1Gui.h"
 #include "j1Fonts.h"
+#include "j1Languages.h"
 #include "Brofiler\Brofiler.h"
 #include "Entity_Player.h"
 #include "j1Scene.h"
@@ -57,6 +58,10 @@ bool Settings::Start()
 	slider = (Gui_Slider*)App->gui->AddSlider(400, 290,this, music);
 	button = (GUI_Button*)App->gui->AddButton(0, 0, { 1068,297,55,55 }, { 1069,362,55,55 }, { 1069,421,55,55 },this, (GUI*)slider);
 	slider->SetNumStart(App->audio->volume, button);
+
+	btn_language = (GUI_Button*)App->gui->AddButton(App->win->width / 2 - 300, 140, { 515,805,190,49 }, { 515,805,190,49 }, { 515,805,190,49 }, this, nullptr);
+	text_language = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->current_language.language.GetString(), this, nullptr);
+	btn_language->SetText(text_language);
 	
 	return true;
 }
@@ -142,15 +147,26 @@ void Settings::Interact(GUI* g)
 
 		this->active = false;
 	}
-	else if (g->position.y == 320)
+	else if (g == btn_language)
 	{
+		SelectLanguage(btn_language);
+		
 	}
-	else if (g->position.y == 460)
+	else if (g == btn_spanish  )
 	{
+		App->gui->DestroyAllUi();
+		App->languages->DeleteLanguage();
+		App->languages->ChangeLanguage();
+		App->settings->Start();
 	}
-	else if (g->position.y == 600)
+	else if (g == btn_english)
 	{
+		App->gui->DestroyAllUi();
+		App->languages->DeleteLanguage();
+		App->languages->ChangeLanguage();
+		App->settings->Start();
 	}
+	
 	else if (g->position.y == 50)
 	{
 		
@@ -163,4 +179,18 @@ void Settings::Interact(GUI* g)
 		
 	}
 
+}
+void Settings::SelectLanguage(GUI_Button* btn_language)
+{
+	if (App->languages->current_language.current == Language::ENLGLISH) {
+		btn_spanish = (GUI_Button*)App->gui->AddButton(btn_language->position.x, btn_language->position.y + btn_language->animation.h, { 515,805,190,49 }, { 515,805,190,49 }, { 515,805,190,49 }, this, btn_language);
+		text_language = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->spanish.language.GetString(), this, nullptr);
+		btn_spanish->SetText(text_language);
+	}
+	else if (App->languages->current_language.current == Language::SPANISH)
+	{
+		btn_english = (GUI_Button*)App->gui->AddButton(btn_language->position.x, btn_language->position.y + btn_language->animation.h, { 515,805,190,49 }, { 515,805,190,49 }, { 515,805,190,49 }, this, btn_language);
+		text_language = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->English.language.GetString(), this, nullptr);
+		btn_english->SetText(text_language);
+	}
 }

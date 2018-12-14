@@ -7,7 +7,7 @@
 #include "j1Scene.h"
 
 
-GUI_Button::GUI_Button(int x, int y, SDL_Rect rect, SDL_Rect rec2, SDL_Rect rect3, UI type, GUI* parent) : GUI(x, y, parent)
+GUI_Button::GUI_Button(int x, int y, SDL_Rect rect, SDL_Rect rec2, SDL_Rect rect3, j1Module* callback, UI type, GUI* parent) : GUI(x, y,callback,parent)
 {
 
 	position.x = x;

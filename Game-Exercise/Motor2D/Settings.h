@@ -37,7 +37,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	bool MouseIn(GUI* button);
+	//bool MouseIn(GUI* button);
 	void Interact(GUI* g);
 private:
 	bool is_faded = false;

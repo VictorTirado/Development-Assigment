@@ -12,7 +12,7 @@ private:
 	Animation anim;
 
 public:
-	GUI_Image(int x, int y, UI type, GUI* parent, Animation* anim , SDL_Rect* rect = NULL);
+	GUI_Image(int x, int y, UI type, GUI* parent, Animation* anim , j1Module* callback, SDL_Rect* rect = NULL);
 
 };
 #endif //_GUI_IMAGE_H__

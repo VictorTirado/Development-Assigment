@@ -14,7 +14,7 @@ private:
 	Gui_Label* text = nullptr;
 
 public:
-	GUI_Button(int x, int y, SDL_Rect rect, SDL_Rect rect2, SDL_Rect rect3, UI type,GUI* parent);
+	GUI_Button(int x, int y, SDL_Rect rect, SDL_Rect rect2, SDL_Rect rect3, j1Module* callback, UI type,GUI* parent);
 	~GUI_Button();
 	void setAnimation(int state);
 	void SetText(Gui_Label* text);

@@ -7,7 +7,7 @@
 #include "p2Log.h"
 
 
-Gui_Slider::Gui_Slider(int x, int y, UI type, GUI* parent) : GUI(x, y, parent)
+Gui_Slider::Gui_Slider(int x, int y, j1Module* callback, UI type, GUI* parent) : GUI(x, y,callback, parent)
 {
 	position.x = x;
 	position.y = y;
@@ -34,7 +34,7 @@ void Gui_Slider::MoveButton(GUI_Button* button)
 	/*if (slider_btn->position.y <= 300)
 		slider_btn->position.y = 301;*/
 	this->slider_btn = button;
-	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT && App->settings->MouseIn(button) == true)
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT /*&& App->settings->MouseIn(button) == true*/)
 	{
 
 		if (slider_btn->position.x < (this->animation.w + this->position.x - button->animation.w))

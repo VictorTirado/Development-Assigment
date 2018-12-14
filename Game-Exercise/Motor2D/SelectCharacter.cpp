@@ -49,15 +49,15 @@ bool Characters::Start()
 
 	SDL_Rect bck = { 0,0,1024,768 };
 	SDL_Rect bck2 = { 600,943,517,271 };
-	background = App->gui->AddImage(0, 0, &bck, nullptr, nullptr);
-	background2 = App->gui->AddImage((App->win->width / 2) - bck2.w/2, App->win->height / 2 - 50, &bck2, nullptr, nullptr);
-	go_back = App->gui->AddButton(50, 50, { 1129,95,48,51 }, { 1128,160,48,51 }, { 1128,160,48,51 }, nullptr);
+	background = App->gui->AddImage(0, 0, &bck, nullptr,this, nullptr);
+	background2 = App->gui->AddImage((App->win->width / 2) - bck2.w/2, App->win->height / 2 - 50, &bck2, nullptr,this, nullptr);
+	go_back = App->gui->AddButton(50, 50, { 1129,95,48,51 }, { 1128,160,48,51 }, { 1128,160,48,51 },this, nullptr);
 
 	
 	
-	sasuke = (GUI_Button*)App->gui->AddButton(200, 50, { 1458,556,120,120 }, { 1318,554,120,120 }, { 1318,554,120,120 }, nullptr);
-	gaara = (GUI_Button*)App->gui->AddButton(400, 50, { 1458,686,120,120 }, { 1317,684,120,120 }, { 1317,684,120,120 }, nullptr);
-	anonymous = (GUI_Button*)App->gui->AddButton(600, 50, { 1056,683,120,120 }, { 1187,683,120,120 }, { 1187,683,120,120 }, nullptr);
+	sasuke = (GUI_Button*)App->gui->AddButton(200, 50, { 1458,556,120,120 }, { 1318,554,120,120 }, { 1318,554,120,120 },this, nullptr);
+	gaara = (GUI_Button*)App->gui->AddButton(400, 50, { 1458,686,120,120 }, { 1317,684,120,120 }, { 1317,684,120,120 },this, nullptr);
+	anonymous = (GUI_Button*)App->gui->AddButton(600, 50, { 1056,683,120,120 }, { 1187,683,120,120 }, { 1187,683,120,120 },this, nullptr);
 	return true;
 }
 
@@ -174,18 +174,18 @@ bool Characters::ShowStats(GUI* g)
 {
 	if (g->position.x == 200 && show_stats == true && mouse_x > g->position.x && mouse_x < g->position.x + g->animation.w && mouse_y > g->position.y && mouse_y < g->position.y + g->animation.h)
 	{
-		stats_sasuke.name = (Gui_Label*)App->gui->AddLabel(500, 500, "Sasuke", nullptr);
-		stats_sasuke.lifes = (Gui_Label*)App->gui->AddLabel(500, 600, "Lifes: 3", nullptr);
+		stats_sasuke.name = (Gui_Label*)App->gui->AddLabel(500, 500, "Sasuke",this, nullptr);
+		stats_sasuke.lifes = (Gui_Label*)App->gui->AddLabel(500, 600, "Lifes: 3",this, nullptr);
 		type = SASUKE;
 		return true;
 	}
 	else if (g->position.x == 400)
 	{
-		App->gui->AddLabel(500, 500, "Gaara", nullptr);
+		App->gui->AddLabel(500, 500, "Gaara",this, nullptr);
 	}
 	else if (g->position.x == 600)
 	{
-		App->gui->AddLabel(500, 600, "Finish the maps in less than 3 min to unlock it", nullptr);
+		App->gui->AddLabel(500, 600, "Finish the maps in less than 3 min to unlock it",this, nullptr);
 	}
 	else
 	{
@@ -196,8 +196,8 @@ bool Characters::ShowStats(GUI* g)
 void Characters::StartGame()
 {
 	if (type != Player_Type::NO_SELECTED) {
-		btn_play = (GUI_Button*)App->gui->AddButton(App->win->width / 2 - 150, 180, { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 }, nullptr);
-		text_play = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->current_language.play.GetString(), btn_play);
+		btn_play = (GUI_Button*)App->gui->AddButton(App->win->width / 2 - 150, 180, { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 },this, nullptr);
+		text_play = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->current_language.play.GetString(),this, btn_play);
 		btn_play->SetText(text_play);
 		start_game = false;
 	}

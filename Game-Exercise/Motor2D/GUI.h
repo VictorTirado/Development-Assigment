@@ -19,16 +19,20 @@ public:
 	SDL_Rect animation = { 0,0,0,0 };
 	Animation* animation2;
 	SDL_Texture* texture = nullptr;
+	j1Module* callback = nullptr;
 	iPoint screen_position = iPoint(0, 0);
 	GUI* parent;
 	bool delete_ui = false;
 
 public:
-	GUI(int x, int y,GUI* parent);
+	GUI(int x, int y,j1Module* callback,GUI* parent);
 	virtual ~GUI();
 
 	virtual void Update();
 	virtual void Draw(SDL_Texture* sprites);
+	virtual bool MouseIn(GUI* element);
+public:
+	int mouse_x, mouse_y;
 };
 
 #endif 

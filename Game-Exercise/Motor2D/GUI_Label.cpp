@@ -5,7 +5,7 @@
 #include "p2Log.h"
 
 
-Gui_Label::Gui_Label(int x, int y, p2SString text, UI type,GUI* parent) : GUI(x, y, parent)
+Gui_Label::Gui_Label(int x, int y, p2SString text, j1Module* callback, UI type,GUI* parent) : GUI(x, y,callback, parent)
 {
 	position.x = x;
 	position.y = y;

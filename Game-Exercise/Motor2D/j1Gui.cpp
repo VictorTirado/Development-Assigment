@@ -72,10 +72,10 @@ bool j1Gui::Update(float dt)
 		if (ui_list.At(i) != nullptr)
 			ui_list[i]->Draw(atlas);
 	}
-	/*for (int i = 0; i < ui_list.Count(); i++) {
+	for (int i = 0; i < ui_list.Count(); i++) {
 		if (ui_list.At(i) != nullptr && ui_list[i]->type == BUTTON)
 			ui_list[i]->MouseIn(ui_list[i]);
-	}*/
+	}
 
 
 	LOG("elements ui: %d", ui_list.Count());
@@ -104,29 +104,29 @@ const SDL_Texture* j1Gui::GetAtlas() const
 
 // class Gui ---------------------------------------------------
 
-GUI* j1Gui::AddImage(int x, int y, SDL_Rect* rect, Animation* anim,GUI* parent)
+GUI* j1Gui::AddImage(int x, int y, SDL_Rect* rect, Animation* anim, j1Module* callback,GUI* parent)
 {
-	GUI* image = new GUI_Image(x, y, IMAGE, parent,anim, rect);
+	GUI* image = new GUI_Image(x, y, IMAGE, parent,anim, callback,rect);
 	ui_list.PushBack(image);
 	return image;
 }
-GUI* j1Gui::AddLabel(int x, int y, p2SString text, GUI* parent)
+GUI* j1Gui::AddLabel(int x, int y, p2SString text, j1Module* callback, GUI* parent)
 {
-	GUI* label = new Gui_Label(x, y, text, LABEL,parent);
+	GUI* label = new Gui_Label(x, y, text,callback, LABEL,parent);
 	ui_list.PushBack(label);
 	return label;
 }
 
-GUI* j1Gui::AddButton(int x, int y, SDL_Rect normal, SDL_Rect mouse_in, SDL_Rect clicked, GUI* parent)
+GUI* j1Gui::AddButton(int x, int y, SDL_Rect normal, SDL_Rect mouse_in, SDL_Rect clicked, j1Module* callback, GUI* parent)
 {
-	GUI* button = new GUI_Button(x, y, normal, mouse_in, clicked, BUTTON,parent);
+	GUI* button = new GUI_Button(x, y, normal, mouse_in, clicked, callback, BUTTON,parent);
 	ui_list.PushBack(button);
 	return button;
 }
 
-GUI* j1Gui::AddSlider(int x, int y, GUI* parent)
+GUI* j1Gui::AddSlider(int x, int y, j1Module* callback, GUI* parent)
 {
-	GUI* slider = new Gui_Slider(x, y, SLIDER, parent);
+	GUI* slider = new Gui_Slider(x, y,callback, SLIDER, parent);
 	ui_list.PushBack(slider);
 	return slider;
 }

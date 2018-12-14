@@ -13,7 +13,7 @@ private:
 	GUI_Button* slider_btn = nullptr;
 
 public:
-	Gui_Slider(int x, int y, UI type, GUI* parent);
+	Gui_Slider(int x, int y, j1Module* callback, UI type, GUI* parent);
 	void SetNumStart(int num, GUI_Button* button);
 	void MoveButton(GUI_Button* button);
 public:

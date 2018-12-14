@@ -50,6 +50,9 @@ public:
 	
 	void ResetMap(int map);
 
+	void UpdatePlayerLifes(int lifes);
+	int HurtingPlayer();
+
 	p2DynArray<Entity*> entities;
 	
 	Entity_Player* player;
@@ -59,6 +62,7 @@ public:
 	Entity_Ninja* ninja;
 	
 	p2SString textures;
+	int playerLifes = 4;
 };
 
 

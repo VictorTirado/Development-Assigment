@@ -73,17 +73,7 @@ bool j1Scene::Update(float dt)
 	BROFILER_CATEGORY("SceneUpdate", Profiler::Color::MediumOrchid);
 	//DEBUG KEYS
 
-	/*if (App->entities->player->player_lifes == 3)
-	{
-		hearts  = App->gui->AddImage(20, 20, &hearts3, nullptr, nullptr);
-	}
-
-	if (App->entities->player->player_lifes == 2)
-	{
-		hearts = App->gui->AddImage(20, 20, &hearts2, nullptr, nullptr);
-	}*/
-
-	App->entities->player->UpdateLifes(App->entities->player->player_lifes);
+	App->entities->UpdatePlayerLifes(App->entities->playerLifes);
 	App->entities->book->UpdateBookUI(App->entities->book->is_caught);
 	
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)

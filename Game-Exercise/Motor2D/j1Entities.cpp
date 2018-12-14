@@ -18,6 +18,7 @@
 #include "Entity_Bat.h"
 #include "Entity_Ninja.h"
 #include "Entity_Gaara.h"
+#include "GUI_Image.h"
 
 j1Entities::j1Entities() : j1Module()
 {
@@ -250,6 +251,30 @@ void j1Entities::ResetMap(int map)
 	App->entities->DestroyEntities();
 	App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 	App->map->Spawn();
+}
+
+void j1Entities::UpdatePlayerLifes(int lifes)
+{
+
+	if (lifes == 4)
+		App->scene->hearts = (GUI_Image*)App->gui->AddImage(20, 20, &App->scene->hearts3, nullptr, App->scene, nullptr); 
+
+	if(lifes == 3)
+		App->scene->hearts = App->gui->AddImage(20, 20, &App->scene->hearts2, nullptr, App->scene, nullptr);
+
+	if(lifes == 2)
+		App->scene->hearts = App->gui->AddImage(20, 20, &App->scene->hearts1, nullptr, App->scene, nullptr);
+
+	if(lifes == 1)
+		App->scene->hearts = App->gui->AddImage(20, 20, &App->scene->hearts0, nullptr, App->scene, nullptr);
+
+}
+
+int j1Entities::HurtingPlayer()
+{
+	playerLifes--;
+
+	return playerLifes;
 }
 
 

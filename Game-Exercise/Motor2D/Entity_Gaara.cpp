@@ -21,7 +21,7 @@
 
 Entity_Gaara::Entity_Gaara(int x, int y):Entity(x, y)
 {
-	sprites = App->tex->Load(App->entities->textures.GetString());
+	sprites = App->tex->Load("textures/Gaara_sprites.png");
 	pugi::xml_document gaara_file;
 	pugi::xml_node gaara;
 

@@ -14,32 +14,6 @@
 	<collisions />
 	<particles />
 	<entities>
-		<player>
-			<map level="1" />
-			<position x="318" y="366" />
-		</player>
-		<bat>
-			<position x="401" y="351" />
-		</bat>
-		<bat>
-			<position x="592" y="288" />
-		</bat>
-		<bat>
-			<position x="720" y="224" />
-		</bat>
-		<bat>
-			<position x="800" y="448" />
-		</bat>
-		<ninja>
-			<position x="1120" y="237" />
-		</ninja>
-		<book>
-			<book caught="false" />
-			<position x="1184" y="240" />
-		</book>
-		<ninja>
-			<position x="1296" y="381" />
-		</ninja>
 	</entities>
 	<fadeToBlack />
 	<gui />

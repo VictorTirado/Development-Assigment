@@ -57,7 +57,7 @@ bool Characters::Start()
 	
 	sasuke = (GUI_Button*)App->gui->AddButton(200, 50, { 1458,556,120,120 }, { 1318,554,120,120 }, { 1318,554,120,120 }, nullptr);
 	gaara = (GUI_Button*)App->gui->AddButton(400, 50, { 1458,686,120,120 }, { 1317,684,120,120 }, { 1317,684,120,120 }, nullptr);
-	anonymous = (GUI_Button*)App->gui->AddButton(600, 50, { 1056,683,120,120 }, { 1187,683,120,120 }, { 1317,684,120,120 }, nullptr);
+	anonymous = (GUI_Button*)App->gui->AddButton(600, 50, { 1056,683,120,120 }, { 1187,683,120,120 }, { 1187,683,120,120 }, nullptr);
 	return true;
 }
 

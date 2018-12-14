@@ -54,7 +54,7 @@ public:
 	GUI* AddLabel(int x, int y, p2SString text, j1Module* callback, GUI* parent);
 	GUI* AddSlider(int x, int y, j1Module* callback, GUI* parent);
 	GUI* AddButton(int x, int y, SDL_Rect normal, SDL_Rect mouse_in, SDL_Rect clicked,j1Module* callback,GUI* parent);
-	void MoveGui(GUI* type, float dt);
+
 
 	void DestroyAllUi();
 

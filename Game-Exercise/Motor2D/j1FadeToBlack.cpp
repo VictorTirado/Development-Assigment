@@ -4,6 +4,9 @@
 #include "p2Log.h"
 #include "j1FadeToBlack.h"
 #include "j1Render.h"
+#include "j1Scene.h"
+#include "Settings.h"
+#include "MainMenu.h"
 #include "Brofiler\Brofiler.h"
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_timer.h"
@@ -43,8 +46,8 @@ bool j1FadeToBlack::Update(float dt)
 	{
 		if (now >= total_time)
 		{
-			to_disable->Disable();
-			to_enable->Enable();
+			App->main_menu->Disable();
+			App->settings->Enable();
 			total_time += total_time;
 			start_time = SDL_GetTicks();
 			current_step = fade_step::fade_from_black;

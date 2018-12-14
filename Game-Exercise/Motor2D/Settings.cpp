@@ -73,10 +73,11 @@ bool Settings::Update(float dt)
 {
 	BROFILER_CATEGORY("SceneUpdate", Profiler::Color::MediumOrchid);
 	//DEBUG KEYS
-	//MouseIn(go_back);
+	if (button->MouseIn(button) == true)
+	{
+		slider->MoveButton(button);
+	}
 
-	/*if (MouseIn(button) == true)
-		slider->MoveButton(button);*/
 
 	App->input->GetMousePosition(mouse_x, mouse_y);
 	return true;
@@ -87,7 +88,7 @@ bool Settings::PostUpdate()
 {
 	BROFILER_CATEGORY("ScenePostUpdate", Profiler::Color::Navy);
 	bool ret = true;
-
+	
 	if (close == true)
 		ret = false;
 
@@ -153,12 +154,11 @@ void Settings::Interact(GUI* g)
 	else if (g->position.y == 50)
 	{
 		
-		App->fade_to_black->current_step == App->fade_to_black->none;
-		
-		App->fade_to_black->FadeToBlack(this, App->main_menu, 3.0f);
-		App->gui->DestroyAllUi();
-		App->main_menu->active = true;
-		App->main_menu->Start();
+			App->fade_to_black->FadeToBlack(this, App->main_menu, 3.0f);
+			App->gui->DestroyAllUi();
+			App->main_menu->active = true;
+			App->main_menu->Start();
+		this->active = false;
 
 		
 	}

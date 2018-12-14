@@ -23,11 +23,8 @@ GUI::~GUI()
 
 void GUI::Update()
 {
-	
 	App->input->GetMousePosition(mouse_x, mouse_y);
 	//LOG("%d, %d", mouse_x, mouse_y);
-
-
 }
 
 void GUI::Draw(SDL_Texture* sprites)
@@ -53,16 +50,13 @@ bool GUI::MouseIn(GUI* element)
 		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
 		{
 			ex2->setAnimation(2);
-
-
 		}
 		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
 		{
 			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
 			{
 				ex2->setAnimation(3);
-				element->callback;
-				//element->callback->Interact(element);
+				element->callback->Interact(element);
 				return true;
 			}
 		}

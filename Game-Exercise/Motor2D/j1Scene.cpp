@@ -39,7 +39,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 
-	ui_background = App->gui->AddImage(0, 0, &ui_backround_rect, nullptr,this, nullptr);
+	//ui_background = App->gui->AddImage(0, 0, &ui_backround_rect, nullptr,this, nullptr);
 
 	if (!is_faded && map_number == 1)
 	{
@@ -86,7 +86,6 @@ bool j1Scene::Update(float dt)
 	//App->entities->player->UpdateLifes(App->entities->player->player_lifes);
 	App->entities->book->UpdateBookUI(App->entities->book->is_caught);
 	
-	App->gui->MoveGui(hearts, dt);
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		map_number = 1;

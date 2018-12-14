@@ -21,19 +21,16 @@ void Gui_Slider::SetNumStart(int num, GUI_Button * button)
 {
 	this->slider_btn = button;
 	num = num * 243 / 100;
-	this->slider_btn->position.x = position.x ;
-	this->slider_btn->position.y = position.y + 2 /*+ animation.h - num - slider_btn->animation.h*/;
+	this->slider_btn->position.x = position.x + animation.w - num - slider_btn->animation.w;
+	this->slider_btn->position.y = position.y + 3 /*+ animation.h - num - slider_btn->animation.h*/;
 }
 
 void Gui_Slider::MoveButton(GUI_Button* button)
 {
-	LOG("X: %d, Y:%d", slider_btn->position.x, slider_btn->position.y);
-	if (slider_btn->position.x >= (this->animation.w + this->position.x - button->animation.w)) {
-		slider_btn->position.x = animation.w + position.x - button->animation.w - 1;
-	}
-	/*if (slider_btn->position.y <= 300)
-		slider_btn->position.y = 301;*/
 	this->slider_btn = button;
+	LOG("X: %d, Y:%d", slider_btn->position.x, slider_btn->position.y);
+	
+	
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT /*&& App->settings->MouseIn(button) == true*/)
 	{
 
@@ -41,7 +38,13 @@ void Gui_Slider::MoveButton(GUI_Button* button)
 		{
 			LOG("PATATTA");
 			this->slider_btn->position.x = App->settings->mouse_x - slider_btn->animation.h / 2 ;
-			this->slider_btn->position.y = position.y - 1;
+			this->slider_btn->position.y = position.y +3;
 		}
+	}
+	if (slider_btn->position.x >= (this->animation.w + this->position.x - button->animation.w)) {
+		slider_btn->position.x = animation.w + position.x - button->animation.w - 1;
+	}
+	if (slider_btn->position.x <= position.x) {
+		slider_btn->position.x = position.x + 1;
 	}
 }

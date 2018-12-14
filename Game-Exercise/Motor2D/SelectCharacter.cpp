@@ -74,12 +74,8 @@ bool Characters::Update(float dt)
 {
 	BROFILER_CATEGORY("SceneUpdate", Profiler::Color::MediumOrchid);
 	//DEBUG KEYS
-	MouseIn(go_back);
-	MouseIn(sasuke);
-	MouseIn(gaara);
-	MouseIn(anonymous);
-	if(btn_play!=nullptr)
-	MouseIn(btn_play);
+	/*if(btn_play!=nullptr)
+	MouseIn(btn_play);*/
 	if (show_stats == true) {
 		ShowStats(sasuke);
 	}
@@ -109,33 +105,33 @@ bool Characters::CleanUp()
 	return true;
 }
 
-bool Characters::MouseIn(GUI* element)
-{
-
-	GUI_Button*  ex2 = (GUI_Button*)element;
-	if (element->type == BUTTON) {
-		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
-		{
-			ex2->setAnimation(2);
-			
-		}
-		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
-		{
-			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
-			{
-				ex2->setAnimation(3);
-				Interact(element);
-				return true;
-			}
-		
-		}
-		else
-		{
-			ex2->setAnimation(1);
-			return false;
-		}
-	}
-}
+//bool Characters::MouseIn(GUI* element)
+//{
+//
+//	GUI_Button*  ex2 = (GUI_Button*)element;
+//	if (element->type == BUTTON) {
+//		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
+//		{
+//			ex2->setAnimation(2);
+//			
+//		}
+//		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
+//		{
+//			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
+//			{
+//				ex2->setAnimation(3);
+//				Interact(element);
+//				return true;
+//			}
+//		
+//		}
+//		else
+//		{
+//			ex2->setAnimation(1);
+//			return false;
+//		}
+//	}
+//}
 
 void Characters::Interact(GUI* g)
 {
@@ -162,7 +158,7 @@ void Characters::Interact(GUI* g)
 	}
 	else if (g->position.y == 50)
 	{
-		App->fade_to_black->current_step == App->fade_to_black->none;
+
 		App->fade_to_black->FadeToBlack(this, App->main_menu, 3.0f);
 		App->gui->DestroyAllUi();
 		App->main_menu->active = true;

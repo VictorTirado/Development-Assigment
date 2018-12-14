@@ -29,8 +29,6 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 	bool ret = true;
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
-	//background_heart_file_name = conf.child("background_heart").attribute("file").as_string("");
-
 	return ret;
 }
 
@@ -131,20 +129,7 @@ GUI* j1Gui::AddSlider(int x, int y, j1Module* callback, GUI* parent)
 	return slider;
 }
 
-void j1Gui::MoveGui(GUI* type, float dt)
-{
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		type->position.x -= 200 * dt;
 
-	else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		type->position.x += 200 * dt;
-
-	else if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		type->position.y += 200 * dt;
-
-	else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		type->position.y -= 200 * dt;
-}
 
 void j1Gui::DestroyAllUi()
 {

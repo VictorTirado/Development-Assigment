@@ -41,6 +41,7 @@ public:
 	void Interact(GUI* g);
 private:
 	bool is_faded = false;
+	bool first_update = true;
 	bool change_map = false;
 	bool change_music = false;
 	bool delete_kunais = false;

@@ -369,7 +369,7 @@ void Entity_Player::OnCollision(Collider* c1, Collider* c2)
 
 void Entity_Player::UpdateLifes(int lifes)
 {
-	if (lifes == 4)
+	/*if (lifes == 4)
 		App->scene->hearts = App->gui->AddImage(20, 20, &App->scene->hearts3, nullptr,App->scene, nullptr);
 
 	if(lifes == 3)
@@ -379,7 +379,7 @@ void Entity_Player::UpdateLifes(int lifes)
 		App->scene->hearts = App->gui->AddImage(20, 20, &App->scene->hearts1, nullptr, App->scene, nullptr);
 
 	if(lifes == 1)
-		App->scene->hearts = App->gui->AddImage(20, 20, &App->scene->hearts0, nullptr, App->scene, nullptr);
+		App->scene->hearts = App->gui->AddImage(20, 20, &App->scene->hearts0, nullptr, App->scene, nullptr);*/
 }
 
 int Entity_Player::HurtPlayer()

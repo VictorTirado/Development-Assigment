@@ -152,12 +152,12 @@ void Characters::Interact(GUI* g)
 		type = SASUKE;
 		start_game = true;
 	}
-	else if (g->position.y == 400)
+	else if (g->position.x == 400)
 	{
 		type = GAARA;
 		start_game = true;
 	}
-	else if (g->position.y == 600)
+	else if (g->position.x == 600)
 	{
 	}
 	else if (g->position.y == 50)

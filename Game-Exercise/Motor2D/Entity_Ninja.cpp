@@ -68,7 +68,7 @@ void Entity_Ninja::Update(float dt)
 	}
 
 	ninja_pos = App->map->WorldToMap(position.x, position.y);
-	player_pos = App->entities->player->player_pos;
+	//player_pos = App->entities->player->player_pos;
 	player_pos.y += 1;
 	gid = App->map->Get_gid(position.x + 10, position.y + 35);
 	App->render->DrawQuad({ position.x + 10,position.y + 35,16,16 }, 0, 0, 255, 255);

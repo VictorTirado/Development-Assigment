@@ -62,7 +62,7 @@ void Entity_Bat::Update(float dt)
 	}
 
 	bat_pos = App->map->WorldToMap(position.x, position.y);
-	player_pos = App->entities->player->player_pos;
+	//player_pos = App->entities->player->player_pos;
 	player_pos.x += 1;
 	player_pos.y -= 1;
 

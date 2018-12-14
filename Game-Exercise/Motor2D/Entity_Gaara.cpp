@@ -34,8 +34,6 @@ Entity_Gaara::Entity_Gaara(int x, int y):Entity(x, y)
 		if (name == "idle")
 			LoadAnimation(animations, &idle);
 	}
-
-	animation = &idle;
 }
 
 Entity_Gaara::~Entity_Gaara()
@@ -128,19 +126,18 @@ void Entity_Gaara::Update(float dt)
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 	}
 	//MOVEMENT PLAYER
-	/*if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid - 1] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid - 1] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
 	{
-		animation = &runBackwards;
-		is_backwards = true;
+		
 		position.x -= 80 * dt;
 	}
-
+	
 	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
 	{
-		animation = &run;
-		is_backwards = false;
+		
 		position.x += 100 * dt;
 	}
+	/*
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->fade_to_black->IsFading() == false)
 	{
 		if (App->map->data.map_layers.end->data->data[gid] == 51)

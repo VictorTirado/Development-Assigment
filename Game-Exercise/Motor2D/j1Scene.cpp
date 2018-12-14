@@ -83,7 +83,7 @@ bool j1Scene::Update(float dt)
 		hearts = App->gui->AddImage(20, 20, &hearts2, nullptr, nullptr);
 	}*/
 
-	//App->entities->player->UpdateLifes(App->entities->player->player_lifes);
+	App->entities->player->UpdateLifes(App->entities->player->player_lifes);
 	App->entities->book->UpdateBookUI(App->entities->book->is_caught);
 	
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)

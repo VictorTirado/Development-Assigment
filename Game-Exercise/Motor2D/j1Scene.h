@@ -8,6 +8,7 @@ class GuiImage;
 class GuiText;
 class GUI;
 class GUI_Button;
+class GUI_Image;
 
 class j1Scene : public j1Module
 {

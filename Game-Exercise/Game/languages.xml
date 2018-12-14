@@ -6,15 +6,19 @@
       <continue value="Continue"/>
       <credits value ="Credits"/>
       <exit value ="Exit"/>
+      <choose_language value ="Language"/>>
+      <music_volume value="Music  volume"/>
     </main_menu>
   </english>
   <spanish>
     <menu_principal>
-      <idioma value="Español"/>
+      <idioma value="Spanish"/>
       <jugar value ="Jugar"/>
       <continuar value ="Continuar"/>
       <creditos value ="Creditos"/>
       <salir value ="Salir"/>
+      <escoger_idioma value ="Idioma"/>>
+      <volumen_musica value ="Volumen  Musica"/>
     </menu_principal>
   </spanish>
 </languages>

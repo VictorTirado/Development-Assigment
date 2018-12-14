@@ -14,6 +14,8 @@ enum Language
 struct LanguageContent
 {
 	Language current;
+	p2SString choose_language;
+	p2SString music_volume;
 	p2SString language;
 	p2SString play;
 	p2SString continue_;

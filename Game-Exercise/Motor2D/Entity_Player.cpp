@@ -19,6 +19,8 @@
 #include "Entity_Book.h"
 #include "Brofiler\Brofiler.h"
 
+#include "GUI_Image.h"
+
 Entity_Player::Entity_Player(int x, int y) : Entity(x , y)
 {
 	sprites = App->tex->Load(App->entities->textures.GetString());
@@ -369,10 +371,10 @@ void Entity_Player::OnCollision(Collider* c1, Collider* c2)
 
 void Entity_Player::UpdateLifes(int lifes)
 {
-	/*if (lifes == 4)
-		App->scene->hearts = App->gui->AddImage(20, 20, &App->scene->hearts3, nullptr,App->scene, nullptr);
+	if (lifes == 4)
+		App->scene->hearts = (GUI_Image*)App->gui->AddImage(20, 20, &App->scene->hearts3, nullptr,App->scene, nullptr);
 
-	if(lifes == 3)
+	/*if(lifes == 3)
 		App->scene->hearts = App->gui->AddImage(20, 20, &App->scene->hearts2, nullptr, App->scene, nullptr);
 
 	if(lifes == 2)

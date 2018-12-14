@@ -54,12 +54,13 @@ bool Settings::Start()
 	SDL_Rect bck = { 0,0,1024,768 };
 	background = App->gui->AddImage(0, 0, &bck, nullptr,this, nullptr);
 	go_back = App->gui->AddButton(50, 50, {1129,95,48,51}, {1128,160,48,51}, { 1128,160,48,51 },this, nullptr);
-	music = App->gui->AddLabel(100,300,"Music volume",this, nullptr);
-	slider = (Gui_Slider*)App->gui->AddSlider(400, 290,this, music);
+	music = App->gui->AddLabel(100,300,App->languages->current_language.music_volume,this, nullptr);
+	language = (Gui_Label*)App->gui->AddLabel(App->win->width - 450, 60, App->languages->current_language.choose_language, this, nullptr);
+	slider = (Gui_Slider*)App->gui->AddSlider(music->animation.w + 150, 290,this, music);
 	button = (GUI_Button*)App->gui->AddButton(0, 0, { 1068,297,55,55 }, { 1069,362,55,55 }, { 1069,421,55,55 },this, (GUI*)slider);
 	slider->SetNumStart(App->audio->volume, button);
 
-	btn_language = (GUI_Button*)App->gui->AddButton(App->win->width / 2 - 300, 140, { 515,805,190,49 }, { 515,805,190,49 }, { 515,805,190,49 }, this, nullptr);
+	btn_language = (GUI_Button*)App->gui->AddButton(App->win->width - 250, 50, { 515,805,190,49 }, { 515,805,190,49 }, { 515,805,190,49 }, this, nullptr);
 	text_language = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->current_language.language.GetString(), this, nullptr);
 	btn_language->SetText(text_language);
 	

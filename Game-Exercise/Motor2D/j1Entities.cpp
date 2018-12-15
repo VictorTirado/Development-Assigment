@@ -19,6 +19,7 @@
 #include "Entity_Ninja.h"
 #include "Entity_Gaara.h"
 #include "GUI_Image.h"
+#include "GUI_Label.h"
 
 j1Entities::j1Entities() : j1Module()
 {
@@ -280,4 +281,28 @@ int j1Entities::HurtingPlayer()
 	return playerLifes;
 }
 
+void j1Entities::UpdateScore(int score_player)
+{
+	//switch (type)
+	//{
+	//case Entities_Type::BAT:
+	//	score = score + 50;
+	//	score_text = App->gui->AddLabel(300, 20, (p2SString)score, App->scene, nullptr);
+	//	break;
+
+	//case Entities_Type::NINJA:
+	//	score = score + 100;
+	//	score_text = App->gui->AddLabel(300, 20, (p2SString)score, App->scene, nullptr);
+	//	break;
+	//}
+
+	App->scene->score_text = (Gui_Label*)App->gui->AddLabel(300, 20, (p2SString)score_player, App->scene, nullptr);
+}
+
+int j1Entities::ScorePlayer()
+{
+	score += 50;
+
+	return score;
+}
 

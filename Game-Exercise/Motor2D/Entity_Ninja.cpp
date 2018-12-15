@@ -181,7 +181,11 @@ void Entity_Ninja::OnCollision(Collider* collider)
 		damage_cd = 0;
 
 	if (lives <= 0)
+	{
+		App->entities->UpdateScore(Entities_Type::NINJA);
 		delete_entity = true;
+	}
+		
 
 }
 

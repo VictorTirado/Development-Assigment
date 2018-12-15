@@ -53,6 +53,9 @@ public:
 	void UpdatePlayerLifes(int lifes);
 	int HurtingPlayer();
 
+	void UpdateScore(int score_player);
+	int ScorePlayer();
+
 	p2DynArray<Entity*> entities;
 	
 	Entity_Player* player;
@@ -63,6 +66,8 @@ public:
 	
 	p2SString textures;
 	int playerLifes = 4;
+	int score = 0;
+
 };
 
 

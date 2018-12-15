@@ -50,6 +50,7 @@ public:
 	bool is_god = false;
 
 	GUI* hearts = nullptr;
+	GUI* score_text = nullptr;
 	SDL_Rect hearts3 = { 1603, 926, 94, 22 };
 	SDL_Rect hearts2 = {1603, 959, 94, 22};
 	SDL_Rect hearts1 = { 1603, 988, 94, 22 };
@@ -60,6 +61,7 @@ public:
 	SDL_Rect book_not_caught_rect = { 1789, 947, 28, 25 };
 
 	GUI* ui_background = nullptr;
+	GUI* player_score_text = nullptr;
 	
 };
 

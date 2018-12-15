@@ -81,7 +81,11 @@ bool j1Scene::Update(float dt)
 		first_update = false;
 	}
 //	App->entities->UpdatePlayerLifes(App->entities->playerLifes);
-	
+	char playerScore[sizeof App->entities->score];
+	sprintf_s(playerScore, "%d", App->entities->score);
+
+	player_score_text = App->gui->AddLabel(300, 20, playerScore, this, nullptr);
+	LOG("%d", App->entities->score);
 	
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{

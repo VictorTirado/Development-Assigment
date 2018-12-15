@@ -176,7 +176,12 @@ void Entity_Bat::OnCollision(Collider* collider)
 		damage_cd = 0;
 
 	if (lives <= 0)
+	{
+		App->entities->ScorePlayer();
+		//App->entities->UpdateScore(App->entities->score);
 		delete_entity = true;
+	}
+		
 }
 
 void Entity_Bat::LoadAnimation(pugi::xml_node& animation, Animation* bat)

@@ -33,14 +33,15 @@ void GUI::Draw(SDL_Texture* sprites)
 	{
 		App->render->Blit_UI(texture, position.x, position.y, &animation, 1);
 	}
-	else if (type == BUTTON)
+	else 
 	{
 		App->render->Blit_UI(sprites, position.x, position.y,&animation);
 	}
-	if(animation2 != nullptr && type != LABEL)
-	App->render->Blit_UI(sprites, position.x, position.y, &(animation2->GetCurrentFrame()), 1);
-	if(animation2 == nullptr && type != LABEL)
-		App->render->Blit_UI(sprites, position.x, position.y, &animation, 0.0f);
+	
+	/*if(animation2 != nullptr && type != LABEL)
+	App->render->Blit_UI(sprites, position.x, position.y, &(animation2->GetCurrentFrame()), 1);*/
+	/*if(animation2== nullptr)
+		App->render->Blit_UI(sprites, position.x, position.y, &animation, 0.0f);*/
 }
 
 bool GUI::MouseIn(GUI* element)

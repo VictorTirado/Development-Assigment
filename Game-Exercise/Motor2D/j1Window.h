@@ -6,6 +6,7 @@
 
 struct SDL_Window;
 struct SDL_Surface;
+struct SDL_Cursor;
 
 class j1Window : public j1Module
 {
@@ -36,8 +37,9 @@ public:
 	SDL_Window* window;
 
 	//The surface contained by the window
-	SDL_Surface* screen_surface;
-	SDL_Surface* icon;
+	SDL_Surface* screen_surface = nullptr;
+	SDL_Surface* icon = nullptr;
+	SDL_Cursor* cursor = nullptr;
 
 public:
 	p2SString	title = nullptr;

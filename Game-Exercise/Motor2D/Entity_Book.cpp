@@ -53,6 +53,7 @@ void Entity_Book::Update(float dt)
 
 
 
+
 void Entity_Book::OnCollision(Collider* collider)
 {
 	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER) {

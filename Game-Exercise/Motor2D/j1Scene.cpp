@@ -42,6 +42,10 @@ bool j1Scene::Start()
 	
 	SDL_Rect ui_backround_rect = { 1057, 573, 243, 61 };
 	ui_background = (GUI_Image*)App->gui->AddImage(0, 0, &ui_backround_rect, nullptr,this, nullptr);
+	
+	char playerScore[sizeof App->entities->score];
+	sprintf_s(playerScore, "%d", App->entities->score);
+	player_score_text = App->gui->AddLabel(300, 20, playerScore, this, nullptr);
 
 	if (!is_faded && map_number == 1)
 	{
@@ -78,13 +82,14 @@ bool j1Scene::Update(float dt)
 	{
 		App->entities->book->UpdateBookUI(App->entities->book->is_caught);
 		App->entities->UpdatePlayerLifes(App->entities->playerLifes);
+		
 		first_update = false;
 	}
 //	App->entities->UpdatePlayerLifes(App->entities->playerLifes);
-	char playerScore[sizeof App->entities->score];
-	sprintf_s(playerScore, "%d", App->entities->score);
-
-	player_score_text = App->gui->AddLabel(300, 20, playerScore, this, nullptr);
+	
+	//p2SString aa = puntuation.create("%i", App->entities->score);
+	//UpdateScore(App->entities->score);
+	
 	LOG("%d", App->entities->score);
 	
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
@@ -169,4 +174,10 @@ bool j1Scene::ChangeMap(int map_number)
 	return true;
 }
 
-
+void j1Scene::UpdateScore(int score)
+{
+	App->gui->DestroyUIElement(*player_score_text);
+	char playerScore[sizeof App->entities->score];
+	sprintf_s(playerScore, "%d", App->entities->score);
+	player_score_text = App->gui->AddLabel(300, 20, playerScore, this, nullptr);
+}

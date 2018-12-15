@@ -57,6 +57,7 @@ public:
 
 
 	void DestroyAllUi();
+	void DestroyUIElement(GUI &element);
 
 
 	const SDL_Texture* GetAtlas() const;

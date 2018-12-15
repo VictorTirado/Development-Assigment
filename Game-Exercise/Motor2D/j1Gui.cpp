@@ -144,3 +144,17 @@ void j1Gui::DestroyAllUi()
 	}
 	ui_list.Clear();
 }
+
+void j1Gui::DestroyUIElement(GUI &element)
+{
+
+	for (uint i = 0; i < ui_list.Count(); i++)
+	{
+		if (*ui_list.At(i) == &element)
+		{
+			ui_list[i]->delete_ui = true;
+	
+		}
+	}
+
+}

@@ -178,7 +178,7 @@ void Entity_Bat::OnCollision(Collider* collider)
 	if (lives <= 0)
 	{
 		App->entities->ScorePlayer();
-		//App->entities->UpdateScore(App->entities->score);
+		App->scene->UpdateScore(App->entities->score);
 		delete_entity = true;
 	}
 		

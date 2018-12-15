@@ -9,6 +9,7 @@ class GuiText;
 class GUI;
 class GUI_Button;
 class GUI_Image;
+class Gui_Label;
 
 class j1Scene : public j1Module
 {
@@ -38,6 +39,8 @@ public:
 	bool CleanUp();
 	bool ChangeMap(int map_number);
 
+	void UpdateScore(int score);
+
 private:
 	bool is_faded = false;
 	bool change_map = false;
@@ -48,6 +51,7 @@ public:
 	int map_number = 1;
 	bool collision_debug = false;
 	bool is_god = false;
+	p2SString puntuation;
 
 	GUI* hearts = nullptr;
 	GUI* score_text = nullptr;
@@ -62,7 +66,9 @@ public:
 
 	GUI* ui_background = nullptr;
 	GUI* player_score_text = nullptr;
-	
+
+	p2SString score_string;
+	Gui_Label* score;
 };
 
 #endif // __j1SCENE_H__

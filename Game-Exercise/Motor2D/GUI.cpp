@@ -31,7 +31,7 @@ void GUI::Draw(SDL_Texture* sprites)
 {
 	if (type == LABEL)
 	{
-		App->render->Blit_UI(texture, position.x, position.y, &animation, 1);
+		App->render->Blit_UI(texture, position.x, position.y, &animation, 0);
 	}
 	else 
 	{

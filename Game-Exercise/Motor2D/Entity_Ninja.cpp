@@ -182,7 +182,8 @@ void Entity_Ninja::OnCollision(Collider* collider)
 
 	if (lives <= 0)
 	{
-		App->entities->UpdateScore(Entities_Type::NINJA);
+		App->entities->ScorePlayer();
+		App->scene->UpdateScore(App->entities->score);
 		delete_entity = true;
 	}
 		

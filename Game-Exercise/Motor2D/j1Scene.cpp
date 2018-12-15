@@ -16,6 +16,7 @@
 #include "j1Fonts.h"
 #include "Brofiler\Brofiler.h"
 #include "Entity_Player.h"
+#include "GUI_Image.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -39,7 +40,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 
-	//ui_background = App->gui->AddImage(0, 0, &ui_backround_rect, nullptr,this, nullptr);
+	ui_background = App->gui->AddImage(0, 0, &ui_backround_rect, nullptr,this, nullptr);
 
 	if (!is_faded && map_number == 1)
 	{

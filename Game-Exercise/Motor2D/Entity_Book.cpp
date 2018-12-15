@@ -13,7 +13,7 @@
 #include "j1Scene.h"
 #include "j1Gui.h"
 #include "j1FadeToBlack.h"
-
+#include "GUI_Image.h"
 #include "Entity_Player.h"
 
 
@@ -84,10 +84,10 @@ bool Entity_Book::Save(pugi::xml_node& data)const
 
 void Entity_Book::UpdateBookUI(bool book_caught)
 {
-	/*if(book_caught)
+	if(book_caught)
 		App->scene->book_caught_ui = App->gui->AddImage(200, 20, &App->scene->book_caught_rect, nullptr,nullptr, nullptr);
 
 	if(!book_caught)
-		App->scene->book_caught_ui = App->gui->AddImage(200, 20, &App->scene->book_not_caught_rect, nullptr,nullptr, nullptr);*/
+		App->scene->book_caught_ui = App->gui->AddImage(200, 20, &App->scene->book_not_caught_rect, nullptr,nullptr, nullptr);
 }
 

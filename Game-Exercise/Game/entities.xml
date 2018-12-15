@@ -151,20 +151,20 @@
       <frame x="402" y="13" w="26" h="57"/>
     </animation>
     <animation name="run" speed="0.05f" loop="true">
-      <frame x="4" y="94"  w="46" h="47"/>
-      <frame x="58" y="94" w="43" h="47"/>
-      <frame x="109" y="93" w="44" h="48"/>
-      <frame x="159" y="93" w="46" h="49"/>
-      <frame x="214" y="94" w="43" h="48"/>
-      <frame x="266" y="93" w="45" h="51"/>
+      <frame x="4" y="88"  w="46" h="53"/>
+      <frame x="58" y="88" w="43" h="53"/>
+      <frame x="109" y="88" w="44" h="54"/>
+      <frame x="159" y="88" w="46" h="55"/>
+      <frame x="214" y="88" w="43" h="54"/>
+      <frame x="266" y="88" w="45" h="57"/>
     </animation>
     <animation name="runBackwards" speed="0.05f" loop="true">
-      <frame x="603" y="94"  w="46" h="47"/>
-      <frame x="552" y="94" w="43" h="47"/>
-      <frame x="500" y="93" w="44" h="48"/>
-      <frame x="448" y="93" w="46" h="49"/>
-      <frame x="396" y="94" w="43" h="48"/>
-      <frame x="342" y="93" w="45" h="51"/>
+      <frame x="603" y="88"  w="46" h="53"/>
+      <frame x="552" y="88" w="43" h="53"/>
+      <frame x="500" y="88" w="44" h="54"/>
+      <frame x="448" y="88" w="46" h="55"/>
+      <frame x="396" y="88" w="43" h="54"/>
+      <frame x="342" y="88" w="45" h="57"/>
     </animation>
     <animation name="jump" speed="0.2f" loop="true">
       <frame x="3" y="169"  w="31" h="60"/>
@@ -178,7 +178,7 @@
       <frame x="3" y="245"  w="43" h="55"/>
       <frame x="55" y="245" w="43" h="55"/>
     </animation>
-    <animation name="fall" speed="0.05f" loop="true">
+    <animation name="fallBackwards" speed="0.05f" loop="true">
       <frame x="484" y="245"  w="43" h="55"/>
       <frame x="432" y="245" w="43" h="55"/>
     </animation>

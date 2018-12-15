@@ -33,6 +33,30 @@ Entity_Gaara::Entity_Gaara(int x, int y):Entity(x, y)
 		p2SString name = animations.attribute("name").as_string();
 		if (name == "idle")
 			LoadAnimation(animations, &idle);
+		if (name == "idleBackwards")
+			LoadAnimation(animations, &idleBackwards);
+		if (name == "run")
+			LoadAnimation(animations, &run);
+		if (name == "runBackwards")
+			LoadAnimation(animations, &runBackwards);
+		if (name == "teleport")
+			LoadAnimation(animations, &teleport);
+		if (name == "teleportBackwards")
+			LoadAnimation(animations, &teleportBackwards);
+		if (name == "jutsu")
+			LoadAnimation(animations, &jutsu);
+		if (name == "jump")
+			LoadAnimation(animations, &jump);
+		if (name == "fall")
+			LoadAnimation(animations, &fall);
+		if (name == "jumpBackwards")
+			LoadAnimation(animations, &jumpBackwards);
+		if (name == "fallBackwards")
+			LoadAnimation(animations, &fallBackwards);
+		if (name == "throwKunai")
+			LoadAnimation(animations, &throwKunai);
+		if (name == "throwKunaiBackwards")
+			LoadAnimation(animations, &throwKunaiBackwards);
 	}
 }
 
@@ -52,6 +76,10 @@ void Entity_Gaara::Update(float dt)
 		firstUpdate = false;
 	}
 
+	else if (!is_backwards)
+		animation = &idle;
+	else if (is_backwards)
+		animation = &idleBackwards;
 
 	//LOGIC
 	gid = App->map->Get_gid(position.x + 10, position.y + 51);
@@ -61,7 +89,10 @@ void Entity_Gaara::Update(float dt)
 		if (App->map->data.map_layers.end->data->data[gid + 1] != Collision_Type::COLLISION_WALL && App->map->data.map_layers.end->data->data[gid] != Collision_Type::COLLISION_WALL)
 		{
 			position.y += 70 * dt;
+			is_falling = true;
 		}
+		else
+			is_falling = false;
 	}
 
 	if (App->map->data.map_layers.end->data->data[gid] == Collision_Type::COLLISION_DEATH)
@@ -128,119 +159,121 @@ void Entity_Gaara::Update(float dt)
 	//MOVEMENT PLAYER
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid - 1] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
 	{
-		
 		position.x -= 80 * dt;
+		is_backwards = true;
+		animation = &runBackwards;
 	}
 	
 	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
 	{
-		
 		position.x += 100 * dt;
+		is_backwards = false;
+		animation = &run;
 	}
-	/*
+	
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->fade_to_black->IsFading() == false)
 	{
 		if (App->map->data.map_layers.end->data->data[gid] == 51)
 			is_jumping = true;
-	}*/
+	}
 
 	//DEBUG KEY FOR TP
-	//if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
-	//	can_tp = true;
+	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
+		can_tp = true;
 
-	////THROW KUNAI
-	//if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
-	//	is_shooting = true;
-
-
-	//if (is_shooting)
-	//{
-	//	App->audio->PlayFx(3);
-	//	if (is_backwards)
-	//	{
-	//		animation = &throwKunaiBackwards;
-	//		App->particles->kunai_particle_backwards.speed.x = -800 * dt;
-	//		App->particles->AddParticle(App->particles->kunai_particle_backwards, position.x, position.y + 20, COLLIDER_PLAYER_SHOT);
-	//	}
-
-	//	else
-	//	{
-	//		animation = &throwKunai;
-	//		App->particles->kunai_particle.speed.x = 800 * dt;
-	//		App->particles->AddParticle(App->particles->kunai_particle, position.x + 12, position.y + 20, COLLIDER_PLAYER_SHOT);
-	//	}
-	//	is_shooting = false;
-	//}
-
-	//if (!is_shooting)
-	//{
-	//	throwKunaiBackwards.Reset();
-	//	throwKunai.Reset();
-	//}
-
-	////JUMP
-	//if (!is_jumping)
-	//{
-	//	old_player_position.y = position.y;
-	//	velocity.y = 0;
-	//}
+	//THROW KUNAI
+	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+		is_shooting = true;
 
 
-	//if (is_jumping)
-	//{
-	//	velocity.y = -200 * dt;
+	if (is_shooting)
+	{
+		//App->audio->PlayFx(3);
+		if (is_backwards)
+		{
+			animation = &throwKunaiBackwards;
+			App->particles->kunai_particle_backwards.speed.x = -800 * dt;
+			App->particles->AddParticle(App->particles->kunai_particle_backwards, position.x, position.y + 20, COLLIDER_PLAYER_SHOT);
+		}
 
-	//	if (position.y < old_player_position.y - 60)
-	//	{
-	//		velocity.y = 1 * dt;
-	//		is_jumping = false;
-	//	}
+		else
+		{
+			animation = &throwKunai;
+			App->particles->kunai_particle.speed.x = 800 * dt;
+			App->particles->AddParticle(App->particles->kunai_particle, position.x + 12, position.y + 20, COLLIDER_PLAYER_SHOT);
+		}
+		is_shooting = false;
+	}
 
-	//}
-	//velocity.y += App->map->prop->gravity;
-	//position.y += velocity.y;
+	if (!is_shooting)
+	{
+		throwKunaiBackwards.Reset();
+		throwKunai.Reset();
+	}
 
-	//if (is_falling && !is_backwards)
-	//	animation = &fall;
+	//JUMP
+	if (!is_jumping)
+	{
+		old_player_position.y = position.y;
+		velocity.y = 0;
+	}
 
-	//if (is_falling && is_backwards)
-	//	animation = &fallBackwards;
 
-	//if (is_jumping && is_backwards)
-	//	animation = &jumpBackwards;
+	if (is_jumping)
+	{
+		velocity.y = -200 * dt;
 
-	//if (is_jumping && !is_backwards)
-	//	animation = &jump;
+		if (position.y < old_player_position.y - 60)
+		{
+			velocity.y = 1 * dt;
+			is_jumping = false;
+		}
+
+	}
+	velocity.y += App->map->prop->gravity;
+	position.y += velocity.y;
+
+	if (is_falling && !is_backwards)
+		animation = &fall;
+
+	if (is_falling && is_backwards)
+		animation = &fallBackwards;
+
+	if (is_jumping && is_backwards)
+		animation = &jumpBackwards;
+
+	if (is_jumping && !is_backwards)
+		animation = &jump;
 
 	////TELEPORT
-	//if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN && App->map->data.map_layers.end->data->data[gid + 1] == 51 && can_tp)
-	//{
-	//	is_tp = true;
-	//	App->audio->PlayFx(2); //Teleport fx
-	//}
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN && App->map->data.map_layers.end->data->data[gid + 1] == 51 && can_tp)
+	{
+		is_tp = true;
+		//App->audio->PlayFx(2); //Teleport fx
+	}
 
-	//if (is_tp)
-	//{
-	//	animation = &teleport;
-	//	App->map->prop->tp_time += 0.1f;
+	if (is_tp)
+	{
+		animation = &teleport;
+		App->map->prop->tp_time += 0.1f;
 
-	//	if (App->map->prop->tp_time == 0.6f)
-	//	{
-	//		position.y -= 100;
-	//		is_tp = false;
-	//		App->map->prop->tp_time = 0.0f;
-	//	}
-	//}
+		if (App->map->prop->tp_time == 0.6f)
+		{
+			position.y -= 100;
+			is_tp = false;
+			App->map->prop->tp_time = 0.0f;
+		}
+	}
 
 	////GOD MODE  The player can fly and move everywhere and is not affected by gravity
-	//if (App->scene->is_god)
-	//{
-	//	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && App->fade_to_black->IsFading() == false)
-	//		position.y -= 120 * dt;
+	if (App->scene->is_god)
+	{
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && App->fade_to_black->IsFading() == false)
+			position.y -= 120 * dt;
 
-	//	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && App->fade_to_black->IsFading() == false)
-	//		position.y += 120 * dt;
-	//}
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && App->fade_to_black->IsFading() == false)
+			position.y += 120 * dt;
+	}
 
 	App->render->camera.x = (-position.x * App->win->render_scale) + (App->win->width / 2);
 	App->render->camera.y = (-position.y * App->win->render_scale) + (App->win->height / 2);

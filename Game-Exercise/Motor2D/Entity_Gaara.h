@@ -18,13 +18,25 @@ public:
 	void LoadAnimation(pugi::xml_node&, Animation* player);
 	/*bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
-	void OnCollision(Collider*, Collider*);
-	void UpdateLifes(int lifes);
-	int HurtPlayer();*/
+	void OnCollision(Collider*, Collider*);*/
 
 public:
-	bool firstUpdate = true;
+
 	Animation idle;
+	Animation idleBackwards;
+	Animation runBackwards;
+	Animation run;
+	Animation teleport;
+	Animation teleportBackwards;
+	Animation jutsu;
+	Animation jump;
+	Animation fall;
+	Animation jumpBackwards;
+	Animation fallBackwards;
+	Animation throwKunai;
+	Animation throwKunaiBackwards;
+
+	bool firstUpdate = true;
 	p2SString path = nullptr;
 
 	iPoint gaara_pos;
@@ -38,6 +50,19 @@ public:
 		COLLISION_CHANGE_MAP = 72,
 
 	};
+
+	bool is_backwards = false;
+
+	bool is_falling = true;
+	bool is_jumping = false;
+	bool is_teleporting = false;
+
+	bool can_tp = false;
+	bool is_tp = false;
+	bool is_shooting = false;
+
+	iPoint old_player_position;
+	iPoint velocity;
 };
 
 

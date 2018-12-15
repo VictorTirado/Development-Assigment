@@ -58,6 +58,8 @@ Entity_Gaara::Entity_Gaara(int x, int y):Entity(x, y)
 		if (name == "throwKunaiBackwards")
 			LoadAnimation(animations, &throwKunaiBackwards);
 	}
+
+	collider = App->collision->AddCollider({ 0, 0, 26, 57 }, COLLIDER_TYPE::COLLIDER_PLAYER, App->entities);
 }
 
 Entity_Gaara::~Entity_Gaara()
@@ -288,4 +290,13 @@ void Entity_Gaara::LoadAnimation(pugi::xml_node& animation, Animation* player)
 	}
 	player->speed = animation.attribute("speed").as_float();
 	player->loop = animation.attribute("loop").as_bool();
+}
+
+void Entity_Gaara::OnCollision(Collider* c1, Collider* c2)
+{
+	if (c2->type == COLLIDER_TYPE::COLLIDER_ENEMY)
+	{
+		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
+
+	}
 }

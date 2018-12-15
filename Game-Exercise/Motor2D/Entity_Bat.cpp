@@ -165,7 +165,6 @@ void Entity_Bat::OnCollision(Collider* collider)
 		//if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER && App->entities->playerLifes == 0)
 			//App->entities->ResetMap(App->scene->map_number);
 
-
 		else if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT) 
 			lives--;
 

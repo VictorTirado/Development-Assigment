@@ -15,6 +15,7 @@
 #include "j1FadeToBlack.h"
 #include "GUI_Image.h"
 #include "Entity_Player.h"
+#include "Entity_Gaara.h"
 
 
 
@@ -58,7 +59,14 @@ void Entity_Book::OnCollision(Collider* collider)
 {
 	if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER) {
 		LOG("COLLISION");
-		App->entities->player->can_tp = true;
+		if (App->entities->player != nullptr)
+		{
+			App->entities->player->can_tp = true;
+		}
+		else if (App->entities->gaara != nullptr)
+		{
+			App->entities->gaara->can_tp = true;
+		}
 		is_caught = true;
 		delete_entity = true;
 		UpdateBookUI(is_caught);

@@ -130,7 +130,6 @@ void Entity_Player::Update(float dt)
 
 	if (App->map->data.map_layers.end->data->data[gid] == Collision_Type::COLLISION_CHANGE_MAP)
 	{
-		
 		App->map->CleanUp();
 		App->entities->DestroyEntities();
 		if (App->scene->map_number == 1)

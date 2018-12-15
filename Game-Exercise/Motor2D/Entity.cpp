@@ -37,6 +37,7 @@ void Entity::Draw(SDL_Texture* sprites)
 		collider->SetPos(position.x, position.y);
 	}
 	if (this->entity_type == GAARA_PLAYER) {
+		
 		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 		if (collider != nullptr)
 			collider->SetPos(position.x, position.y);

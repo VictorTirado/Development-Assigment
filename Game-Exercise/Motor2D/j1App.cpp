@@ -23,7 +23,7 @@
 #include "Settings.h"
 #include "SelectCharacter.h"
 #include "Brofiler/Brofiler.h"
-
+#include "Credits.h"
 #include "j1Entitites.h"
 
 // Constructor
@@ -52,6 +52,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	main_menu = new MainMenu();
 	settings = new Settings();
 	characters = new Characters();
+	credits = new Credits();
 	
 
 	// Ordered for awake / Start / Update
@@ -73,10 +74,12 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 
 	AddModule(gui);
 
+	AddModule(credits);
 	AddModule(main_menu);
 	AddModule(settings);
 	
 	AddModule(characters);
+	
 	// render last to swap buffer
 	AddModule(render);
 

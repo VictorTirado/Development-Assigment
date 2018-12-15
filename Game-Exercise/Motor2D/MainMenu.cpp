@@ -20,6 +20,7 @@
 #include "Settings.h"
 #include "SelectCharacter.h"
 #include "j1Languages.h"
+#include "Credits.h"
 
 #include "GUI_Button.h"
 
@@ -202,6 +203,15 @@ void MainMenu::Interact(GUI* g)
 	}
 	else if (g->position.y == 600)
 	{
+	}
+	else if (g->position.y == 460)
+	{
+		App->fade_to_black->FadeToBlack(this, App->credits, 3.0f);
+		App->gui->DestroyAllUi();
+		App->credits->active = true;
+		App->credits->Start();
+
+		this->active = false;
 	}
 	else if (g->position.y == 50)
 	{

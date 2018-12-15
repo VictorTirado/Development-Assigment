@@ -26,6 +26,7 @@ class j1Languages;
 class MainMenu;
 class Settings;
 class Characters;
+class Credits;
 
 enum Entities
 {
@@ -130,6 +131,7 @@ public:
 	MainMenu*			main_menu = nullptr;
 	Settings*			settings = nullptr;
 	Characters*			characters = nullptr;
+	Credits*            credits = nullptr;
 
 private:
 

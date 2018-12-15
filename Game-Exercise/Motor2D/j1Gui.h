@@ -58,6 +58,7 @@ public:
 
 	void DestroyAllUi();
 	void DestroyUIElement(GUI &element);
+	void DebugDraw();
 
 
 	const SDL_Texture* GetAtlas() const;
@@ -71,6 +72,7 @@ private:
 	p2DynArray<GUI*> ui_list;
 public:
 	Animation shuriken;
+	bool debug = false;
 };
 
 #endif // __j1GUI_H__

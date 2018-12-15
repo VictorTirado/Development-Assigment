@@ -57,8 +57,6 @@ bool MainMenu::Start()
 	background = App->gui->AddImage(0, 0, &bck,nullptr,this, nullptr);
 	background2 = App->gui->AddImage(App->win->width/2 - 165, 150, &bck2, nullptr,this, nullptr);
 	
-
-	
 	//BTN_CONTINUE
 	btn_play = (GUI_Button*)App->gui->AddButton(App->win->width/2 -150,180 , { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 },this, nullptr);
 	text_play = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->current_language.play.GetString(),this,btn_play);
@@ -70,17 +68,18 @@ bool MainMenu::Start()
 		text_play = (Gui_Label*)App->gui->AddLabel(10, 10,App->languages->current_language.continue_.GetString(),this, nullptr);
 		btn_continue->SetText(text_play);
 	}
-
+	//BTN_ CREDITS
 	btn_credits = (GUI_Button*)App->gui->AddButton(App->win->width / 2 - 150, 460, { 1316,382,300,77 }, { 1316,299,300,77 },{ 1317,466,300,77 },this, nullptr);
 	text_credits = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->current_language.credits.GetString(),this, nullptr);
 	btn_credits->SetText(text_credits);
 	btn_settings = App->gui->AddButton(App->win->width - 150, 150, { 1137,298,55,55 }, { 1138,361,55,55 }, { 1137,419,55,55 },this,nullptr);
 
+	//BTN_SETTINGS
 	adjust = App->gui->AddImage(btn_settings->position.x + btn_settings->animation.w/6, btn_settings->position.y - 3 + btn_settings->animation.h / 6, &set, nullptr,this, btn_settings);
+	//BTN_EXIT
 	btn_exit = App->gui->AddButton(App->win->width - 150, 50, { 1207,298,55,55 }, { 1207,361,55,55 }, { 1207,420,55,55 },this, nullptr);
 
-	//select_lng = (GUI_Box*)App->gui->AddBox(0, 0, (GUI_Button*)btn_language,(GUI_Button*)btn_options, this, nullptr);
-	//select_lng->SetOptions((GUI_Button*)btn_options);
+	
 
 
 	return true;

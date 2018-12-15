@@ -76,7 +76,7 @@ bool j1Gui::Update(float dt)
 			ui_list[i]->MouseIn(ui_list[i]);
 	}
 
-
+	DebugDraw();
 	//LOG("elements ui: %d", ui_list.Count());
 	return true;
 }
@@ -153,5 +153,10 @@ void j1Gui::DestroyUIElement(GUI &element)
 	
 		}
 	}
-
 }
+void j1Gui::DebugDraw()
+{
+	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
+		debug = !debug;
+}
+	

@@ -37,7 +37,10 @@ void GUI::Draw(SDL_Texture* sprites)
 	{
 		App->render->Blit_UI(sprites, position.x, position.y,&animation,0);
 	}
-	
+	if (App->gui->debug) {
+		SDL_Rect tmp_rect{ position.x,position.y,animation.w,animation.h };
+		App->render->DrawQuad(tmp_rect, 255, 0, 0, 255, false,false);
+	}
 	/*if(animation2 != nullptr && type != LABEL)
 	App->render->Blit_UI(sprites, position.x, position.y, &(animation2->GetCurrentFrame()), 1);*/
 	/*if(animation2== nullptr)

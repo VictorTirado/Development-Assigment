@@ -77,7 +77,7 @@ bool j1Gui::Update(float dt)
 	}
 
 
-	LOG("elements ui: %d", ui_list.Count());
+	//LOG("elements ui: %d", ui_list.Count());
 	return true;
 }
 

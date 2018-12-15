@@ -58,6 +58,7 @@ private:
 	GUI_Button* btn_english;
 	Gui_Label* text_language = nullptr;
 	Gui_Label* language;
+	Gui_Label* music_volume;
 	GUI_Button* btn_language;
 
 

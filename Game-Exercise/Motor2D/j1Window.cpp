@@ -68,8 +68,7 @@ bool j1Window::Awake(pugi::xml_node& config)
 		SDL_SetWindowIcon(window, icon);
 		SDL_Surface* surface = NULL;
 		surface = SDL_LoadBMP("textures/mouse2.bmp");
-		
-		cursor = SDL_CreateColorCursor(surface, 10, 10);
+		cursor = SDL_CreateColorCursor(surface, 0, 0);
 		SDL_SetCursor(cursor);
 		if(window == NULL)
 		{

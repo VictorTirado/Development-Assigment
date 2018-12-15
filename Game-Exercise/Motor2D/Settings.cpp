@@ -50,7 +50,7 @@ bool Settings::Start()
 	root = data.child("game_state");
 
 	//MENU _UI
-
+	App->audio->PlayMusic(App->audio->path.GetString());
 	SDL_Rect bck = { 0,0,1024,768 };
 	background = App->gui->AddImage(0, 0, &bck, nullptr,this, nullptr);
 	go_back = App->gui->AddButton(50, 50, {1129,95,48,51}, {1128,160,48,51}, { 1128,160,48,51 },this, nullptr);
@@ -59,6 +59,7 @@ bool Settings::Start()
 	slider = (Gui_Slider*)App->gui->AddSlider(music->animation.w + 150, 290,this, music);
 	button = (GUI_Button*)App->gui->AddButton(0, 0, { 1068,297,55,55 }, { 1069,362,55,55 }, { 1069,421,55,55 },this, (GUI*)slider);
 	slider->SetNumStart(App->audio->volume, button);
+	//music_volume = (Gui_Label*)App->gui->AddLabel(slider->position.x + slider->animation.w +20, slider->position.y + 10, App->audio->volume, this, nullptr);
 
 	btn_language = (GUI_Button*)App->gui->AddButton(App->win->width - 250, 50, { 515,805,190,49 }, { 515,805,190,49 }, { 515,805,190,49 }, this, nullptr);
 	text_language = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->current_language.language.GetString(), this, nullptr);
@@ -82,8 +83,9 @@ bool Settings::Update(float dt)
 	if (button->MouseIn(button) == true)
 	{
 		slider->MoveButton(button);
+		slider->UpadteNumStart(App->audio->volume,button);
 	}
-
+	Mix_VolumeMusic(slider->value);
 
 	App->input->GetMousePosition(mouse_x, mouse_y);
 	return true;

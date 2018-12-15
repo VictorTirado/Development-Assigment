@@ -6,7 +6,7 @@
 	<textures />
 	<language />
 	<audio>
-		<music value="64" />
+		<music value="0" />
 	</audio>
 	<map />
 	<pathfinding />

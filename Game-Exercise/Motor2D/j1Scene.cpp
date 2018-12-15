@@ -39,8 +39,9 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-
-	ui_background = App->gui->AddImage(0, 0, &ui_backround_rect, nullptr,this, nullptr);
+	
+	SDL_Rect ui_backround_rect = { 1057, 573, 243, 61 };
+	ui_background = (GUI_Image*)App->gui->AddImage(0, 0, &ui_backround_rect, nullptr,this, nullptr);
 
 	if (!is_faded && map_number == 1)
 	{
@@ -73,9 +74,14 @@ bool j1Scene::Update(float dt)
 {
 	BROFILER_CATEGORY("SceneUpdate", Profiler::Color::MediumOrchid);
 	//DEBUG KEYS
-
-	App->entities->UpdatePlayerLifes(App->entities->playerLifes);
-	App->entities->book->UpdateBookUI(App->entities->book->is_caught);
+	if (first_update == true)
+	{
+		App->entities->book->UpdateBookUI(App->entities->book->is_caught);
+		App->entities->UpdatePlayerLifes(App->entities->playerLifes);
+		first_update = false;
+	}
+//	App->entities->UpdatePlayerLifes(App->entities->playerLifes);
+	
 	
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
@@ -109,6 +115,7 @@ bool j1Scene::Update(float dt)
 	}
 
 	App->map->Draw();
+	
 
 	return true;
 }

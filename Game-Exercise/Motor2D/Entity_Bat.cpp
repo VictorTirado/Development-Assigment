@@ -157,8 +157,10 @@ void Entity_Bat::OnCollision(Collider* collider)
 {
 	if (App->scene->is_god == false)
 	{
-		if(collider->type == COLLIDER_TYPE::COLLIDER_PLAYER && damage_cd == 0)
+		if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER && damage_cd == 0) {
 			App->entities->HurtingPlayer();
+			App->entities->UpdatePlayerLifes(App->entities->playerLifes);
+		}
 
 		if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER && App->entities->playerLifes == 0)
 			App->entities->ResetMap(App->scene->map_number);

@@ -170,14 +170,11 @@ void Settings::Interact(GUI* g)
 	
 	else if (g->position.y == 50)
 	{
-		
-			App->fade_to_black->FadeToBlack(this, App->main_menu, 3.0f);
-			App->gui->DestroyAllUi();
-			App->main_menu->active = true;
-			App->main_menu->Start();
+		App->fade_to_black->FadeToBlack(this, App->main_menu, 3.0f);
+		App->gui->DestroyAllUi();
+		App->main_menu->active = true;
+		App->main_menu->Start();
 		this->active = false;
-
-		
 	}
 
 }

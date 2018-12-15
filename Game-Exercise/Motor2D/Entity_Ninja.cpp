@@ -165,9 +165,11 @@ void Entity_Ninja::OnCollision(Collider* collider)
 	if (App->scene->is_god == false)
 	{
 		if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER && damage_cd == 0)
+		{
 			App->entities->HurtingPlayer();
-
-		if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER&& App->entities->playerLifes == 0)
+			App->entities->UpdatePlayerLifes(App->entities->playerLifes);
+		}
+		if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER && App->entities->playerLifes == 0)
 		App->entities->ResetMap(App->scene->map_number);
 
 		else if (collider->type == COLLIDER_TYPE::COLLIDER_PLAYER_SHOT)

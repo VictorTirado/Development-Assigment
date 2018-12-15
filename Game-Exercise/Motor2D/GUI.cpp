@@ -35,7 +35,7 @@ void GUI::Draw(SDL_Texture* sprites)
 	}
 	else 
 	{
-		App->render->Blit_UI(sprites, position.x, position.y,&animation);
+		App->render->Blit_UI(sprites, position.x, position.y,&animation,0);
 	}
 	
 	/*if(animation2 != nullptr && type != LABEL)

@@ -66,14 +66,16 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(pathfinding);
 	
 	AddModule(scene);
-	
 	AddModule(collision);
 	AddModule(particles);
 	AddModule(entities);
 	AddModule(fade_to_black);
+
 	AddModule(gui);
+
 	AddModule(main_menu);
 	AddModule(settings);
+	
 	AddModule(characters);
 	// render last to swap buffer
 	AddModule(render);

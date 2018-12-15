@@ -42,7 +42,7 @@ private:
 	bool is_faded = false;
 	bool change_map = false;
 	bool change_music = false;
-	
+	bool first_update = true;
 
 public:
 	int map_number = 1;
@@ -60,7 +60,7 @@ public:
 	SDL_Rect book_not_caught_rect = { 1789, 947, 28, 25 };
 
 	GUI* ui_background = nullptr;
-	SDL_Rect ui_backround_rect = {1057, 573, 243, 61};
+	
 };
 
 #endif // __j1SCENE_H__

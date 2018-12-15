@@ -61,6 +61,7 @@ void Entity_Book::OnCollision(Collider* collider)
 		App->entities->player->can_tp = true;
 		is_caught = true;
 		delete_entity = true;
+		UpdateBookUI(is_caught);
 	}
 }
 

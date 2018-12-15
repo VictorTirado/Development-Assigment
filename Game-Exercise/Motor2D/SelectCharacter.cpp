@@ -141,6 +141,7 @@ void Characters::Interact(GUI* g)
 		App->gui->DestroyAllUi();
 		App->scene->active = true;
 		App->scene->Start();
+
 		this->active = false;
 	}
 	else if (g->position.x == 200)

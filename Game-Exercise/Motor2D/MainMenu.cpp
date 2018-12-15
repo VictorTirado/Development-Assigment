@@ -99,7 +99,7 @@ bool MainMenu::Update(float dt)
 	BROFILER_CATEGORY("SceneUpdate", Profiler::Color::MediumOrchid);
 	//DEBUG KEYS
 	
-
+	LOG("%i", App->entities->entities.Count());
 	App->input->GetMousePosition(mouse_x, mouse_y);
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {

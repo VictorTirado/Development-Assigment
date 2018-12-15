@@ -80,13 +80,13 @@ bool j1Scene::Update(float dt)
 	//DEBUG KEYS
 	if (first_update == true)
 	{
-		App->entities->book->UpdateBookUI(App->entities->book->is_caught);
+		//App->entities->book->UpdateBookUI(App->entities->book->is_caught);
 		App->entities->UpdatePlayerLifes(App->entities->playerLifes);
 		
 		first_update = false;
 	}
 //	App->entities->UpdatePlayerLifes(App->entities->playerLifes);
-	
+	LOG("%i", App->entities->entities.Count());
 	//p2SString aa = puntuation.create("%i", App->entities->score);
 	//UpdateScore(App->entities->score);
 	

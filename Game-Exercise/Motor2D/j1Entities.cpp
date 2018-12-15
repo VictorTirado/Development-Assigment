@@ -104,6 +104,7 @@ void j1Entities::DestroyEntities()
 		{
 			delete entities[i];
 			entities[i] = nullptr;
+			entities.Pop(entities[i]);
 		}
 	}
 	entities.Clear();
@@ -258,8 +259,6 @@ void j1Entities::ResetMap(int map)
 
 void j1Entities::UpdatePlayerLifes(int lifes)
 {
-	
-
 	if (lifes == 4)
 		App->scene->hearts = (GUI_Image*)App->gui->AddImage(20, 20, &App->scene->hearts3, nullptr, App->scene, nullptr); 
 
@@ -272,11 +271,14 @@ void j1Entities::UpdatePlayerLifes(int lifes)
 	if(lifes == 1)
 		App->scene->hearts = App->gui->AddImage(20, 20, &App->scene->hearts0, nullptr, App->scene, nullptr);
 
+	if (lifes == 0)
+		lifes = 4;
+
 }
 
 int j1Entities::HurtingPlayer()
 {
-	playerLifes--;
+	playerLifes -= 1;
 
 	return playerLifes;
 }

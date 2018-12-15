@@ -45,12 +45,11 @@ private:
 	bool is_faded = false;
 	bool change_map = false;
 	bool change_music = false;
-	bool first_update = true;
-
 public:
 	int map_number = 1;
 	bool collision_debug = false;
 	bool is_god = false;
+	bool first_update = true;
 	p2SString puntuation;
 
 	GUI* hearts = nullptr;

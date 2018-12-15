@@ -17,6 +17,7 @@
 #include "Entity_Player.h"
 #include "j1Gui.h"
 #include "Entity_Book.h"
+#include "MainMenu.h"
 #include "Brofiler\Brofiler.h"
 
 #include "GUI_Image.h"
@@ -287,6 +288,19 @@ void Entity_Player::Update(float dt)
 
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && App->fade_to_black->IsFading() == false)
 			position.y += 120 * dt;
+	}
+
+	if (App->entities->playerLifes == 0)
+	{
+		App->fade_to_black->FadeToBlack(App->scene, App->main_menu, 3.0f);
+		App->entities->DestroyEntities();
+		App->map->CleanUp();
+		App->gui->DestroyAllUi();
+		App->main_menu->active = true;
+		App->main_menu->Start();
+		App->scene->first_update = true;
+
+		App->scene->active = false;
 	}
 	
 	App->render->camera.x = (-position.x * App->win->render_scale) + (App->win->width / 2);

@@ -130,8 +130,6 @@ GUI* j1Gui::AddSlider(int x, int y, j1Module* callback, GUI* parent)
 	return slider;
 }
 
-
-
 void j1Gui::DestroyAllUi()
 {
 	for (uint i = 0; i < ui_list.Count(); i++)
@@ -144,7 +142,6 @@ void j1Gui::DestroyAllUi()
 	}
 	ui_list.Clear();
 }
-
 void j1Gui::DestroyUIElement(GUI &element)
 {
 

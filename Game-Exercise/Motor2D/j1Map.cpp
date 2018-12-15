@@ -69,15 +69,15 @@ void j1Map::Spawn()
 							}
 							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 73)
 							{
-								App->entities->SpawnEntities(coords.x, coords.y, BOOK);
+								App->entities->SpawnEntities(coords.x, coords.y, Entities_Type::BOOK);
 							}
 							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 74)
 							{
-								App->entities->SpawnEntities(coords.x, coords.y, BAT);
+								App->entities->SpawnEntities(coords.x, coords.y, Entities_Type::BAT);
 							}
 							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 54)
 							{
-								App->entities->SpawnEntities(coords.x, coords.y, NINJA);
+								App->entities->SpawnEntities(coords.x, coords.y, Entities_Type::NINJA);
 							}
 						}
 					}
@@ -123,15 +123,15 @@ void j1Map::SpawnEnemies()
 						
 							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 73)
 							{
-								App->entities->SpawnEntities(coords.x, coords.y, BOOK);
+								App->entities->SpawnEntities(coords.x, coords.y, Entities_Type::BOOK);
 							}
 							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 74)
 							{
-								App->entities->SpawnEntities(coords.x, coords.y, BAT);
+								App->entities->SpawnEntities(coords.x, coords.y, Entities_Type::BAT);
 							}
 							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 54)
 							{
-								App->entities->SpawnEntities(coords.x, coords.y, NINJA);
+								App->entities->SpawnEntities(coords.x, coords.y, Entities_Type::NINJA);
 							}
 						}
 					}

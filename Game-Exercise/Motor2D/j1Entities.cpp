@@ -119,6 +119,7 @@ bool j1Entities::SpawnEntities(int x, int y, Entities_Type type)
 		player = new Entity_Player(x, y);
 		player->entity_type = Entities_Type::PLAYER;
 		entities.PushBack(player);
+		playerLifes = 4;
 		ret = true;
 		break;
 	}
@@ -126,6 +127,7 @@ bool j1Entities::SpawnEntities(int x, int y, Entities_Type type)
 		gaara = new Entity_Gaara(x, y);
 		gaara->entity_type = Entities_Type::GAARA_PLAYER;
 		entities.PushBack(gaara);
+		playerLifes = 4;
 		ret = true;
 		break;
 	}
@@ -255,6 +257,7 @@ void j1Entities::ResetMap(int map)
 
 void j1Entities::UpdatePlayerLifes(int lifes)
 {
+	
 
 	if (lifes == 4)
 		App->scene->hearts = (GUI_Image*)App->gui->AddImage(20, 20, &App->scene->hearts3, nullptr, App->scene, nullptr); 

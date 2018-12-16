@@ -28,7 +28,7 @@ First of all we started to make our platformer game by drawing a map with Tiled 
 
 * Link to our github repository [here](https://github.com/VictorTirado/Development-Assigment)
 
-* Link to download the lastest release [here](https://github.com/VictorTirado/Development-Assigment/releases)
+* Link to download the last release [here](https://github.com/VictorTirado/Development-Assigment/releases/tag/1.2)
 
 ## Gameplay
 Here you can see a short gameplay!

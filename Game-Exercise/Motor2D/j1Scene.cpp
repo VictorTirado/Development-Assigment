@@ -66,9 +66,7 @@ bool j1Scene::Start()
 
 	score2 = (Gui_Label*)App->gui->AddLabel(250, 10, "Score", this, nullptr);
 	
-	char playerScore[sizeof App->entities->score];
-	sprintf_s(playerScore, "%d", App->entities->score);
-	player_score_text = App->gui->AddLabel(score2->position.x + score2->animation.w + 15, 10, playerScore, this, score2);
+	
 
 	if (!is_faded && map_number == 1)
 	{
@@ -105,6 +103,10 @@ bool j1Scene::Update(float dt)
 	{
 		App->entities->book->UpdateBookUI(App->entities->book->is_caught);
 		App->entities->UpdatePlayerLifes(App->entities->playerLifes);
+
+		char playerScore[sizeof App->entities->score];
+		sprintf_s(playerScore, "%d", App->entities->score);
+		player_score_text = App->gui->AddLabel(score2->position.x + score2->animation.w + 15, 10, playerScore, this, score2);
 		
 		first_update = false;
 	}
@@ -229,8 +231,10 @@ void j1Scene::Interact(GUI* g)
 	else if (g == btn_back && paused == true)
 	{
 		App->fade_to_black->FadeToBlack(this, App->main_menu, 3.0f);
+		App->map->CleanUp();
 		App->gui->DestroyAllUi();
 		App->entities->DestroyEntities();
+		App->entities->score = 0;
 		this->active = false;
 		App->main_menu->active = true;
 		App->main_menu->Start();

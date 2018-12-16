@@ -17,30 +17,22 @@
 	<entities>
 		<player>
 			<map level="1" />
-			<position x="321" y="366" />
-			<type value="2" />
+			<position x="495" y="350" />
+			<type value="1" />
+			<score value="250" />
 		</player>
-		<bat>
-			<position x="432" y="320" />
-		</bat>
-		<bat>
-			<position x="592" y="288" />
-		</bat>
-		<bat>
-			<position x="720" y="224" />
-		</bat>
-		<bat>
-			<position x="800" y="448" />
-		</bat>
 		<ninja>
-			<position x="1120" y="388" />
+			<position x="1296" y="1546" />
 		</ninja>
 		<book>
 			<book caught="false" />
 			<position x="1184" y="240" />
 		</book>
+		<bat>
+			<position x="800" y="448" />
+		</bat>
 		<ninja>
-			<position x="1296" y="838" />
+			<position x="1120" y="381" />
 		</ninja>
 	</entities>
 	<fadeToBlack />
@@ -49,6 +41,6 @@
 	<Settings />
 	<Characters />
 	<renderer>
-		<camera x="-451" y="-714" />
+		<camera x="-973" y="-666" />
 	</renderer>
 </game_state>

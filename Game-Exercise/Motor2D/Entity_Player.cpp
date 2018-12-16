@@ -125,7 +125,8 @@ void Entity_Player::Update(float dt)
 			App->map->Load("ForestMap.tmx");
 			App->map->Spawn();
 		}
-	
+		App->entities->HurtingPlayer();
+		App->entities->UpdatePlayerLifes(App->entities->playerLifes);
 		App->audio->PlayFx(2); //player's death fx
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 	
@@ -324,6 +325,7 @@ void Entity_Player::LoadAnimation(pugi::xml_node& animation, Animation* player)
 bool Entity_Player::Load(pugi::xml_node& data)
 {
 	App->map->CleanUp();
+	
 	if(data.child("map") != NULL)
 		App->scene->map_number = data.child("map").attribute("level").as_int();
 
@@ -346,6 +348,7 @@ bool Entity_Player::Load(pugi::xml_node& data)
 		App->map->SpawnEnemies();
 		position.x = data.child("position").attribute("x").as_int();
 		position.y = data.child("position").attribute("y").as_int();
+		App->entities->score = data.child("score").attribute("value").as_int();
 		App->entities->SpawnEntities(position.x, position.y, Entities_Type::PLAYER);
 	}
 	else if (App->scene->map_number == 1 && data.child("map") != NULL)
@@ -362,8 +365,10 @@ bool Entity_Player::Load(pugi::xml_node& data)
 			RELEASE_ARRAY(data);
 		}
 		App->map->SpawnEnemies();
+		App->entities->score = data.child("position").attribute("x").as_int();
 		position.x = data.child("position").attribute("x").as_int();
 		position.y = data.child("position").attribute("y").as_int();
+		App->entities->score = data.child("score").attribute("value").as_int();
 		App->entities->SpawnEntities(position.x,position.y, Entities_Type::PLAYER);
 	}
 	return true;
@@ -375,6 +380,7 @@ bool Entity_Player::Save(pugi::xml_node& data)const
 	data.append_child("position").append_attribute("x") = position.x;
 	data.append_child("type").append_attribute("value") = App->characters->type;
 	data.child("position").append_attribute("y") = position.y;
+	data.append_child("score").append_attribute("value") = App->entities->score;
 	return true;
 }
 

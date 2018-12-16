@@ -120,6 +120,8 @@ void Entity_Gaara::Update(float dt)
 			App->map->Load("ForestMap.tmx");
 			App->map->Spawn();
 		}
+		App->entities->HurtingPlayer();
+		App->entities->UpdatePlayerLifes(App->entities->playerLifes);
 		App->audio->PlayFx(2); //player's death fx
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 	}
@@ -339,6 +341,7 @@ bool Entity_Gaara::Load(pugi::xml_node& data)
 		App->map->SpawnEnemies();
 		position.x = data.child("position").attribute("x").as_int();
 		position.y = data.child("position").attribute("y").as_int();
+		App->entities->score = data.child("score").attribute("value").as_int();
 		App->entities->SpawnEntities(position.x, position.y, Entities_Type::GAARA_PLAYER);
 	}
 	return true;
@@ -349,7 +352,9 @@ bool Entity_Gaara::Save(pugi::xml_node& data)const
 	data.append_child("map").append_attribute("level") = App->scene->map_number;
 	data.append_child("position").append_attribute("x") = position.x;
 	data.append_child("type").append_attribute("value") = App->characters->type;
+	data.append_child("score").append_attribute("value") = App->entities->score;
 	data.child("position").append_attribute("y") = position.y;
+	
 	return true;
 }
 

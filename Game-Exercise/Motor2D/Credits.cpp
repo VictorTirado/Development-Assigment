@@ -99,15 +99,15 @@ bool Credits::CleanUp()
 
 void Credits::Interact(GUI* g)
 {
-	/*if (g->position.y == 180)
+	if (g == go_back)
 	{
 		App->fade_to_black->FadeToBlack(this, App->scene, 3.0f);
 		App->gui->DestroyAllUi();
-		App->scene->active = true;
-		App->scene->Start();
+		App->main_menu->active = true;
+		App->main_menu->Start();
 
 		this->active = false;
-	}*/
+	}
 
 	if (g == btn_web)
 	{

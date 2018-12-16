@@ -346,7 +346,13 @@ void j1App::FinishUpdate()
 	}
 
 	double fps = 1000.0f / perf_timer.ReadMs();
-	dt = 1.0f / fps;
+	if (App->scene->paused == true)
+	{
+		dt = 0.0f;
+	}
+	else {
+		dt = 1.0f / fps;
+	}
 	static char title[256];	
 		sprintf_s(title, 256, "FPS: %.2f Av.FPS: %.2f Last Frame Ms: %.3u Time since startup: %.3f Frame Count: %lu (Cap: %d %s Vsync: %s)",
 			fps,avg_fps, last_frame_ms, seconds_since_startup, frame_count, cap_value.GetString(), vsync_value.GetString());

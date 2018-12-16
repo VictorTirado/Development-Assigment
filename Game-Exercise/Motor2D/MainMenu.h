@@ -48,7 +48,7 @@ private:
 	bool change_music = false;
 	bool delete_kunais = false;
 	bool close = false;
-	bool first_update = true;
+	
 
 	GUI* background = nullptr;
 	GUI* background2 = nullptr;
@@ -72,11 +72,9 @@ private:
 	Gui_Label* text_continue = nullptr;
 	Gui_Label* text_credits = nullptr;
 
-	
-	
-
 public:
 	int mouse_x, mouse_y;
+	bool first_update = true;
 	
 };
 

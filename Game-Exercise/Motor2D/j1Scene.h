@@ -40,6 +40,7 @@ public:
 	bool ChangeMap(int map_number);
 
 	void UpdateScore(int score);
+	void Interact(GUI* g);
 
 private:
 	bool is_faded = false;
@@ -50,10 +51,14 @@ public:
 	bool collision_debug = false;
 	bool is_god = false;
 	bool first_update = true;
+	bool paused = false;
 	p2SString puntuation;
 
 	GUI* hearts = nullptr;
 	GUI* score_text = nullptr;
+	GUI* background_menu = nullptr;
+	GUI_Button* btn_resume = nullptr;
+	GUI_Button* btn_back = nullptr;
 	SDL_Rect hearts3 = { 1603, 926, 94, 22 };
 	SDL_Rect hearts2 = {1603, 959, 94, 22};
 	SDL_Rect hearts1 = { 1603, 988, 94, 22 };
@@ -65,6 +70,9 @@ public:
 
 	GUI* ui_background = nullptr;
 	GUI* player_score_text = nullptr;
+	Gui_Label* text_resume = nullptr;
+	Gui_Label* text_back = nullptr;
+
 
 	p2SString score_string;
 	Gui_Label* score;

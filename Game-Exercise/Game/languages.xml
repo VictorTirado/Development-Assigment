@@ -8,6 +8,7 @@
       <exit value ="Exit"/>
       <choose_language value ="Language"/>>
       <music_volume value="Music  volume"/>
+      <resume value="Resume"/>
     </main_menu>
   </english>
   <spanish>
@@ -19,6 +20,7 @@
       <salir value ="Salir"/>
       <escoger_idioma value ="Idioma"/>>
       <volumen_musica value ="Volumen  Musica"/>
+      <continuar value="Continuar"/>
     </menu_principal>
   </spanish>
 </languages>

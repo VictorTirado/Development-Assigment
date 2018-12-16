@@ -29,11 +29,11 @@ void GUI::Update()
 
 void GUI::Draw(SDL_Texture* sprites)
 {
-	if (type == LABEL)
+	if (type == LABEL && invisible == false)
 	{
 		App->render->Blit_UI(texture, position.x, position.y, &animation, 0);
 	}
-	else 
+	else if(invisible == false)
 	{
 		App->render->Blit_UI(sprites, position.x, position.y,&animation,0);
 	}

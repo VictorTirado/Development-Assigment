@@ -32,7 +32,7 @@ void Entity::Draw(SDL_Texture* sprites)
 	BROFILER_CATEGORY("EntityDrawFunction", Profiler::Color::HotPink);
 	SDL_Rect r = animation->GetCurrentFrame();
 	if (r.x != NULL) {
-		if (this->entity_type == PLAYER) {
+		if (this->entity_type == PLAYER ) {
 			App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 			if (collider != nullptr)
 				collider->SetPos(position.x, position.y);

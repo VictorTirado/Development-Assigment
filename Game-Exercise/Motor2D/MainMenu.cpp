@@ -109,6 +109,7 @@ bool MainMenu::Update(float dt)
 	App->input->GetMousePosition(mouse_x, mouse_y);
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+		App->audio->PlayMusic("audio/music/Main_menu.ogg");
 		App->gui->DestroyAllUi();
 		App->languages->DeleteLanguage();
 		App->languages->ChangeLanguage();
@@ -195,12 +196,7 @@ void MainMenu::Interact(GUI* g)
 	else if (g == btn_continue)
 	{
 		
-		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
-		App->gui->DestroyAllUi();
-		App->settings->active = true;
-		App->settings->Start();
-
-		this->active = false;
+		
 	}
 	else if (g == btn_credits)
 	{
@@ -208,6 +204,15 @@ void MainMenu::Interact(GUI* g)
 		App->gui->DestroyAllUi();
 		App->credits->active = true;
 		App->credits->Start();
+
+		this->active = false;
+	}
+	else if (g == btn_settings)
+	{
+		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
+		App->gui->DestroyAllUi();
+		App->settings->active = true;
+		App->settings->Start();
 
 		this->active = false;
 	}

@@ -21,6 +21,7 @@ struct LanguageContent
 	p2SString continue_;
 	p2SString credits;
 	p2SString exit;
+	p2SString resume;
 };
 
 

@@ -23,6 +23,7 @@ public:
 	iPoint screen_position = iPoint(0, 0);
 	GUI* parent;
 	bool delete_ui = false;
+	bool invisible = false;
 
 public:
 	GUI(int x, int y,j1Module* callback,GUI* parent);

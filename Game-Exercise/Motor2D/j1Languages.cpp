@@ -36,6 +36,7 @@ bool j1Languages::Awake(pugi::xml_node& config)
 	English.exit = language.child("main_menu").child("exit").attribute("value").as_string();
 	English.choose_language = language.child("main_menu").child("choose_language").attribute("value").as_string();
 	English.music_volume = language.child("main_menu").child("music_volume").attribute("value").as_string();
+	English.resume = language.child("main_menu").child("resume").attribute("value").as_string();
 
 	pugi::xml_node language_spanish;
 	language_spanish = App->LoadLanguages(languages, ESPAÑOL);
@@ -130,7 +131,7 @@ bool j1Languages::LoadLanguage(Language _language_)
 		spanish.exit = language_spanish.child("menu_principal").child("salir").attribute("value").as_string();
 		spanish.choose_language = language_spanish.child("menu_principal").child("escoger_idioma").attribute("value").as_string();
 		spanish.music_volume = language_spanish.child("menu_principal").child("volumen_musica").attribute("value").as_string();
-
+		spanish.resume = language_spanish.child("menu_principal").child("continuar").attribute("value").as_string();
 
 		current_language = spanish;	
 	}
@@ -147,7 +148,7 @@ bool j1Languages::LoadLanguage(Language _language_)
 		English.exit = language_english.child("main_menu").child("exit").attribute("value").as_string();
 		English.choose_language = language_english.child("main_menu").child("choose_language").attribute("value").as_string();
 		English.music_volume = language_english.child("main_menu").child("music_volume").attribute("value").as_string();
-
+		English.resume = language_english.child("main_menu").child("resume").attribute("value").as_string();
 
 		current_language = English;
 

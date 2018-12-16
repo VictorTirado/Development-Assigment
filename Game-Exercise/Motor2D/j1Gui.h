@@ -69,8 +69,9 @@ private:
 	p2SString atlas_file_name;
 	p2SString background_heart_file_name = nullptr;
 	SDL_Texture* background_heart = nullptr;
-	p2DynArray<GUI*> ui_list;
+
 public:
+	p2DynArray<GUI*> ui_list;
 	Animation shuriken;
 	bool debug = false;
 };

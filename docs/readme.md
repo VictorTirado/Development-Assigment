@@ -22,7 +22,7 @@ Here, you will be a ninja whose goal is to get to the end of the levels passing 
 
 ## Core subsystems and innovations
 
-As innovations, we have added to our game that the player can choose the language between english and spanish. Also we have made a select character scene we the player can play with two different characters.
+First of all we started to make our platformer game by drawing a map with Tiled with its layers and properties and a mechanic like teleport to make the game more interesting. Then we added enemies using A* and the way to kill them (in this case is by shooting a kunai). And finally, we added UI as well as a main menu where the player can choose between two characters, settings were the language and music volume can be changed, and credits. In addition, in the scene we added hearts to represent player's lifes, a book to know if it is caught or not, puntuation and a timer.
 
 ## Links
 

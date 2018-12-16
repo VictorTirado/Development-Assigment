@@ -36,10 +36,11 @@ Here you can see a short gameplay!
 
 ## Instructions to play
 
-- A/D to move forwards and backwards
-- SPACEBAR to jump
-- Left Shift to teleport (only if the player has caught the book that appears in some place around the level)
-- Q to shoot the kunai
+- A/D: move forwards and backwards
+- SPACEBAR: jump
+- Left Shift: teleport (only if the player has caught the book that appears in some place around the level)
+- Q: shoot the kunai
+- Orange icon: close the game
 
 ## License
 

@@ -13,11 +13,13 @@
 #include "j1Render.h"
 #include "j1Entitites.h"
 #include "j1Scene.h"
+#include "SelectCharacter.h"
 #include "j1Pathfinding.h"
 
 #include "j1FadeToBlack.h"
 #include "Brofiler\Brofiler.h"
 #include "Entity_Player.h"
+#include "Entity_Gaara.h"
 
 
 Entity_Bat::Entity_Bat(int x, int y):Entity(x, y)
@@ -62,7 +64,13 @@ void Entity_Bat::Update(float dt)
 	}
 
 	bat_pos = App->map->WorldToMap(position.x, position.y);
-	//player_pos = App->entities->player->player_pos;
+	if (App->characters->type == 1) {
+		player_pos = App->entities->player->player_pos;
+	}
+	if (App->characters->type == 2) {
+		player_pos = App->entities->gaara->gaara_pos;
+	}
+
 	player_pos.x += 1;
 	player_pos.y -= 1;
 

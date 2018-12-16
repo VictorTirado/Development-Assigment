@@ -59,11 +59,30 @@ bool Settings::Start()
 	slider = (Gui_Slider*)App->gui->AddSlider(music->animation.w + 150, 290,this, music);
 	button = (GUI_Button*)App->gui->AddButton(0, 0, { 1068,297,55,55 }, { 1069,362,55,55 }, { 1069,421,55,55 },this, (GUI*)slider);
 	slider->SetNumStart(App->audio->volume, button);
-	//music_volume = (Gui_Label*)App->gui->AddLabel(slider->position.x + slider->animation.w +20, slider->position.y + 10, App->audio->volume, this, nullptr);
+	
 
-	btn_language = (GUI_Button*)App->gui->AddButton(App->win->width - 250, 50, { 515,805,190,49 }, { 515,805,190,49 }, { 515,805,190,49 }, this, nullptr);
+	btn_language = (GUI_Button*)App->gui->AddButton(language->position.x + language->animation.w, 50, { 515,805,190,49 }, { 515,805,190,49 }, { 515,805,190,49 }, this, language);
 	text_language = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->current_language.language.GetString(), this, nullptr);
 	btn_language->SetText(text_language);
+
+	if (App->languages->current_language.current == Language::ENLGLISH)
+	{
+		btn_spanish = (GUI_Button*)App->gui->AddButton(language->position.x + language->animation.w, btn_language->position.y + btn_language->animation.h, { 515,805,190,49 }, { 515,805,190,49 }, { 515,805,190,49 }, this, btn_language);
+		text_language = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->spanish.language.GetString(), this, nullptr);
+		btn_spanish->SetText(text_language);
+		btn_spanish->invisible = true;
+		text_language->invisible = true;
+	}
+	else if (App->languages->current_language.current == Language::SPANISH)
+	{
+		btn_english = (GUI_Button*)App->gui->AddButton(language->position.x + language->animation.w, btn_language->position.y + btn_language->animation.h, { 515,805,190,49 }, { 515,805,190,49 }, { 515,805,190,49 }, this, btn_language);
+		text_language = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->English.language.GetString(), this, nullptr);
+		btn_english->SetText(text_language);
+		btn_english->invisible = true;
+		text_language->invisible = true;
+	}
+
+
 	
 	return true;
 }
@@ -107,37 +126,10 @@ bool Settings::PostUpdate()
 bool Settings::CleanUp()
 {
 	LOG("Freeing main menu");
-
 	return true;
 }
 
-//bool Settings::MouseIn(GUI* element)
-//{
-//
-//	GUI_Button*  ex2 = (GUI_Button*)element;
-//	if (element->type == BUTTON) {
-//		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
-//		{
-//			ex2->setAnimation(2);
-//			
-//			
-//		}
-//		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
-//		{
-//			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
-//			{
-//				ex2->setAnimation(3);
-//				Interact(element);
-//				return true;
-//			}
-//		}
-//		else
-//		{
-//			ex2->setAnimation(1);
-//			return false;
-//		}
-//	}
-//}
+
 
 void Settings::Interact(GUI* g)
 {
@@ -152,17 +144,25 @@ void Settings::Interact(GUI* g)
 	}
 	else if (g == btn_language)
 	{
-		SelectLanguage(btn_language);
-		
+		if (App->languages->current_language.current == Language::ENLGLISH)
+		{
+			btn_spanish->invisible = false;
+			text_language->invisible = false;
+		}
+		else if (App->languages->current_language.current == Language::SPANISH)
+		{
+			btn_english->invisible = false;
+			text_language->invisible = false;
+		}
 	}
-	else if (g == btn_spanish  )
+	else if (g == btn_spanish && btn_spanish->invisible == false)
 	{
 		App->gui->DestroyAllUi();
 		App->languages->DeleteLanguage();
 		App->languages->ChangeLanguage();
 		App->settings->Start();
 	}
-	else if (g == btn_english)
+	else if (g == btn_english && btn_english->invisible == false)
 	{
 		App->gui->DestroyAllUi();
 		App->languages->DeleteLanguage();
@@ -179,18 +179,4 @@ void Settings::Interact(GUI* g)
 		this->active = false;
 	}
 
-}
-void Settings::SelectLanguage(GUI_Button* btn_language)
-{
-	if (App->languages->current_language.current == Language::ENLGLISH) {
-		btn_spanish = (GUI_Button*)App->gui->AddButton(btn_language->position.x, btn_language->position.y + btn_language->animation.h, { 515,805,190,49 }, { 515,805,190,49 }, { 515,805,190,49 }, this, btn_language);
-		text_language = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->spanish.language.GetString(), this, nullptr);
-		btn_spanish->SetText(text_language);
-	}
-	else if (App->languages->current_language.current == Language::SPANISH)
-	{
-		btn_english = (GUI_Button*)App->gui->AddButton(btn_language->position.x, btn_language->position.y + btn_language->animation.h, { 515,805,190,49 }, { 515,805,190,49 }, { 515,805,190,49 }, this, btn_language);
-		text_language = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->English.language.GetString(), this, nullptr);
-		btn_english->SetText(text_language);
-	}
 }

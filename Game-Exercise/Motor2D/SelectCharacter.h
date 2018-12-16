@@ -11,12 +11,6 @@ class GUI_Button;
 class Gui_Slider;
 class Gui_Label;
 
-struct Stats
-{
-	Gui_Label* name;
-	Gui_Label* lifes;
-	Gui_Label* jump;
-};
 
 enum Player_Type
 {
@@ -53,11 +47,8 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	bool MouseIn(GUI* button);
 	void Interact(GUI* g);
-	bool ShowStats(GUI* g);
 	void StartGame();
-
 
 private:
 	bool is_faded = false;
@@ -65,23 +56,21 @@ private:
 	bool start_game = false;
 	bool show_stats = true;
 	bool close = false;
-	
-
-	GUI_Button* btn_play = nullptr;
-	Gui_Label* text_play = nullptr;
 
 	GUI* background = nullptr;
 	GUI* background2 = nullptr;
 	GUI* go_back = nullptr;
 	GUI* music = nullptr;
-	Gui_Slider* slider;
-	GUI_Button* sasuke;
-	GUI_Button* gaara;
-	GUI_Button* anonymous;
 
-	Stats stats_sasuke;
+	GUI_Button* btn_play = nullptr;
+	GUI_Button* sasuke = nullptr;
+	GUI_Button* gaara = nullptr;
+	
+	Gui_Label* text_play = nullptr;
+	Gui_Slider* slider = nullptr;
+	
 
-
+	
 
 public:
 	int mouse_x, mouse_y;

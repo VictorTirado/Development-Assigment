@@ -40,30 +40,24 @@ public:
 
 	//bool MouseIn(GUI* button);
 	void Interact(GUI* g);
-	void SelectLanguage(GUI_Button* btn_language);
+
 private:
-	bool is_faded = false;
+	
 	bool first_update = true;
-	bool change_map = false;
 	bool change_music = false;
-	bool delete_kunais = false;
 	bool close = false;
 
 	GUI* background = nullptr;
 	GUI* go_back = nullptr;
 	GUI* music = nullptr;
-	Gui_Slider* slider;
-	GUI_Button* button;
-	GUI_Button* btn_spanish;
-	GUI_Button* btn_english;
+	Gui_Slider* slider = nullptr;
+	GUI_Button* button = nullptr;
+	GUI_Button* btn_spanish = nullptr;
+	GUI_Button* btn_english = nullptr;
 	Gui_Label* text_language = nullptr;
-	Gui_Label* language;
-	Gui_Label* music_volume;
-	GUI_Button* btn_language;
-
-
-	
-
+	Gui_Label* language = nullptr;
+	Gui_Label* music_volume = nullptr;
+	GUI_Button* btn_language = nullptr;
 
 public:
 	int mouse_x, mouse_y;

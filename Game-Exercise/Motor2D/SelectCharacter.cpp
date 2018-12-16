@@ -54,10 +54,14 @@ bool Characters::Start()
 	go_back = App->gui->AddButton(50, 50, { 1129,95,48,51 }, { 1128,160,48,51 }, { 1128,160,48,51 },this, nullptr);
 
 	
-	
+	btn_play = (GUI_Button*)App->gui->AddButton(App->win->width / 2 - 150, 180, { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 }, this, nullptr);
+	text_play = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->current_language.play.GetString(), this, btn_play);
+	btn_play->SetText(text_play);
+	btn_play->invisible = true;
+	text_play->invisible = true;
 	sasuke = (GUI_Button*)App->gui->AddButton(200, 50, { 1458,556,120,120 }, { 1318,554,120,120 }, { 1318,554,120,120 },this, nullptr);
 	gaara = (GUI_Button*)App->gui->AddButton(400, 50, { 1458,686,120,120 }, { 1317,684,120,120 }, { 1317,684,120,120 },this, nullptr);
-	anonymous = (GUI_Button*)App->gui->AddButton(600, 50, { 1056,683,120,120 }, { 1187,683,120,120 }, { 1187,683,120,120 },this, nullptr);
+
 	return true;
 }
 
@@ -73,15 +77,11 @@ bool Characters::PreUpdate()
 bool Characters::Update(float dt)
 {
 	BROFILER_CATEGORY("SceneUpdate", Profiler::Color::MediumOrchid);
-	//DEBUG KEYS
-	/*if(btn_play!=nullptr)
-	MouseIn(btn_play);*/
-	if (show_stats == true) {
-		ShowStats(sasuke);
-	}
+
 	App->input->GetMousePosition(mouse_x, mouse_y);
 	if (start_game == true)
 		StartGame();
+
 	return true;
 }
 
@@ -105,37 +105,9 @@ bool Characters::CleanUp()
 	return true;
 }
 
-//bool Characters::MouseIn(GUI* element)
-//{
-//
-//	GUI_Button*  ex2 = (GUI_Button*)element;
-//	if (element->type == BUTTON) {
-//		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
-//		{
-//			ex2->setAnimation(2);
-//			
-//		}
-//		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
-//		{
-//			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
-//			{
-//				ex2->setAnimation(3);
-//				Interact(element);
-//				return true;
-//			}
-//		
-//		}
-//		else
-//		{
-//			ex2->setAnimation(1);
-//			return false;
-//		}
-//	}
-//}
-
 void Characters::Interact(GUI* g)
 {
-	if (g->position.y == 180)
+	if (g->position.y == 180 && g->invisible == false)
 	{
 		App->fade_to_black->FadeToBlack(this, App->scene, 3.0f);
 		App->gui->DestroyAllUi();
@@ -144,22 +116,18 @@ void Characters::Interact(GUI* g)
 
 		this->active = false;
 	}
-	else if (g->position.x == 200)
+	else if (g == sasuke)
 	{
 		type = 1;
 		start_game = true;
 	}
-	else if (g->position.x == 400)
+	else if (g == gaara)
 	{
 		type = 2;
 		start_game = true;
 	}
-	else if (g->position.x == 600)
+	else if (g == go_back)
 	{
-	}
-	else if (g->position.y == 50)
-	{
-
 		App->fade_to_black->FadeToBlack(this, App->main_menu, 3.0f);
 		App->gui->DestroyAllUi();
 		App->main_menu->active = true;
@@ -167,35 +135,12 @@ void Characters::Interact(GUI* g)
 	}
 
 }
-bool Characters::ShowStats(GUI* g)
-{
-	if (g->position.x == 200 && show_stats == true && mouse_x > g->position.x && mouse_x < g->position.x + g->animation.w && mouse_y > g->position.y && mouse_y < g->position.y + g->animation.h)
-	{
-		stats_sasuke.name = (Gui_Label*)App->gui->AddLabel(500, 500, "Sasuke",this, nullptr);
-		stats_sasuke.lifes = (Gui_Label*)App->gui->AddLabel(500, 600, "Lifes: 3",this, nullptr);
-		type = SASUKE;
-		return true;
-	}
-	else if (g->position.x == 400)
-	{
-		App->gui->AddLabel(500, 500, "Gaara",this, nullptr);
-	}
-	else if (g->position.x == 600)
-	{
-		App->gui->AddLabel(500, 600, "Finish the maps in less than 3 min to unlock it",this, nullptr);
-	}
-	else
-	{
-		show_stats = false;
-		return false;
-	}
-}
+
 void Characters::StartGame()
 {
 	if (type != 0) {
-		btn_play = (GUI_Button*)App->gui->AddButton(App->win->width / 2 - 150, 180, { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 },this, nullptr);
-		text_play = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->current_language.play.GetString(),this, btn_play);
-		btn_play->SetText(text_play);
+		btn_play->invisible = false;
+		text_play->invisible = false;
 		App->scene->first_update = true;
 		start_game = false;
 	}

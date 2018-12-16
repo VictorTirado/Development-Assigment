@@ -75,7 +75,9 @@ Entity_Player::Entity_Player(int x, int y) : Entity(x , y)
 Entity_Player::~Entity_Player()
 {
 	App->tex->UnLoad(sprites);
+	App->tex->UnLoad(X);
 	sprites = nullptr;
+	X = nullptr;
 }
 
 
@@ -129,7 +131,7 @@ void Entity_Player::Update(float dt)
 	
 	}
 
-	if (App->map->data.map_layers.end->data->data[gid] == Collision_Type::COLLISION_CHANGE_MAP)
+	else if (App->map->data.map_layers.end->data->data[gid] == Collision_Type::COLLISION_CHANGE_MAP)
 	{
 		App->map->CleanUp();
 		App->entities->DestroyEntities();
@@ -293,13 +295,13 @@ void Entity_Player::Update(float dt)
 	if (App->entities->playerLifes == 0)
 	{
 		App->fade_to_black->FadeToBlack(App->scene, App->main_menu, 3.0f);
-		App->entities->DestroyEntities();
+		
 		App->map->CleanUp();
 		App->gui->DestroyAllUi();
 		App->main_menu->active = true;
 		App->main_menu->Start();
 		App->scene->first_update = true;
-
+		App->entities->DestroyEntities();
 		App->scene->active = false;
 	}
 	

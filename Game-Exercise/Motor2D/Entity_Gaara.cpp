@@ -278,18 +278,17 @@ void Entity_Gaara::Update(float dt)
 			position.y += 120 * dt;
 	}
 
-	if (App->entities->playerLifes == 0)
-	{
-		App->fade_to_black->FadeToBlack(App->scene, App->main_menu, 3.0f);
-		App->entities->DestroyEntities();
-		App->map->CleanUp();
-		App->gui->DestroyAllUi();
-		App->main_menu->active = true;
-		App->main_menu->Start();
-		App->scene->first_update = true;
-
-		App->scene->active = false;
-	}
+	//if (App->entities->playerLifes == 0)
+	//{
+	///*	App->fade_to_black->FadeToBlack(App->scene, App->main_menu, 3.0f);
+	//	App->map->CleanUp();
+	//	App->gui->DestroyAllUi();
+	//	App->main_menu->active = true;
+	//	App->main_menu->Start();
+	//	App->scene->first_update = true;
+	//	App->entities->DestroyEntities();
+	//	App->scene->active = false;*/
+	//}
 
 	App->render->camera.x = (-position.x * App->win->render_scale) + (App->win->width / 2);
 	App->render->camera.y = (-position.y * App->win->render_scale) + (App->win->height / 2);

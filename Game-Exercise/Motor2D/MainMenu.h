@@ -9,7 +9,6 @@ class GuiText;
 class GUI;
 class GUI_Button;
 class Gui_Label;
-class GUI_Box;
 
 class MainMenu : public j1Module
 {
@@ -38,36 +37,30 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	bool MouseIn(GUI* button);
 	void Interact(GUI* g);
 
 	
 private:
+	SDL_Rect bck = { 0,0,1024,768 };
+	SDL_Rect bck2 = { 1625,299,330,421 };
+	SDL_Rect set = { 1067,54,37,37 };
 	bool is_faded = false;
-	bool change_map = false;
-	bool change_music = false;
-	bool delete_kunais = false;
 	bool close = false;
-	
 
 	GUI* background = nullptr;
 	GUI* background2 = nullptr;
-	GUI* adjust;
-
+	GUI* adjust = nullptr;
 	GUI* cross = nullptr;
+	GUI* btn_settings = nullptr;
+	GUI* btn_exit = nullptr;
+
 	GUI_Button* btn_play = nullptr;
 	GUI_Button* btn_continue = nullptr;
-	GUI* btn_settings = nullptr;
 	GUI_Button* btn_credits = nullptr;
-	GUI* btn_exit = nullptr;
-	GUI* kunai_left = nullptr;
-	GUI* kunai_right = nullptr;
-	GUI_Button* btn_language;
-	Gui_Label* text_language = nullptr;
-	GUI* btn_options = nullptr;
-	GUI_Box* select_lng; 
-	GUI_Button* btn_spanish;
+	GUI_Button* btn_spanish = nullptr;
+	GUI_Button* btn_language = nullptr;
 
+	Gui_Label* text_language = nullptr;
 	Gui_Label* text_play = nullptr;
 	Gui_Label* text_continue = nullptr;
 	Gui_Label* text_credits = nullptr;
@@ -75,7 +68,6 @@ private:
 public:
 	int mouse_x, mouse_y;
 	bool first_update = true;
-	
 };
 
 #endif // __MAINMENU_H__

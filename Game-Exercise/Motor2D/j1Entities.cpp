@@ -21,6 +21,7 @@
 #include "Entity_Gaara.h"
 #include "GUI_Image.h"
 #include "GUI_Label.h"
+#include "MainMenu.h"
 
 j1Entities::j1Entities() : j1Module()
 {
@@ -282,9 +283,18 @@ void j1Entities::UpdatePlayerLifes(int lifes)
 	if(lifes == 1)
 		App->scene->hearts = App->gui->AddImage(20, 20, &App->scene->hearts0, nullptr, App->scene, nullptr);
 
-	if (lifes == 0)
+	if (lifes == 0) {
+		App->fade_to_black->FadeToBlack(App->scene, App->main_menu, 3.0f);
+		App->map->CleanUp();
+		App->gui->DestroyAllUi();
+		App->scene->active = false;
+		App->main_menu->active = true;
+		App->main_menu->Start();
+		App->scene->first_update = true;
+		App->entities->DestroyEntities();
+		
 		lifes = 4;
-
+	}
 }
 
 int j1Entities::HurtingPlayer()

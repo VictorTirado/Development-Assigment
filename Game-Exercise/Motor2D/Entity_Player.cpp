@@ -163,24 +163,11 @@ void Entity_Player::Update(float dt)
 			App->main_menu->active = true;
 			App->main_menu->Start();
 			App->scene->first_update = true;
-			App->entities->DestroyEntities();
-		
-
-			/*if (App->map->Load("Map4.tmx"))
-			{
-				App->map->Spawn();
-
-				int w, h;
-				uchar* data = NULL;
-				if (App->map->CreateWalkabilityMap(w, h, &data))
-					App->pathfinding->SetMap(w, h, data);
-
-				RELEASE_ARRAY(data);
-
-			}*/
+			//App->entities->DestroyEntities();
+	
 			App->scene->map_number = 1;
 			firstUpdate = true;
-			can_tp = false;
+		
 		}
 		
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
@@ -200,11 +187,12 @@ void Entity_Player::Update(float dt)
 			is_backwards = false;
 			position.x += 100 * dt;
 		}
-	}
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->fade_to_black->IsFading() == false)
-	{
-		if (App->map->data.map_layers.end->data->data[gid] == 51)
-			is_jumping = true;
+
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->fade_to_black->IsFading() == false)
+		{
+			if (App->map->data.map_layers.end->data->data[gid] == 51)
+				is_jumping = true;
+		}
 	}
 
 
@@ -243,8 +231,8 @@ void Entity_Player::Update(float dt)
 	//JUMP
 	if (!is_jumping)
 	{
-		old_player_position.y = position.y;
-		velocity.y = 0;
+			old_player_position.y = position.y;
+			velocity.y = 0;
 	}
 	  
 

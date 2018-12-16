@@ -17,21 +17,21 @@
 	<entities>
 		<player>
 			<map level="2" />
-			<position x="2021" y="238" />
+			<position x="2018" y="238" />
 			<type value="1" />
 			<score value="0" />
 		</player>
 		<ninja>
-			<position x="654" y="1066" />
+			<position x="1199" y="966" />
 		</ninja>
 		<bat>
 			<position x="2176" y="304" />
 		</bat>
 		<ninja>
-			<position x="1526" y="764" />
+			<position x="1297" y="620" />
 		</ninja>
 		<bat>
-			<position x="1649" y="222" />
+			<position x="1663" y="213" />
 		</bat>
 	</entities>
 	<fadeToBlack />
@@ -40,6 +40,6 @@
 	<Settings />
 	<Characters />
 	<renderer>
-		<camera x="-5551" y="-330" />
+		<camera x="-5542" y="-330" />
 	</renderer>
 </game_state>

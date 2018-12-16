@@ -66,7 +66,8 @@ bool j1Scene::Start()
 
 	score2 = (Gui_Label*)App->gui->AddLabel(250, 10, "Score:", this, nullptr);
 	
-	
+
+	App->entities->time_playing.Start();
 
 	if (!is_faded && map_number == 1)
 	{
@@ -101,8 +102,7 @@ bool j1Scene::Update(float dt)
 	//DEBUG KEYS
 	if (first_update == true)
 	{
-		if(App->entities->player_time == 0.0f)
-		App->entities->time_playing.Start();
+		
 
 		App->entities->book->UpdateBookUI(App->entities->book->is_caught);
 		App->entities->UpdatePlayerLifes(App->entities->playerLifes);

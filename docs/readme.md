@@ -4,7 +4,7 @@
 
 Welcome to our platformer game!
 
-As students of the second grade in game design in CITM Terrassa, we have made a platformer game for the subject of game development.
+As students of the second grade in game design in CITM Terrassa, we have made a platformer game for the subject of game development. In this project you will find the different lessons we have learned in this subject.
 Here, you will be a ninja whose goal is to get to the end of the levels passing throught a sort of handicaps and enemies. This can be reach using 2 different skills: shooting a kunai and teleporting yourself.
 
 ## Team members

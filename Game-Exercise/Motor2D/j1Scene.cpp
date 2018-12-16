@@ -66,7 +66,7 @@ bool j1Scene::Start()
 
 	score2 = (Gui_Label*)App->gui->AddLabel(250, 10, "Score:", this, nullptr);
 	
-	App->entities->time_playing.Start();
+	
 
 	if (!is_faded && map_number == 1)
 	{
@@ -101,6 +101,9 @@ bool j1Scene::Update(float dt)
 	//DEBUG KEYS
 	if (first_update == true)
 	{
+		if(App->entities->player_time == 0.0f)
+		App->entities->time_playing.Start();
+
 		App->entities->book->UpdateBookUI(App->entities->book->is_caught);
 		App->entities->UpdatePlayerLifes(App->entities->playerLifes);
 
@@ -108,9 +111,9 @@ bool j1Scene::Update(float dt)
 		sprintf_s(playerScore, "%d", App->entities->score);
 		player_score_text = App->gui->AddLabel(score2->position.x + score2->animation.w + 15, 10, playerScore, this, score2);
 
-		/*char TimeScore[((sizeof App->entities->player_time  * CHAR_BIT) + 2) / 3 + 2];
+		char TimeScore[((sizeof App->entities->player_time  * CHAR_BIT) + 2) / 3 + 2];
 		sprintf_s(TimeScore, "%.2f", App->entities->player_time);
-		time_score_text = App->gui->AddLabel(App->win->width -100, 10, TimeScore, this, nullptr);*/
+		time_score_text = App->gui->AddLabel(App->win->width -100, 10, TimeScore, this, nullptr);
 		
 		first_update = false;
 	}

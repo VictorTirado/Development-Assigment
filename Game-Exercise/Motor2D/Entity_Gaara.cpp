@@ -150,7 +150,16 @@ void Entity_Gaara::Update(float dt)
 		}
 		else if (App->scene->map_number == 2)
 		{
-			if (App->map->Load("Map4.tmx"))
+			App->fade_to_black->FadeToBlack(App->scene, App->main_menu, 3.0f);
+			App->map->CleanUp();
+			App->gui->DestroyAllUi();
+			App->scene->active = false;
+			App->main_menu->active = true;
+			App->main_menu->Start();
+			App->scene->first_update = true;
+			App->entities->DestroyEntities();
+			App->scene->map_number = 1;
+			/*if (App->map->Load("Map4.tmx"))
 			{
 				App->map->Spawn();
 
@@ -163,12 +172,13 @@ void Entity_Gaara::Update(float dt)
 
 			}
 			App->scene->map_number = 1;
-			firstUpdate = true;
+			firstUpdate = true;*/
 		}
 
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 	}
 	//MOVEMENT PLAYER
+	else if (App->map->data.map_layers.end != nullptr) {
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid - 1] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
 	{
 		position.x -= 80 * dt;
@@ -176,11 +186,12 @@ void Entity_Gaara::Update(float dt)
 		animation = &runBackwards;
 	}
 	
-	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
 	{
 		position.x += 100 * dt;
 		is_backwards = false;
 		animation = &run;
+	}
 	}
 	
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->fade_to_black->IsFading() == false)
@@ -286,6 +297,7 @@ void Entity_Gaara::Update(float dt)
 
 	App->render->camera.x = (-position.x * App->win->render_scale) + (App->win->width / 2);
 	App->render->camera.y = (-position.y * App->win->render_scale) + (App->win->height / 2);
+
 	App->entities->player_time = App->entities->time_playing.ReadSec();
 }
 
@@ -324,6 +336,8 @@ bool Entity_Gaara::Load(pugi::xml_node& data)
 		App->map->SpawnEnemies();
 		position.x = data.child("position").attribute("x").as_int();
 		position.y = data.child("position").attribute("y").as_int();
+		App->entities->score = data.child("score").attribute("value").as_int();
+		App->entities->player_time = data.child("time").attribute("value").as_float();
 		App->entities->SpawnEntities(position.x, position.y, Entities_Type::GAARA_PLAYER);
 	}
 	else if (App->scene->map_number == 1 && data.child("map") != NULL)
@@ -343,6 +357,7 @@ bool Entity_Gaara::Load(pugi::xml_node& data)
 		position.x = data.child("position").attribute("x").as_int();
 		position.y = data.child("position").attribute("y").as_int();
 		App->entities->score = data.child("score").attribute("value").as_int();
+		App->entities->player_time = data.child("time").attribute("value").as_float();
 		App->entities->SpawnEntities(position.x, position.y, Entities_Type::GAARA_PLAYER);
 	}
 	return true;
@@ -353,8 +368,10 @@ bool Entity_Gaara::Save(pugi::xml_node& data)const
 	data.append_child("map").append_attribute("level") = App->scene->map_number;
 	data.append_child("position").append_attribute("x") = position.x;
 	data.append_child("type").append_attribute("value") = App->characters->type;
+	data.append_child("time").append_attribute("value") = App->entities->player_time;
 	data.append_child("score").append_attribute("value") = App->entities->score;
 	data.child("position").append_attribute("y") = position.y;
+
 	
 	return true;
 }

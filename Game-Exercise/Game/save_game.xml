@@ -15,6 +15,24 @@
 	<collisions />
 	<particles />
 	<entities>
+		<player>
+			<map level="2" />
+			<position x="2021" y="238" />
+			<type value="1" />
+			<score value="0" />
+		</player>
+		<ninja>
+			<position x="654" y="1066" />
+		</ninja>
+		<bat>
+			<position x="2176" y="304" />
+		</bat>
+		<ninja>
+			<position x="1526" y="764" />
+		</ninja>
+		<bat>
+			<position x="1649" y="222" />
+		</bat>
 	</entities>
 	<fadeToBlack />
 	<Credits />
@@ -22,6 +40,6 @@
 	<Settings />
 	<Characters />
 	<renderer>
-		<camera x="-973" y="-666" />
+		<camera x="-5551" y="-330" />
 	</renderer>
 </game_state>

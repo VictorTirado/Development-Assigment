@@ -156,7 +156,17 @@ void Entity_Player::Update(float dt)
 		}
 		else if (App->scene->map_number == 2)
 		{
-			if (App->map->Load("Map4.tmx"))
+			App->fade_to_black->FadeToBlack(App->scene, App->main_menu, 3.0f);
+			App->map->CleanUp();
+			App->gui->DestroyAllUi();
+			App->scene->active = false;
+			App->main_menu->active = true;
+			App->main_menu->Start();
+			App->scene->first_update = true;
+			App->entities->DestroyEntities();
+		
+
+			/*if (App->map->Load("Map4.tmx"))
 			{
 				App->map->Spawn();
 
@@ -167,7 +177,7 @@ void Entity_Player::Update(float dt)
 
 				RELEASE_ARRAY(data);
 
-			}
+			}*/
 			App->scene->map_number = 1;
 			firstUpdate = true;
 			can_tp = false;
@@ -176,24 +186,27 @@ void Entity_Player::Update(float dt)
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 	}
 	//MOVEMENT PLAYER
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid-1] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
-	{	
-		animation = &runBackwards;
-		is_backwards = true;
-		position.x -= 80*dt;
-	}
+	else if (App->map->data.map_layers.end != nullptr) {
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid - 1] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
+		{
+			animation = &runBackwards;
+			is_backwards = true;
+			position.x -= 80 * dt;
+		}
 
-	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid +1] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
-	{
-		animation = &run;
-		is_backwards = false;
-		position.x += 100*dt;
+		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
+		{
+			animation = &run;
+			is_backwards = false;
+			position.x += 100 * dt;
+		}
 	}
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && App->fade_to_black->IsFading() == false)
 	{
 		if (App->map->data.map_layers.end->data->data[gid] == 51)
 			is_jumping = true;
 	}
+
 
 	
 

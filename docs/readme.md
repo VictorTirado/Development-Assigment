@@ -1,10 +1,18 @@
-﻿# Platformer game
+﻿# Ninja Way 2
+
+## Introduction
 
 Welcome to our platformer game!
 
-This game is about to reach the goal passing through diferent handicaps.
-You will need to get a parchment to reach the end of every level that gives you the hability to teleport yourself vertically.
-Enemies will die if you shoot them with a kunai.
+As students of the second grade in game design in CITM Terrassa, we have made a platformer game for the subject of game development.
+Here, you will be a ninja whose goal is to get to the end of the levels passing throught a sort of handicaps and enemies. This can be reach using 2 different skills: shooting a kunai and teleporting yourself.
+
+## Team members
+
+
+
+
+
 
 ## Controls
 

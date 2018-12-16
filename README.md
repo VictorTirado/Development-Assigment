@@ -11,9 +11,7 @@ Enemies will die if you shoot them with a kunai.
 - A/D to move forwards and backwards
 - SPACEBAR to jump
 - Left Shift to teleport
-- F to shoot the kunai
-
-- Right Plus/Right Minus: higher/lower the volume level
+- Q to shoot the kunai
 
 ## Debug functionalities
 
@@ -21,14 +19,22 @@ Enemies will die if you shoot them with a kunai.
 - F2: Start from the beggining of the current level
 - F5: Save the current state
 - F6: Load the previous state
+- F8: Debug UI
 - F9: View all logic
 - F10: God Mode (you can fly)
 - B: Show the logic of the player and the parchment
 
 ## Innovation
-	- Flying enemy can use diagonals
 
-        - Turn up and down the volume level
+	- Change language
+
+        - All entities loaded in xml
+
+        - Enemies have diagonals
+
+        - Mouse changed
+
+        - 2 characters
 
 ## Authors
 
@@ -44,9 +50,9 @@ Link to the release: https://github.com/VictorTirado/Development-Assigment/relea
 
 ## Accomplishments
 
-Enric Pérez Rifà: FPS, game normalized with dt, brofiler, particles
+Enric Pérez Rifà: game HUD and logic, second character
 
-Víctor Tirado Fernández: flying enemy, walking enemy, enemy radar, save&load, entity system
+Víctor Tirado Fernández: game loop, all menus, slider, save&load
 
 ## License
 
@@ -73,7 +79,9 @@ SOFTWARE.
 
 ## Resources
 
-Character: https://www.spriters-resource.com/ds_dsi/narutoshippudenninjacouncil3/sheet/66530/
+Sasuke's sprites: https://www.spriters-resource.com/ds_dsi/narutoshippudenninjacouncil3/sheet/66530/
+
+Gaara's sprites: https://www.spriters-resource.com/ds_dsi/narutoshippudenninjacouncil3/sheet/66621/
 
 Parchment and Kunai: https://www.spriters-resource.com/ds_dsi/narutoshippudenninjacouncil3/sheet/98840/
 
@@ -83,11 +91,17 @@ Walking enemy: https://www.spriters-resource.com/ds_dsi/narutoshippudenninjacoun
 
 Tilesets: https://allfenom.itch.io/hills-simple-pack
 
-FX: - http://soundbible.com/462-Male-Grunt.html
+FX: - Player's death: http://soundbible.com/462-Male-Grunt.html
 
-    - https://www.zapsplat.com/music/knife-dagger-swing-swipe-through-air-whoosh-2/
+    - Kunai fx: https://www.zapsplat.com/music/knife-dagger-swing-swipe-through-air-whoosh-2/
+
+    - Button fx: http://soundbible.com/419-Tiny-Button-Push.html
+
+Main Menu song: https://soundimage.org/fantasywonder/
 
 Background Song: http://www.twinmusicom.org/download_file?fileid=99
+
+UI assets: https://kenney.nl/assets/ui-pack
 
 All art used in this game belongs to their authors
 

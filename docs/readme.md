@@ -31,8 +31,8 @@ As innovations, we have added to our game that the player can choose the languag
 * Link to download the lastest release [here](https://github.com/VictorTirado/Development-Assigment/releases)
 
 ## Gameplay
-
-
+Here you can see a short gameplay!
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nCi3O0hDIr8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Instructions to play
 

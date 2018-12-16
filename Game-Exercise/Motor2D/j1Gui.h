@@ -74,6 +74,7 @@ public:
 	p2DynArray<GUI*> ui_list;
 	Animation shuriken;
 	bool debug = false;
+	p2SString button_fx_path = nullptr;
 };
 
 #endif // __j1GUI_H__

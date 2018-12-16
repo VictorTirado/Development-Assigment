@@ -21,6 +21,9 @@
   <audio>
     <path value ="audio/music/Mega_Rust.ogg" />
   </audio>
+  <audio2>
+    <button_path value="audio/fx/button_fx.wav"/>
+  </audio2>
   <file_system>
     <path>data.zip</path>
   </file_system>

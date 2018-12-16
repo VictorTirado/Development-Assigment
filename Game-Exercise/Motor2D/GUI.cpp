@@ -5,6 +5,7 @@
 #include "j1Input.h"
 #include "GUI.h"
 #include "GUI_button.h"
+#include "j1Audio.h"
 
 GUI::GUI(int x, int y, j1Module* callback,GUI* parent)
 {
@@ -61,6 +62,7 @@ bool GUI::MouseIn(GUI* element)
 			{
 				ex2->setAnimation(3);
 				element->callback->Interact(element);
+				App->audio->PlayFx(1);
 				return true;
 			}
 		}

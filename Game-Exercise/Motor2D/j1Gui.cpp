@@ -7,6 +7,7 @@
 #include "j1Input.h"
 #include "j1Gui.h"
 #include "GUI.h"
+#include "j1Audio.h"
 
 #include "GUI_Image.h"
 #include "GUI_Label.h"
@@ -30,6 +31,9 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 	bool ret = true;
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
+	//button_fx_path = conf.child("audio2").attribute("button_path").as_string();
+	//App->audio->LoadFx(button_fx_path.GetString());
+
 	return ret;
 }
 
@@ -42,6 +46,8 @@ bool j1Gui::Start()
 	shuriken.PushBack({ 1043,1384,40,40 });
 	shuriken.PushBack({ 1106,1383,40,40 });
 	shuriken.PushBack({ 1175,1384,40,40 });
+
+	App->audio->LoadFx("audio/fx/Button_fx.wav");
 
 	return true;
 }

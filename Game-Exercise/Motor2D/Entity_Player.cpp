@@ -307,6 +307,8 @@ void Entity_Player::Update(float dt)
 	
 	App->render->camera.x = (-position.x * App->win->render_scale) + (App->win->width / 2);
 	App->render->camera.y = (-position.y * App->win->render_scale) + (App->win->height / 2);
+
+	App->entities->player_time = App->entities->time_playing.ReadSec();
 }
 
 

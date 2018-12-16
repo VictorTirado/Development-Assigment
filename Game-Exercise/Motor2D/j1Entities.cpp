@@ -43,6 +43,7 @@ bool j1Entities::Awake(pugi::xml_node& config)
 bool j1Entities::Start()
 {
 	bool ret = true;
+	time_playing.Start();
 	return ret;
 }
 
@@ -327,5 +328,21 @@ int j1Entities::ScorePlayer()
 	score += 50;
 
 	return score;
+}
+
+float j1Entities::GetTime()
+{
+	float time_since_scene_started = time_playing.ReadSec();
+	time = time_since_scene_started;
+
+	return time;
+}
+
+void j1Entities::UpdateTime(float current_time)
+{
+	char time_played[sizeof current_time];
+	//sprintf_s(time_played, "%f", current_time);
+	time_text = App->gui->AddLabel(700, 20, time_played, App->scene, nullptr);
+
 }
 

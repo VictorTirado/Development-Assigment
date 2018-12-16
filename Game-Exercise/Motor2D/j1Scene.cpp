@@ -101,12 +101,15 @@ bool j1Scene::Update(float dt)
 	//DEBUG KEYS
 	if (first_update == true)
 	{
-		//App->entities->book->UpdateBookUI(App->entities->book->is_caught);
+		App->entities->book->UpdateBookUI(App->entities->book->is_caught);
 		App->entities->UpdatePlayerLifes(App->entities->playerLifes);
 		
 		first_update = false;
 	}
 
+	LOG("%f seconds", App->entities->player_time);
+
+	//App->entities->UpdateTime(App->entities->player->player_time);
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		map_number = 1;
@@ -160,6 +163,9 @@ bool j1Scene::PostUpdate()
 
 	/*if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;*/
+	char time_played[sizeof App->entities->player_time];
+	sprintf_s(time_played, "%d", App->entities->player_time);
+	time_text = App->gui->AddLabel(700, 20, time_played, App->scene, nullptr);
 
 	return ret;
 }

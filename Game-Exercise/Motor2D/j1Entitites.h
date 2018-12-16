@@ -3,6 +3,7 @@
 
 #include "j1Module.h"
 #include "p2DynArray.h"
+#include "j1Timer.h"
 
 class Entity_Player;
 class Entity_Book;
@@ -56,6 +57,9 @@ public:
 	void UpdateScore(int score_player);
 	int ScorePlayer();
 
+	void UpdateTime(float current_time);
+	float GetTime();
+
 	p2DynArray<Entity*> entities;
 	
 	Entity_Player* player;
@@ -67,7 +71,10 @@ public:
 	p2SString textures;
 	int playerLifes = 4;
 	int score = 0;
-
+	int time = 0;
+	j1Timer time_playing;
+	GUI* time_text = nullptr;
+	float player_time = 0.0f;
 };
 
 

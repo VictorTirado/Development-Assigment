@@ -76,6 +76,7 @@ public:
 
 	p2SString score_string;
 	Gui_Label* score;
+	GUI* time_text = nullptr;
 };
 
 #endif // __j1SCENE_H__

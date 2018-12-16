@@ -13,12 +13,12 @@ Here, you will be a ninja whose goal is to get to the end of the levels passing 
 
 * Right member (Víctor Tirado): Manager, programmer and designer
 
-  View github profile: https://github.com/VictorTirado
+  View [Github Profile](https://github.com/VictorTirado)
 
 
 * Left member (Enric Pérez): Artist, programmer and designer
 
-  View github profile: https://github.com/PerezEnric
+  View [Github Profile](https://github.com/PerezEnric)
 
 ## Core subsystems and innovations
 
@@ -40,8 +40,6 @@ As innovations, we have added to our game that the player can choose the languag
 - SPACEBAR to jump
 - Left Shift to teleport (only if the player has caught the book that appears in some place around the level)
 - Q to shoot the kunai
-
-- Right Plus/Right Minus: higher/lower the volume level
 
 ## License
 

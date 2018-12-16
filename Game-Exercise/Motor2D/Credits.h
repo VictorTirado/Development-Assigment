@@ -48,7 +48,18 @@ private:
 	GUI* background = nullptr;
 	GUI* go_back = nullptr;
 
-	GUI_Button* btn_web;
+	GUI_Button* btn_license = nullptr;
+	GUI_Button* btn_github_victor = nullptr;
+	GUI_Button* btn_github_enric = nullptr;
+	GUI_Button* btn_web = nullptr;
+
+	Gui_Label* license_text = nullptr;
+	Gui_Label* web_text = nullptr;
+	Gui_Label* website_text = nullptr;
+	Gui_Label* enric_text = nullptr;
+	Gui_Label* victor_text = nullptr;
+
+	
 
 	Gui_Label* text_language = nullptr;
 

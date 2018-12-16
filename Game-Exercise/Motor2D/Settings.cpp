@@ -44,11 +44,7 @@ bool Settings::Awake()
 // Called before the first frame
 bool Settings::Start()
 {
-	pugi::xml_document data;
-	pugi::xml_node root;
-	pugi::xml_parse_result result = data.load_file("save_game.xml");
-	root = data.child("game_state");
-
+	
 	//MENU _UI
 	
 	SDL_Rect bck = { 0,0,1024,768 };

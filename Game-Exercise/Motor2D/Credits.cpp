@@ -44,19 +44,25 @@ bool Credits::Awake()
 // Called before the first frame
 bool Credits::Start()
 {
-	pugi::xml_document data;
-	pugi::xml_node root;
-	pugi::xml_parse_result result = data.load_file("save_game.xml");
-	root = data.child("game_state");
-
 	//MENU _UI
 
 	SDL_Rect bck = { 0,0,1024,768 };
 	background = App->gui->AddImage(0, 0, &bck, nullptr, this, nullptr);
 	go_back = App->gui->AddButton(50, 50, { 1129,95,48,51 }, { 1128,160,48,51 }, { 1128,160,48,51 }, this, nullptr);
-	
-	btn_web = (GUI_Button*)App->gui->AddButton(300, 200, { 1068,297,55,55 }, { 1069,362,55,55 }, { 1069,421,55,55 }, this, nullptr);
 
+	btn_license = (GUI_Button*)App->gui->AddButton(App->win->width/2 - 150 , 50, { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 },this,nullptr);
+	license_text = (Gui_Label*)App->gui->AddLabel(200, 200, "License", this, btn_license);
+	btn_license->SetText(license_text);
+
+	website_text = (Gui_Label*)App->gui->AddLabel(App->win->width / 2 - 200, 200, "Check our website", this, nullptr);
+
+	victor_text = (Gui_Label*)App->gui->AddLabel(50, 380, "Victor's Github", this, nullptr);
+	btn_github_victor = (GUI_Button*)App->gui->AddButton(victor_text->position.x , victor_text->position.y + 60, { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 }, this, victor_text);
+	enric_text = (Gui_Label*)App->gui->AddLabel(App->win->width- 350, victor_text->position.y, "Enric's Github", this, victor_text);
+	btn_github_enric = (GUI_Button*)App->gui->AddButton(enric_text->position.x , enric_text->position.y + 60, { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 }, this, enric_text);
+	btn_web = (GUI_Button*)App->gui->AddButton(App->win->width / 2 - 150, website_text->position.y +50, { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 }, this, website_text);
+	web_text = (Gui_Label*)App->gui->AddLabel(200, 200, "Website", this, btn_web);
+	btn_web->SetText(web_text);
 	return true;
 }
 
@@ -112,6 +118,18 @@ void Credits::Interact(GUI* g)
 	if (g == btn_web)
 	{
 		ShellExecute(GetActiveWindow(), "open","https://victortirado.github.io/Development-Assigment/", NULL, NULL, SW_SHOWNORMAL);
+	}
+	if (g == btn_github_enric)
+	{
+		ShellExecute(GetActiveWindow(), "open", "https://github.com/PerezEnric", NULL, NULL, SW_SHOWNORMAL);
+	}
+	if (g == btn_github_victor)
+	{
+		ShellExecute(GetActiveWindow(), "open", "https://github.com/VictorTirado", NULL, NULL, SW_SHOWNORMAL);
+	}
+	if (g == btn_license)
+	{
+		ShellExecute(GetActiveWindow(), "open", "https://github.com/VictorTirado/Development-Assigment/blob/master/LICENSE", NULL, NULL, SW_SHOWNORMAL);
 	}
 
 }

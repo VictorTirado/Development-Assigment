@@ -9,52 +9,39 @@ Here, you will be a ninja whose goal is to get to the end of the levels passing 
 
 ## Team members
 
+![alt text](https://github.com/VictorTirado/Development-Assigment/blob/master/docs/Team_photo.jpg)
+
+* Right member (Víctor Tirado): Manager, programmer and designer
+
+  View github profile: https://github.com/VictorTirado
+
+
+* Left member (Enric Pérez): Artist, programmer and designer
+
+  View github profile: https://github.com/PerezEnric
+
+## Core subsystems and innovations
+
+As innovations, we have added to our game that the player can choose the language between english and spanish. Also we have made a select character scene we the player can play with two different characters.
+
+## Links
+
+* Link to our github repository [here](https://github.com/VictorTirado/Development-Assigment)
+
+* Link to download the lastest release [here](https://github.com/VictorTirado/Development-Assigment/releases)
+
+## Gameplay
 
 
 
-
-
-## Controls
+## Instructions to play
 
 - A/D to move forwards and backwards
 - SPACEBAR to jump
-- Left Shift to teleport
-- F to shoot the kunai
+- Left Shift to teleport (only if the player has caught the book that appears in some place around the level)
+- Q to shoot the kunai
 
 - Right Plus/Right Minus: higher/lower the volume level
-
-## Debug functionalities
-
-- F1: Start from the very first level
-- F2: Start from the beggining of the current level
-- F5: Save the current state
-- F6: Load the previous state
-- F9: View all logic
-- F10: God Mode (you can fly)
-- B: Show the logic of the player and the parchment
-
-## Innovation
-	- Flying enemy can use diagonals
-
-        - Turn up and down the volume level
-
-## Authors
-
-- Víctor Tirado Fernández: https://github.com/VictorTirado
-
-- Enric Pérez Rifà: https://github.com/PerezEnric
-
-## Repository
-
-Repository of the game: https://github.com/VictorTirado/Development-Assigment
-
-Link to the release: https://github.com/VictorTirado/Development-Assigment/releases
-
-## Accomplishments
-
-Enric Pérez Rifà: FPS, game normalized with dt, brofiler, particles
-
-Víctor Tirado Fernández: flying enemy, walking enemy, enemy radar, save&load, entity system
 
 ## License
 
@@ -79,22 +66,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## Resources
-
-Character: https://www.spriters-resource.com/ds_dsi/narutoshippudenninjacouncil3/sheet/66530/
-
-Parchment and Kunai: https://www.spriters-resource.com/ds_dsi/narutoshippudenninjacouncil3/sheet/98840/
-
-Flying enemy: https://www.spriters-resource.com/ds_dsi/narutoshippudenninjacouncil3/sheet/98844/
-
-Walking enemy: https://www.spriters-resource.com/ds_dsi/narutoshippudenninjacouncil3/sheet/98855/
-
-Tilesets: https://allfenom.itch.io/hills-simple-pack
-
-FX: - http://soundbible.com/462-Male-Grunt.html
-
-    - https://www.zapsplat.com/music/knife-dagger-swing-swipe-through-air-whoosh-2/
-
-Background Song: http://www.twinmusicom.org/download_file?fileid=99
-
-All art used in this game belongs to their authors

@@ -20,6 +20,7 @@
 #include "Settings.h"
 #include "SelectCharacter.h"
 #include "j1Languages.h"
+#include "Credits.h"
 
 #include "GUI_Button.h"
 
@@ -181,22 +182,17 @@ bool MainMenu::CleanUp()
 
 void MainMenu::Interact(GUI* g)
 {
-	if (g->position.y == 180)
+	if (g == btn_play)
 	{
 		if (App->fade_to_black->IsFading() == false) {
 			App->fade_to_black->FadeToBlack(this, App->scene, 2.0f);
 			App->gui->DestroyAllUi();
 			App->characters->active = true;
 			App->characters->Start();
-		}
-		
-		//this->active = false;
+		}	
+		this->active = false;
 	}
-	else if (g->position.y == 140)
-	{
-		
-	}
-	else if (g->position.y == 150)
+	else if (g == btn_continue)
 	{
 		
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
@@ -206,21 +202,19 @@ void MainMenu::Interact(GUI* g)
 
 		this->active = false;
 	}
-	else if (g->position.y == 600)
+	else if (g == btn_credits)
 	{
+		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
+		App->gui->DestroyAllUi();
+		App->credits->active = true;
+		App->credits->Start();
 
+		this->active = false;
 	}
-	else if (g->position.y == 50)
+	else if (g == btn_exit)
 	{
 		App->gui->DestroyAllUi();
 		close = true;
-	}
-	else if (g == btn_spanish)
-	{
-		App->gui->DestroyAllUi();
-		App->languages->DeleteLanguage();
-		App->languages->ChangeLanguage();
-		App->main_menu->Start();
 	}
 	
 }

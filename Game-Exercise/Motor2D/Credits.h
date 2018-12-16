@@ -48,7 +48,7 @@ private:
 	GUI* background = nullptr;
 	GUI* go_back = nullptr;
 
-	GUI_Button* button;
+	GUI_Button* btn_web;
 
 	Gui_Label* text_language = nullptr;
 

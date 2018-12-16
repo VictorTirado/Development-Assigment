@@ -31,35 +31,37 @@ void Entity::Draw(SDL_Texture* sprites)
 {
 	BROFILER_CATEGORY("EntityDrawFunction", Profiler::Color::HotPink);
 	SDL_Rect r = animation->GetCurrentFrame();
-	if (this->entity_type == PLAYER) {
-		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
-		if(collider!=nullptr)
-		collider->SetPos(position.x, position.y);
-	}
-	if (this->entity_type == GAARA_PLAYER) {
-		
-		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
-		if (collider != nullptr)
-			collider->SetPos(position.x, position.y);
-	}
-	if (this->entity_type == BOOK && App->entities->book->collider != nullptr /*&& App->entities->player->can_tp == false*/)
-	{
-		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
-		if (collider != nullptr)
-		collider->SetPos(position.x, position.y);
-	}
-	if (this->entity_type == BAT && App->entities->bat->collider != nullptr)
-	{
-		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
-		if (collider != nullptr)
-		collider->SetPos(position.x, position.y);
-	}
+	if (r.x != NULL) {
+		if (this->entity_type == PLAYER) {
+			App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
+			if (collider != nullptr)
+				collider->SetPos(position.x, position.y);
+		}
+		if (this->entity_type == GAARA_PLAYER) {
 
-	if (this->entity_type == NINJA && App->entities->ninja->collider != nullptr)
-	{
-		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
-		if (collider != nullptr)
-		collider->SetPos(position.x, position.y);
+			App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
+			if (collider != nullptr)
+				collider->SetPos(position.x, position.y);
+		}
+		if (this->entity_type == BOOK && App->entities->book->collider != nullptr /*&& App->entities->player->can_tp == false*/)
+		{
+			App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
+			if (collider != nullptr)
+				collider->SetPos(position.x, position.y);
+		}
+		if (this->entity_type == BAT && App->entities->bat->collider != nullptr)
+		{
+			App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
+			if (collider != nullptr)
+				collider->SetPos(position.x, position.y);
+		}
+
+		if (this->entity_type == NINJA && App->entities->ninja->collider != nullptr)
+		{
+			App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
+			if (collider != nullptr)
+				collider->SetPos(position.x, position.y);
+		}
 	}
 }
 

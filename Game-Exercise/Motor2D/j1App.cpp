@@ -88,6 +88,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	main_menu->active = true;
 	settings->active = false;
 	scene->active = false;
+	credits->active = false;
 	
 	characters->active = false;
 

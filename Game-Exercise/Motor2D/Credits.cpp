@@ -54,7 +54,8 @@ bool Credits::Start()
 	SDL_Rect bck = { 0,0,1024,768 };
 	background = App->gui->AddImage(0, 0, &bck, nullptr, this, nullptr);
 	go_back = App->gui->AddButton(50, 50, { 1129,95,48,51 }, { 1128,160,48,51 }, { 1128,160,48,51 }, this, nullptr);
-
+	
+	btn_web = (GUI_Button*)App->gui->AddButton(300, 200, { 1068,297,55,55 }, { 1069,362,55,55 }, { 1069,421,55,55 }, this, nullptr);
 
 	return true;
 }
@@ -108,13 +109,9 @@ void Credits::Interact(GUI* g)
 		this->active = false;
 	}*/
 
-	if (g->position.y == 50)
+	if (g == btn_web)
 	{
-		App->fade_to_black->FadeToBlack(this, App->main_menu, 3.0f);
-		App->gui->DestroyAllUi();
-		App->main_menu->active = true;
-		App->main_menu->Start();
-		this->active = false;
+		ShellExecute(GetActiveWindow(), "open","https://victortirado.github.io/Development-Assigment/", NULL, NULL, SW_SHOWNORMAL);
 	}
 
 }

@@ -116,7 +116,7 @@ void Entity_Gaara::Update(float dt)
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 	}
 
-	if (App->map->data.map_layers.end->data->data[gid] == Collision_Type::COLLISION_CHANGE_MAP)
+	else if (App->map->data.map_layers.end->data->data[gid] == Collision_Type::COLLISION_CHANGE_MAP)
 	{
 
 		App->map->CleanUp();

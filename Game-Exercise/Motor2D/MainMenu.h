@@ -48,6 +48,7 @@ private:
 	bool change_music = false;
 	bool delete_kunais = false;
 	bool close = false;
+	bool first_update = true;
 
 	GUI* background = nullptr;
 	GUI* background2 = nullptr;

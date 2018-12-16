@@ -50,7 +50,7 @@ bool Settings::Start()
 	root = data.child("game_state");
 
 	//MENU _UI
-	App->audio->PlayMusic(App->audio->path.GetString());
+	
 	SDL_Rect bck = { 0,0,1024,768 };
 	background = App->gui->AddImage(0, 0, &bck, nullptr,this, nullptr);
 	go_back = App->gui->AddButton(50, 50, {1129,95,48,51}, {1128,160,48,51}, { 1128,160,48,51 },this, nullptr);

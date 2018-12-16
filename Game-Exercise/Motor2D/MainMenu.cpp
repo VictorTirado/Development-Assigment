@@ -20,7 +20,6 @@
 #include "Settings.h"
 #include "SelectCharacter.h"
 #include "j1Languages.h"
-#include "Credits.h"
 
 #include "GUI_Button.h"
 
@@ -46,6 +45,7 @@ bool MainMenu::Awake()
 // Called before the first frame
 bool MainMenu::Start()
 {
+
 	pugi::xml_document data;
 	pugi::xml_node root;
 	pugi::xml_parse_result result = data.load_file("save_game.xml");
@@ -54,8 +54,11 @@ bool MainMenu::Start()
 	SDL_Rect bck2 = { 1625,299,330,421 };
 	SDL_Rect set = { 1067,54,37,37 };
 	//MENU _UI
+	
 	background = App->gui->AddImage(0, 0, &bck,nullptr,this, nullptr);
 	background2 = App->gui->AddImage(App->win->width/2 - 165, 150, &bck2, nullptr,this, nullptr);
+	
+
 	
 	//BTN_CONTINUE
 	btn_play = (GUI_Button*)App->gui->AddButton(App->win->width/2 -150,180 , { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 },this, nullptr);
@@ -68,18 +71,17 @@ bool MainMenu::Start()
 		text_play = (Gui_Label*)App->gui->AddLabel(10, 10,App->languages->current_language.continue_.GetString(),this, nullptr);
 		btn_continue->SetText(text_play);
 	}
-	//BTN_ CREDITS
+
 	btn_credits = (GUI_Button*)App->gui->AddButton(App->win->width / 2 - 150, 460, { 1316,382,300,77 }, { 1316,299,300,77 },{ 1317,466,300,77 },this, nullptr);
 	text_credits = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->current_language.credits.GetString(),this, nullptr);
 	btn_credits->SetText(text_credits);
 	btn_settings = App->gui->AddButton(App->win->width - 150, 150, { 1137,298,55,55 }, { 1138,361,55,55 }, { 1137,419,55,55 },this,nullptr);
 
-	//BTN_SETTINGS
 	adjust = App->gui->AddImage(btn_settings->position.x + btn_settings->animation.w/6, btn_settings->position.y - 3 + btn_settings->animation.h / 6, &set, nullptr,this, btn_settings);
-	//BTN_EXIT
 	btn_exit = App->gui->AddButton(App->win->width - 150, 50, { 1207,298,55,55 }, { 1207,361,55,55 }, { 1207,420,55,55 },this, nullptr);
 
-	
+	//select_lng = (GUI_Box*)App->gui->AddBox(0, 0, (GUI_Button*)btn_language,(GUI_Button*)btn_options, this, nullptr);
+	//select_lng->SetOptions((GUI_Button*)btn_options);
 
 
 	return true;
@@ -97,8 +99,12 @@ bool MainMenu::Update(float dt)
 {
 	BROFILER_CATEGORY("SceneUpdate", Profiler::Color::MediumOrchid);
 	//DEBUG KEYS
-	
-	LOG("%i", App->entities->entities.Count());
+	if (first_update == true)
+	{
+		App->audio->PlayMusic("audio/music/Main_menu.ogg");
+		first_update = false;
+	}
+
 	App->input->GetMousePosition(mouse_x, mouse_y);
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
@@ -184,7 +190,7 @@ void MainMenu::Interact(GUI* g)
 			App->characters->Start();
 		}
 		
-		this->active = false;
+		//this->active = false;
 	}
 	else if (g->position.y == 140)
 	{
@@ -202,15 +208,7 @@ void MainMenu::Interact(GUI* g)
 	}
 	else if (g->position.y == 600)
 	{
-	}
-	else if (g->position.y == 460)
-	{
-		App->fade_to_black->FadeToBlack(this, App->credits, 3.0f);
-		App->gui->DestroyAllUi();
-		App->credits->active = true;
-		App->credits->Start();
 
-		this->active = false;
 	}
 	else if (g->position.y == 50)
 	{

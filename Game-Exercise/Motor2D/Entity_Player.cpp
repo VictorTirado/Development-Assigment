@@ -126,7 +126,7 @@ void Entity_Player::Update(float dt)
 			App->map->Spawn();
 		}
 	
-		App->audio->PlayFx(1); //player's death fx
+		App->audio->PlayFx(2); //player's death fx
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 	
 	}
@@ -182,7 +182,7 @@ void Entity_Player::Update(float dt)
 		position.x -= 80*dt;
 	}
 
-	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
+	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
 	{
 		animation = &run;
 		is_backwards = false;
@@ -194,9 +194,7 @@ void Entity_Player::Update(float dt)
 			is_jumping = true;
 	}
 
-	//DEBUG KEY FOR TP
-	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
-		can_tp = true;
+	
 
 	//THROW KUNAI
 	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
@@ -205,7 +203,7 @@ void Entity_Player::Update(float dt)
 
 	if (is_shooting)
 	{
-		App->audio->PlayFx(3);
+		App->audio->PlayFx(4);
 		if (is_backwards)
 		{
 			animation = &throwKunaiBackwards;
@@ -266,7 +264,7 @@ void Entity_Player::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN && App->map->data.map_layers.end->data->data[gid + 1] == 51 && can_tp)
 	{
 		is_tp = true;
-		App->audio->PlayFx(2); //Teleport fx
+		App->audio->PlayFx(3); //Teleport fx
 	}
 
 	if (is_tp)

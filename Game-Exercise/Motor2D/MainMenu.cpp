@@ -130,7 +130,7 @@ void MainMenu::Interact(GUI* g)
 	if (g == btn_play)
 	{
 		if (App->fade_to_black->IsFading() == false) {
-			App->fade_to_black->FadeToBlack(this, App->scene, 2.0f);
+			App->fade_to_black->FadeToBlack(this, App->characters, 2.0f);
 			App->gui->DestroyAllUi();
 			App->characters->active = true;
 			App->characters->Start();
@@ -150,7 +150,7 @@ void MainMenu::Interact(GUI* g)
 	}
 	else if (g == btn_credits)
 	{
-		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
+		App->fade_to_black->FadeToBlack(this, App->credits, 3.0f);
 		App->gui->DestroyAllUi();
 		App->credits->active = true;
 		App->credits->Start();
@@ -159,7 +159,7 @@ void MainMenu::Interact(GUI* g)
 	}
 	else if (g == btn_settings)
 	{
-		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
+		App->fade_to_black->FadeToBlack(this, App->settings, 3.0f);
 		App->gui->DestroyAllUi();
 		App->settings->active = true;
 		App->settings->Start();

@@ -59,6 +59,7 @@ public:
 	GUI* background_menu = nullptr;
 	GUI_Button* btn_resume = nullptr;
 	GUI_Button* btn_back = nullptr;
+	Gui_Label* score2 = nullptr;
 	SDL_Rect hearts3 = { 1603, 926, 94, 22 };
 	SDL_Rect hearts2 = {1603, 959, 94, 22};
 	SDL_Rect hearts1 = { 1603, 988, 94, 22 };
@@ -75,7 +76,6 @@ public:
 
 
 	p2SString score_string;
-	Gui_Label* score;
 	GUI* time_text = nullptr;
 };
 

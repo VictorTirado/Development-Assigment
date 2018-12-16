@@ -48,6 +48,7 @@ private:
 
 public:
 	int volume = 64;
+	int fx_volume = 64;
 	p2SString  path = nullptr;
 	p2List<Mix_Chunk*>	fx;
 };

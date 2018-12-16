@@ -63,10 +63,12 @@ bool j1Scene::Start()
 	btn_back->SetText(text_back);
 	btn_back->invisible = true;
 	text_back->invisible = true;
+
+	score2 = (Gui_Label*)App->gui->AddLabel(250, 10, "Score", this, nullptr);
 	
 	char playerScore[sizeof App->entities->score];
 	sprintf_s(playerScore, "%d", App->entities->score);
-	player_score_text = App->gui->AddLabel(300, 20, playerScore, this, nullptr);
+	player_score_text = App->gui->AddLabel(score2->position.x + score2->animation.w + 15, 10, playerScore, this, score2);
 
 	if (!is_faded && map_number == 1)
 	{
@@ -209,7 +211,7 @@ void j1Scene::UpdateScore(int score)
 	App->gui->DestroyUIElement(*player_score_text);
 	char playerScore[sizeof App->entities->score];
 	sprintf_s(playerScore, "%d", App->entities->score);
-	player_score_text = App->gui->AddLabel(300, 20, playerScore, this, nullptr);
+	player_score_text = App->gui->AddLabel(score2->position.x + score2->animation.w + 15, 10, playerScore, this, score2);
 }
 
 

@@ -41,26 +41,28 @@ int Gui_Slider::SetNumStart(int num, GUI_Button * button)
 
 void Gui_Slider::MoveButton(GUI_Button* button)
 {
-	this->slider_btn = button;
-	LOG("X: %d, Y:%d", slider_btn->position.x, slider_btn->position.y);
+	button = this->slider_btn;
+	LOG("X: %d, Y:%d", button->position.x, button->position.y);
 	
 	
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT /*&& App->settings->MouseIn(button) == true*/)
 	{
 
-		if (slider_btn->position.x < (this->animation.w + this->position.x - button->animation.w))
+		if (button->position.x < (this->animation.w + this->position.x - button->animation.w))
 		{
-			this->slider_btn->position.x = App->settings->mouse_x - slider_btn->animation.h / 2 ;
-			this->slider_btn->position.y = position.y +3;
+			button->position.x = App->settings->mouse_x - button->animation.h / 2 ;
+			button->position.y = position.y +3;
 	
 		}
 	}
-	if (slider_btn->position.x >= (this->animation.w + this->position.x - button->animation.w)) {
-		slider_btn->position.x = animation.w + position.x - button->animation.w - 4;
+	if (button->position.x >= (this->animation.w + this->position.x - button->animation.w)) {
+		button->position.x = animation.w + position.x - button->animation.w - 4;
+		button->position.y = position.y + 3;
 		
 	}
-	if (slider_btn->position.x <= position.x) {
-		slider_btn->position.x = position.x + 1;
+	if (button->position.x <= position.x) {
+		button->position.x = position.x + 1;
+		button->position.y = position.y + 3;
 	}
 }
 

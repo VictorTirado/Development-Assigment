@@ -60,7 +60,13 @@ Entity_Gaara::Entity_Gaara(int x, int y):Entity(x, y)
 		if (name == "throwKunaiBackwards")
 			LoadAnimation(animations, &throwKunaiBackwards);
 	}
-
+	deathfx_path = gaara.child("audio").attribute("path").as_string();
+	teleportfx_path = gaara.child("audio2").attribute("tp_path").as_string();
+	kunai_path = gaara.child("audio3").attribute("kunai_path").as_string();
+	App->audio->LoadFx(deathfx_path.GetString());
+	App->audio->LoadFx(teleportfx_path.GetString());
+	App->audio->LoadFx(kunai_path.GetString());
+	animation = &idle;
 	collider = App->collision->AddCollider({ 0, 0, 26, 57 }, COLLIDER_TYPE::COLLIDER_PLAYER, App->entities);
 }
 
@@ -114,6 +120,7 @@ void Entity_Gaara::Update(float dt)
 			App->map->Load("ForestMap.tmx");
 			App->map->Spawn();
 		}
+		App->audio->PlayFx(2); //player's death fx
 		App->fade_to_black->FadeToBlack(App->scene, App->entities, 3.0f);
 	}
 
@@ -167,7 +174,7 @@ void Entity_Gaara::Update(float dt)
 		animation = &runBackwards;
 	}
 	
-	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid + 1] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
+	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
 	{
 		position.x += 100 * dt;
 		is_backwards = false;
@@ -180,18 +187,15 @@ void Entity_Gaara::Update(float dt)
 			is_jumping = true;
 	}
 
-	//DEBUG KEY FOR TP
-	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
-		can_tp = true;
+
 
 	//THROW KUNAI
 	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
 		is_shooting = true;
 
-
 	if (is_shooting)
 	{
-		//App->audio->PlayFx(3);
+		App->audio->PlayFx(4);
 		if (is_backwards)
 		{
 			animation = &throwKunaiBackwards;
@@ -249,13 +253,13 @@ void Entity_Gaara::Update(float dt)
 		animation = &jump;
 
 	////TELEPORT
-	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN && App->map->data.map_layers.end->data->data[gid + 1] == 51 && can_tp)
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN && App->map->data.map_layers.end->data->data[gid + 1] == 51 )
 	{
-		is_tp = true;
-		//App->audio->PlayFx(2); //Teleport fx
+		this->is_tp = true;
+		App->audio->PlayFx(3);
 	}
 
-	if (is_tp)
+	if (this->is_tp)
 	{
 		animation = &teleport;
 		App->map->prop->tp_time += 0.1f;
@@ -277,18 +281,6 @@ void Entity_Gaara::Update(float dt)
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && App->fade_to_black->IsFading() == false)
 			position.y += 120 * dt;
 	}
-
-	//if (App->entities->playerLifes == 0)
-	//{
-	///*	App->fade_to_black->FadeToBlack(App->scene, App->main_menu, 3.0f);
-	//	App->map->CleanUp();
-	//	App->gui->DestroyAllUi();
-	//	App->main_menu->active = true;
-	//	App->main_menu->Start();
-	//	App->scene->first_update = true;
-	//	App->entities->DestroyEntities();
-	//	App->scene->active = false;*/
-	//}
 
 	App->render->camera.x = (-position.x * App->win->render_scale) + (App->win->width / 2);
 	App->render->camera.y = (-position.y * App->win->render_scale) + (App->win->height / 2);

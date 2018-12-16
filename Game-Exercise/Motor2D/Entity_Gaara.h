@@ -60,7 +60,9 @@ public:
 	bool can_tp = false;
 	bool is_tp = false;
 	bool is_shooting = false;
-
+	p2SString deathfx_path = nullptr;
+	p2SString teleportfx_path = nullptr;
+	p2SString kunai_path = nullptr;
 	iPoint old_player_position;
 	iPoint velocity;
 };

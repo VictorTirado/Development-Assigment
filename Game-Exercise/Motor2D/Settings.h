@@ -51,7 +51,9 @@ private:
 	GUI* go_back = nullptr;
 	GUI* music = nullptr;
 	Gui_Slider* slider = nullptr;
-	GUI_Button* button = nullptr;
+	Gui_Slider* slider_fx = nullptr;
+	
+	GUI_Button* button_fx = nullptr;
 	GUI_Button* btn_spanish = nullptr;
 	GUI_Button* btn_english = nullptr;
 	Gui_Label* text_language = nullptr;
@@ -61,7 +63,7 @@ private:
 
 public:
 	int mouse_x, mouse_y;
-
+	GUI_Button* button = nullptr;
 };
 
 #endif // Settings

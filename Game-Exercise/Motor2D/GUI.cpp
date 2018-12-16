@@ -6,6 +6,7 @@
 #include "GUI.h"
 #include "GUI_button.h"
 #include "j1Audio.h"
+#include "Settings.h"
 
 GUI::GUI(int x, int y, j1Module* callback,GUI* parent)
 {
@@ -51,7 +52,30 @@ void GUI::Draw(SDL_Texture* sprites)
 bool GUI::MouseIn(GUI* element)
 {
 	GUI_Button*  ex2 = (GUI_Button*)element;
-	if (element->type == BUTTON) {
+
+	if (element->type == BUTTON && App->settings->active == false) {
+		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
+		{
+			ex2->setAnimation(2);
+		}
+		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
+		{
+			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+			{
+			
+				App->audio->PlayFx(1);		
+				ex2->setAnimation(3);
+				element->callback->Interact(element);		
+				return true;
+			}
+		}
+		else
+		{
+			ex2->setAnimation(1);
+			return false;
+		}	
+	}
+	else if (element->type == BUTTON && App->settings->active == true ) {
 		if (mouse_x > element->position.x && mouse_x < element->position.x + element->animation.w && mouse_y > element->position.y && mouse_y < element->position.y + element->animation.h)
 		{
 			ex2->setAnimation(2);
@@ -60,9 +84,10 @@ bool GUI::MouseIn(GUI* element)
 		{
 			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
 			{
+
+				
 				ex2->setAnimation(3);
 				element->callback->Interact(element);
-				App->audio->PlayFx(1);
 				return true;
 			}
 		}
@@ -72,5 +97,6 @@ bool GUI::MouseIn(GUI* element)
 			return false;
 		}
 	}
+	
 }
 

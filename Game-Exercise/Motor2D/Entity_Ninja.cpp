@@ -14,11 +14,14 @@
 #include "j1Render.h"
 #include "j1Entitites.h"
 #include "j1Scene.h"
+#include "SelectCharacter.h"
 #include "j1Pathfinding.h"
+
 
 #include "j1FadeToBlack.h"
 #include "Brofiler\Brofiler.h"
 #include "Entity_Player.h"
+#include "Entity_Gaara.h"
 
 
 Entity_Ninja::Entity_Ninja(int x, int y) :Entity(x, y)
@@ -68,7 +71,12 @@ void Entity_Ninja::Update(float dt)
 	}
 
 	ninja_pos = App->map->WorldToMap(position.x, position.y);
-	//player_pos = App->entities->player->player_pos;
+	if (App->characters->type == 1) {
+		player_pos = App->entities->player->player_pos;
+	}
+	if (App->characters->type == 2) {
+		player_pos = App->entities->gaara->gaara_pos;
+	}
 	player_pos.y += 1;
 	gid = App->map->Get_gid(position.x + 10, position.y + 35);
 	App->render->DrawQuad({ position.x + 10,position.y + 35,16,16 }, 0, 0, 255, 255);

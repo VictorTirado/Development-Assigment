@@ -55,7 +55,12 @@ bool Settings::Start()
 	slider = (Gui_Slider*)App->gui->AddSlider(music->animation.w + 150, 290,this, music);
 	button = (GUI_Button*)App->gui->AddButton(0, 0, { 1068,297,55,55 }, { 1069,362,55,55 }, { 1069,421,55,55 },this, (GUI*)slider);
 	slider->SetNumStart(App->audio->volume, button);
-	
+	slider->value = App->audio->volume;
+
+	slider_fx = (Gui_Slider*)App->gui->AddSlider(music->animation.w + 150, 450, this, music);
+	button_fx = (GUI_Button*)App->gui->AddButton(0, 0, { 1068,297,55,55 }, { 1069,362,55,55 }, { 1069,421,55,55 }, this, (GUI*)slider);
+	slider_fx->SetNumStart(0, button_fx);
+	slider_fx->value = App->audio->fx_volume;
 
 	btn_language = (GUI_Button*)App->gui->AddButton(language->position.x + language->animation.w, 50, { 515,805,190,49 }, { 515,805,190,49 }, { 515,805,190,49 }, this, language);
 	text_language = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->current_language.language.GetString(), this, nullptr);
@@ -99,8 +104,16 @@ bool Settings::Update(float dt)
 	{
 		slider->MoveButton(button);
 		slider->UpadateNumStart(App->audio->volume,button);
+		
 	}
+	/*if (button->MouseIn(button_fx) == true)
+	{
+		slider->MoveButton(button_fx);
+		slider->UpadateNumStart(App->audio->volume, button_fx);
+
+	}*/
 	Mix_VolumeMusic(slider->value);
+	//Mix_VolumeChunk(Mix_GetChunk(0), App->audio->fx_volume);
 
 	App->input->GetMousePosition(mouse_x, mouse_y);
 	return true;
@@ -129,16 +142,8 @@ bool Settings::CleanUp()
 
 void Settings::Interact(GUI* g)
 {
-	if (g->position.y == 180)
-	{
-		App->fade_to_black->FadeToBlack(this, App->scene, 3.0f);
-		App->gui->DestroyAllUi();
-		App->scene->active = true;
-		App->scene->Start();
-
-		this->active = false;
-	}
-	else if (g == btn_language)
+	
+	if (g == btn_language)
 	{
 		if (App->languages->current_language.current == Language::ENLGLISH)
 		{
@@ -166,7 +171,7 @@ void Settings::Interact(GUI* g)
 		App->settings->Start();
 	}
 	
-	else if (g->position.y == 50)
+	else if (g == go_back)
 	{
 		App->fade_to_black->FadeToBlack(this, App->main_menu, 3.0f);
 		App->gui->DestroyAllUi();

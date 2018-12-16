@@ -9,6 +9,7 @@
 #include "j1Collision.h"
 #include "j1Render.h"
 #include "j1Scene.h"
+#include "SelectCharacter.h"
 #include "j1Entitites.h"
 #include "Entity.h"
 #include "j1FadeToBlack.h"
@@ -183,7 +184,7 @@ bool j1Entities::Load(pugi::xml_node& data)
 
 	for (int i = 0; i < entities.Count(); i++)
 	{
-		if (entities[i]->entity_type == PLAYER)
+		if (entities[i]->entity_type == PLAYER || App->characters->type == 1)
 		{
 			pugi::xml_node player_stats = data.child("player");
 			entities[i]->Load(player_stats);
@@ -217,7 +218,7 @@ bool j1Entities::Save(pugi::xml_node& data)const
 	
 	for (int i = 0; i < entities.Count(); i++)
 	{
-		if (entities[i]->entity_type == PLAYER)
+		if (entities[i]->entity_type == PLAYER )
 		{
 			pugi::xml_node player_stats = data.append_child("player");
 			entities[i]->Save(player_stats);

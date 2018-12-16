@@ -64,7 +64,7 @@ void Gui_Slider::MoveButton(GUI_Button* button)
 	}
 }
 
-int Gui_Slider::UpadteNumStart(int num,GUI_Button* button)
+int Gui_Slider::UpadateNumStart(int num,GUI_Button* button)
 {
 	if ((slider_btn->position.x + slider_btn->animation.w +5) >= (this->animation.w + this->position.x )) {
 		num = 100;

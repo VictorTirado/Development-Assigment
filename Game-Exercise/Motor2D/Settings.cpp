@@ -83,7 +83,7 @@ bool Settings::Update(float dt)
 	if (button->MouseIn(button) == true)
 	{
 		slider->MoveButton(button);
-		slider->UpadteNumStart(App->audio->volume,button);
+		slider->UpadateNumStart(App->audio->volume,button);
 	}
 	Mix_VolumeMusic(slider->value);
 

@@ -62,9 +62,9 @@ void j1Map::Spawn()
 
 							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 52)
 							{
-								if (App->characters->type == Player_Type::SASUKE)
+								if (App->characters->type == 1)
 									App->entities->SpawnEntities(coords.x, coords.y, Entities_Type::PLAYER);
-								else if (App->characters->type == Player_Type::GAARA)
+								else if (App->characters->type == 2)
 									App->entities->SpawnEntities(coords.x, coords.y, Entities_Type::GAARA_PLAYER);
 							}
 							if (layers_list->data->name == "Logic" && App->map->data.map_layers.end->data->data[gid] == 73)

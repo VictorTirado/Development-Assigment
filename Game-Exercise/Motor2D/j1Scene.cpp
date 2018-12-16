@@ -148,7 +148,7 @@ bool j1Scene::Update(float dt)
 
 	App->map->Draw();
 	
-
+	LOG("%i", App->entities->entities.Count());
 	return true;
 }
 

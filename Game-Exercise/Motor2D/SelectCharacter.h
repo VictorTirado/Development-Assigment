@@ -85,7 +85,7 @@ private:
 
 public:
 	int mouse_x, mouse_y;
-	Player_Type type = Player_Type::NO_SELECTED;
+	int type = 0;
 };
 
 #endif // __CHARACTERS_H__

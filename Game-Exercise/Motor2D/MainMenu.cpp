@@ -55,7 +55,7 @@ bool MainMenu::Start()
 	SDL_Rect bck2 = { 1625,299,330,421 };
 	SDL_Rect set = { 1067,54,37,37 };
 	//MENU _UI
-	
+	App->characters->type = root.child("entities").child("player").child("type").attribute("value").as_int();
 	background = App->gui->AddImage(0, 0, &bck,nullptr,this, nullptr);
 	background2 = App->gui->AddImage(App->win->width/2 - 165, 150, &bck2, nullptr,this, nullptr);
 	
@@ -195,7 +195,14 @@ void MainMenu::Interact(GUI* g)
 	}
 	else if (g == btn_continue)
 	{
-		
+		App->fade_to_black->FadeToBlack(this, App->scene, 2.0f);
+		App->gui->DestroyAllUi();
+		App->LoadGame();
+		App->scene->active = true;
+		App->scene->Start();
+
+		this->active = false;
+	
 		
 	}
 	else if (g == btn_credits)

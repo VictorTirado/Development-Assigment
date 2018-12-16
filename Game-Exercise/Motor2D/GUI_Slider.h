@@ -17,7 +17,7 @@ public:
 	Gui_Slider(int x, int y, j1Module* callback, UI type, GUI* parent);
 	int SetNumStart(int num, GUI_Button* button);
 	void MoveButton(GUI_Button* button);
-	int UpadteNumStart(int num,GUI_Button* button);
+	int UpadateNumStart(int num,GUI_Button* button);
 public:
 	p2SString text;
 	uint value;

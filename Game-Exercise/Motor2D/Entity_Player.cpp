@@ -11,6 +11,7 @@
 #include "j1Audio.h"
 #include "j1Scene.h"
 #include "j1Entitites.h"
+#include "SelectCharacter.h"
 #include "j1FadeToBlack.h"
 #include "j1Particles.h"
 #include "j1Pathfinding.h"
@@ -369,6 +370,7 @@ bool Entity_Player::Save(pugi::xml_node& data)const
 {
 	data.append_child("map").append_attribute("level") = App->scene->map_number;
 	data.append_child("position").append_attribute("x") = position.x;
+	data.append_child("type").append_attribute("value") = App->characters->type;
 	data.child("position").append_attribute("y") = position.y;
 	return true;
 }

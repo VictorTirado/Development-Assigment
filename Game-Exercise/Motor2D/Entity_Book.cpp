@@ -76,10 +76,11 @@ void Entity_Book::OnCollision(Collider* collider)
 
 bool Entity_Book::Load(pugi::xml_node& data)
 {
-	App->entities->player->can_tp = data.child("book").attribute("caught").as_bool();
-	position.x = data.child("position").attribute("x").as_int();
-	position.y = data.child("position").attribute("y").as_int();
-
+	if (App->entities->player != nullptr) {
+		App->entities->player->can_tp = data.child("book").attribute("caught").as_bool();
+		position.x = data.child("position").attribute("x").as_int();
+		position.y = data.child("position").attribute("y").as_int();
+	}
 	return true;
 }
 

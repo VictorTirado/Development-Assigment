@@ -179,7 +179,7 @@ void Entity_Bat::OnCollision(Collider* collider)
 	}	
 
 	damage_cd += 1;
-	if (damage_cd == 50)
+	if (damage_cd == 30)
 		damage_cd = 0;
 
 	if (lives <= 0)

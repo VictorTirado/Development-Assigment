@@ -86,7 +86,13 @@ bool Entity_Book::Load(pugi::xml_node& data)
 
 bool Entity_Book::Save(pugi::xml_node& data)const
 {
-	data.append_child("book").append_attribute("caught") = App->entities->player->can_tp;
+	if (App->entities->player != nullptr) {
+		data.append_child("book").append_attribute("caught") = App->entities->player->can_tp;
+	}
+	else if (App->entities->gaara != nullptr)
+	{
+		data.append_child("book").append_attribute("caught") = App->entities->gaara->can_tp;
+	}
 	data.append_child("position").append_attribute("x") = position.x;
 	data.child("position").append_attribute("y") = position.y;
 

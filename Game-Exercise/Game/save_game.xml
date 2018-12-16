@@ -15,6 +15,11 @@
 	<collisions />
 	<particles />
 	<entities>
+		<player>
+			<map level="1" />
+			<position x="321" y="366" />
+			<type value="2" />
+		</player>
 		<bat>
 			<position x="432" y="320" />
 		</bat>
@@ -28,20 +33,15 @@
 			<position x="800" y="448" />
 		</bat>
 		<ninja>
-			<position x="1120" y="238" />
+			<position x="1120" y="388" />
 		</ninja>
 		<book>
 			<book caught="false" />
 			<position x="1184" y="240" />
 		</book>
 		<ninja>
-			<position x="1296" y="382" />
+			<position x="1296" y="838" />
 		</ninja>
-		<player>
-			<map level="1" />
-			<position x="348" y="366" />
-			<type value="1" />
-		</player>
 	</entities>
 	<fadeToBlack />
 	<Credits />
@@ -49,6 +49,6 @@
 	<Settings />
 	<Characters />
 	<renderer>
-		<camera x="-532" y="-714" />
+		<camera x="-451" y="-714" />
 	</renderer>
 </game_state>

@@ -184,22 +184,27 @@ bool j1Entities::Load(pugi::xml_node& data)
 
 	for (int i = 0; i < entities.Count(); i++)
 	{
-		if (entities[i]->entity_type == PLAYER || App->characters->type == 1)
+		if (entities[i]->entity_type == Entities_Type::PLAYER || App->characters->type == 1)
 		{
 			pugi::xml_node player_stats = data.child("player");
 			entities[i]->Load(player_stats);
 		}
-		if (entities[i]->entity_type == NINJA)
+		if (entities[i]->entity_type == Entities_Type::GAARA_PLAYER || App->characters->type == 2)
+		{
+			pugi::xml_node player_stats = data.child("player");
+			entities[i]->Load(player_stats);
+		}
+		if (entities[i]->entity_type == Entities_Type::NINJA)
 		{
 			pugi::xml_node ninja_stats = data.child("ninja");
 			entities[i]->Load(ninja_stats);
 		}
-		if (entities[i]->entity_type == BAT)
+		if (entities[i]->entity_type == Entities_Type::BAT)
 		{
 			pugi::xml_node bat_stats = data.child("bat");
 			entities[i]->Load(bat_stats);
 		}
-		if (entities[i]->entity_type == BOOK)
+		if (entities[i]->entity_type == Entities_Type::BOOK)
 		{
 			pugi::xml_node book_stats = data.child("book");
 			entities[i]->Load(book_stats);
@@ -218,22 +223,27 @@ bool j1Entities::Save(pugi::xml_node& data)const
 	
 	for (int i = 0; i < entities.Count(); i++)
 	{
-		if (entities[i]->entity_type == PLAYER )
+		if (entities[i]->entity_type == Entities_Type::PLAYER )
 		{
 			pugi::xml_node player_stats = data.append_child("player");
 			entities[i]->Save(player_stats);
 		}
-		if (entities[i]->entity_type == NINJA)
+		if (entities[i]->entity_type == Entities_Type::GAARA_PLAYER)
+		{
+			pugi::xml_node player_stats = data.append_child("player");
+			entities[i]->Save(player_stats);
+		}
+		if (entities[i]->entity_type == Entities_Type::NINJA)
 		{
 			pugi::xml_node ninja_stats = data.append_child("ninja");
 			entities[i]->Save(ninja_stats);
 		}
-		if (entities[i]->entity_type == BAT)
+		if (entities[i]->entity_type == Entities_Type::BAT)
 		{
 			pugi::xml_node bat_stats = data.append_child("bat");
 			entities[i]->Save(bat_stats);
 		}
-		if (entities[i]->entity_type == BOOK)
+		if (entities[i]->entity_type == Entities_Type::BOOK)
 		{
 			pugi::xml_node book_stats = data.append_child("book");
 			entities[i]->Save(book_stats);

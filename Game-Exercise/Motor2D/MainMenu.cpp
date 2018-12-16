@@ -200,6 +200,7 @@ void MainMenu::Interact(GUI* g)
 		App->LoadGame();
 		App->scene->active = true;
 		App->scene->Start();
+		App->scene->first_update = true;
 
 		this->active = false;
 	

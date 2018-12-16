@@ -321,6 +321,7 @@ void Entity_Player::LoadAnimation(pugi::xml_node& animation, Animation* player)
 
 bool Entity_Player::Load(pugi::xml_node& data)
 {
+	App->map->CleanUp();
 	if(data.child("map") != NULL)
 		App->scene->map_number = data.child("map").attribute("level").as_int();
 
@@ -343,7 +344,7 @@ bool Entity_Player::Load(pugi::xml_node& data)
 		App->map->SpawnEnemies();
 		position.x = data.child("position").attribute("x").as_int();
 		position.y = data.child("position").attribute("y").as_int();
-		App->entities->SpawnEntities(position.x, position.y, PLAYER);
+		App->entities->SpawnEntities(position.x, position.y, Entities_Type::PLAYER);
 	}
 	else if (App->scene->map_number == 1 && data.child("map") != NULL)
 	{
@@ -361,7 +362,7 @@ bool Entity_Player::Load(pugi::xml_node& data)
 		App->map->SpawnEnemies();
 		position.x = data.child("position").attribute("x").as_int();
 		position.y = data.child("position").attribute("y").as_int();
-		App->entities->SpawnEntities(position.x,position.y,PLAYER);
+		App->entities->SpawnEntities(position.x,position.y, Entities_Type::PLAYER);
 	}
 	return true;
 }

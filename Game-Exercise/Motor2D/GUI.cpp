@@ -7,6 +7,7 @@
 #include "GUI_button.h"
 #include "j1Audio.h"
 #include "Settings.h"
+#include "Brofiler\Brofiler.h"
 
 GUI::GUI(int x, int y, j1Module* callback,GUI* parent)
 {
@@ -25,12 +26,14 @@ GUI::~GUI()
 
 void GUI::Update()
 {
+	BROFILER_CATEGORY("GuiUpdate", Profiler::Color::LawnGreen);
 	App->input->GetMousePosition(mouse_x, mouse_y);
 	//LOG("%d, %d", mouse_x, mouse_y);
 }
 
 void GUI::Draw(SDL_Texture* sprites)
 {
+	BROFILER_CATEGORY("GuiDrawFunction", Profiler::Color::DarkSalmon);
 	if (type == LABEL && invisible == false)
 	{
 		App->render->Blit_UI(texture, position.x, position.y, &animation, 0);
@@ -51,6 +54,7 @@ void GUI::Draw(SDL_Texture* sprites)
 
 bool GUI::MouseIn(GUI* element)
 {
+	BROFILER_CATEGORY("MouseInFucntion", Profiler::Color::Brown);
 	GUI_Button*  ex2 = (GUI_Button*)element;
 
 	if (element->type == BUTTON && App->settings->active == false) {

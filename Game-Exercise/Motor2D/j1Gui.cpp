@@ -13,6 +13,7 @@
 #include "GUI_Label.h"
 #include "GUI_button.h"
 #include "GUI_Slider.h"
+#include "Brofiler\Brofiler.h"
 
 
 j1Gui::j1Gui() : j1Module()
@@ -69,6 +70,8 @@ bool j1Gui::PreUpdate()
 
 bool j1Gui::Update(float dt)
 {
+	BROFILER_CATEGORY("j1GuiUpdate", Profiler::Color::Crimson);
+
 	for (int i = 0; i < ui_list.Count(); i++) {
 		if (ui_list.At(i) != nullptr)
 			ui_list[i]->Update();
@@ -111,12 +114,15 @@ const SDL_Texture* j1Gui::GetAtlas() const
 
 GUI* j1Gui::AddImage(int x, int y, SDL_Rect* rect, Animation* anim, j1Module* callback,GUI* parent)
 {
+	BROFILER_CATEGORY("AddImageFunction", Profiler::Color::Khaki);
+
 	GUI* image = new GUI_Image(x, y, IMAGE, parent,anim, callback,rect);
 	ui_list.PushBack(image);
 	return image;
 }
 GUI* j1Gui::AddLabel(int x, int y, p2SString text, j1Module* callback, GUI* parent)
 {
+	BROFILER_CATEGORY("AddLabelFunction", Profiler::Color::Gainsboro);
 	GUI* label = new Gui_Label(x, y, text,callback, LABEL,parent);
 	ui_list.PushBack(label);
 	return label;
@@ -124,6 +130,7 @@ GUI* j1Gui::AddLabel(int x, int y, p2SString text, j1Module* callback, GUI* pare
 
 GUI* j1Gui::AddButton(int x, int y, SDL_Rect normal, SDL_Rect mouse_in, SDL_Rect clicked, j1Module* callback, GUI* parent)
 {
+	BROFILER_CATEGORY("AddButtonFunction", Profiler::Color::Fuchsia);
 	GUI* button = new GUI_Button(x, y, normal, mouse_in, clicked, callback, BUTTON,parent);
 	ui_list.PushBack(button);
 	return button;
@@ -131,6 +138,7 @@ GUI* j1Gui::AddButton(int x, int y, SDL_Rect normal, SDL_Rect mouse_in, SDL_Rect
 
 GUI* j1Gui::AddSlider(int x, int y, j1Module* callback, GUI* parent)
 {
+	BROFILER_CATEGORY("AddSliderFunction", Profiler::Color::Moccasin);
 	GUI* slider = new Gui_Slider(x, y, callback, SLIDER, parent);
 	ui_list.PushBack(slider);
 	return slider;

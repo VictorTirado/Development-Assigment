@@ -64,9 +64,9 @@ bool j1Scene::Start()
 	btn_back->invisible = true;
 	text_back->invisible = true;
 
-	score2 = (Gui_Label*)App->gui->AddLabel(250, 10, "Score", this, nullptr);
+	score2 = (Gui_Label*)App->gui->AddLabel(250, 10, "Score:", this, nullptr);
 	
-	
+	App->entities->time_playing.Start();
 
 	if (!is_faded && map_number == 1)
 	{
@@ -107,12 +107,16 @@ bool j1Scene::Update(float dt)
 		char playerScore[sizeof App->entities->score];
 		sprintf_s(playerScore, "%d", App->entities->score);
 		player_score_text = App->gui->AddLabel(score2->position.x + score2->animation.w + 15, 10, playerScore, this, score2);
+
+		/*char TimeScore[((sizeof App->entities->player_time  * CHAR_BIT) + 2) / 3 + 2];
+		sprintf_s(TimeScore, "%.2f", App->entities->player_time);
+		time_score_text = App->gui->AddLabel(App->win->width -100, 10, TimeScore, this, nullptr);*/
 		
 		first_update = false;
 	}
 
 	LOG("%f seconds", App->entities->player_time);
-
+	UpdateTime(App->entities->player_time);
 	//App->entities->UpdateTime(App->entities->player->player_time);
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
@@ -143,6 +147,7 @@ bool j1Scene::Update(float dt)
 		change_music = false;
 		App->audio->ChangeMusic(change_music);
 	}*/
+
 	else if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	{
 		background_menu->invisible = !background_menu->invisible;
@@ -214,6 +219,15 @@ void j1Scene::UpdateScore(int score)
 	char playerScore[sizeof App->entities->score];
 	sprintf_s(playerScore, "%d", App->entities->score);
 	player_score_text = App->gui->AddLabel(score2->position.x + score2->animation.w + 15, 10, playerScore, this, score2);
+}
+
+void j1Scene::UpdateTime(float time)
+{
+	App->gui->DestroyUIElement(*time_score_text);
+	char TimeScore[((sizeof App->entities->player_time  * CHAR_BIT) + 2) / 3 + 2];
+	sprintf_s(TimeScore, "%.1f", App->entities->player_time);
+	time_score_text = App->gui->AddLabel(App->win->width - 150, 10, TimeScore, this, nullptr);
+
 }
 
 

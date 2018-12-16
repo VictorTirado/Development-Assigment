@@ -183,7 +183,7 @@ void Entity_Player::Update(float dt)
 		position.x -= 80*dt;
 	}
 
-	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
+	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->map->data.map_layers.end->data->data[gid +1] != COLLISION_FLOOR && App->fade_to_black->IsFading() == false)
 	{
 		animation = &run;
 		is_backwards = false;

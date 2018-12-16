@@ -139,37 +139,45 @@ void MainMenu::Interact(GUI* g)
 	}
 	else if (g == btn_continue)
 	{
-		App->fade_to_black->FadeToBlack(this, App->scene, 2.0f);
-		App->gui->DestroyAllUi();
-		App->LoadGame();
-		App->scene->active = true;
-		App->scene->Start();
-		App->scene->first_update = true;
+		if (App->fade_to_black->IsFading() == false) {
+			App->fade_to_black->FadeToBlack(this, App->scene, 2.0f);
+			App->gui->DestroyAllUi();
+			App->LoadGame();
+			App->scene->active = true;
+			App->scene->Start();
+			App->scene->first_update = true;
 
-		this->active = false;	
+			this->active = false;
+		}
 	}
 	else if (g == btn_credits)
 	{
-		App->fade_to_black->FadeToBlack(this, App->credits, 3.0f);
-		App->gui->DestroyAllUi();
-		App->credits->active = true;
-		App->credits->Start();
+		if (App->fade_to_black->IsFading() == false) {
+			App->fade_to_black->FadeToBlack(this, App->credits, 3.0f);
+			App->gui->DestroyAllUi();
+			App->credits->active = true;
+			App->credits->Start();
 
-		this->active = false;
+			this->active = false;
+		}
 	}
 	else if (g == btn_settings)
 	{
-		App->fade_to_black->FadeToBlack(this, App->settings, 3.0f);
-		App->gui->DestroyAllUi();
-		App->settings->active = true;
-		App->settings->Start();
+		if (App->fade_to_black->IsFading() == false) {
+			App->fade_to_black->FadeToBlack(this, App->settings, 3.0f);
+			App->gui->DestroyAllUi();
+			App->settings->active = true;
+			App->settings->Start();
 
-		this->active = false;
+			this->active = false;
+		}
 	}
 	else if (g == btn_exit)
 	{
-		App->gui->DestroyAllUi();
-		close = true;
+		if (App->fade_to_black->IsFading() == false) {
+			App->gui->DestroyAllUi();
+			close = true;
+		}
 	}
 	
 }

@@ -4,7 +4,7 @@
 #include "j1Module.h"
 #include "SDL\include\SDL_pixels.h"
 
-#define DEFAULT_FONT "fonts/njnaruto.ttf"
+#define DEFAULT_FONT "fonts/LibreBaskerville-Italic.ttf"
 #define DEFAULT_FONT_SIZE 36
 
 struct SDL_Texture;

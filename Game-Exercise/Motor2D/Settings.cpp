@@ -57,10 +57,10 @@ bool Settings::Start()
 	slider->SetNumStart(App->audio->volume, button);
 	slider->value = App->audio->volume;
 
-	slider_fx = (Gui_Slider*)App->gui->AddSlider(music->animation.w + 150, 450, this, music);
+	/*slider_fx = (Gui_Slider*)App->gui->AddSlider(music->animation.w + 150, 450, this, music);
 	button_fx = (GUI_Button*)App->gui->AddButton(0, 0, { 1068,297,55,55 }, { 1069,362,55,55 }, { 1069,421,55,55 }, this, (GUI*)slider);
 	slider_fx->SetNumStart(0, button_fx);
-	slider_fx->value = App->audio->fx_volume;
+	slider_fx->value = App->audio->fx_volume;*/
 
 	btn_language = (GUI_Button*)App->gui->AddButton(language->position.x + language->animation.w, 50, { 515,805,190,49 }, { 515,805,190,49 }, { 515,805,190,49 }, this, language);
 	text_language = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->current_language.language.GetString(), this, nullptr);
@@ -141,8 +141,7 @@ bool Settings::CleanUp()
 
 
 void Settings::Interact(GUI* g)
-{
-	
+{	
 	if (g == btn_language)
 	{
 		if (App->languages->current_language.current == Language::ENLGLISH)

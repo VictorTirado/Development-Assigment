@@ -109,29 +109,37 @@ void Characters::Interact(GUI* g)
 {
 	if (g->position.y == 180 && g->invisible == false)
 	{
-		App->fade_to_black->FadeToBlack(this, App->scene, 3.0f);
-		App->gui->DestroyAllUi();
-		App->scene->active = true;
-		App->scene->Start();
+		if (App->fade_to_black->IsFading() == false) {
+			App->fade_to_black->FadeToBlack(this, App->scene, 3.0f);
+			App->gui->DestroyAllUi();
+			App->scene->active = true;
+			App->scene->Start();
 
-		this->active = false;
+			this->active = false;
+		}
 	}
 	else if (g == sasuke)
 	{
-		type = 1;
-		start_game = true;
+		if (App->fade_to_black->IsFading() == false) {
+			type = 1;
+			start_game = true;
+		}
 	}
 	else if (g == gaara)
 	{
-		type = 2;
-		start_game = true;
+		if (App->fade_to_black->IsFading() == false) {
+			type = 2;
+			start_game = true;
+		}
 	}
 	else if (g == go_back)
 	{
-		App->fade_to_black->FadeToBlack(this, App->main_menu, 3.0f);
-		App->gui->DestroyAllUi();
-		App->main_menu->active = true;
-		App->main_menu->Start();
+		if (App->fade_to_black->IsFading() == false) {
+			App->fade_to_black->FadeToBlack(this, App->main_menu, 3.0f);
+			App->gui->DestroyAllUi();
+			App->main_menu->active = true;
+			App->main_menu->Start();
+		}
 	}
 
 }

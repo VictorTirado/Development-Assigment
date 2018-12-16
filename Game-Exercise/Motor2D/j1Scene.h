@@ -40,6 +40,7 @@ public:
 	bool ChangeMap(int map_number);
 
 	void UpdateScore(int score);
+	void UpdateTime(float time);
 	void Interact(GUI* g);
 
 private:
@@ -71,6 +72,7 @@ public:
 
 	GUI* ui_background = nullptr;
 	GUI* player_score_text = nullptr;
+	GUI* time_score_text = nullptr;
 	Gui_Label* text_resume = nullptr;
 	Gui_Label* text_back = nullptr;
 

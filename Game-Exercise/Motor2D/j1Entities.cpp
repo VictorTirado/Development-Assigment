@@ -43,7 +43,7 @@ bool j1Entities::Awake(pugi::xml_node& config)
 bool j1Entities::Start()
 {
 	bool ret = true;
-	time_playing.Start();
+	//time_playing.Start();
 	return ret;
 }
 

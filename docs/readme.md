@@ -9,7 +9,7 @@ Here, you will be a ninja whose goal is to get to the end of the levels passing 
 
 ## Team members
 
-![alt text](https://github.com/VictorTirado/Development-Assigment/blob/master/docs/Team_photo.jpg)
+!["alttext"](https://github.com/VictorTirado/Development-Assigment/blob/master/docs/Team_photo.jpg)
 
 * Right member (Víctor Tirado): Manager, programmer and designer
 

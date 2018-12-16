@@ -48,19 +48,21 @@ bool Characters::Start()
 	//MENU _UI
 
 	SDL_Rect bck = { 0,0,1024,768 };
-	SDL_Rect bck2 = { 600,943,517,271 };
+	
 	background = App->gui->AddImage(0, 0, &bck, nullptr,this, nullptr);
-	background2 = App->gui->AddImage((App->win->width / 2) - bck2.w/2, App->win->height / 2 - 50, &bck2, nullptr,this, nullptr);
 	go_back = App->gui->AddButton(50, 50, { 1129,95,48,51 }, { 1128,160,48,51 }, { 1128,160,48,51 },this, nullptr);
 
 	
-	btn_play = (GUI_Button*)App->gui->AddButton(App->win->width / 2 - 150, 180, { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 }, this, nullptr);
+	btn_play = (GUI_Button*)App->gui->AddButton(App->win->width / 2 -120 , 400, { 1316,382,300,77 }, { 1316,299,300,77 }, { 1317,466,300,77 }, this, nullptr);
 	text_play = (Gui_Label*)App->gui->AddLabel(10, 10, App->languages->current_language.play.GetString(), this, btn_play);
 	btn_play->SetText(text_play);
 	btn_play->invisible = true;
 	text_play->invisible = true;
-	sasuke = (GUI_Button*)App->gui->AddButton(200, 50, { 1458,556,120,120 }, { 1318,554,120,120 }, { 1318,554,120,120 },this, nullptr);
-	gaara = (GUI_Button*)App->gui->AddButton(400, 50, { 1458,686,120,120 }, { 1317,684,120,120 }, { 1317,684,120,120 },this, nullptr);
+
+	sasuke = (GUI_Button*)App->gui->AddButton(App->win->width/2 - 150, 250, { 1458,556,120,120 }, { 1318,554,120,120 }, { 1318,554,120,120 },this, nullptr);
+	gaara = (GUI_Button*)App->gui->AddButton(App->win->width / 2 + 75, 250, { 1458,686,120,120 }, { 1317,684,120,120 }, { 1317,684,120,120 },this, nullptr);
+
+	
 
 	return true;
 }
@@ -107,7 +109,7 @@ bool Characters::CleanUp()
 
 void Characters::Interact(GUI* g)
 {
-	if (g->position.y == 180 && g->invisible == false)
+	if (g == btn_play && g->invisible == false)
 	{
 		if (App->fade_to_black->IsFading() == false) {
 			App->fade_to_black->FadeToBlack(this, App->scene, 3.0f);
@@ -120,7 +122,9 @@ void Characters::Interact(GUI* g)
 	}
 	else if (g == sasuke)
 	{
+
 		if (App->fade_to_black->IsFading() == false) {
+			
 			type = 1;
 			start_game = true;
 		}

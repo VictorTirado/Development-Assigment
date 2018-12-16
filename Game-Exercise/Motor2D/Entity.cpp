@@ -33,18 +33,18 @@ void Entity::Draw(SDL_Texture* sprites)
 	if (animation != nullptr) {
 		SDL_Rect r = animation->GetCurrentFrame();
 		if (r.x != NULL) {
-			if (this->entity_type == PLAYER) {
+			if (this->entity_type == PLAYER && App->scene->paused == false) {
 				App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 				if (collider != nullptr)
 					collider->SetPos(position.x, position.y);
 			}
-			if (this->entity_type == GAARA_PLAYER) {
+			if (this->entity_type == GAARA_PLAYER && App->scene->paused == false) {
 
 				App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 				if (collider != nullptr)
 					collider->SetPos(position.x, position.y);
 			}
-			if (this->entity_type == BOOK && App->entities->book->collider != nullptr /*&& App->entities->player->can_tp == false*/)
+			if (this->entity_type == BOOK && App->entities->book->collider != nullptr && App->scene->paused == false)
 			{
 				App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 				if (collider != nullptr)
@@ -57,7 +57,7 @@ void Entity::Draw(SDL_Texture* sprites)
 					collider->SetPos(position.x, position.y);
 			}
 
-			if (this->entity_type == NINJA && App->entities->ninja->collider != nullptr)
+			if (this->entity_type == NINJA && App->entities->ninja->collider != nullptr )
 			{
 				App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 				if (collider != nullptr)

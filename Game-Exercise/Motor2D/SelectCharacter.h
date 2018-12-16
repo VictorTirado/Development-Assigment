@@ -58,7 +58,6 @@ private:
 	bool close = false;
 
 	GUI* background = nullptr;
-	GUI* background2 = nullptr;
 	GUI* go_back = nullptr;
 	GUI* music = nullptr;
 

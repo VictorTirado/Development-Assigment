@@ -8,10 +8,11 @@ Enemies will die if you shoot them with a kunai.
 
 ## Controls
 
-- A/D to move forwards and backwards
-- SPACEBAR to jump
-- Left Shift to teleport
-- Q to shoot the kunai
+- A/D: move forwards and backwards
+- SPACEBAR: jump
+- Left Shift: teleport
+- Q: shoot the kunai
+- Orange icon: close the game
 
 ## Debug functionalities
 
